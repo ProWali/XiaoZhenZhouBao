@@ -65,6 +65,7 @@ static func _budget(world) -> void:
 	if mayor == "":
 		return
 	var options := {"bridge": "修桥", "road": "修路", "school": "修学校", "mill": "补贴锯木厂"}
+	var options_en := {"bridge": "repairing the bridge", "road": "mending the road", "school": "a new schoolroom", "mill": "a grant to the sawmill"}
 	var weights := {"bridge": 1.0, "road": 1.0, "school": 0.8, "mill": 0.8}
 	# 报纸影响：登过春汛就修桥；登过受贿就不敢补贴厂子
 	for iss in world.issues:
@@ -88,7 +89,7 @@ static func _budget(world) -> void:
 	var choice: String = keys[world.rng.weighted(ws)]
 	world.flags["budget_" + str(world.week)] = choice
 	world.log.append("第 %d 周：镇议会把今年的钱花在「%s」上。" % [world.week, options[choice]])
-	_soft(world, "budget", {"mayor": [mayor]}, {"decision": options[choice]})
+	_soft(world, "budget", {"mayor": [mayor]}, {"decision": options[choice], "decision_en": options_en[choice]})
 	if choice == "mill":
 		for rid in world.living_ids():
 			if world.residents[rid].occ == "owner":
@@ -150,7 +151,7 @@ static func _vote(world) -> void:
 	if winner == challenger:
 		TownGen.change_job(world, mayor, "retired")
 		TownGen.change_job(world, challenger, "mayor")
-	_soft(world, "election", {"winner": [winner]}, {"loser": world.residents[loser].name, "v1": str(votes[winner]), "v2": str(votes[loser])})
+	_soft(world, "election", {"winner": [winner]}, {"loser": world.residents[loser].name, "loser_en": world.residents[loser].name_en, "v1": str(votes[winner]), "v2": str(votes[loser])})
 
 
 static func _soft(world, tid: String, preset: Dictionary, extras: Dictionary) -> void:

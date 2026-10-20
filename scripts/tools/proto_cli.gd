@@ -9,8 +9,9 @@ const World = preload("res://scripts/sim/world.gd")
 const Auto = preload("res://scripts/sim/autoplayer.gd")
 const T = preload("res://scripts/sim/tables.gd")
 const Save = preload("res://scripts/sim/save.gd")
+const TE = preload("res://scripts/text/text_engine.gd")
 
-var opts := {"seed": 1, "weeks": 12, "auto": "", "verbose": false, "batch": 0, "play": false, "story": false, "save": "", "load": ""}
+var opts := {"seed": 1, "weeks": 12, "auto": "", "verbose": false, "batch": 0, "play": false, "story": false, "save": "", "load": "", "lang": "zh"}
 
 
 func _init() -> void:
@@ -34,6 +35,7 @@ func _parse_args() -> void:
 		var next: String = args[i + 1] if i + 1 < args.size() else ""
 		match a:
 			"--seed": opts.seed = int(next); i += 1
+			"--lang": opts.lang = next; i += 1
 			"--weeks": opts.weeks = int(next); i += 1
 			"--auto": opts.auto = next; i += 1
 			"--batch": opts.batch = int(next); i += 1
@@ -47,7 +49,7 @@ func _parse_args() -> void:
 
 # ------------------------------------------------------------ 自动
 func _run_auto(strategy: String, seed_v: int, weeks: int, show: bool) -> Dictionary:
-	var world = World.new(seed_v, {"total_weeks": weeks})
+	var world = World.new(seed_v, {"total_weeks": weeks, "lang": opts.lang})
 	var auto = Auto.new(strategy, seed_v)
 	var false_printed := 0
 	var articles := 0
@@ -154,11 +156,11 @@ func _ask_int(prompt: String, lo: int, hi: int) -> int:
 
 
 func _run_interactive() -> void:
-	var world = World.new(opts.seed, {"total_weeks": opts.weeks})
+	var world = World.new(opts.seed, {"total_weeks": opts.weeks, "lang": opts.lang})
 	print("《%s》 · 灰河镇 · 种子 %d · %d 周" % [world.paper_name, world.seed_value, opts.weeks])
 	while world.game_over == "":
 		print("\n======== 第 %d 周 · %s ========" % [world.week, world.season_name()])
-		for l in world.letters:
+		for l in world.render_letters():
 			print("信：" + l)
 		while world.day <= 6:
 			_interactive_day(world)
@@ -245,7 +247,7 @@ func _interactive_interview(world) -> void:
 	var topics: Array = world.known.keys()
 	print("  0 泛泛打听")
 	for i in topics.size():
-		print("%3d %s" % [i + 1, world.facts[topics[i]].text])
+		print("%3d %s" % [i + 1, TE.fact_note(world, topics[i], world.lang)])
 	var t := _ask_int("话头？", 0, topics.size())
 	if t < 0:
 		return
@@ -264,7 +266,7 @@ func _print_notebook(world) -> void:
 		print("（空）")
 	for g in groups:
 		var e: Dictionary = g.event
-		print("· %s%s" % [e.name, "（已登）" if e.printed else ""])
+		print("· %s%s" % [TE.event_name(world, e, world.lang), "（已登）" if e.printed else ""])
 		for fid in g.facts:
 			var f: Dictionary = world.facts[fid]
 			var stamps := ""
@@ -273,7 +275,7 @@ func _print_notebook(world) -> void:
 			var srcs: Array = []
 			for s in world.known[fid].sources:
 				srcs.append(T.SOURCE_NAME[s.kind] + ("" if s.who == "" else "·" + world.res_name(s.who)))
-			print("    [%s] %s  ← %s%s" % [stamps.rpad(3, "　"), f.text, "，".join(srcs), "  ✔证据" if world.known[fid].evidence else ""])
+			print("    [%s] %s  ← %s%s" % [stamps.rpad(3, "　"), TE.fact_note(world, fid, world.lang), "，".join(srcs), "  ✔证据" if world.known[fid].evidence else ""])
 		for h in g.hints:
 			print("    提示：" + h)
 
@@ -298,7 +300,7 @@ func _interactive_layout(world) -> void:
 		print("%s：" % T.SLOT_NAME[slot])
 		for i in avail.size():
 			var e: Dictionary = avail[i].event
-			print("%3d %s（%d 条碎片）" % [i + 1, e.name, avail[i].facts.size()])
+			print("%3d %s（%d 条碎片）" % [i + 1, TE.event_name(world, e, world.lang), avail[i].facts.size()])
 		var k := _ask_int("登哪件事？（回车留空）", 1, avail.size())
 		if k <= 0:
 			break

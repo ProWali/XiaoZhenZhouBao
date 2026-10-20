@@ -1,0 +1,2679 @@
+{
+ "pollution": {
+  "name": "the mill waste",
+  "headlines": {
+   "calm": [
+    "Downriver Wells Turn Foul; Cause Unknown",
+    {
+     "t": "Wells Taste of Lime Downriver; Mill Drainage Questioned",
+     "needs": "smell"
+    },
+    "The Wells Below Town Went Bad #weather#",
+    "Why Does the Well Water Taste Bitter? Downriver Families Want an Answer"
+   ],
+   "neutral": [
+    {
+     "t": "{culprit} Accused of Dumping Waste in River by Night",
+     "needs": "dump"
+    },
+    {
+     "t": "Forty Sacks of Lime for {culprit}; Mill Waste in the River?",
+     "needs": "lime"
+    },
+    "Foul Wells Downriver Point to {culprit}",
+    "{culprit} and the Bad Water Below Town",
+    "Wells Go Bad Downriver; {culprit} Has Questions to Answer"
+   ],
+   "hot": [
+    "{culprit} Poisons the River! What Are Families Downriver Drinking?",
+    {
+     "t": "{culprit} Pours Mill Waste into the River! Poisoned Water Downstream",
+     "needs": "dump"
+    },
+    "{culprit} Grows Rich While Downriver Drinks Bitter Water",
+    "The River Stinks, and {culprit} Knows Why"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "#recent#, several households below town found that their well water had begun to taste wrong. This paper has made some inquiries.",
+    "#weather#, the well water downriver began to taste chalky, and the families along that stretch have talked of little else since.",
+    "Families downriver say that lately they let a bucket from the well stand half a day before they dare to drink from it.",
+    "#season_open#, several households below town have grown wary of drinking from their own wells."
+   ],
+   "neutral": [
+    "The wells downriver have tasted wrong for some time now. This paper's inquiries suggest the matter may be connected with the sawmill upstream, owned by {culprit}.",
+    "#recent#, families downriver came to this paper with a complaint: their well water tastes chalky, and has a queer taste even after boiling. This paper followed the trail to the sawmill.",
+    "#weather#, three households downriver stopped drinking from their own wells. This paper followed the river upstream, to the sawmill owned by {culprit}.",
+    "#season_open#, several households below town have grown wary of drinking from their own wells."
+   ],
+   "hot": [
+    "Families downriver have been drinking bitter water for weeks, and no one has told them why. This paper will: the trouble starts at the sawmill owned by {culprit}.",
+    "Someone has been pouring something into the river, and the children downriver drink from that river every day.",
+    "What are the children downriver drinking? {culprit.full} ought to come and taste it."
+   ]
+  },
+  "facts": {
+   "smell": {
+    "note": "{victim}'s well water has tasted of lime for several weeks",
+    "prose": [
+     "{victim}'s well water has tasted of lime these several weeks, and boiling does not take it out.",
+     "!{victim}, who lives downriver, told this paper that the water from the well has gone chalky and the stock will hardly drink it.",
+     "the water in {victim}'s well has gone bad, and {victim.ta} says it has been that way for weeks."
+    ]
+   },
+   "lime": {
+    "note": "{culprit} ordered forty sacks of lime through the post office, more than the sawmill could ever use",
+    "prose": [
+     "{culprit} ordered forty sacks of lime by mail this month, far more than the sawmill ordinarily uses.",
+     "{culprit} placed a single order for forty sacks of lime. Lime is commonly used to cover the smell of waste.",
+     "the sawmill took delivery of forty sacks of lime in one order, and the order was placed by {culprit}.",
+     {
+      "t": "!This paper looked at the order slips at the post office: {culprit} ordered forty sacks of lime this month. The sawmill does not ordinarily use that much in a year.",
+      "src": [
+       "archive"
+      ]
+     }
+    ]
+   },
+   "dump": {
+    "note": "{culprit} had men pour the mill's waste into the river under cover of night",
+    "prose": [
+     "men working for {culprit} carried the mill's waste down to #river# #night# and emptied it, barrel after barrel.",
+     "#night#, men wheeled barrels from the back gate of the sawmill to the water's edge and tipped them into the river. They were acting on the orders of {culprit}.",
+     {
+      "t": "the mill's waste went into the river under cover of darkness, and {culprit} knew of it.",
+      "not_src": [
+       "witness"
+      ]
+     },
+     {
+      "t": "!#night#, this paper's reporter kept watch on the riverbank and saw several barrels wheeled out of the sawmill's back gate and emptied into the river.",
+      "src": [
+       "witness"
+      ]
+     },
+     {
+      "t": "!#night#, this paper's reporter waited a long while by the river, until men from the sawmill came out with barrels and tipped them into the water, one after another.",
+      "src": [
+       "witness"
+      ]
+     },
+     {
+      "t": "!This paper's reporter saw it #night#: barrels came out of the sawmill's back gate and were wheeled all the way down to the bank, and what was in them went into the river.",
+      "src": [
+       "witness"
+      ]
+     }
+    ]
+   },
+   "rumor": {
+    "note": "{culprit} slipped money to the state inspector",
+    "prose": [
+     "{culprit} has been slipping money to the state inspector.",
+     "{culprit} paid off the state inspector long ago."
+    ]
+   }
+  },
+  "detail": [
+   "The stones along the bank downriver have taken on a white crust these past days.",
+   "An old man downriver says the river was once fit for washing clothes in summer, and is not now.",
+   {
+    "t": "A faint smell of lime still hangs about the well.",
+    "needs": "smell"
+   },
+   "Families downriver now let their water stand and clear before they carry it home.",
+   {
+    "t": "A rut runs from the back gate of the sawmill to the water's edge, worn by the wheels of a loaded barrow.",
+    "needs": "dump"
+   },
+   "Fish have been scarce at the river bend this season, and the fishermen say their nets come up empty.",
+   {
+    "t": "Those households now fetch their water from the public well on the east side of town, half an hour there and back.",
+    "needs": "smell"
+   },
+   {
+    "t": "On the post office order slip, the line for the lime is written smaller than the rest.",
+    "needs": "lime"
+   }
+  ],
+  "comment": {
+   "calm": [
+    "One river runs through the whole town, and whatever is done upstream, the families downstream must live with.",
+    "The sawmill keeps some forty families in this town in work, and that is a fact. The well water downriver is a fact as well.",
+    "This paper knows nothing of the sawmill's trade. It knows only that the well water did not used to taste like this.",
+    "The sawmill cannot do without the river, and the families along it cannot do without their wells."
+   ],
+   "neutral": [
+    "The sawmill is the largest employer in town, and the largest advertiser in this paper. This paper printed the story anyway, because the families downriver take the Gazette too.",
+    "What goes into the river does not stop at the doors of three households downstream.",
+    "This is not a quarrel between one household and another. Below town, the river runs past a good many people's land.",
+    {
+     "t": "Lime may cover a smell. It will not keep the families downriver quiet.",
+     "needs": "lime"
+    }
+   ],
+   "hot": [
+    "The Grey River is nobody's private sewer.",
+    "Everybody knows whose pocket the mill's profits go into. What goes into the river, the whole town drinks.",
+    {
+     "t": "It was done at night because it could not be done by day.",
+     "needs": "dump"
+    },
+    "The children downriver have drunk bitter water for a whole season, and nobody has come to say sorry."
+   ]
+  },
+  "resp": {
+   "denied": [
+    "{target.short} insists on {target.his} innocence.",
+    "{target.short} says someone is out to ruin {target.him}.",
+    "{target.short} says {target.ta} disputes every word this paper has printed.",
+    "{target.short} says the sawmill's drainage has always been done properly."
+   ],
+   "unreached": [
+    "{target.name} has not yet responded.",
+    "By the time this paper went to press, it had not been able to see {target.name}."
+   ]
+  },
+  "close": {
+   "calm": [
+    "This paper will ask again when the wells downriver are fit to drink."
+   ],
+   "hot": [
+    "How much longer will the river stink?"
+   ]
+  }
+ },
+ "debt": {
+  "name": "the unpaid account",
+  "headlines": {
+   "calm": [
+    "Credit Accounts Mount in Town; Merchants Hope for Settlement",
+    {
+     "t": "The Store's Credit Book Grows Thicker",
+     "needs": "ledger"
+    },
+    "Slow Payers Squeeze the General Store",
+    "Goods Given on Credit, Money Never Seen"
+   ],
+   "neutral": [
+    {
+     "t": "{debtor} Six Months Behind at General Store",
+     "needs": "ledger"
+    },
+    {
+     "t": "{debtor} Owes the Store Half a Year's Account",
+     "needs": "ledger"
+    },
+    {
+     "t": "{debtor} Pawns the Family Clock",
+     "needs": "pawn"
+    },
+    "{debtor} Behind on Account; {creditor} Cannot Collect",
+    "{debtor} Short of Money",
+    "An Unpaid Bill, and {debtor}"
+   ],
+   "hot": [
+    {
+     "t": "{debtor} Dodges Bill for Six Months! Where Does the Money Go?",
+     "needs": "ledger"
+    },
+    {
+     "t": "Six Months of Free Groceries for {debtor}",
+     "needs": "ledger"
+    },
+    "{debtor}, Well Dressed and Deep in Debt",
+    "{debtor} Won't Pay, and {creditor} Can Barely Keep the Store Open",
+    "{debtor} Bought Respectability on Credit"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "In the credit book at the general store, a few accounts have been standing open a long while.",
+    "Small trade is never easy in Greyriver, and the general store has lately had more trouble than most collecting what it is owed.",
+    "A new sign hangs at the door of the general store: No credit.",
+    "#season_open#, the credit book at the general store has grown by several pages."
+   ],
+   "neutral": [
+    "An account at the general store has gone unpaid for six months. It stands in the name of {debtor}.",
+    "{creditor.full} has a debt on the books that will not be collected, and it has been weighing on the store.",
+    "The general store kept by {creditor.full} stocked half its usual goods this month. One reason is a debt that cannot be collected.",
+    "#season_open#, the credit book at the general store has grown by several pages."
+   ],
+   "hot": [
+    "{debtor.full} walks through town with head held high, but in the general store's book, a long column of figures stands after {debtor.his} name.",
+    "Some people eat well and dress well and never pay a cent of what they owe.",
+    "{debtor.full} sits near the front at church, but never reaches into a pocket at the general store."
+   ]
+  },
+  "facts": {
+   "ledger": {
+    "note": "{debtor} has run an account at the general store for half a year without paying it",
+    "prose": [
+     "{debtor} has bought on credit for six months without paying a cent of it.",
+     "the store's credit book has carried the name of {debtor} for half a year, for everything from flour to lamp oil.",
+     "{debtor} owes {creditor}, and the first entry was made six months ago.",
+     {
+      "t": "!This paper has seen the credit book at the general store. The page for {debtor} runs back half a year: flour, lamp oil, cloth, and not a cent of it paid.",
+      "src": [
+       "archive"
+      ]
+     }
+    ]
+   },
+   "pawn": {
+    "note": "{debtor} pawned the family mantel clock at a shop near the railway station",
+    "prose": [
+     "{debtor} took the family mantel clock to be pawned at a shop near the railway station.",
+     "{debtor} was seen carrying a clock into the pawnshop.",
+     "the mantel clock is gone from the parlor of {debtor}, and the ticket for it is at the shop behind the station."
+    ]
+   },
+   "rumor": {
+    "note": "{debtor}'s debts are gambling debts, not store accounts",
+    "prose": [
+     "!Some say the debts of {debtor} are really gambling debts.",
+     "!There is another story, too: that {debtor} lost the money at cards."
+    ]
+   }
+  },
+  "detail": [
+   {
+    "t": "The pawn ticket reads: one mantel clock, keeps good time.",
+    "needs": "pawn"
+   },
+   {
+    "t": "The store keeps its credit book in blue ink, and the earliest entries have already faded.",
+    "needs": "ledger"
+   },
+   "A small blackboard now hangs behind the counter at the general store. It reads: No credit given.",
+   {
+    "t": "The clerk at the pawnshop says the clock was still running when it was brought in.",
+    "needs": "pawn"
+   },
+   {
+    "t": "The clock went to the pawnshop for three dollars; getting it back will cost four.",
+    "needs": "pawn"
+   },
+   {
+    "t": "The most recent entry in the credit book is two pounds of salt, last week.",
+    "needs": "ledger"
+   }
+  ],
+  "comment": {
+   "calm": [
+    "There is no shame in owing money; everyone runs short in times like these. But the storekeeper who gives credit has a living to make too.",
+    "Trade in a small town runs on credit and on trust. When trust goes bad, everyone pays for it.",
+    "Debts get paid in time, but a storekeeper cannot wait forever.",
+    {
+     "t": "When the clock goes to the pawnshop, a household's circumstances are plain to see.",
+     "needs": "pawn"
+    }
+   ],
+   "neutral": [
+    "This paper does not print the matter to make anyone a laughingstock. If the general store goes under, there will be nowhere left in town to buy a pound of flour on credit.",
+    "The storekeeper is too embarrassed to go and ask, and so the one who owes never brings it up.",
+    {
+     "t": "The clock is pawned, and life goes on. But an account cannot stay open forever.",
+     "needs": "pawn"
+    },
+    "The general store gives credit out of neighborliness."
+   ],
+   "hot": [
+    "Fine clothes are for others to look at. Debts are for paying.",
+    "A poor family owes thirty cents and the storekeeper is at the door the next day. A person of standing owes for half a year, and no one says a word.",
+    "Half a year of flour, and not so much as a thank-you.",
+    {
+     "t": "Even the clock has gone to the pawnshop, and still the show of money goes on in public.",
+     "needs": "pawn"
+    }
+   ],
+   "any": [
+    {
+     "t": "One of the town's most respectable people owes the general store, and the storekeeper is too embarrassed even to knock at the door.",
+     "occ": [
+      "doctor",
+      "teacher",
+      "clerk",
+      "priest"
+     ]
+    },
+    {
+     "t": "What {target.short} says carries weight in this town. So do the figures in that account book.",
+     "occ": [
+      "mayor",
+      "sheriff",
+      "foreman",
+      "stationmaster"
+     ]
+    }
+   ]
+  },
+  "resp": {
+   "denied": [
+    "{target.short} says the account will be settled sooner or later.",
+    "{target.short} says the matter is between {target.him} and the store, and no concern of a newspaper's.",
+    "{target.short} says {target.ta} has never refused to pay what {target.ta} owes."
+   ],
+   "unreached": [
+    "{target.name} has not yet responded.",
+    "By the time this paper went to press, it had not been able to see {target.name}."
+   ]
+  },
+  "close": {
+   "calm": [
+    "This paper will ask again when the account is paid."
+   ]
+  }
+ },
+ "affair": {
+  "name": "the business at the bridge",
+  "headlines": {
+   "calm": [
+    {
+     "t": "Late Hours at the Bridge",
+     "needs": "bridge"
+    },
+    {
+     "t": "The Bridge Has Company at Night",
+     "needs": "bridge"
+    },
+    {
+     "t": "Two Figures on the Bridge at Midnight",
+     "needs": "bridge"
+    },
+    {
+     "t": "Some Letters Need Not Be Sent So Often",
+     "needs": "letters"
+    },
+    "A Family Matter Has the Town Talking",
+    "Talk in Town of a Private Matter",
+    "A Household Under Strain"
+   ],
+   "neutral": [
+    {
+     "t": "{lover} Seen Walking Late at Night with a Married Person",
+     "needs": "bridge"
+    },
+    {
+     "t": "{lover} and {spouse} on the Bridge at Night",
+     "needs": "bridge"
+    },
+    {
+     "t": "{spouse} Writes to {lover} Every Week",
+     "needs": "letters"
+    },
+    {
+     "t": "{lover} and a Married Companion on the Bridge After Midnight",
+     "needs": "bridge"
+    },
+    "{lover} Drawn into a Family Matter",
+    "Talk Concerning {lover}",
+    "Questions Around {lover}"
+   ],
+   "hot": [
+    "{lover} Wrecks a Marriage! What Remains of This Town's Decency?",
+    {
+     "t": "{spouse} Has a Home and Family, Yet Spends Nights on the Bridge",
+     "needs": "bridge"
+    },
+    {
+     "t": "The Secret {lover} and {spouse} Kept on the Bridge",
+     "needs": "bridge"
+    },
+    {
+     "t": "{wife} Waits at Home While {spouse} Waits on the Bridge",
+     "needs": "bridge"
+    },
+    "Did {lover} Wreck a Home?",
+    "Talk on the Doorstep of {spouse}"
+   ]
+  },
+  "lead": {
+   "calm": [
+    {
+     "t": "#recent#, people passing the bridge #night# saw two figures there, and more than once.",
+     "needs": "bridge"
+    },
+    {
+     "t": "Under the gas lamp at the bridge, people can often be found talking late into the night.",
+     "needs": "bridge"
+    },
+    "There is a matter in town that everyone talks about, and nobody will talk about out loud.",
+    {
+     "t": "#season_open#, the bridge has not been a quiet place at night.",
+     "needs": "bridge"
+    }
+   ],
+   "neutral": [
+    {
+     "t": "#recent#, {lover.full} was seen #night# walking side by side with a married person on the bridge.",
+     "needs": "bridge"
+    },
+    "Talk about {lover} has already started in town. What this paper could establish is set out below.",
+    "This paper has heard the talk about {lover} several times now.",
+    {
+     "t": "#season_open#, the bridge has not been a quiet place at night.",
+     "needs": "bridge"
+    }
+   ],
+   "hot": [
+    {
+     "t": "{spouse.full} sits in the third pew on Sundays, and someone at home keeps supper waiting for {spouse.him}. But at night, {spouse.ta} is on the bridge.",
+     "needs": "bridge"
+    },
+    "There is a matter in this town that everyone knows about and no one will say out loud.",
+    "{lover.full} has been much talked of lately on the church steps."
+   ]
+  },
+  "facts": {
+   "bridge": {
+    "note": "{lover} and {spouse} were seen together on the bridge late at night, by several people",
+    "prose": [
+     "#night#, {lover} and {spouse} walked together on the bridge, and several people saw them.",
+     "#night#, {lover} and {spouse} stood a long while on the bridge, then left one after the other.",
+     "{lover} and {spouse} have met on the bridge late at night, and not for the first time.",
+     "#night#, {lover} and {spouse} walked together on the bridge, and several people saw them. {spouse} is married.",
+     {
+      "t": "!#night#, this paper's reporter passed the bridge and saw {lover} and {spouse} talking under the gas lamp. They talked a long while, then left one after the other.",
+      "src": [
+       "witness"
+      ]
+     },
+     {
+      "t": "!#night#, this paper's reporter saw {lover} and {spouse} walk across the bridge side by side, close together.",
+      "src": [
+       "witness"
+      ]
+     }
+    ]
+   },
+   "letters": {
+    "note": "{spouse} mails a letter to {lover} every week",
+    "prose": [
+     "{spouse} sends a letter every week, and it is addressed to {lover}.",
+     "though the two live in the same small town, {spouse} writes to {lover} every week.",
+     "the letters from {spouse} to {lover} go out once a week and have never missed.",
+     {
+      "t": "!The post office mail book shows a letter from {spouse} to {lover} every week.",
+      "src": [
+       "archive"
+      ]
+     }
+    ]
+   },
+   "suspect": {
+    "note": "{wife} already suspects where {spouse} goes at night, and has cried over it more than once",
+    "prose": [
+     "{wife} has grown suspicious and has wept over it more than once.",
+     "!{wife} has told friends of waking in the night to find the other side of the bed empty.",
+     "the household of {spouse} has begun to notice, and there have been hard looks at home these days."
+    ]
+   },
+   "rumor": {
+    "note": "{lover} was paid to come from out of town and break up the family",
+    "prose": [
+     "{lover} was brought in from out of town and paid to break up the family.",
+     "{lover} did the same sort of thing before ever coming to Greyriver."
+    ]
+   }
+  },
+  "detail": [
+   {
+    "t": "The gas lamp at the bridge is the only light in town that burns all night.",
+    "needs": "bridge"
+   },
+   {
+    "t": "Someone has cut two initials into the bridge rail with a pocketknife, and the marks are fresh.",
+    "needs": "bridge"
+   },
+   {
+    "t": "The bridge is only two hundred paces from the church, and on those nights the church clock had already struck eleven.",
+    "needs": "bridge"
+   },
+   {
+    "t": "The river runs loud under the bridge at night, and words spoken up there are hard to make out from a few steps away.",
+    "needs": "bridge"
+   },
+   {
+    "t": "The letters always come in the same blue envelope.",
+    "needs": "letters"
+   },
+   {
+    "t": "In that household, supper these days is eaten alone.",
+    "needs": "suspect"
+   }
+  ],
+  "comment": {
+   "calm": [
+    "This is a private matter between two households, and this paper would rather not say more. But the town is small and the talk has spread, and it is better to set down plainly what was seen than to leave people guessing.",
+    "This paper does not mean to pry any further. But since the talk has spread, it ought not to spread only by halves."
+   ],
+   "neutral": [
+    "This paper does not judge who is right and who is wrong. Both households still live in this town, and how they go on from here is their own affair.",
+    "There is no law against a few words on a bridge at night. Keeping it from one's own family is another matter.",
+    {
+     "t": "The bridge at night is no hidden place. When enough people see a thing, the talk spreads.",
+     "needs": "bridge"
+    },
+    "In a small town, one family's trouble soon becomes half the town's."
+   ],
+   "hot": [
+    {
+     "t": "How does a home come apart? Often enough, it starts at the bridge.",
+     "needs": "bridge"
+    },
+    "Some people believe what is said in church only on Sundays.",
+    "A person with a home ought to be in it at night.",
+    "The hardest part of this falls on the one who sits at home and waits."
+   ],
+   "any": [
+    {
+     "t": "This town has always held its schoolteachers to a stricter account than other people. That may not be fair to {target.short}.",
+     "occ": [
+      "teacher"
+     ]
+    },
+    {
+     "t": "{target.short} has taken the measurements of half the households in town. Knowing so many people means a great many tongues.",
+     "occ": [
+      "tailor"
+     ]
+    }
+   ]
+  },
+  "resp": {
+   "denied": [
+    "{target.short} says the two of them are only friends.",
+    "{target.short} says that on the evening in question they met purely by chance.",
+    "{target.short} says there is nothing between them that needs explaining."
+   ],
+   "unreached": [
+    "{target.name} has not yet responded.",
+    "By the time this paper went to press, it had not been able to see {target.name}."
+   ]
+  },
+  "close": {
+   "calm": [
+    "This paper will write no more about it."
+   ]
+  }
+ },
+ "theft": {
+  "name": "the missing tools",
+  "headlines": {
+   "calm": [
+    "Theft at the Sawmill; Mill Makes Inquiries",
+    "Tools Missing from the Sawmill",
+    "Mill Short a Crate of Nails",
+    "Where Did the Saw Blades Go?",
+    {
+     "t": "Noises at the Sawmill After Dark",
+     "needs": "night"
+    }
+   ],
+   "neutral": [
+    {
+     "t": "{thief} Accused of Selling Sawmill Tools",
+     "needs": "sold"
+    },
+    {
+     "t": "{thief} Sold the Mill's Saw Blades to a Farm",
+     "needs": "sold"
+    },
+    "{boss} Investigates Mill Theft; Trail Leads to {thief}",
+    {
+     "t": "Sawmill Blades Found at the River-Bend Farm",
+     "needs": "sold"
+    },
+    "Mill Theft Points to {thief}",
+    "Theft at the Sawmill; This Paper Looks into It",
+    {
+     "t": "{thief} Seen at the Sawmill's Back Door at Night",
+     "needs": "night"
+    },
+    {
+     "t": "{thief} Leaves the Sawmill Late at Night, Carrying Something",
+     "needs": "night"
+    },
+    {
+     "t": "Trouble at the Sawmill by Night",
+     "needs": "night"
+    }
+   ],
+   "hot": [
+    {
+     "t": "{thief} Steals from the Mill to Feed a Family! Who Looks Out for the Other Men?",
+     "needs": "sold"
+    },
+    {
+     "t": "The Thief in the Mill Was {thief}",
+     "needs": "sold"
+    },
+    {
+     "t": "{thief} Came Out the Back Door at Night, and Not Empty-Handed",
+     "needs": "night"
+    },
+    "The Sawmill Has a Thief",
+    "Tools at the Sawmill Grow Legs",
+    "Who Is Stealing from the Sawmill?",
+    {
+     "t": "What Did {thief} Carry Out of the Mill at Midnight?",
+     "needs": "night"
+    }
+   ]
+  },
+  "lead": {
+   "calm": [
+    "The sawmill lost two saw blades and a crate of nails #recent#, and the mill is looking into it.",
+    "The tool room at the sawmill could not account for its stock this month.",
+    "A few things went missing from the sawmill's tool room this month.",
+    "#season_open#, the tool room at the sawmill has not been able to account for its stock."
+   ],
+   "neutral": [
+    {
+     "t": "The tools missing from the sawmill have been traced, and they passed through the hands of {thief}.",
+     "needs": "sold"
+    },
+    "This paper followed the theft at the sawmill, and the trail ends with {thief}.",
+    "For some weeks now, {boss.full} has been trying to answer one question: where did the things missing from the tool room go?",
+    "#season_open#, the tool room at the sawmill has not been able to account for its stock."
+   ],
+   "hot": [
+    "{thief.full} goes to work with the rest of the crew every morning and draws the same wages. Yet the things missing from the mill were carried out and sold by {thief.him}.",
+    "The men at the mill pinch every penny, and someone has been carrying the mill's property out the gate.",
+    "The things missing from the sawmill did not walk off by themselves. Someone carried them out and sold them."
+   ]
+  },
+  "facts": {
+   "missing": {
+    "note": "the sawmill lost two saw blades and a crate of nails this month, and {boss} is looking into it",
+    "prose": [
+     "the sawmill is missing two saw blades and a crate of nails this month, and {boss} is looking into it.",
+     "{boss} found the tool room short: two saw blades and a crate of nails."
+    ]
+   },
+   "sold": {
+    "note": "{thief} sold the saw blades to the river-bend farm, and the receipt is on file at the general store",
+    "prose": [
+     "{thief} sold the saw blades to the river-bend farm, and the bill of sale still exists.",
+     "the new saw blades at the river-bend farm were bought from {thief}.",
+     "the river-bend farm paid {thief} in cash for the saw blades.",
+     {
+      "t": "!The receiving slips at the general store record that {thief} sold the saw blades to the river-bend farm.",
+      "src": [
+       "archive"
+      ]
+     }
+    ]
+   },
+   "night": {
+    "note": "{thief} came out the back door of the sawmill at night, carrying something",
+    "prose": [
+     "#night#, {thief} came out the back door of the sawmill carrying something.",
+     "#night#, someone left the sawmill by the back door and set off toward the river-bend farm. It was {thief}.",
+     {
+      "t": "!#night#, this paper's reporter was outside the sawmill and saw {thief} come out the back door carrying something, walking fast.",
+      "src": [
+       "witness"
+      ]
+     },
+     {
+      "t": "!This paper's reporter saw {thief} come out of the sawmill's back door #night#, with hands far from empty.",
+      "src": [
+       "witness"
+      ]
+     }
+    ]
+   },
+   "rumor": {
+    "note": "{boss} took the goods and laid the blame on one of the mill hands",
+    "prose": [
+     "{boss} took the goods and laid the blame on one of the men.",
+     "{boss} helped {boss.him}self to the stock and found a mill hand to take the blame."
+    ],
+    "counter": true
+   }
+  },
+  "detail": [
+   "The side of the nail crate is branded with the sawmill's mark.",
+   {
+    "t": "The handles of the blades are stamped with the sawmill's tool room numbers.",
+    "needs": "sold"
+   },
+   {
+    "t": "There are only three keys to the tool room, and the foreman holds one of them.",
+    "needs": "missing"
+   },
+   {
+    "t": "The river-bend farm mended a long stretch of fence this month, and did it with new saw blades.",
+    "needs": "sold"
+   },
+   {
+    "t": "The sawmill's dog did not bark that night.",
+    "needs": "night"
+   },
+   {
+    "t": "The tool room has been counted three times this month, and each time something was short.",
+    "needs": "missing"
+   }
+  ],
+  "comment": {
+   "calm": [
+    "A few saw blades are not worth much money. But once the men at the mill start watching each other, the work cannot get done.",
+    "When something goes missing from the mill, it is not only the owner who feels it."
+   ],
+   "neutral": [
+    "Most people who steal have their troubles. But trouble is no excuse, and everyone in this town knows it.",
+    {
+     "t": "Each time something went missing at the mill, every man there was suspected. Now at least the trail leads somewhere.",
+     "needs": "sold"
+    },
+    {
+     "t": "The goods were sold to a farm, and the slip says plainly whose pocket the money went into.",
+     "needs": "sold"
+    },
+    "This paper convicts no one. It writes down what was seen."
+   ],
+   "hot": [
+    "Every time something goes missing at the mill, it is the whole crew that takes the blame.",
+    "The foreman looked for a month and found nothing. This paper looked for a week.",
+    {
+     "t": "Someone who comes out the back door in the middle of the night is not working late.",
+     "needs": "night"
+    },
+    "The men at the mill pinch every penny all year, and someone has had designs on the mill's stock."
+   ],
+   "any": [
+    {
+     "t": "Everyone in town knows what an apprentice is paid.",
+     "occ": [
+      "apprentice"
+     ]
+    },
+    {
+     "t": "The smithy is only half a street from the sawmill.",
+     "occ": [
+      "smith"
+     ]
+    },
+    {
+     "t": "When a mill hand loses his place, the whole town sees it. When a mill hand suddenly has money in his pocket, the town sees that too.",
+     "occ": [
+      "worker"
+     ]
+    }
+   ]
+  },
+  "resp": {
+   "denied": [
+    "{target.short} insists on {target.his} innocence.",
+    "{target.short} says someone is out to ruin {target.him}.",
+    "{target.short} says {target.ta} disputes every word this paper has printed."
+   ],
+   "unreached": [
+    "{target.name} has not yet responded.",
+    "By the time this paper went to press, it had not been able to see {target.name}."
+   ]
+  },
+  "close": {
+   "neutral": [
+    "The tool room at the mill now has a second lock."
+   ]
+  }
+ },
+ "drinking": {
+  "name": "the bottles in the yard",
+  "headlines": {
+   "calm": [
+    "More Bottles in Town Than There Ought to Be",
+    {
+     "t": "Empty Bottles in a Back Yard",
+     "needs": "bottles"
+    },
+    "Some Drinking Happens Behind Closed Doors",
+    {
+     "t": "The Tavern's Back Door Busier Than Its Front",
+     "needs": "backdoor"
+    },
+    "A Private Habit, Poorly Kept"
+   ],
+   "neutral": [
+    {
+     "t": "{drunk} Said to Drink Heavily, Uses the Tavern's Back Door",
+     "needs": "backdoor"
+    },
+    {
+     "t": "Clinic Record Explains the Trembling Hands of {drunk}",
+     "needs": "record"
+    },
+    {
+     "t": "A Basket of Empty Bottles a Week from the Home of {drunk}",
+     "needs": "bottles"
+    },
+    {
+     "t": "{drunk} Seen at Tavern Back Door Late at Night",
+     "needs": "backdoor"
+    },
+    "{drunk} Drinks Habitually and Hides It",
+    "Questions About {drunk} and the Bottle",
+    "{drunk} and a Habit Kept Quiet"
+   ],
+   "hot": [
+    "Respectable by Day, {drunk} Drinks by Night",
+    "Full of Advice for Others, {drunk} Proves a Drunkard",
+    "{drunk} Drinks Like That and Still Lectures the Town",
+    {
+     "t": "The Bottles of {drunk} Go Out by the Basketful",
+     "needs": "bottles"
+    },
+    "The Other Face of {drunk}"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "Drinking is no crime. But some people drink too much and would rather no one knew.",
+    {
+     "t": "Neighbors noticed #recent# that the back yard of one respectable household is always piled with empty bottles.",
+     "needs": "bottles"
+    },
+    "{drunk.full} has always been counted among the respectable people of this town.",
+    {
+     "t": "#season_open#, the back door off the tavern alley has been opening and shutting a good deal at night.",
+     "needs": "backdoor"
+    }
+   ],
+   "neutral": [
+    "{drunk.full} is a respected figure in town. This paper has learned that {drunk.ta} has long been a heavy drinker and has kept it hidden.",
+    "There is a story going around town about {drunk}, and this paper looked into it.",
+    "Many in town put their trust in {drunk}. What this paper has found may change some minds.",
+    {
+     "t": "#season_open#, the back door off the tavern alley has been opening and shutting a good deal at night.",
+     "needs": "backdoor"
+    }
+   ],
+   "hot": [
+    "{drunk.full} speaks of rules and decency in public, and in private cannot do without the bottle.",
+    {
+     "t": "There is a person in this town who lectures others on how to live by day, and slips in and out of the tavern's back door by night.",
+     "needs": "backdoor"
+    },
+    "In public, {drunk.full} never touches a drop."
+   ]
+  },
+  "facts": {
+   "bottles": {
+    "note": "{maid} carries a basket of empty bottles out of the back yard of {drunk} every week",
+    "prose": [
+     "{maid} clears a basketful of empty bottles from the back yard of {drunk} every week.",
+     "the empty bottles in the back yard of {drunk} fill a basket every week, and {maid} is the one who carries them out."
+    ]
+   },
+   "backdoor": {
+    "note": "{drunk} goes in and out of the tavern by the back door, never the front",
+    "prose": [
+     "{drunk} uses the back door of the tavern, coming and going, and never the front.",
+     "#night#, {drunk} came out of the tavern's back door with {drunk.his} hat pulled low.",
+     {
+      "t": "!More than once, #night#, this paper's reporter saw {drunk} go in and out of the tavern by the back door. The front door is right on the street, and {drunk.ta} never uses it.",
+      "src": [
+       "witness"
+      ]
+     },
+     {
+      "t": "!#night#, in the alley behind the tavern, this paper's reporter saw {drunk} push the door open and come out with {drunk.his} hat pulled low.",
+      "src": [
+       "witness"
+      ]
+     }
+    ]
+   },
+   "record": {
+    "note": "the clinic record says the trembling in the hands of {drunk} comes from drink",
+    "prose": [
+     {
+      "t": "the trembling in the hands of {drunk} comes from drink. The doctor wrote as much.",
+      "not_occ": [
+       "doctor"
+      ]
+     },
+     {
+      "t": "the hands of {drunk} have shaken for more than a year, and the cause the doctor wrote down is drink.",
+      "not_occ": [
+       "doctor"
+      ]
+     },
+     {
+      "t": "!This paper has seen the clinic record: the cause the doctor wrote down for the trembling in the hands of {drunk} is drink.",
+      "src": [
+       "archive"
+      ],
+      "not_occ": [
+       "doctor"
+      ]
+     },
+     {
+      "t": "the clinic's own record states that the trembling in the hands of {drunk} comes from drink. The entry was made by the nurse.",
+      "occ": [
+       "doctor"
+      ]
+     },
+     {
+      "t": "!The clinic's own records contain this entry: the trembling in the hands of {drunk} is due to drink. The person who wrote it down is the clinic nurse.",
+      "src": [
+       "archive"
+      ],
+      "occ": [
+       "doctor"
+      ]
+     }
+    ]
+   },
+   "rumor": {
+    "note": "{drunk} has struck someone while drunk",
+    "prose": [
+     "{drunk} has struck someone while drunk.",
+     "{drunk} once passed out by the roadside and had to be carried home."
+    ]
+   }
+  },
+  "detail": [
+   {
+    "t": "Among the bottles in that basket are a few of good liquor shipped in from out of town.",
+    "needs": "bottles"
+   },
+   {
+    "t": "The step at the tavern's back door has been worn shiny.",
+    "needs": "backdoor"
+   },
+   {
+    "t": "The tavern keeper says some customers never sit by the window.",
+    "needs": "backdoor"
+   },
+   {
+    "t": "The clinic has been ordering medicine for trembling hands unusually often this year.",
+    "needs": "record"
+   },
+   {
+    "t": "{maid} says the bottles always go out before it is light.",
+    "needs": "bottles"
+   },
+   {
+    "t": "The lamp in the alley behind the tavern has been broken half a year, and nobody has mended it.",
+    "needs": "backdoor"
+   }
+  ],
+  "comment": {
+   "calm": [
+    "Drinking is a person's own business. But the position {target.short} holds is not {target.his} business alone.",
+    "This paper does not preach temperance. It only observes that a person who fears being found out usually knows why.",
+    "People who drink usually have something on their minds. This paper does not ask what; it asks only whether the thing can be kept hidden."
+   ],
+   "neutral": [
+    "People who bring their affairs to {target.short} do so because they trust {target.him}. That trust ought not to come mixed with liquor.",
+    {
+     "t": "A person who must go round to the tavern's back door has {target.his} reasons.",
+     "needs": "backdoor"
+    },
+    "This paper has nothing against drink. It only wonders why a person should be so afraid of being seen.",
+    {
+     "t": "Basket after basket of empty bottles: someone had to drink them, one by one.",
+     "needs": "bottles"
+    }
+   ],
+   "hot": [
+    "Those so full of advice for others would do well to mind their own bottle first.",
+    "The whole town has been kept in the dark, and only the tavern keeper knew.",
+    {
+     "t": "Hands shaking like that, and still deciding things for the town?",
+     "needs": "record"
+    },
+    "Whatever decency there is by day gets left at the tavern's back door by night."
+   ],
+   "any": [
+    {
+     "t": "A man who preaches ought to be the first to heed his own sermons.",
+     "occ": [
+      "priest"
+     ]
+    },
+    {
+     "t": "{target.short} holds the key to the church, and knows the way to the tavern's back door just as well.",
+     "occ": [
+      "priest"
+     ]
+    },
+    {
+     "t": "The children at the schoolhouse watch {target.short} every day, and they learn more than their letters.",
+     "occ": [
+      "teacher"
+     ]
+    },
+    {
+     "t": "When a schoolteacher's hands shake, the pupils are the first to notice.",
+     "occ": [
+      "teacher"
+     ]
+    },
+    {
+     "t": "Patients put their lives in the hands of {target.short}. They have a right to know whether those hands are steady.",
+     "occ": [
+      "doctor"
+     ]
+    },
+    {
+     "t": "This town has one doctor. If {target.his} hands are not steady, where else are people to go?",
+     "occ": [
+      "doctor"
+     ]
+    },
+    {
+     "t": "The town hall's ledgers and registers are all copied out by {target.short}. One wrong figure, and some household pays for it.",
+     "occ": [
+      "clerk"
+     ]
+    },
+    {
+     "t": "What the town clerk writes down gets the town seal put on it. With hands shaking like that, can the seal be set down straight?",
+     "occ": [
+      "clerk"
+     ],
+     "needs": "record"
+    }
+   ]
+  },
+  "resp": {
+   "denied": [
+    "{target.short} says {target.ta} never touches a drop.",
+    {
+     "t": "Asked about the drinking, {target.short} said people must have been mistaken.",
+     "needs": "backdoor"
+    },
+    "{target.short} says a glass now and then is no one's business."
+   ],
+   "unreached": [
+    "{target.name} has not yet responded.",
+    "By the time this paper went to press, it had not been able to see {target.name}."
+   ]
+  },
+  "close": {
+   "neutral": [
+    "This paper does not preach temperance. It only writes down what it has seen."
+   ]
+  }
+ },
+ "illness": {
+  "name": "the hidden illness",
+  "headlines": {
+   "calm": [
+    "{sick} Seldom Seen Lately; Old Ailment Blamed",
+    "{sick} Unwell",
+    "Has the Town a Right to Know How Ill {sick} Has Been?",
+    "An Empty Chair at the Town Hall"
+   ],
+   "neutral": [
+    {
+     "t": "{sick} Hid Illness, Fainted at Town Hall",
+     "needs": "faint"
+    },
+    {
+     "t": "{sick} More Seriously Ill Than Admitted",
+     "needs": "chart"
+    },
+    {
+     "t": "{sick} Collapses at Town Hall, Blames a Missed Breakfast",
+     "needs": "faint"
+    },
+    {
+     "t": "Doctor Warns {sick} Against Overwork",
+     "needs": "chart"
+    },
+    "{sick} in Poorer Health Than Admitted",
+    "The Health of {sick}",
+    "{sick} Keeps an Illness Quiet"
+   ],
+   "hot": [
+    "{sick} Gravely Ill and Still in Office! Who Runs This Town Now?",
+    "What {sick} Kept from the Whole Town",
+    "How Long Can {sick} Hold Out?",
+    "A Sickbed and a Town"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "{sick.full} has seldom been seen in public of late.",
+    "{sick.full} has not been seen about town for several weeks, and people have begun to ask after {sick.his} health.",
+    "{sick.full} has not been to church this month.",
+    "#season_open#, {sick.full} has been seen in public less and less."
+   ],
+   "neutral": [
+    "{sick.full} is in poorer health than {sick.ta} has let on.",
+    "{sick.full} has been ill, and the illness has never been made public. This paper has learned some of the facts.",
+    "People at the town hall say {sick.full} often does not come in until the afternoon these days.",
+    "#season_open#, {sick.full} has been seen in public less and less."
+   ],
+   "hot": [
+    "Who makes the decisions in this town? {sick.full} sits in the chair, but {sick.ta} is seriously ill.",
+    "Someone in this town is ill, and is keeping it from everyone.",
+    "{sick.full} is still holding on. But for how much longer?"
+   ]
+  },
+  "facts": {
+   "faint": {
+    "note": "{sick} fainted at the town hall last week and told people it was from skipping breakfast",
+    "prose": [
+     "{sick} fainted at the town hall last week and gave out that {sick.ta} had skipped breakfast.",
+     "{sick} collapsed at the town hall and was helped into a back room, where {sick.ta} lay down for half an hour."
+    ]
+   },
+   "chart": {
+    "note": "the clinic chart shows a lung complaint for {sick}, and the doctor has ordered no overwork",
+    "prose": [
+     "the illness of {sick} is in the lungs, and the doctor's instruction is plain: no overwork.",
+     "the clinic chart for {sick} carries a plain instruction from the doctor, to avoid all strain.",
+     {
+      "t": "!This paper has seen the clinic chart. The illness of {sick} is in the lungs, and the doctor has written on it: no overwork.",
+      "src": [
+       "archive"
+      ]
+     }
+    ]
+   },
+   "rumor": {
+    "note": "{sick} is already drawing up a will",
+    "prose": [
+     "{sick} is already drawing up a will.",
+     "{sick} is quietly looking for someone to take over."
+    ]
+   }
+  },
+  "detail": [
+   {
+    "t": "Until lately, nobody ever used the couch in the back room of the town hall.",
+    "needs": "faint"
+   },
+   {
+    "t": "The medicine bottle on the desk of {sick} has changed labels three times this month.",
+    "needs": "chart"
+   },
+   "Someone from the clinic has called at the town hall four times this month.",
+   "Half the town hall's meetings these two months have been moved to the afternoon.",
+   {
+    "t": "The clinic nurse says that by the time the patient was helped into the back room that day, no words would come.",
+    "needs": "faint"
+   },
+   {
+    "t": "The corners of that chart have been thumbed soft.",
+    "needs": "chart"
+   }
+  ],
+  "comment": {
+   "calm": [
+    "Everyone falls ill sometime, and there is no shame in it.",
+    "This paper wishes {target.short} a quick recovery. It also hopes that a person who carries the town's affairs will tell the town the truth.",
+    "Being ill is not news. Keeping quiet about it is.",
+    {
+     "t": "The doctor's instruction is short, but it concerns the whole town.",
+     "needs": "chart"
+    }
+   ],
+   "neutral": [
+    "When one person falls ill, it is that person's own business. When the person carrying the whole town's affairs falls ill, it is everyone's business.",
+    "This paper knows nothing of medicine and will say nothing about it. It asks only this: who is making the decisions for this town now?",
+    {
+     "t": "A person faints at the town hall and says only that breakfast was missed. Few in town believe it.",
+     "needs": "faint"
+    },
+    "This paper wants to know one thing only: whether {target.short} is still fit for the post."
+   ],
+   "hot": [
+    "Being ill is nothing to be ashamed of. Hiding it is.",
+    "This town's affairs cannot be left to someone who hides even the state of {target.his} own health.",
+    "This town is not one person's sickbed.",
+    {
+     "t": "Fainting at the town hall, and calling it a missed breakfast?",
+     "needs": "faint"
+    }
+   ],
+   "any": [
+    {
+     "t": "The mayor's chair cannot stand empty. But whoever sits in it owes the town an honest word on whether {target.ta} can stay there.",
+     "occ": [
+      "mayor"
+     ]
+    },
+    {
+     "t": "The council's business and the coming election both rest on {target.short}.",
+     "occ": [
+      "mayor"
+     ]
+    },
+    {
+     "t": "Half the livelihoods of the sawmill's forty-odd hands hang on {target.short}.",
+     "occ": [
+      "owner"
+     ]
+    },
+    {
+     "t": "A mill cannot run itself. When the owner falls ill, the men are the first to worry.",
+     "occ": [
+      "owner"
+     ]
+    },
+    {
+     "t": "From the pulpit these past Sundays, the voice of {target.short} has grown noticeably weaker.",
+     "occ": [
+      "priest"
+     ]
+    },
+    {
+     "t": "The church's work can be handed to others. An illness has to be carried alone.",
+     "occ": [
+      "priest"
+     ]
+    }
+   ]
+  },
+  "resp": {
+   "denied": [
+    "{target.short} says {target.ta} is perfectly well and nobody need worry.",
+    "{target.short} said only: \"I'm fine.\"",
+    "{target.short} says {target.ta} has had a cold, and nothing more."
+   ],
+   "declined": [
+    "The family of {target.short} says {target.ta} is not seeing visitors this week."
+   ],
+   "unreached": [
+    "{target.name} has not yet responded.",
+    "By the time this paper went to press, it had not been able to see {target.name}."
+   ]
+  },
+  "close": {
+   "calm": [
+    "This paper wishes {target.short} a quick recovery."
+   ]
+  }
+ },
+ "bribery": {
+  "name": "the road money",
+  "headlines": {
+   "calm": [
+    {
+     "t": "Road Money Paid Six Months Ago; Road Unchanged",
+     "needs": "ledger"
+    },
+    {
+     "t": "The Money Came; the Road Waits",
+     "needs": "ledger"
+    },
+    {
+     "t": "Where Did the Road Money Go?",
+     "needs": "ledger"
+    },
+    {
+     "t": "Lumber Contract Let Without Bids",
+     "needs": "contract"
+    },
+    "An Entry in the Town Hall Books",
+    "Questions About the Town Hall Accounts",
+    "The Town's Books and the Town's Road"
+   ],
+   "neutral": [
+    {
+     "t": "{official} Accused of Taking Money from {payer}; Contract Let Without Bids",
+     "needs": "contract"
+    },
+    {
+     "t": "No Account of the Road Money; {official} Must Answer",
+     "needs": "ledger"
+    },
+    {
+     "t": "{payer} Gets Lumber Contract Without Bidding",
+     "needs": "contract"
+    },
+    {
+     "t": "An Envelope Between {official} and {payer}",
+     "needs": "envelope"
+    },
+    "Money Handled by {official} Goes Unexplained",
+    "{official} Faces Questions over Town Money",
+    "The Town Hall Accounts and {official}"
+   ],
+   "hot": [
+    {
+     "t": "{official} Sold This Town! Our Road Was in That Envelope",
+     "needs": "envelope"
+    },
+    {
+     "t": "The Road Stayed Broken; the Money Went to {official}",
+     "needs": "ledger"
+    },
+    {
+     "t": "{official} Takes the Money, {payer} Takes the Contract",
+     "needs": "contract"
+    },
+    "Who Sold Greyriver's Road?",
+    "The Books of {official} Won't Bear Close Inspection",
+    "{official} Has Some Explaining to Do"
+   ]
+  },
+  "lead": {
+   "calm": [
+    {
+     "t": "The town hall books show a payment for road repairs. The money came in six months ago; the road has not been touched.",
+     "needs": "ledger"
+    },
+    {
+     "t": "#recent#, a reader stopped by the office to ask: where did the road money go?",
+     "needs": "ledger"
+    },
+    "The town's main road was to be mended last year. This year it looks exactly the same.",
+    {
+     "t": "#season_open#, the road through town has looked just as it always has.",
+     "needs": "ledger"
+    }
+   ],
+   "neutral": [
+    {
+     "t": "Road money passed through the hands of {official}, and this paper cannot find where it was spent.",
+     "needs": "ledger"
+    },
+    "This paper's inquiries have turned up a sum of money passing between {payer.full} and {official} that no one can explain.",
+    "#recent#, this paper looked into an entry in the town hall's books.",
+    {
+     "t": "#season_open#, the road through town has looked just as it always has.",
+     "needs": "ledger"
+    }
+   ],
+   "hot": [
+    {
+     "t": "The roads in this town are rutted and potholed, and in wet weather a wagon cannot get through. The money to fix them came in long ago. It simply was not spent on the road.",
+     "needs": "ledger"
+    },
+    {
+     "t": "{official.full} promised the whole town a mended road. There is no road, and there is no money.",
+     "needs": "ledger"
+    },
+    "The road is as rutted as ever, and yet somebody's wallet has grown fat."
+   ]
+  },
+  "facts": {
+   "ledger": {
+    "note": "the town hall books record a payment from {payer} for road repairs, but the road was never mended",
+    "prose": [
+     "there is a payment on the books from {payer}, entered as road money, yet the road has not been mended.",
+     "{payer} paid a sum that was entered under road repairs, and nothing more was heard of it.",
+     {
+      "t": "!This paper went through the town hall's accounts. There is a payment from {payer}, entered under road repairs. To this day the road has not been touched.",
+      "src": [
+       "archive"
+      ]
+     }
+    ]
+   },
+   "envelope": {
+    "note": "{payer} handed {official} an envelope in the back room of the tavern",
+    "prose": [
+     "{payer} handed {official} an envelope in the back room of the tavern.",
+     "#night#, in the back room of the tavern, {payer} pushed a brown paper envelope across the table to {official}.",
+     {
+      "t": "!#night#, in the back room of the tavern, this paper's reporter saw {payer} push an envelope across to {official}. What was in it, this paper did not see.",
+      "src": [
+       "witness"
+      ]
+     },
+     {
+      "t": "!This paper's reporter saw {payer} hand {official} a brown paper envelope in the back room of the tavern, and saw {official} take it.",
+      "src": [
+       "witness"
+      ]
+     }
+    ]
+   },
+   "contract": {
+    "note": "this year's lumber contract went to {payer} without any bidding",
+    "prose": [
+     "this year's lumber contract was never put out for bids; it went straight to {payer}.",
+     "{payer} was handed the town's lumber contract for the year, and nobody had heard there was to be any bidding."
+    ]
+   },
+   "rumor": {
+    "note": "{official} has friends at the state capital and cannot be touched",
+    "prose": [
+     "{official} has friends at the state house and cannot be touched.",
+     "{official} has protection at the state capital."
+    ]
+   }
+  },
+  "detail": [
+   {
+    "t": "Last autumn a grain wagon sank to its axles in the deepest hole on that road.",
+    "needs": "ledger"
+   },
+   {
+    "t": "The envelope was thick, and sealed with wax.",
+    "needs": "envelope"
+   },
+   {
+    "t": "On one page of the town hall ledger, the ink is a different color from the pages before and after.",
+    "needs": "ledger"
+   },
+   {
+    "t": "That lumber was shipped in from out of state, at a tenth more than local timber.",
+    "needs": "contract"
+   },
+   {
+    "t": "The back room of the tavern has a single table, which the keeper ordinarily uses for doing the accounts.",
+    "needs": "envelope"
+   },
+   {
+    "t": "The ink of the signatures on the contract is still fresh.",
+    "needs": "contract"
+   }
+  ],
+  "comment": {
+   "calm": [
+    "Accounts that do not add up do not always mean someone has taken money. But someone ought to come forward and make them add up.",
+    {
+     "t": "A contract nobody knows about is the surest way to set people wondering.",
+     "needs": "contract"
+    },
+    "When the accounts are clear, the matter is simple. When they are not, people can only guess."
+   ],
+   "neutral": [
+    {
+     "t": "The road money comes from taxes paid by every household in town. Every household has a right to know where it went.",
+     "needs": "ledger"
+    },
+    {
+     "t": "Who gets a contract is not for this paper to decide. But before it is given, the town ought at least to know there is a contract to be had.",
+     "needs": "contract"
+    },
+    {
+     "t": "What was in the envelope, this paper does not know. But the back room of a tavern is no place for town business.",
+     "needs": "envelope"
+    },
+    "How public money is spent was never meant to be one person's say."
+   ],
+   "hot": [
+    {
+     "t": "Whose account should the wagon stuck in the mud be charged to?",
+     "needs": "ledger"
+    },
+    {
+     "t": "The one who took the money still gives speeches from the platform. The ones who paid it still walk through the mud.",
+     "needs": "ledger"
+    },
+    {
+     "t": "An envelope handed over that smoothly was not the first.",
+     "needs": "envelope"
+    },
+    {
+     "t": "The road was never mended, but the contract was signed quickly enough.",
+     "needs": "contract"
+    },
+    "Is the business of this town settled in the back room of a tavern?"
+   ],
+   "any": [
+    {
+     "t": "The mayor was elected by this town, and nobody at the polls said anything about envelopes.",
+     "occ": [
+      "mayor"
+     ]
+    },
+    {
+     "t": "The people of this town ought to remember this before the next vote.",
+     "occ": [
+      "mayor"
+     ]
+    },
+    {
+     "t": "A sheriff's business is whether other people keep the law.",
+     "occ": [
+      "sheriff"
+     ]
+    },
+    {
+     "t": "A sheriff who takes envelopes: can he arrest a thief with a straight face?",
+     "occ": [
+      "sheriff"
+     ]
+    }
+   ]
+  },
+  "resp": {
+   "denied": [
+    "{target.short} insists on {target.his} innocence.",
+    "{target.short} says someone is out to ruin {target.him}.",
+    "{target.short} says {target.ta} disputes every word this paper has printed.",
+    "{target.short} says where the money went is all written down in the books."
+   ],
+   "unreached": [
+    "{target.name} has not yet responded.",
+    "By the time this paper went to press, it had not been able to see {target.name}."
+   ]
+  },
+  "close": {
+   "neutral": [
+    "This paper will keep asking about the road until it gets an answer."
+   ],
+   "hot": [
+    "The road is still not mended."
+   ]
+  }
+ },
+ "moonshine": {
+  "name": "the untaxed liquor",
+  "headlines": {
+   "calm": [
+    {
+     "t": "Wagons in the Woods at Night Keep Neighbors Awake",
+     "needs": "wagon"
+    },
+    {
+     "t": "Where Does the Tavern Get Its Cheap Liquor?",
+     "needs": "buy"
+    },
+    {
+     "t": "A Wagon Through the Woods After Dark",
+     "needs": "wagon"
+    },
+    {
+     "t": "The Smell Behind the Barn",
+     "needs": "smell"
+    },
+    "Families by the Woods Sleep Poorly",
+    "Night Traffic on the Woods Road",
+    "Questions About the Tavern's Cheap Whiskey"
+   ],
+   "neutral": [
+    {
+     "t": "{brewer} Accused of Bootlegging; Tavern Liquor of Doubtful Origin",
+     "needs": "buy"
+    },
+    {
+     "t": "Liquor Sold by {buyer} Comes from the Barn of {brewer}",
+     "needs": "buy"
+    },
+    {
+     "t": "{brewer} Distills, the Tavern Buys",
+     "needs": "buy"
+    },
+    {
+     "t": "Untaxed Liquor Passes Through the Hands of {buyer}",
+     "needs": "buy"
+    },
+    "{brewer} Accused of Running a Still",
+    "{brewer} and the Still in the Woods",
+    "A Still Near Greyriver, and Talk of {brewer}"
+   ],
+   "hot": [
+    {
+     "t": "Bootleg from {brewer} Pours into the Tavern! Not a Drop Has Paid Tax",
+     "needs": "buy"
+    },
+    {
+     "t": "From the Barn Vat to the Tavern Glass",
+     "needs": "buy"
+    },
+    {
+     "t": "{brewer} and {buyer} in a Business That Pays No Tax",
+     "needs": "buy"
+    },
+    "Whose Liquor Are You Drinking?",
+    "{brewer} in the Liquor Trade",
+    "Moonshine in Greyriver, and {brewer} Behind It"
+   ]
+  },
+  "lead": {
+   "calm": [
+    {
+     "t": "#night#, wagons often pass through the woods. Those who live at the edge of the trees say the loads are not timber.",
+     "needs": "wagon"
+    },
+    {
+     "t": "The cheap liquor at the tavern sells at a good price, and nobody has asked where it comes from.",
+     "needs": "buy"
+    },
+    "The families at the edge of the woods say they have not been sleeping well lately.",
+    {
+     "t": "#season_open#, the families at the edge of the woods have often been woken at night by wagon wheels.",
+     "needs": "wagon"
+    }
+   ],
+   "neutral": [
+    {
+     "t": "Half the cheap liquor sold at the tavern comes from the barn of {brewer}, and no tax has been paid on it.",
+     "needs": "buy"
+    },
+    {
+     "t": "This paper looked into where the tavern gets its cheap liquor, and the trail led to {brewer}.",
+     "needs": "buy"
+    },
+    "This paper looked into where the cheapest liquor at the tavern comes from.",
+    {
+     "t": "#season_open#, the families at the edge of the woods have often been woken at night by wagon wheels.",
+     "needs": "wagon"
+    }
+   ],
+   "hot": [
+    {
+     "t": "That glass of cheap liquor you drank at the tavern never paid a cent of tax. The person who made it is {brewer}.",
+     "needs": "buy"
+    },
+    "There is a business in this town that pays no tax, and it runs right under your nose.",
+    "There is a business in Greyriver that has never paid a cent of tax."
+   ]
+  },
+  "facts": {
+   "smell": {
+    "note": "there is always a smell of mash behind the barn of {brewer}",
+    "prose": [
+     "there has long been a smell of mash behind the barn of {brewer}.",
+     "anyone walking past the barn of {brewer} can smell the sour-sweet reek of mash."
+    ]
+   },
+   "buy": {
+    "note": "half the cheap liquor sold at the tavern comes from {brewer}, and no tax is paid on it",
+    "prose": [
+     "half the cheap liquor the tavern sells comes from {brewer}, and {buyer} has never paid tax on it.",
+     "{buyer} buys liquor from {brewer}, keeps it off the books, and pays no tax."
+    ]
+   },
+   "wagon": {
+    "note": "{brewer} drove a wagon through the woods in the middle of the night, the load under a tarpaulin",
+    "prose": [
+     "#night#, {brewer} drove a wagon through the woods with the load under a tarpaulin.",
+     "#night#, a wagon covered with a tarpaulin passed through the woods, and the driver was {brewer}.",
+     {
+      "t": "!This paper's reporter kept watch at the edge of the woods #night# and saw {brewer} drive a wagon through the trees, the load under a tarpaulin.",
+      "src": [
+       "witness"
+      ]
+     },
+     {
+      "t": "!#night#, there was the sound of a wagon in the woods. This paper's reporter followed it and found {brewer} at the reins, the tarpaulin over the wagon bed tied down tight.",
+      "src": [
+       "witness"
+      ]
+     }
+    ]
+   },
+   "rumor": {
+    "note": "liquor from {brewer} has blinded a man",
+    "prose": [
+     "liquor from {brewer} has blinded a man.",
+     "a man who drank liquor from {brewer} has had trouble with his eyes ever since."
+    ]
+   }
+  },
+  "detail": [
+   {
+    "t": "One corner of the tarpaulin had slipped, showing the rim of a crock.",
+    "needs": "wagon"
+   },
+   {
+    "t": "Even the straw in the crack of the barn door smells of liquor.",
+    "needs": "smell"
+   },
+   {
+    "t": "The ruts on the little track through the woods are deeper than those on the timber road.",
+    "needs": "wagon"
+   },
+   {
+    "t": "Cheap liquor at the tavern is three cents a glass, half the price of bottled.",
+    "needs": "buy"
+   },
+   "The dog at the house by the woods has been barking every night lately.",
+   {
+    "t": "Behind the barn, the ground is marked with ring after ring left by the bottoms of crocks.",
+    "needs": "smell"
+   },
+   {
+    "t": "The tavern never gives a receipt for the liquor it takes in.",
+    "needs": "buy"
+   }
+  ],
+  "comment": {
+   "calm": [
+    "Country people have always made a little liquor for themselves, and nobody minded. Selling it over the tavern counter is another thing.",
+    "Liquor made at home and drunk at home is nobody's business.",
+    {
+     "t": "The families at the edge of the woods have listened to those wagons for a whole season.",
+     "needs": "wagon"
+    }
+   ],
+   "neutral": [
+    "Bootleg liquor is cheap, that much is true. But the tax that was never paid falls in the end on every household in town.",
+    "Nobody has ever tested that liquor. If someone takes sick from it, who answers for it?",
+    {
+     "t": "Driving a wagon through the woods in the middle of the night does not look like hauling firewood.",
+     "needs": "wagon"
+    },
+    "This paper does not preach against drink. It asks about the tax."
+   ],
+   "hot": [
+    "The tavern takes the money, and the town never sees the tax.",
+    "Those who drink it do not know. Those who sell it know very well.",
+    {
+     "t": "Nothing that travels at night under a tarpaulin is fit for daylight.",
+     "needs": "wagon"
+    },
+    "A trade this size cannot have gone unnoticed by everyone."
+   ],
+   "any": [
+    {
+     "t": "A man who went through the war has lived through hard times. But hard times do not explain a bootleg trade.",
+     "occ": [
+      "veteran"
+     ]
+    },
+    {
+     "t": "The harvest has been poor and every household has had a hard year. Hard or not, the tax is owed.",
+     "occ": [
+      "farmer"
+     ]
+    }
+   ]
+  },
+  "resp": {
+   "denied": [
+    "{target.short} insists on {target.his} innocence.",
+    "{target.short} says someone is out to ruin {target.him}.",
+    "{target.short} says {target.ta} disputes every word this paper has printed.",
+    "{target.short} says what is kept in the barn is mash for the livestock."
+   ],
+   "unreached": [
+    "{target.name} has not yet responded.",
+    "By the time this paper went to press, it had not been able to see {target.name}."
+   ]
+  },
+  "close": {
+   "hot": [
+    "Will there be wagons in the woods again tonight?"
+   ]
+  }
+ },
+ "past": {
+  "name": "the stranger's past",
+  "headlines": {
+   "calm": [
+    "Not Everyone the Train Brings Leaves a Name",
+    {
+     "t": "A Letter Bearing a Court Seal",
+     "needs": "letter"
+    },
+    {
+     "t": "A New Face, an Old Name",
+     "needs": "recognize"
+    },
+    "A Newcomer with a History",
+    "Everyone Who Comes by Train Has a Reason"
+   ],
+   "neutral": [
+    {
+     "t": "Doubts About {stranger}, Who Once Went by Another Name",
+     "needs": "recognize"
+    },
+    {
+     "t": "{stranger} Used a Different Name Down South",
+     "needs": "recognize"
+    },
+    {
+     "t": "Letter from a Court Addressed to {stranger}",
+     "needs": "letter"
+    },
+    {
+     "t": "{recognizer} Recognizes {stranger}",
+     "needs": "recognize"
+    },
+    "Talk in Town About the Past of {stranger}",
+    "Questions About {stranger}",
+    "{stranger} and a Past Left Behind"
+   ],
+   "hot": [
+    {
+     "t": "{stranger} Came to Greyriver Under a False Name. Why?",
+     "needs": "recognize"
+    },
+    "The Puzzle of {stranger}",
+    {
+     "t": "Someone Who Changed Names Now Lives in Greyriver",
+     "needs": "recognize"
+    },
+    "The Past Overtakes {stranger}",
+    "The Past of {stranger}"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "Greyriver is a small place, and when a stranger arrives, people look twice.",
+    "Everyone who comes in on the train has a reason for coming.",
+    "Since coming to Greyriver, {stranger.full} has lived very quietly.",
+    "#season_open#, people in town have been asking where {stranger.full} came from."
+   ],
+   "neutral": [
+    {
+     "t": "{stranger.full} has not been in Greyriver long. This paper has learned that {stranger.ta} has gone by another name elsewhere.",
+     "needs": "recognize"
+    },
+    "There is talk in town about where {stranger.full} came from, and this paper has checked some of it.",
+    "The town has been talking about {stranger} for some while now.",
+    "#season_open#, people in town have been asking where {stranger.full} came from."
+   ],
+   "hot": [
+    "When {stranger.full} settled in Greyriver, nobody asked where {stranger.ta} came from. It is time the question was asked.",
+    {
+     "t": "Why does a person change names?",
+     "needs": "recognize"
+    },
+    "{stranger.full} has a past, and this paper has gone looking for it."
+   ]
+  },
+  "facts": {
+   "recognize": {
+    "note": "{recognizer} knows {stranger} and says {stranger.ta} went by another name down south",
+    "prose": [
+     "!{recognizer} knows {stranger} and says that down south, {stranger.ta} went by a different name.",
+     "!{recognizer} recognized {stranger} on sight and told this paper: \"Down south, that's not the name {stranger.ta} went by.\""
+    ]
+   },
+   "letter": {
+    "note": "a letter addressed to {stranger} came through the post office bearing a court seal",
+    "prose": [
+     "a letter addressed to {stranger} arrived with a court seal pressed into the flap.",
+     "a letter stamped with a court seal arrived in Greyriver, and it was addressed to {stranger}.",
+     {
+      "t": "!This paper found at the post office a letter addressed to {stranger}, with a court seal on the flap. Which court, and on what business, this paper does not yet know.",
+      "src": [
+       "archive"
+      ]
+     }
+    ]
+   },
+   "rumor": {
+    "note": "{stranger} is an army deserter with blood on {stranger.his} hands",
+    "prose": [
+     "{stranger} is a deserter from the army, with a man's blood on {stranger.his} hands.",
+     "{stranger} has done time in a prison down south."
+    ]
+   }
+  },
+  "detail": [
+   {
+    "t": "The envelope was a bluish grey, postmarked from a large city down south.",
+    "needs": "letter"
+   },
+   {
+    "t": "In the passenger register at the railway station, that one line was written with a heavy hand.",
+    "needs": "recognize"
+   },
+   "{stranger.short} came to Greyriver with a single leather suitcase.",
+   {
+    "t": "The day {stranger.short} got off the train, {stranger.his} hat was pulled low.",
+    "needs": "recognize"
+   },
+   {
+    "t": "Nobody has yet called for that letter.",
+    "needs": "letter"
+   }
+  ],
+  "comment": {
+   "calm": [
+    "Living under a new name does not always mean someone has done wrong. Plenty of people come to Greyriver to start over.",
+    "This paper has no wish to dig into anyone's past. Someone asked, and so this paper looked.",
+    "Most families in Greyriver came from somewhere else. Go back two generations, and every one of them has a story."
+   ],
+   "neutral": [
+    {
+     "t": "Where a person comes from is ordinarily nobody else's business. But once a letter from a court arrives in Greyriver, it is no longer the business of one person alone.",
+     "needs": "letter"
+    },
+    "The people of this town have a right to know who their neighbors are, and neighbors have a right not to be guessed about. This paper prints only what it could confirm.",
+    {
+     "t": "Recognizing a face is a matter of memory, not proof. This paper sets down only what was said by the one who recognized it.",
+     "needs": "recognize"
+    }
+   ],
+   "hot": [
+    "Greyriver welcomes strangers. It does not welcome liars.",
+    "A person can change names. The past does not change along with them.",
+    {
+     "t": "A court does not send its letters to the wrong person.",
+     "needs": "letter"
+    },
+    "All this time living here, and nobody in town knows {target.his} real name."
+   ],
+   "any": [
+    {
+     "t": "A newcomer always gets looked at twice. It is not fair, but that is how a small town is.",
+     "occ": [
+      "newcomer"
+     ]
+    },
+    {
+     "t": "The people who lodge behind the railway station have never been asked many questions. Now someone is asking.",
+     "occ": [
+      "drifter"
+     ]
+    }
+   ]
+  },
+  "resp": {
+   "denied": [
+    "{target.short} says {target.ta} has never gone by any other name.",
+    "{target.short} says whatever happened down south has nothing to do with {target.him}.",
+    "{target.short} says {target.ta} came to Greyriver for work, and for no other reason."
+   ],
+   "unreached": [
+    "{target.name} has not yet responded.",
+    "By the time this paper went to press, it had not been able to see {target.name}."
+   ]
+  },
+  "close": {
+   "neutral": [
+    "Should {target.ta} wish to explain, this paper will print it."
+   ]
+  }
+ },
+ "fair": {
+  "name": "the summer fair",
+  "headlines": {
+   "calm": [
+    "Summer Fair Opens Saturday Next",
+    "River-Bend Fair Date Set",
+    "Fair to Open Shortly"
+   ],
+   "neutral": [
+    "Summer Fair Saturday Next, {host} in Charge",
+    "{host} Organizes the Summer Fair",
+    "Fair Saturday Next; River-Bend Farm Offers Two Hogs"
+   ],
+   "hot": [
+    "Everybody Come! Summer Fair Saturday Next",
+    "The Fair Comes to Town! Two Hogs Await You",
+    "Saturday Next, the Whole Town Turns Out"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "The annual summer fair has been set for Saturday next."
+   ],
+   "neutral": [
+    "The summer fair, organized by {host.full}, will be held on Main Street Saturday next."
+   ],
+   "hot": [
+    "The fair is coming again!"
+   ]
+  },
+  "facts": {
+   "fair": {
+    "note": "{host} is organizing the summer fair for Saturday next, and the river-bend farm is putting up two hogs"
+   }
+  },
+  "body": [
+   " The river-bend farm is putting up two hogs, and the general store will set out its new cloth.[? The children are already counting the days.]",
+   " According to {host.short}, there will be more stalls this year than last, and the tavern will set a table outside its door.",
+   " Families with goods to sell may sign up with {host.short}."
+  ]
+ },
+ "wedding": {
+  "name": "the wedding",
+  "headlines": {
+   "calm": [
+    "{groom} Weds {bride}",
+    "Wedding at the Church Sunday",
+    "Glad Tidings: {groom} and {bride}"
+   ],
+   "neutral": [
+    "{groom} and {bride} to Wed Sunday; Town Sends Good Wishes",
+    "{groom} and {bride} to Marry at the Church Sunday",
+    "{groom}, {bride} Wed Sunday"
+   ],
+   "hot": [
+    "Church Bells Ring for {groom} and {bride}",
+    "{groom} Marries {bride}!",
+    "The Whole Town Turns Out to Celebrate"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "{groom.full} and {bride.full} will be married Sunday at the church."
+   ],
+   "neutral": [
+    "This Sunday, {groom.full} and {bride.full} will be married at the church, with the priest officiating."
+   ],
+   "hot": [
+    "The church will be packed on Sunday: {groom.full} is marrying {bride.full}."
+   ]
+  },
+  "facts": {
+   "wed": {
+    "note": "{groom} and {bride} are to be married Sunday at the church, with the priest officiating"
+   }
+  },
+  "body": [
+   " The two met [at the fair|at church|down by the river]. #wedding_tail#",
+   " After the ceremony, the couple will give a plain supper at home for all who come. #wedding_tail#",
+   " The bride's gown is borrowed, and is said to be the finest in town. #wedding_tail#"
+  ],
+  "own_tail": true
+ },
+ "train": {
+  "name": "the late trains",
+  "headlines": {
+   "calm": [
+    "South Line Trains Late Several Days Running",
+    "Trains Running Late",
+    "Delays on the South Line"
+   ],
+   "neutral": [
+    "Trains Late for Days; Stationmaster Blames Bridge Work Upstream",
+    "Three Days of Late Trains; {master} Cites Bridge Repairs",
+    "Bridge Work Upstream Delays South Line"
+   ],
+   "hot": [
+    "Late Again! Mail and Salt Still on the Way",
+    "The Train That Never Comes",
+    "Three Days Now, and Still No Train"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "The train from the south has now been late three days running."
+   ],
+   "neutral": [
+    "The south line ran late three days in a row this week. {master.full} says the bridge upstream is under repair."
+   ],
+   "hot": [
+    "The train is late again, and this time by three days."
+   ]
+  },
+  "facts": {
+   "late": {
+    "note": "the train from the south was late three days running, and {master} says the bridge upstream is under repair"
+   }
+  },
+  "body": [
+   " Families waiting on letters and goods will have to wait a few days more.",
+   " According to {master.short}, the trains will run as usual once the bridge is repaired.[? The general store is running low on salt.]",
+   " Several parcels sit unclaimed on the platform."
+  ]
+ },
+ "flood": {
+  "name": "the spring flood",
+  "headlines": {
+   "calm": [
+    "High Water over the Bridge; River-Bend Fields Flooded",
+    "The Spring Flood Arrives",
+    "River Rises over the Bridge Approach"
+   ],
+   "neutral": [
+    "High Water over the Bridge; {farmer} Hard Hit",
+    "Flood Takes Half the Fields of {farmer}",
+    "Grey River Rises, River-Bend Farmland Under Water"
+   ],
+   "hot": [
+    "The River Rises in Anger! Bridge Under Water, and Who Will Mend It?",
+    "The Water Comes, and the Bridge Goes Under",
+    "Fields Flooded Again; Will the Town Do Anything?"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "#weather#, the Grey River rose and came over the bridge approach."
+   ],
+   "neutral": [
+    "The spring high water came early this year. The river came over the bridge approach and flooded half the land of {farmer.full}."
+   ],
+   "hot": [
+    "Every spring the river rises, and every spring someone's fields go under. This year it was the turn of {farmer.full}."
+   ]
+  },
+  "facts": {
+   "flood": {
+    "note": "the spring high water came over the bridge and flooded half the land of {farmer}"
+   }
+  },
+  "body": [
+   " The planks of the bridge approach have been soaked loose, and wagons should keep off for now.",
+   " According to {farmer.short}, the seed just put in the ground is as good as wasted.",
+   " Now that the water has gone down, the high-water mark on the bridge stands a hand's width above last year's."
+  ]
+ },
+ "funeral": {
+  "name": "the funeral",
+  "headlines": {
+   "calm": [
+    "A Death in the Family of {widow}",
+    "{widow} in Mourning",
+    "Death Notice"
+   ],
+   "neutral": [
+    "Death in the Family of {widow}; Burial Thursday",
+    "{widow}'s Household Buries Its Eldest Thursday",
+    "{widow} Loses an Elder of the Family"
+   ],
+   "hot": [
+    "Another of the Old Folks Gone; the Town Grows Older",
+    "Greyriver Loses Another of Its Elders",
+    "The Old Depart; the Town Remains"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "An elder of the household of {widow} died this week."
+   ],
+   "neutral": [
+    "An elder of {widow}'s household died this week, and will be buried Thursday from the church."
+   ],
+   "hot": [
+    "This month the town has seen off another of its old people."
+   ]
+  },
+  "facts": {
+   "obit": {
+    "note": "an elder of the household of {widow} has died, and the burial is Thursday from the church"
+   }
+  },
+  "body": [
+   " The funeral will be held at the church Thursday morning. #obit_tail#",
+   " The deceased lived a whole life in Greyriver, and many will remember the pear tree by the front gate. #obit_tail#",
+   " The priest will conduct the service Thursday, and burial will follow in the churchyard. #obit_tail#"
+  ],
+  "own_tail": true
+ },
+ "obituary": {
+  "name": "the death notice",
+  "headlines": {
+   "calm": [
+    "Death Notice: {x_deceased}, Aged {x_age}",
+    "Death Notice: {x_deceased}",
+    "{x_deceased} Dies"
+   ],
+   "neutral": [
+    "{x_deceased} Dies; Service Thursday",
+    "{x_deceased} Dead at {x_age}",
+    "{x_deceased} Has Gone"
+   ],
+   "hot": [
+    "{x_deceased} Gone, and a Familiar Face Missing from Town",
+    "Greyriver Says Goodbye to {x_deceased}",
+    "{x_deceased}, {x_age}, Is Gone"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "{x_deceased} died this week, aged {x_age}."
+   ],
+   "neutral": [
+    "{x_deceased} died this week at the age of {x_age}. {kin.full}, of the family, says the end was peaceful."
+   ],
+   "hot": [
+    "{x_deceased} is gone. {x_age} years is not short in Greyriver, and not long either."
+   ]
+  },
+  "facts": {
+   "obituary": {
+    "note": "{x_deceased}, of the household of {kin}, has died at {x_age}, and the service is Thursday at the church"
+   }
+  },
+  "body": [
+   " The funeral will be held at the church Thursday. #obit_tail#",
+   " Those who knew {x_deceased} may come to the church Thursday morning to pay their respects. #obit_tail#",
+   " The family asks this paper to say that the service will be a simple one. #obit_tail#"
+  ],
+  "own_tail": true
+ },
+ "birth": {
+  "name": "the new baby",
+  "headlines": {
+   "calm": [
+    "{father} and {mother} Welcome a Child",
+    "A Blessed Event",
+    "{mother} Safely Delivered"
+   ],
+   "neutral": [
+    "{mother} Safely Delivered; a Child for {father}",
+    "{father}, {mother} Have a Child",
+    "One More at the Home of {father}"
+   ],
+   "hot": [
+    "Another Mouth at {father}'s Table! Can the Town Feed Them All?",
+    "Greyriver Gains a Resident",
+    "A Cry from the House of {father}"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "{mother.full} was safely delivered of a child this week."
+   ],
+   "neutral": [
+    "{father.full} and {mother.full} welcomed a child this week. Mother and child are both well."
+   ],
+   "hot": [
+    "{father.full} has one more mouth to feed."
+   ]
+  },
+  "facts": {
+   "birth": {
+    "note": "{mother} has had a child, and nobody keeps count anymore of how many that makes for {father}"
+   }
+  },
+  "body": [
+   " The child has not yet been named.",
+   " The nurse from the clinic attended the birth.[? The baby has a fine pair of lungs.]",
+   " The neighbors say the baby has a voice like {father.short}'s."
+  ]
+ },
+ "arrival": {
+  "name": "the newcomer",
+  "headlines": {
+   "calm": [
+    "New Face in Town: {newcomer}",
+    "A Newcomer in Greyriver",
+    "Train Brings a New Resident"
+   ],
+   "neutral": [
+    "{newcomer} Arrives by Train, Lodging Behind the Station",
+    "{newcomer} Settles in Greyriver",
+    "Newcomer {newcomer} Lodging Behind the Station"
+   ],
+   "hot": [
+    "Another Stranger! What Brings {newcomer} Here?",
+    "And Who Might {newcomer} Be?",
+    "A Stranger Comes to Town"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "The train brought a new resident to town this week: {newcomer}."
+   ],
+   "neutral": [
+    "{newcomer} came to Greyriver by train this week and is lodging for now behind the railway station."
+   ],
+   "hot": [
+    "Another stranger has come to town, by the name of {newcomer}."
+   ]
+  },
+  "facts": {
+   "arrival": {
+    "note": "the train brought a newcomer named {newcomer}, who is lodging behind the railway station"
+   }
+  },
+  "body": [
+   " {newcomer.short} says {newcomer.ta} has come looking for work.",
+   " Not much luggage: one leather suitcase and an old hat.",
+   " According to the stationmaster, {newcomer.short} bought a one-way ticket."
+  ]
+ },
+ "departure": {
+  "name": "the departure",
+  "headlines": {
+   "calm": [
+    "{x_leaver} Leaves Town",
+    "{x_leaver} Moves Away",
+    "Farewell: {x_leaver}"
+   ],
+   "neutral": [
+    "{x_leaver} Leaves on the South Train; {kin} at the Station",
+    "{x_leaver} Leaves Greyriver",
+    "{x_leaver} Gone, with {kin} There to Say Goodbye"
+   ],
+   "hot": [
+    "{x_leaver} Gone; This Town Can't Keep Its People",
+    "Another One Leaves",
+    "{x_leaver} Leaves, and Means to Stay Away"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "{x_leaver} left Greyriver this week."
+   ],
+   "neutral": [
+    "{x_leaver} left Greyriver on the south train this week, and {kin.full} went to the station to say goodbye."
+   ],
+   "hot": [
+    "The town is one person smaller: {x_leaver} has gone."
+   ]
+  },
+  "facts": {
+   "departure": {
+    "note": "{x_leaver} has left town; {kin} saw the train off and would not say where it was bound"
+   }
+  },
+  "body": [
+   " No one knows where.",
+   " According to {kin.short}, there are relatives down south to stay with.",
+   " The station hands say only two people stood on the platform that day."
+  ]
+ },
+ "budget": {
+  "name": "the town budget",
+  "headlines": {
+   "calm": [
+    "Council Budget for the Year: {x_decision}",
+    "This Year's Money Goes to {x_decision}",
+    "Council Settles This Year's Budget"
+   ],
+   "neutral": [
+    "{mayor} Presides as Council Puts the Year's Money into {x_decision}",
+    "Council Decides on {x_decision}",
+    "Budget Settled: {x_decision}"
+   ],
+   "hot": [
+    "The Money Goes to {x_decision} Again! Whose Council Is It?",
+    "{x_decision}? The Council's Arithmetic",
+    "{mayor} Decides: {x_decision}"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "The town council settled this year's budget this week."
+   ],
+   "neutral": [
+    "The council met this week with {mayor.full} presiding, and decided that the year's money will go to {x_decision}."
+   ],
+   "hot": [
+    "The council shut its doors for an afternoon, and when it came out the money had already been divided."
+   ]
+  },
+  "facts": {
+   "budget": {
+    "note": "the council has decided to spend this year's money on {x_decision}, and {mayor} made the final call"
+   }
+  },
+  "body": [
+   " This year's money will go chiefly to {x_decision}.",
+   " Those who attended say the hardest fight was over where the money should go. In the end, it went to {x_decision}.",
+   " {mayor.short} called it the most pressing need in town."
+  ]
+ },
+ "candidacy": {
+  "name": "the race for mayor",
+  "headlines": {
+   "calm": [
+    "{challenger} to Run for Mayor",
+    "Date Set for Mayoral Election",
+    "{challenger} Enters the Race"
+   ],
+   "neutral": [
+    "{challenger} Challenges {mayor}; Election in Ten Weeks",
+    "{challenger} Announces Run for Mayor",
+    "Race for Mayor: {challenger} Against {mayor}"
+   ],
+   "hot": [
+    "{challenger} Out to Unseat {mayor}!",
+    "A New Face for the Mayor's Chair?",
+    "{challenger} Squares Off Against {mayor}"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "{challenger.full} announced this week a run for mayor."
+   ],
+   "neutral": [
+    "{challenger.full} announced a run for mayor this week, against the sitting mayor, {mayor}. The vote is ten weeks off."
+   ],
+   "hot": [
+    "{mayor} has held the mayor's chair for years, and at last someone has stood up to it."
+   ]
+  },
+  "facts": {
+   "candidacy": {
+    "note": "{challenger} is running for mayor against the sitting mayor, {mayor}, and the vote is in ten weeks"
+   }
+  },
+  "body": [
+   " The vote will be held at the town hall in ten weeks.",
+   " {challenger.short} says the town needs a different way of doing things.",
+   " {mayor.short} had only one thing to say about it: let the people decide."
+  ]
+ },
+ "election": {
+  "name": "the election",
+  "headlines": {
+   "calm": [
+    "{winner} Elected Mayor",
+    "Mayoral Election Decided",
+    "Mayor for the Coming Term: {winner}"
+   ],
+   "neutral": [
+    "{winner} Elected Mayor, {x_v1} Votes to {x_v2}",
+    "{winner} Wins Mayoral Race",
+    "Mayoral Vote: {winner} {x_v1}, {x_loser} {x_v2}"
+   ],
+   "hot": [
+    "{winner} Wins!",
+    "{winner} Takes the Mayor's Chair",
+    "{x_loser} Loses; {winner} Wins"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "The votes for mayor were counted this week, and {winner} was elected."
+   ],
+   "neutral": [
+    "The town went to the polls at the town hall this week, and {winner} won by {x_v1} votes to {x_v2}."
+   ],
+   "hot": [
+    "The count is in: {winner}, {x_v1} votes; {x_loser}, {x_v2}."
+   ]
+  },
+  "facts": {
+   "election": {
+    "note": "{winner} has beaten {x_loser} for mayor, {x_v1} votes to {x_v2}"
+   }
+  },
+  "body": [
+   " The ballots were counted at the town hall, with the town clerk calling out each one.",
+   " {x_loser} left before the count was finished.",
+   " {winner.short} says the election is over and the town is still one town."
+  ]
+ },
+ "succession": {
+  "name": "the acting mayor",
+  "headlines": {
+   "calm": [
+    "{mayor} Named Acting Mayor",
+    "{mayor} to Fill the Mayor's Office for Now",
+    "An Acting Mayor"
+   ],
+   "neutral": [
+    "Mayor's Office Vacant; {mayor} to Serve",
+    "{mayor} Assumes the Mayor's Duties for Now",
+    "Town Hall Has an Acting Mayor"
+   ],
+   "hot": [
+    "Who Put {mayor} in the Mayor's Chair?",
+    "{mayor} Acting Mayor, and Nobody Voted",
+    "{mayor} Gets to the Mayor's Chair First"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "The office of mayor being vacant, {mayor} will serve in the meantime."
+   ],
+   "neutral": [
+    "The mayor's office fell vacant, and the town hall has decided that {mayor} will fill it for now."
+   ],
+   "hot": [
+    "The mayor's chair had been empty only a few days before {mayor} sat down in it."
+   ]
+  },
+  "facts": {
+   "succession": {
+    "note": "the mayor's office is vacant, and {mayor} is filling it for now"
+   }
+  },
+  "body": [
+   " The arrangement holds until the next election.",
+   " {mayor.short} says the business of the town hall will not suffer.",
+   " The town hall doors are open as usual."
+  ]
+ },
+ "inspector": {
+  "name": "the state inspection",
+  "headlines": {
+   "calm": [
+    "State Inspector Visits Sawmill",
+    "The Inspector Has Come and Gone",
+    "Sawmill Inspected"
+   ],
+   "neutral": [
+    "State Inspector Penalizes Sawmill; {official} Fined",
+    "{official} Fined by the State",
+    "Sawmill Drain Filled"
+   ],
+   "hot": [
+    "A Fine Well Earned! {official} Pays at Last",
+    "{official} Fined. Can We Drink from the River Now?",
+    "The State Arrives, and {official} Panics"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "An inspector from the state spent three days at the sawmill this week."
+   ],
+   "neutral": [
+    "A state inspector went over the sawmill this week, and {official.full} was fined."
+   ],
+   "hot": [
+    "After this paper printed its report, the state sent someone."
+   ]
+  },
+  "facts": {
+   "inspector": {
+    "note": "the state inspector spent three days at the sawmill, {official} was fined, and the drain was filled in"
+   }
+  },
+  "body": [
+   " The drain from the sawmill to the river has been filled in.",
+   " The inspector left without a word to anyone in town.",
+   " It will be some while yet before the wells downriver are fit to drink from."
+  ]
+ },
+ "fired": {
+  "name": "the dismissal",
+  "headlines": {
+   "calm": [
+    "Sawmill Dismisses a Hand",
+    "Mill Hand Let Go",
+    "One Fewer at the Sawmill"
+   ],
+   "neutral": [
+    "{worker} Dismissed from the Sawmill",
+    "Sawmill Lets {worker} Go",
+    "{worker} Loses Place at the Sawmill"
+   ],
+   "hot": [
+    "{worker} Out of Work! What Will the Family Do?",
+    "One Word from the Mill, and {worker} Has No Wages",
+    "{worker} Thrown Out of the Sawmill"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "The sawmill dismissed one of its hands this week."
+   ],
+   "neutral": [
+    "{worker.full} was dismissed from the sawmill this week."
+   ],
+   "hot": [
+    "{worker.full} went to work Monday morning and was stopped at the gate."
+   ]
+  },
+  "facts": {
+   "fired": {
+    "note": "{worker} was let go from the sawmill, and the foreman says the mill will not take {worker.him} back"
+   }
+  },
+  "body": [
+   " The foreman says the mill will not take {worker.him} back.",
+   " Wages were paid through last week.",
+   " The other hands say {worker.ta} left without even taking a lunch pail."
+  ]
+ },
+ "separation": {
+  "name": "the separation",
+  "headlines": {
+   "calm": [
+    "Two Households Move",
+    "{spouse} Moves to the River-Bend Farm",
+    "{lover} and {spouse} Each Move House"
+   ],
+   "neutral": [
+    "{lover} Leaves Lodgings; {spouse} Moves to River-Bend Farm",
+    "{spouse} Moves Out to the River-Bend Farm",
+    "{lover} and {spouse} Living Apart"
+   ],
+   "hot": [
+    "After Our Report, {lover} and {spouse} Go Separate Ways",
+    "{spouse} Moves Out, and a Family Comes Apart",
+    "The Sequel to the Business at the Bridge"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "{spouse.full} moved to the river-bend farm this week."
+   ],
+   "neutral": [
+    "{spouse.full} moved alone to the river-bend farm this week, and {lover.full} is no longer to be seen in the old places."
+   ],
+   "hot": [
+    "The matter this paper reported earlier has had its sequel."
+   ]
+  },
+  "facts": {
+   "separation": {
+    "note": "{lover} has left {lover.his} old place in town, and {spouse} has moved alone to the river-bend farm"
+   }
+  },
+  "body": [
+   " The family did not go along.",
+   " People in town say the matter is now closed.",
+   " When the two pass in the street these days, neither speaks."
+  ]
+ },
+ "resign": {
+  "name": "the resignation",
+  "headlines": {
+   "calm": [
+    "{official} Resigns",
+    "{official} Steps Down",
+    "One Fewer at the Town Hall"
+   ],
+   "neutral": [
+    "{official} Resigns, Citing Health",
+    "{official} Leaves Office",
+    "{official} Steps Down for Reasons of Health"
+   ],
+   "hot": [
+    "{official} Out!",
+    "{official} Could Not Last",
+    "{official} Goes"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "{official.full} resigned from office this week."
+   ],
+   "neutral": [
+    "{official.full} resigned this week, giving health as the reason."
+   ],
+   "hot": [
+    "{official.full} has finally quit."
+   ]
+  },
+  "facts": {
+   "resign": {
+    "note": "{official} has resigned, giving health as the reason"
+   }
+  },
+  "body": [
+   " No successor has yet been named.",
+   " {official.short} says {official.ta} means to spend more time with the family.",
+   " {official.short}'s desk has already been cleared."
+  ]
+ }
+}

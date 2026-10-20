@@ -1,0 +1,105 @@
+{
+ "plea": [
+  {"if": {"bucket": ["timid"]}, "lines": ["{who} stood in the doorway, hat clutched in both hands.", "\"I know you've been asking about {event}. Please. Don't print it.\""]},
+  {"if": {"bucket": ["timid"]}, "lines": ["{who} knocked three times and waited a long while before coming in.", "\"I have family here. If it's printed, we can't go on living in this town.\""]},
+  {"if": {"bucket": ["timid"], "female": true}, "lines": ["{who} began to cry the moment {who.ta} came in, and could not get a whole sentence out.", "In the end {who.ta} said only: \"Don't write about me.\""]},
+  {"if": {"bucket": ["practical"]}, "lines": ["{who} sat down and rested both hands on {who.his} knees.", "\"I'll be plain with you. If {event} goes in the paper, nobody comes out ahead.\""]},
+  {"if": {"bucket": ["practical"]}, "lines": ["{who} spoke slowly, as if the words had been turned over all the way here.", "\"You want a paper that sells. I want a life I can still live. Can't we both give a little?\""]},
+  {"if": {"bucket": ["hot"]}, "lines": ["{who} came in and slammed a hand down on the table, then looked sorry for it.", "\"I'm asking you. Just this once.\""]},
+  {"if": {"bucket": ["powerful"]}, "lines": ["{who} did not sit, and spoke standing.", "\"I seldom ask anyone for anything. I am asking you to think this over.\""]},
+  {"if": {"bucket": ["powerful"]}, "lines": ["{who} brought a bottle of good whiskey and set it on the type case.", "\"We are both respectable people in this town. Respectable people settle things respectably.\""]},
+  {"if": {"trait": ["pious"]}, "lines": ["{who} said {who.ta} had prayed a long while over this last night.", "\"The Lord forgives. Why can't a newspaper?\""]},
+  {"if": {"trait": ["kind"]}, "lines": ["{who} first asked whether you had eaten.", "Only then did {who.ta} say: \"I know this is hard for you too. But could you leave {event} out of the paper?\""]},
+  {"if": {"trait": ["grudge"]}, "lines": ["{who} looked you straight in the eye the whole time.", "\"If you do me this one favor, I'll remember it. If you don't, I'll remember that too.\""]},
+  {"if": {"female": true}, "lines": ["{who} set a parcel down by the door. It was bread, baked at home.", "\"I didn't come to beg. All right. I did.\""]},
+  {"lines": ["{who} stood at the door a while before coming in.", "\"I know what you've been asking about. I ask only one thing: leave my name out of it.\""]},
+  {"lines": ["{who} came in without any small talk.", "\"Please.\""]}
+ ],
+ "threat": [
+  {"lines": ["{who} did not come in. \"Print certain things, and the windows of this office get hard to keep in one piece.\""]},
+  {"lines": ["{who} stood in the doorway and spoke quietly.", "\"A word of advice. There are things you would do better to forget, once you know them.\""]},
+  {"if": {"bucket": ["hot"]}, "lines": ["{who} shoved the door so hard it banged against the wall.", "\"Keep digging, and I'll show you how deep the Grey River is.\""]},
+  {"if": {"bucket": ["hot"]}, "lines": ["{who} lit a cigarette in the doorway and finished it before saying a word.", "\"This place is built of wood, isn't it?\""]},
+  {"if": {"bucket": ["hot"]}, "lines": ["{who} said nothing at all, set a brick on your desk, and left."]},
+  {"if": {"bucket": ["hot"]}, "lines": ["{who} stood outside the office and cursed for a quarter of an hour while the neighbors came out to watch.", "At last {who.ta} said: \"You just wait.\""]},
+  {"if": {"bucket": ["powerful"]}, "lines": ["{who} sat down and spoke calmly.", "\"Your paper lives on advertising. Have you ever thought about who buys the advertisements?\""]},
+  {"if": {"bucket": ["powerful"]}, "lines": ["{who} kept glancing at the license on your wall while {who.ta} spoke.", "\"That license was issued by the town hall. What the town hall gives, it can take back.\""]},
+  {"if": {"bucket": ["powerful"]}, "lines": ["{who} did not sit.", "\"I know the judges at the state capital. Whom do you know?\""]},
+  {"if": {"bucket": ["powerful"]}, "lines": ["{who} sent a man instead of coming in person.", "The man said: \"I was asked to pass along a word. Know when to stop.\""]},
+  {"if": {"trait": ["sly"]}, "lines": ["{who} came in smiling and sat down smiling.", "\"Running a paper all on your own can't be easy. Watch your step walking home at night.\""]},
+  {"if": {"bucket": ["practical"]}, "lines": ["{who} made it very plain.", "\"Print it, and I'll see to it you never print anything again. That's not a threat. It's a fact.\""]}
+ ],
+ "deal": [
+  {"lines": ["{who} set down an envelope with {offer} dollars in it.", "\"Leave me out of it this week. And next week.\""]},
+  {"lines": ["{who} said: \"I know you're short of money. Take {offer} dollars, and this is the end of it.\""]},
+  {"lines": ["{who} came to talk business: {offer} dollars in exchange for keeping {event} out of the paper."]},
+  {"if": {"bucket": ["practical"]}, "lines": ["{who} came straight to the point: \"Here are {offer} dollars. That buys one issue without my name in it.\""]},
+  {"if": {"bucket": ["powerful"]}, "lines": ["{who} offered to take out half a year of advertising, with {offer} dollars paid in advance.", "\"There's only one condition, and you know what it is.\""]},
+  {"if": {"bucket": ["powerful"]}, "lines": ["{who} brought no money, only a sheet of paper.", "\"This is a printing job for next year, worth {offer} dollars. Sign it, and we'll forget the other matter.\""]},
+  {"if": {"trait": ["sly"]}, "lines": ["{who} tucked {offer} dollars under an old book.", "\"The book is a gift. Whatever's inside it, you can look at for yourself.\""]},
+  {"if": {"bucket": ["timid"]}, "lines": ["{who} put the money on the table and made for the door, then turned back.", "\"It's {offer} dollars. Is it enough? If it isn't, I'll find more.\""]},
+  {"if": {"trait": ["greedy"]}, "lines": ["{who} counted out the money while talking.", "\"That makes {offer} dollars. Everyone has a price, and yours I can pay.\""]},
+  {"if": {"trait": ["kind"]}, "lines": ["{who} said: \"I'm not buying you. Call the {offer} dollars help with your roof.\""]}
+ ],
+ "tip": [
+  {"if": {"has_fact": true}, "lines": ["{who} came by to say thank you, and on the way out said quietly: \"{fact}.\""]},
+  {"if": {"has_fact": true}, "lines": ["{who} brought a basket of eggs.", "Setting it down, {who.ta} said: \"One more thing you might want to know. {fact}.\""]},
+  {"if": {"has_fact": true, "trait": ["gossip"]}, "lines": ["{who} sat down and would not leave, talking of the weather and then of the market.", "At last {who.ta} leaned in: \"{fact}. I'm telling nobody but you.\""]},
+  {"if": {"has_fact": true, "trait": ["tight"]}, "lines": ["{who} said one sentence and left: \"{fact}.\""]},
+  {"if": {"has_fact": true, "trait": ["honest"]}, "lines": ["{who} said: \"You were fair to me last time. I'll be fair to you. {fact}.\""]},
+  {"if": {"has_fact": true, "female": true}, "lines": ["{who} pressed a folded note into your hand at the door. It read: \"{fact}.\"", "{who.ta} left without coming in."]},
+  {"if": {"no_fact": true}, "lines": ["{who} came by to say thank you, with a basket of eggs."]},
+  {"if": {"no_fact": true}, "lines": ["{who} sat in the office a while and said the last report was well done.", "On the way out, {who.ta} said: \"If you ever need anything, come and find me.\""]},
+  {"if": {"no_fact": true}, "lines": ["{who} brought a jar of home-pickled vegetables by way of thanks."]},
+  {"if": {"no_fact": true, "trait": ["pious"]}, "lines": ["{who} said {who.ta} would pray for the paper at church."]}
+ ],
+ "explain": [
+  {"lines": ["{who} called to explain for half an hour, and said what was printed was not the whole story."]},
+  {"lines": ["{who} said: \"I know you wrote what you saw. I only want you to see the other side.\""]},
+  {"lines": ["{who} sat in the office all afternoon and finally said: \"That's all I have to say. Print it or don't.\""]},
+  {"if": {"bucket": ["practical"]}, "lines": ["{who} brought a stack of receipts and laid them out on the desk one by one.", "\"Look, this is how it was.\" {who.ta} talked until dark."]},
+  {"if": {"bucket": ["timid"]}, "lines": ["{who} spoke so softly you had to lean close to hear.", "\"I'm not that kind of person. Truly I'm not.\""]},
+  {"if": {"bucket": ["powerful"]}, "lines": ["{who} said: \"I won't take action over what you printed. But you ought to know the whole picture.\"", "Then {who.ta} told a story quite different from the one in the paper."]},
+  {"if": {"bucket": ["hot"]}, "lines": ["{who} arrived shouting.", "When the shouting was over, {who.ta} sat down and said a few honest things."]},
+  {"if": {"trait": ["kind"]}, "lines": ["{who} did not blame you.", "\"What you wrote is true. I only wanted to tell you why.\""]},
+  {"if": {"trait": ["pious"]}, "lines": ["{who} said {who.ta} had already been to church to confess.", "\"I did wrong. But I'm not a wicked person.\""]},
+  {"if": {"trait": ["sly"]}, "lines": ["{who} gave an explanation that sounded perfectly reasonable.", "Only when you saw {who.him} to the door did you notice that {who.ta} had not denied a single thing."]}
+ ],
+ "expose": [
+  {"if": {"has_fact": true}, "lines": ["{who} spoke through gritted teeth: \"If you're going to print it, print all of it. {fact}.\""]},
+  {"if": {"has_fact": true}, "lines": ["{who} said: \"You printed me. Don't let the others off. {fact}.\""]},
+  {"if": {"has_fact": true}, "lines": ["{who} slapped a sheet of paper down on the desk: \"{fact}. Have you got the nerve to print that?\""]},
+  {"if": {"has_fact": true, "bucket": ["practical"]}, "lines": ["{who} was very calm.", "\"If everyone's to be shamed, let's all be shamed together. {fact}.\""]},
+  {"if": {"has_fact": true, "bucket": ["hot"]}, "lines": ["{who} kept a fist clenched the whole time {who.ta} talked.", "\"Why only me? {fact}. Go and look into that!\""]},
+  {"if": {"has_fact": true, "trait": ["sly"]}, "lines": ["{who} smiled: \"Let me give you a bigger one. {fact}.\""]},
+  {"if": {"no_fact": true}, "lines": ["{who} came wanting to tell tales on someone else, but had nothing to tell."]},
+  {"if": {"no_fact": true}, "lines": ["{who} sat for ages and cursed several people, but said nothing you didn't already know."]}
+ ],
+ "expose_more": [
+  {"lines": ["\"And another thing. {fact}.\""]},
+  {"lines": ["\"There's more. {fact}.\""]},
+  {"lines": ["{who.ta} added: \"{fact}.\""]}
+ ],
+ "ad": [
+  {"lines": ["{who} wants to place an advertisement in the next issue."]},
+  {"lines": ["{who} says the earlier trouble is over, and the advertisement can run as before."]},
+  {"lines": ["{who} came to renew the advertisement, in the same spot as always."]},
+  {"if": {"occ": ["grocer"]}, "lines": ["{who} says a new shipment of cloth has come in, and wants to advertise it."]},
+  {"if": {"occ": ["barkeep"]}, "lines": ["{who} says the tavern is having a fiddler in on Saturday, and wants to post a notice."]},
+  {"if": {"occ": ["owner"]}, "lines": ["{who} says the sawmill is taking on hands, and wants to run a notice in the paper."]}
+ ],
+ "silent": [
+  {"lines": ["{who} came, stood in the doorway a while, and left without a word."]},
+  {"lines": ["A knock at the door. You opened it, and there was {who}. {who.ta} looked at you once and turned away."]},
+  {"lines": ["{who} came in and sat on the bench for a quarter of an hour without saying anything. On leaving, {who.ta} closed the door gently."]},
+  {"if": {"other_subject": true}, "lines": ["{who} left an old copy of the paper on the step: the issue that printed the story about {subject.short}. It had been badly crumpled."]},
+  {"lines": ["Someone was standing outside the window. It was {who}. By the time you went out, {who.ta} was far down the street."]}
+ ],
+ "warning": [
+  {"lines": ["{who} came after dark and drew the curtains before saying anything.", "\"{subject.short} has been saying at the tavern there's a score to settle with you. Be careful.\""]},
+  {"lines": ["{who} said: \"I shouldn't have come. But you ought to know {subject.short} has been asking what time you go to bed.\""]},
+  {"lines": ["{who} did not sit down: \"Stay away from the back alley. There are people working for {subject.short} hanging about there.\""]},
+  {"lines": ["{who} said a single sentence and went: \"Bolt your door these next few nights.\""]},
+  {"lines": ["{who} said {subject.short} has looked very black these last days. \"I don't know what {subject.ta} means to do. I'm only telling you.\""]}
+ ]
+}

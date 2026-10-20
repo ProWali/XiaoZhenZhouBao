@@ -1,0 +1,105 @@
+{
+ "plea": [
+  {"if": {"bucket": ["timid"]}, "lines": ["{who}站在门口，帽子攥在手里。", "「我知道你在打听{event}的事。求你，别登。」"]},
+  {"if": {"bucket": ["timid"]}, "lines": ["{who}敲了三下门，等了很久才进来。", "「我家里还有人。登出来，我们就没法在镇上住了。」"]},
+  {"if": {"bucket": ["timid"], "female": true}, "lines": ["{who}进门就哭了，说不出一句完整的话。", "最后{who.ta}只说了一句：「别写我。」"]},
+  {"if": {"bucket": ["practical"]}, "lines": ["{who}坐下来，把手放在膝盖上。", "「我不跟你绕弯子。{event}那件事，登出来对谁都没好处。」"]},
+  {"if": {"bucket": ["practical"]}, "lines": ["{who}说话很慢，像是想了一路。", "「你要的是报纸好卖，我要的是日子还能过。我们能不能都退一步？」"]},
+  {"if": {"bucket": ["hot"]}, "lines": ["{who}一进门就拍了桌子，拍完又像是后悔了。", "「……我求你。就这一回。」"]},
+  {"if": {"bucket": ["powerful"]}, "lines": ["{who}没坐，站着说话。", "「我很少求人。这件事，我请你再想想。」"]},
+  {"if": {"bucket": ["powerful"]}, "lines": ["{who}带来一瓶好酒，放在排字台上。", "「我们都是镇上的体面人。体面人的事，体面地处理。」"]},
+  {"if": {"trait": ["pious"]}, "lines": ["{who}说，昨晚为这件事祷告了很久。", "「主会宽恕人，报纸为什么不能？」"]},
+  {"if": {"trait": ["kind"]}, "lines": ["{who}先问你吃过饭没有。", "然后{who.ta}才说：「{event}的事，我知道你也难。可你能不能不登？」"]},
+  {"if": {"trait": ["grudge"]}, "lines": ["{who}说话的时候一直盯着你的眼睛。", "「我求你这一回，我会记着。你要是不答应，我也会记着。」"]},
+  {"if": {"female": true}, "lines": ["{who}把一包东西放在门边，是自家烤的面包。", "「我不是来求情的。……好吧，我是。」"]},
+  {"lines": ["{who}在门口站了一会儿才进来。", "「我知道你在打听什么。我只求你一件事：别登我的名字。」"]},
+  {"lines": ["{who}来了，没有寒暄。", "「求你。」"]}
+ ],
+ "threat": [
+  {"lines": ["{who}没进门：「有些事登了，报社的窗户就不好修了。」"]},
+  {"lines": ["{who}在门口站着，说话声音不大。", "「我劝你一句：有的事，知道了就当不知道。」"]},
+  {"if": {"bucket": ["hot"]}, "lines": ["{who}把门推得砰的一声。", "「你再往下查，我就让你知道灰河有多深。」"]},
+  {"if": {"bucket": ["hot"]}, "lines": ["{who}在门口点了根烟，抽完才开口。", "「你这屋子是木头的吧？」"]},
+  {"if": {"bucket": ["hot"]}, "lines": ["{who}一句话都没说，把一块砖头放在你桌上，走了。"]},
+  {"if": {"bucket": ["hot"]}, "lines": ["{who}在报社门口骂了一刻钟，邻居都出来看。", "最后{who.ta}说：「你给我等着。」"]},
+  {"if": {"bucket": ["powerful"]}, "lines": ["{who}坐下来，语气很平和。", "「你的报纸靠广告吃饭。广告是谁登的，你想过没有？」"]},
+  {"if": {"bucket": ["powerful"]}, "lines": ["{who}说话的时候一直在看你墙上的执照。", "「这张执照是镇公所发的。发得出来，也收得回去。」"]},
+  {"if": {"bucket": ["powerful"]}, "lines": ["{who}没坐。", "「我认识州里的法官。你认识谁？」"]},
+  {"if": {"bucket": ["powerful"]}, "lines": ["{who}派了个人来，自己没露面。", "来的人说：「东家让我带句话：适可而止。」"]},
+  {"if": {"trait": ["sly"]}, "lines": ["{who}笑着进来，笑着坐下。", "「你一个人办报，挺不容易的。夜里走路要当心。」"]},
+  {"if": {"bucket": ["practical"]}, "lines": ["{who}把话说得很清楚。", "「你登了，我就让你登不下去。这不是吓唬你，是告诉你。」"]}
+ ],
+ "deal": [
+  {"lines": ["{who}放下一个信封，{offer}块钱。", "「这周别写我，下周也别。」"]},
+  {"lines": ["{who}说：「我知道你缺钱。{offer}块，这事就到此为止。」"]},
+  {"lines": ["{who}来谈了一笔生意：{offer}块，换你不登{event}的事。"]},
+  {"if": {"bucket": ["practical"]}, "lines": ["{who}开门见山：「{offer}块。买你一期不写我。」"]},
+  {"if": {"bucket": ["powerful"]}, "lines": ["{who}说要在你的报上登半年广告，先付{offer}块定金。", "「只有一个条件，你知道是什么。」"]},
+  {"if": {"bucket": ["powerful"]}, "lines": ["{who}没带钱，带了一张纸。", "「这是明年的一笔印刷活，{offer}块。签了它，那件事就算了。」"]},
+  {"if": {"trait": ["sly"]}, "lines": ["{who}把{offer}块钱压在一本旧书底下。", "「这本书送你。书里夹着什么，你自己看。」"]},
+  {"if": {"bucket": ["timid"]}, "lines": ["{who}把钱放在桌上就往外走，走到门口又回头。", "「{offer}块……够不够？不够我再想办法。」"]},
+  {"if": {"trait": ["greedy"]}, "lines": ["{who}一边数钱一边说话。", "「{offer}块。人人都有个价钱，你的价钱我出得起。」"]},
+  {"if": {"trait": ["kind"]}, "lines": ["{who}说：「我不是收买你。这{offer}块，就当我帮你修修屋顶。」"]}
+ ],
+ "tip": [
+  {"if": {"has_fact": true}, "lines": ["{who}来道谢，临走压低声音：「{fact}。」"]},
+  {"if": {"has_fact": true}, "lines": ["{who}送来一篮鸡蛋。", "放下篮子的时候{who.ta}说：「还有件事，你也许想知道：{fact}。」"]},
+  {"if": {"has_fact": true, "trait": ["gossip"]}, "lines": ["{who}坐下就不走了，从天气说到集市。", "说到最后，{who.ta}凑过来：「{fact}。这话我只跟你说。」"]},
+  {"if": {"has_fact": true, "trait": ["tight"]}, "lines": ["{who}只说了一句话就走了：「{fact}。」"]},
+  {"if": {"has_fact": true, "trait": ["honest"]}, "lines": ["{who}说：「你上次写得公道。我也公道一回：{fact}。」"]},
+  {"if": {"has_fact": true, "female": true}, "lines": ["{who}在门口塞给你一张纸条，上面写着：「{fact}。」", "{who.ta}没进屋就走了。"]},
+  {"if": {"no_fact": true}, "lines": ["{who}来道谢，带了一篮鸡蛋。"]},
+  {"if": {"no_fact": true}, "lines": ["{who}来报社坐了一会儿，说上次的报道写得好。", "临走时{who.ta}说：「有事你就来找我。」"]},
+  {"if": {"no_fact": true}, "lines": ["{who}送来一罐自家腌的菜，说是谢谢你。"]},
+  {"if": {"no_fact": true, "trait": ["pious"]}, "lines": ["{who}说会在教堂里为报社祷告。"]}
+ ],
+ "explain": [
+  {"lines": ["{who}登门解释了半个钟头，说报上写的不全是那么回事。"]},
+  {"lines": ["{who}说：「我知道你也是按看到的写。我只想让你看到另一面。」"]},
+  {"lines": ["{who}在报社坐了一下午，最后说：「我说完了。你爱登不登。」"]},
+  {"if": {"bucket": ["practical"]}, "lines": ["{who}带来一沓单据，一张一张摊在桌上。", "「你看，事情是这样的……」{who.ta}一直讲到天黑。"]},
+  {"if": {"bucket": ["timid"]}, "lines": ["{who}说话的声音很小，你要凑近才听得清。", "「我不是那样的人。真的不是。」"]},
+  {"if": {"bucket": ["powerful"]}, "lines": ["{who}说：「你登的那些，我不追究。但你得知道全貌。」", "然后{who.ta}讲了一个和报上不一样的故事。"]},
+  {"if": {"bucket": ["hot"]}, "lines": ["{who}来了，嗓门很大。", "吵完了，{who.ta}坐下来，说了几句真心话。"]},
+  {"if": {"trait": ["kind"]}, "lines": ["{who}没有怪你。", "「你写的是实情，我只是想说说为什么。」"]},
+  {"if": {"trait": ["pious"]}, "lines": ["{who}说已经去教堂忏悔过了。", "「我做错了事。可我不是坏人。」"]},
+  {"if": {"trait": ["sly"]}, "lines": ["{who}的解释听上去很有道理。", "你送{who.ta}出门的时候，才发现{who.ta}一句也没有否认。"]}
+ ],
+ "expose": [
+  {"if": {"has_fact": true}, "lines": ["{who}咬着牙：「要写就写全。{fact}。」"]},
+  {"if": {"has_fact": true}, "lines": ["{who}说：「你登了我，那也别放过别人。{fact}。」"]},
+  {"if": {"has_fact": true}, "lines": ["{who}把一张纸拍在桌上：「{fact}。这个你敢登吗？」"]},
+  {"if": {"has_fact": true, "bucket": ["practical"]}, "lines": ["{who}很冷静。", "「既然大家都要丢脸，那就一起丢。{fact}。」"]},
+  {"if": {"has_fact": true, "bucket": ["hot"]}, "lines": ["{who}说话的时候拳头一直攥着。", "「你只盯着我？{fact}。去查啊！」"]},
+  {"if": {"has_fact": true, "trait": ["sly"]}, "lines": ["{who}笑了笑：「我送你一条更大的。{fact}。」"]},
+  {"if": {"no_fact": true}, "lines": ["{who}来了，想爆别人的料，却没什么可说的。"]},
+  {"if": {"no_fact": true}, "lines": ["{who}坐了半天，骂了几个人，说的都是你早就知道的事。"]}
+ ],
+ "expose_more": [
+  {"lines": ["「还有，{fact}。」"]},
+  {"lines": ["「另外，{fact}。」"]},
+  {"lines": ["{who.ta}又补了一句：「{fact}。」"]}
+ ],
+ "ad": [
+  {"lines": ["{who}想在下期登个广告。"]},
+  {"lines": ["{who}说上回的事过去了，广告照旧登。"]},
+  {"lines": ["{who}来续广告，还是老位置。"]},
+  {"if": {"occ": ["grocer"]}, "lines": ["{who}说新到了一批布料，想在报上登个广告。"]},
+  {"if": {"occ": ["barkeep"]}, "lines": ["{who}说酒馆周六要请人拉琴，想登个告示。"]},
+  {"if": {"occ": ["owner"]}, "lines": ["{who}说锯木厂要招工，想在报上登个启事。"]}
+ ],
+ "silent": [
+  {"lines": ["{who}来了，在门口站了一会儿，什么都没说就走了。"]},
+  {"lines": ["有人敲门。你开门，是{who}。{who.ta}看了你一眼，转身走了。"]},
+  {"lines": ["{who}进来，在长凳上坐了一刻钟，一句话没说。走的时候把门轻轻带上了。"]},
+  {"if": {"other_subject": true}, "lines": ["{who}把一份旧报纸放在门口，是登了{subject.short}那一期。报纸被揉得很皱。"]},
+  {"lines": ["窗外站着一个人，是{who}。你出去的时候，{who.ta}已经走远了。"]}
+ ],
+ "warning": [
+  {"lines": ["{who}天黑以后才来，进门先把窗帘拉上。", "「{subject.short}这几天在酒馆里说要找你算账。你当心点。」"]},
+  {"lines": ["{who}说：「我不该来的。可我得告诉你，{subject.short}在打听你夜里几点睡。」"]},
+  {"lines": ["{who}没坐：「后巷那边你别去了，{subject.short}的人在那转悠。」"]},
+  {"lines": ["{who}放下一句话就走：「这两天夜里把门闩好。」"]},
+  {"lines": ["{who}说{subject.short}这几天脸色很难看。「我不知道{subject.ta}要干什么。我只是告诉你一声。」"]}
+ ]
+}

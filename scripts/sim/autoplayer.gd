@@ -9,6 +9,8 @@ const Rng = preload("res://scripts/sim/rng.gd")
 var strategy := "cautious"
 var rng: Rng     # 自动玩家自己的随机源，和世界的分开，避免策略改变世界种子序列
 var transcript: Array = []  # 可读的行动记录
+var last_letters: Array = []   # 本周渲染出来的信，抽检工具用
+var last_visitors: Array = []  # 本周的来访，抽检工具用
 var _world
 
 
@@ -21,7 +23,8 @@ func play_week(world) -> Dictionary:
 	_world = world
 	transcript.clear()
 	transcript.append("—— 第 %d 周（%s）——" % [world.week, world.season_name()])
-	for l in world.letters:
+	last_letters = world.render_letters()
+	for l in last_letters:
 		transcript.append("信：" + l)
 	while world.day <= 6 and world.game_over == "":
 		if world.can_act_day():
@@ -33,6 +36,7 @@ func play_week(world) -> Dictionary:
 	if world.game_over != "":
 		return {}
 	var visitors: Array = world.saturday_visitors()
+	last_visitors = visitors
 	for v in visitors:
 		for l in v.lines:
 			transcript.append("来访：" + l)

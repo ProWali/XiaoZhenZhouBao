@@ -115,7 +115,7 @@ func instantiate(tpl: Dictionary, roles: Dictionary, world, extras: Dictionary =
 	}
 	for role in roles:
 		for rid in roles[role]:
-			inst.occ_at[rid] = world.residents[rid].occ_name
+			inst.occ_at[rid] = world.residents[rid].occ
 	world.next_event_id += 1
 	for frag in tpl.fragments:
 		var fid := _make_fact(inst, frag, roles, world, 1.0)
@@ -207,7 +207,11 @@ static func fill_text(tpl: String, roles: Dictionary, world, naming: String, tar
 	for role in roles:
 		var rid: String = roles[role][0]
 		var r: Dictionary = world.residents[rid]
-		var occ: String = occ_at.get(rid, r.occ_name)
+		var occ_id: String = occ_at.get(rid, "")
+		var occ: String = r.occ_name
+		if occ_id != "":
+			var o := T.occupation_by_id(occ_id)
+			occ = o.name if not o.is_empty() else {"homemaker": "家眷", "retired": "赋闲的人"}.get(occ_id, r.occ_name)
 		var shown: String
 		if role == target_role:
 			shown = display_name(r, naming, occ)

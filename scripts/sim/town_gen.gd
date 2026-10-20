@@ -92,9 +92,10 @@ static func new_resident(world, female: bool, occ: Dictionary, family_name: Stri
 		if ex != "":
 			used_excl[ex] = true
 	var literate: bool = rng.chance(float(occ.literate))
+	var zh_name: String = world.namegen.full(female, family_name)
 	var r := {
-		"id": id, "name": world.namegen.full(female, family_name), "female": female, "age": age, "age_weeks": 0,
-		"occ": occ.id, "occ_name": occ.name, "work": occ.work,
+		"id": id, "name": zh_name, "name_en": world.namegen.last_en, "female": female, "age": age, "age_weeks": 0,
+		"occ": occ.id, "occ_name": occ.name, "occ_en": T.occ_en(occ.id), "work": occ.work,
 		"power": int(occ.power), "wealth": int(occ.wealth), "literate": literate,
 		"subscribed": (literate and rng.chance(0.75)) or rng.chance(0.25),
 		"traits": traits, "bucket": "",
@@ -134,6 +135,7 @@ static func change_job(world, rid: String, occ_id: String) -> void:
 	var r: Dictionary = world.residents[rid]
 	r.occ = occ.id
 	r.occ_name = occ.name
+	r.occ_en = T.occ_en(occ.id)
 	r.work = occ.work
 	if r.work == "farm":
 		r.work = world.rng.pick(["farm_a", "farm_b"])

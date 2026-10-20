@@ -85,7 +85,7 @@ static func _die(world, rid: String) -> void:
 	if r.occ == "mayor":
 		world.flags["mayor_vacant"] = true
 	if kin != "":
-		_life_event(world, "obituary", {"kin": [kin]}, {"deceased": r.name, "age": str(r.age)})
+		_life_event(world, "obituary", {"kin": [kin]}, {"deceased": r.name, "deceased_en": r.name_en, "age": str(r.age)})
 
 
 static func _leave(world, rid: String) -> void:
@@ -103,7 +103,7 @@ static func _leave(world, rid: String) -> void:
 	if kin == "" and not r.friends.is_empty():
 		kin = r.friends[0]
 	if kin != "":
-		_life_event(world, "departure", {"kin": [kin]}, {"leaver": r.name})
+		_life_event(world, "departure", {"kin": [kin]}, {"leaver": r.name, "leaver_en": r.name_en})
 
 
 ## 用预设角色实例化一个生活事件，直接变成公开事实。

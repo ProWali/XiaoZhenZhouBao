@@ -11,6 +11,7 @@ const Relations = preload("res://scripts/sim/relations.gd")
 const Needs = preload("res://scripts/sim/needs.gd")
 const Population = preload("res://scripts/sim/population.gd")
 const Election = preload("res://scripts/sim/election.gd")
+const TE = preload("res://scripts/text/text_engine.gd")
 
 const SLOT_NAMES := ["上午", "下午", "晚上"]
 const DAY_NAMES := ["", "周一", "周二", "周三", "周四", "周五", "周六", "周日"]
@@ -18,7 +19,7 @@ const MAX_NIGHTS := 2  # 一周最多熬夜次数，超过就吃次日上午
 
 var rng: Rng
 var seed_value: int = 0
-var config := {"total_weeks": 104, "ironman": true, "suicide": false}
+var config := {"total_weeks": 104, "ironman": true, "suicide": false, "lang": "zh"}
 var events_db: Events
 
 var week := 1
@@ -40,12 +41,16 @@ var pending: Array = []         # 延迟生效的反应 {week, kind, who, event}
 var lawsuits: Array = []
 var log: Array = []             # 故事日志（给人读）
 var issues: Array = []          # 已印报纸
-var letters: Array = []         # 本周一收到的信
+var letters: Array = []         # 本周一收到的信：{kind, roles, vars, id, week}，显示时由文本引擎渲染
 var history: Array = []         # 每周三条主数值
 var flags := {"burned_until": 0, "negative_weeks": 0, "lawsuits_lost": 0, "weeks_no_news": 0}
 var game_over := ""
 var player_name := "主编"
 var paper_name := "灰河周报"
+var paper_name_en := "The Greyriver Gazette"
+var lang := "zh"
+var text_counter := 0           # 文本引擎的计数器，只影响措辞，不影响模拟
+var text_memory := {}           # 语言 -> {模板原文: 上次用的周}，让报道半年内不重复同一句
 
 var next_event_id := 1
 var next_resident_id := 0
@@ -65,6 +70,7 @@ func _init(seed_in: int, cfg: Dictionary = {}) -> void:
 	rng = Rng.new(seed_in)
 	for k in cfg:
 		config[k] = cfg[k]
+	lang = str(config.lang)
 	namegen = NameGen.new(rng)
 	events_db = Events.new()
 	events_db.load_all()
@@ -84,6 +90,41 @@ func living_ids() -> Array:
 
 func res_name(rid: String) -> String:
 	return residents[rid].name if residents.has(rid) else "？"
+
+
+# ---- 给玩家看的文字：全部走文本引擎，按当前语言
+func _nm(rid: String) -> String:
+	return TE.person_name(self, rid, lang)
+
+
+func _note(fid: String) -> String:
+	return TE.fact_note(self, fid, lang)
+
+
+func _ui(key: String, args: Dictionary = {}) -> String:
+	return TE.ui(self, key, args, lang)
+
+
+func _letter(kind: String, roles: Dictionary = {}, vars: Dictionary = {}) -> void:
+	letters.append({"kind": kind, "roles": roles, "vars": vars, "id": letters.size(), "week": week})
+
+
+## 本周的信，渲染成文字。
+func render_letters(lang_override: String = "") -> Array:
+	var lg := lang if lang_override == "" else lang_override
+	var out: Array = []
+	for L in letters:
+		var vars: Dictionary = L.vars.duplicate()
+		if vars.has("fact_id"):
+			vars["fact"] = TE.fact_note(self, vars.fact_id, lg)
+		var Lr: Dictionary = L.duplicate()
+		Lr.vars = vars
+		var r: Dictionary = TE.letter(self, Lr, lg)
+		var text: String = r.text
+		if r.from != "":
+			text += TE.data(lg).ui.get("letter_sign", "——{from}").replace("{from}", r.from)
+		out.append(text)
+	return out
 
 
 func event_of(fid: String) -> Dictionary:
@@ -205,7 +246,7 @@ func _start_week(first: bool) -> void:
 	_spawn_events(first)
 	_expire_events()
 	if first:
-		letters.push_front("前任主编留下的信：邮差是朋友，有事先问他。锯木厂的广告别断，那是半个月的纸钱。酒馆晚上去听听，别信全部。头条空着，你自己填。")
+		letters.push_front({"kind": "predecessor", "roles": {}, "vars": {}, "id": -1, "week": week})
 	_anonymous_letters()
 	_start_day()
 
@@ -441,7 +482,7 @@ func _anonymous_letters() -> void:
 		return
 	var fid: String = rng.pick(candidates)
 	_learn(fid, "letter", "")
-	letters.append("一封没有署名的信：「%s」" % facts[fid].text)
+	_letter("anon_tip", {}, {"fact_id": fid})
 
 
 # ---------------------------------------------------------------- 玩家行动
@@ -528,19 +569,19 @@ func where_is(rid: String) -> String:
 func act_interview(rid: String, topic: String = "") -> Dictionary:
 	var res := {"ok": false, "lines": [], "gained": []}
 	if not can_act_day():
-		res.lines.append("今天没有行动点了。")
+		res.lines.append(_ui("no_action_day"))
 		return res
 	var r: Dictionary = residents.get(rid, {})
 	if r.is_empty() or where_is(rid) == "":
-		res.lines.append("找不到这个人。")
+		res.lines.append(_ui("not_found"))
 		return res
 	_record({"kind": "interview", "rid": rid, "topic": topic})
 	_spend_day_action()
 	res.ok = true
 	var loc := where_is(rid)
-	res.lines.append("你在%s找到了%s（%s）。" % [loc_name(loc), r.name, r.occ_name])
+	res.lines.append(_ui("found_at", {"loc": TE.loc_label(self, loc, lang), "name": _nm(rid), "occ": TE.occ_label(self, rid, lang)}))
 	if r.avoid_until > week:
-		res.lines.append("%s看见你就转身走了。" % r.name)
+		res.lines.append(_ui("avoids", {"name": _nm(rid)}))
 		return res
 	var w := 0.3 + 0.45 * float(r.player_rel.like) + 0.25 * float(r.player_rel.trust)
 	if "honest" in r.traits: w += 0.1
@@ -573,9 +614,9 @@ func act_interview(rid: String, topic: String = "") -> Dictionary:
 				var fid: String = rng.pick(lie)
 				_learn(fid, "interview", rid)
 				res.gained.append(fid)
-				res.lines.append("%s压低声音：「你该去查查别的。%s。」" % [r.name, facts[fid].text])
+				res.lines.append(_ui("lie", {"name": _nm(rid), "fact": _note(fid)}))
 				return res
-		res.lines.append("%s含糊了几句，什么都没说。" % r.name)
+		res.lines.append(_ui("evasive", {"name": _nm(rid)}))
 		return res
 	if tfact.is_empty():
 		# 泛泛打听：给一条玩家不知道的、不是自己秘密的事实
@@ -588,19 +629,19 @@ func act_interview(rid: String, topic: String = "") -> Dictionary:
 				continue
 			pool.append(fid)
 		if pool.is_empty():
-			res.lines.append("%s聊了聊天气和河水，没什么新鲜事。" % r.name)
+			res.lines.append(_ui("small_talk", {"name": _nm(rid)}))
 			r.player_rel.like = minf(1.0, r.player_rel.like + 0.03)
 			return res
 		var fid: String = rng.pick(pool)
 		_learn(fid, "interview", rid)
 		res.gained.append(fid)
-		res.lines.append("%s说：「%s。」" % [r.name, facts[fid].text])
+		res.lines.append(_ui("tells", {"name": _nm(rid), "fact": _note(fid)}))
 		return res
 	# 有话头
 	if r.knows.has(topic):
 		_learn(topic, "interview", rid)
 		res.gained.append(topic)
-		res.lines.append("%s点头：「这事我也听说了。%s。」" % [r.name, tfact.text])
+		res.lines.append(_ui("confirms", {"name": _nm(rid), "fact": _note(topic)}))
 		var e := event_of(topic)
 		var more: Array = []
 		for fid in e.facts:
@@ -610,9 +651,9 @@ func act_interview(rid: String, topic: String = "") -> Dictionary:
 			var fid2: String = rng.pick(more)
 			_learn(fid2, "interview", rid)
 			res.gained.append(fid2)
-			res.lines.append("%s又补了一句：「%s。」" % [r.name, facts[fid2].text])
+			res.lines.append(_ui("adds", {"name": _nm(rid), "fact": _note(fid2)}))
 	else:
-		res.lines.append("%s摇头：「这个我真不知道。」" % r.name)
+		res.lines.append(_ui("denies_knowing", {"name": _nm(rid)}))
 		# 对方把话头记住了，可能传开
 		if rng.chance(0.4):
 			r.knows[topic] = true
@@ -623,13 +664,13 @@ func act_interview(rid: String, topic: String = "") -> Dictionary:
 func act_eavesdrop() -> Dictionary:
 	var res := {"ok": false, "lines": [], "gained": []}
 	if not can_act_night():
-		res.lines.append("今晚不能行动。")
+		res.lines.append(_ui("no_action_night"))
 		return res
 	var present := people_at_night("tavern")
 	_record({"kind": "eavesdrop"})
 	_spend_night_mark()
 	res.ok = true
-	res.lines.append("酒馆里有 %d 个人。" % present.size())
+	res.lines.append(_ui("tavern_count", {"n": present.size()}))
 	for rid in rng.sample(present, 3):
 		var r: Dictionary = residents[rid]
 		if r.knows.is_empty() or not rng.chance(0.5):
@@ -641,9 +682,9 @@ func act_eavesdrop() -> Dictionary:
 			fid = rng.pick(e.rumor_facts)
 		_learn(fid, "eavesdrop", rid)
 		res.gained.append(fid)
-		res.lines.append("隔壁桌%s在说：「%s。」" % [r.name, facts[fid].text])
+		res.lines.append(_ui("overheard", {"name": _nm(rid), "fact": _note(fid)}))
 	if res.gained.is_empty():
-		res.lines.append("今晚只听到了牌桌上的争吵。")
+		res.lines.append(_ui("tavern_nothing"))
 	_spend_night()
 	return res
 
@@ -656,11 +697,11 @@ func _spend_night_mark() -> void:
 func act_archive(loc: String) -> Dictionary:
 	var res := {"ok": false, "lines": [], "gained": []}
 	if not can_act_day():
-		res.lines.append("今天没有行动点了。")
+		res.lines.append(_ui("no_action_day"))
 		return res
 	var l := T.location_by_id(loc)
 	if not l.get("archive", false):
-		res.lines.append("这里没有档案可查。")
+		res.lines.append(_ui("no_archive"))
 		return res
 	var keeper := ""
 	for rid in living_ids():
@@ -670,17 +711,17 @@ func act_archive(loc: String) -> Dictionary:
 	_spend_day_action()
 	res.ok = true
 	if keeper == "":
-		res.lines.append("%s今天没人看门，你翻了一会儿什么也没找到。" % l.name)
+		res.lines.append(_ui("archive_unattended", {"place": TE.loc_label(self, loc, lang)}))
 		return res
 	var k: Dictionary = residents[keeper]
 	if k.player_rel.trust >= 0.5:
-		res.lines.append("%s让你在后屋随便看。" % k.name)
+		res.lines.append(_ui("archive_open", {"name": _nm(keeper)}))
 	elif stats.cash >= 5:
 		stats.cash -= 5
 		k.player_rel.like = minf(1.0, k.player_rel.like + (0.1 if "greedy" in k.traits else 0.0))
-		res.lines.append("你塞给%s五块钱，门开了。" % k.name)
+		res.lines.append(_ui("archive_bribe", {"name": _nm(keeper)}))
 	else:
-		res.lines.append("%s说档案不外借，你也没钱打点。" % k.name)
+		res.lines.append(_ui("archive_refused", {"name": _nm(keeper)}))
 		return res
 	var found := 0
 	for e in events:
@@ -689,7 +730,7 @@ func act_archive(loc: String) -> Dictionary:
 				_learn(fid, "archive", keeper)
 				known[fid].evidence = true
 				res.gained.append(fid)
-				res.lines.append("记录：%s。" % facts[fid].text)
+				res.lines.append(_ui("archive_record", {"fact": _note(fid)}))
 				found += 1
 				# 看门人可能走漏风声
 				if rng.chance(0.35):
@@ -702,7 +743,7 @@ func act_archive(loc: String) -> Dictionary:
 		if found >= 2:
 			break
 	if found == 0:
-		res.lines.append("翻了一下午，没有和你在查的事有关的记录。")
+		res.lines.append(_ui("archive_nothing"))
 	return res
 
 
@@ -710,7 +751,7 @@ func act_archive(loc: String) -> Dictionary:
 func act_informer(target: String) -> Dictionary:
 	var res := {"ok": false, "lines": [], "gained": []}
 	if not can_act_day():
-		res.lines.append("今天没有行动点了。")
+		res.lines.append(_ui("no_action_day"))
 		return res
 	var informer := ""
 	var best := -1.0
@@ -720,13 +761,13 @@ func act_informer(target: String) -> Dictionary:
 			best = r.player_rel.like
 			informer = rid
 	if informer == "":
-		res.lines.append("镇上没有肯做线人的人。")
+		res.lines.append(_ui("no_informer"))
 		return res
 	if stats.cash < 3:
-		res.lines.append("线人要三块钱，你拿不出来。")
+		res.lines.append(_ui("informer_broke"))
 		return res
 	if not residents.has(target):
-		res.lines.append("没有这个人。")
+		res.lines.append(_ui("no_such_person"))
 		return res
 	_record({"kind": "informer", "target": target})
 	_spend_day_action()
@@ -747,14 +788,14 @@ func act_informer(target: String) -> Dictionary:
 		var fid: String = rng.pick(rumor_pool)
 		_learn(fid, "informer", informer)
 		res.gained.append(fid)
-		res.lines.append("%s收了钱，说：「%s。」" % [inf.name, facts[fid].text])
+		res.lines.append(_ui("informer_says", {"name": _nm(informer), "fact": _note(fid)}))
 	elif not pool.is_empty():
 		var fid: String = rng.pick(pool)
 		_learn(fid, "informer", informer)
 		res.gained.append(fid)
-		res.lines.append("%s收了钱，说：「%s。」" % [inf.name, facts[fid].text])
+		res.lines.append(_ui("informer_says", {"name": _nm(informer), "fact": _note(fid)}))
 	else:
-		res.lines.append("%s收了钱，想了半天：「这人干净得很。」" % inf.name)
+		res.lines.append(_ui("informer_nothing", {"name": _nm(informer)}))
 	return res
 
 
@@ -762,7 +803,7 @@ func act_informer(target: String) -> Dictionary:
 func act_stakeout(loc: String) -> Dictionary:
 	var res := {"ok": false, "lines": [], "gained": []}
 	if not can_act_night():
-		res.lines.append("今晚不能行动。")
+		res.lines.append(_ui("no_action_night"))
 		return res
 	_record({"kind": "stakeout", "loc": loc})
 	_spend_night_mark()
@@ -773,9 +814,9 @@ func act_stakeout(loc: String) -> Dictionary:
 			_learn(fid, "witness", "")
 			known[fid].evidence = true
 			res.gained.append(fid)
-			res.lines.append("你亲眼看见：%s。" % facts[fid].text)
+			res.lines.append(_ui("witnessed", {"fact": _note(fid)}))
 	if res.gained.is_empty():
-		res.lines.append("你在%s蹲到后半夜，只有风。" % loc_name(loc))
+		res.lines.append(_ui("stakeout_nothing", {"place": TE.loc_label(self, loc, lang)}))
 	_spend_night()
 	return res
 
@@ -822,45 +863,45 @@ func saturday_visitors() -> Array:
 		for ev in events + archive_events:
 			if ev.id == v.event:
 				e = ev
-		var item := {"who": v.who, "kind": v.kind, "event": v.event, "lines": [], "offer": 0}
+		var item := {"who": v.who, "kind": v.kind, "event": v.event, "lines": [], "offer": 0, "fact": "", "facts": []}
+		if v.has("subject"):
+			item["subject"] = v.subject
 		match v.kind:
 			"plea":
-				item.lines.append("%s站在门口，帽子攥在手里：「我知道你在打听%s的事。求你，别登。」" % [r.name, e.get("name", "我")])
 				if not e.is_empty():
 					e.plea = v.who
 			"threat":
-				item.lines.append("%s没进门：「有些事登了，报社的窗户就不好修了。」" % r.name)
 				r.player_rel.fear = minf(1.0, r.player_rel.fear + 0.2)
 			"deal":
 				item.offer = 6 + r.wealth * 4
-				item.lines.append("%s放下一个信封，%d 块钱：「这周别写我，下周也别。」" % [r.name, item.offer])
 			"tip":
 				var pool: Array = []
 				for fid in r.knows:
-					if not known.has(fid):
+					var fs: String = facts[fid].subject
+					# 不会把自己和家里人的事说出去
+					if not known.has(fid) and fs != v.who and not (fs in r.family):
 						pool.append(fid)
-				if pool.is_empty():
-					item.lines.append("%s来道谢，带了一篮鸡蛋。" % r.name)
-				else:
+				if not pool.is_empty():
 					var fid: String = rng.pick(pool)
 					_learn(fid, "visitor", v.who)
-					item.lines.append("%s来道谢，临走压低声音：「%s。」" % [r.name, facts[fid].text])
+					item.fact = fid
 			"explain":
-				item.lines.append("%s登门解释了半个钟头，说报上写的不全是那么回事。" % r.name)
 				r.player_rel.like = minf(1.0, r.player_rel.like + 0.1)
 			"expose":
-				var given := 0
 				for ev in events:
 					for fid in ev.facts:
 						var subj: String = facts[fid].subject
-						if subj != v.who and (subj in r.enemies) and not known.has(fid) and given < 2:
+						if subj != v.who and (subj in r.enemies) and not known.has(fid) and item.facts.size() < 2:
 							_learn(fid, "visitor", v.who)
-							item.lines.append("%s咬着牙：「要写就写全。%s。」" % [r.name, facts[fid].text])
-							given += 1
-				if given == 0:
-					item.lines.append("%s来了，想爆别人的料，却没什么可说的。" % r.name)
-			"ad":
-				item.lines.append("%s想在下期登个广告。" % r.name)
+							item.facts.append(fid)
+				if not item.facts.is_empty():
+					item.fact = item.facts[0]
+		item.lines = TE.visitor_lines(self, item, lang)
+		for i in range(1, item.facts.size()):
+			var more := item.duplicate()
+			more.kind = "expose_more"
+			more.fact = item.facts[i]
+			item.lines.append_array(TE.visitor_lines(self, more, lang))
 		out.append(item)
 	visitors.clear()
 	return out
@@ -903,7 +944,7 @@ func validate_article(a: Dictionary) -> String:
 
 func headline_candidates(a: Dictionary) -> Array:
 	var e := event_of(a.facts[0])
-	return events_db.headlines(e, a.tone, a.naming, self)
+	return TE.headline_candidates(self, e, a, lang)
 
 
 ## 付印并结算。返回 issue 字典。
@@ -924,13 +965,17 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 		var e := event_of(a.facts[0])
 		if e.soft:
 			a.naming = "named"  # 公开的事没有化名可言
-		var cands := headline_candidates(a)
-		var hl: String = cands[mini(headline_choice.get(a.slot, 0), cands.size() - 1)]
-		var body: Array = []
-		for fid in a.facts:
-			var f: Dictionary = facts[fid]
-			var role := _role_of(e, f.subject)
-			body.append(Events.fill_text(f.text_tpl, e.roles, self, a.naming, role, "occ" if a.naming != "named" else "named", e.get("extras", {}), e.get("occ_at", {})))
+		var ra: Dictionary = a.duplicate()
+		ra["choice"] = int(headline_choice.get(a.slot, 0))
+		ra["remember"] = true
+		var art: Dictionary = TE.article(self, e, ra, lang)
+		var hl: String = art.headline
+		var body: Array = art.paragraphs
+		# 故事日志只给开发者看，固定用中文，这样换语言不会改变日志
+		var rl: Dictionary = ra.duplicate()
+		rl["use_memory"] = false
+		rl["remember"] = false
+		var hl_log: String = str(TE.headline_candidates(self, e, rl, "zh")[ra.choice])
 		var exposure: float = T.SLOT_MULT[a.slot] * T.TONE_MULT[a.tone]
 		var avg_truth := 0.0
 		var gain_scale: float = (1.0 - stats.credibility / 150.0) * {"named": 1.0, "alias": 0.7, "anon": 0.4}[a.naming]
@@ -968,10 +1013,10 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 				pending.append({"week": week + int(fu.get("delay", 2)), "kind": "followup", "who": "", "event": e.id, "tid": fu.tid, "preset": preset})
 		e.printed = true
 		e.printed_week = week
-		var rec := {"slot": a.slot, "headline": hl, "body": body, "tone": a.tone, "naming": a.naming, "evidence": a.get("evidence", false), "event": e.id, "avg_truth": avg_truth, "facts": a.facts.duplicate()}
+		var rec := {"slot": a.slot, "headline": hl, "body": body, "tone": a.tone, "naming": a.naming, "evidence": a.get("evidence", false), "event": e.id, "avg_truth": avg_truth, "facts": a.facts.duplicate(), "choice": ra.choice, "reroll": int(a.get("reroll", 0))}
 		issue.articles.append(rec)
 		if not e.soft or a.slot == "head":
-			log.append("第 %d 周 %s：%s" % [week, T.SLOT_NAME[a.slot], hl])
+			log.append("第 %d 周 %s：%s" % [week, T.SLOT_NAME[a.slot], hl_log])
 		var before: int = issue.consequences.size()
 		_react_to_article(a, e, rec, exposure, issue)
 		for i in range(before, issue.consequences.size()):
@@ -1073,12 +1118,27 @@ func _react_to_article(a: Dictionary, e: Dictionary, rec: Dictionary, exposure: 
 		Relations.on_exposed(self, subj, s, e)
 		Election.on_article(self, subj, s, false)
 		var kind := _reaction(r.bucket, level)
+		if level != "light":
+			for fam in r.family:
+				if residents.has(fam) and residents[fam].in_town and residents[fam].player_rel.like < 0.3 and rng.chance(0.3):
+					visitors.append({"who": fam, "kind": "silent", "event": e.id})
+					break
 		if kind == "suicide" and not config.suicide:
 			kind = "leave"
 		# 印了假话且对方有点地位：起诉概率
 		if rec.avg_truth < 0.5 and a.naming == "named" and r.power >= 1 and rng.chance(0.7):
 			kind = "sue"
 		_schedule_reaction(kind, subj, e, issue, s, rec)
+
+
+## 被曝光的人要动手时，和他走得近、又对报社有好感的人可能会来通风报信。
+func _maybe_warning(angry: String, e: Dictionary) -> void:
+	var allies: Array = []
+	for fr in residents[angry].friends:
+		if residents.has(fr) and residents[fr].in_town and residents[fr].player_rel.like >= 0.6:
+			allies.append(fr)
+	if not allies.is_empty() and rng.chance(0.6):
+		visitors.append({"who": rng.pick(allies), "kind": "warning", "event": e.id, "subject": angry})
 
 
 func _reaction(bucket: String, level: String) -> String:
@@ -1117,7 +1177,9 @@ func _schedule_reaction(kind: String, rid: String, e: Dictionary, issue: Diction
 		"window":
 			pending.append({"week": week + 1, "kind": "window", "who": rid, "event": e.id})
 			issue.consequences.append("夜里有人在报社门口站了很久。")
+			_maybe_warning(rid, e)
 		"arson":
+			_maybe_warning(rid, e)
 			if rng.chance(0.5):
 				pending.append({"week": week + 1, "kind": "arson", "who": rid, "event": e.id})
 				issue.consequences.append("有人在报社后巷闻到了煤油味。")
@@ -1128,6 +1190,7 @@ func _schedule_reaction(kind: String, rid: String, e: Dictionary, issue: Diction
 			if ads.has(rid):
 				ads[rid].paused_until = week + 8
 				issue.consequences.append("%s撤了广告。" % r.name)
+				pending.append({"week": week + 1, "kind": "letter", "who": rid, "letter": {"kind": "ad_pulled", "roles": {"who": rid}, "vars": {}, "id": 900 + letters.size(), "week": week + 1}})
 			else:
 				for fr in r.friends:
 					if ads.has(fr):
@@ -1159,6 +1222,9 @@ func _apply_pending() -> void:
 		if p.week > week:
 			keep.append(p)
 			continue
+		if p.kind == "letter":
+			letters.append(p.letter)
+			continue
 		if p.kind == "followup":
 			var tpl: Dictionary = events_db.template_by_id(p.tid)
 			var roles: Dictionary = events_db.cast_roles(tpl, self, p.preset) if not tpl.is_empty() else {}
@@ -1175,20 +1241,20 @@ func _apply_pending() -> void:
 					residents[r.spouse].spouse = ""
 					residents[r.spouse]["widowed_week"] = week
 					r.spouse = ""
-				letters.append("%s坐上了南去的火车，没跟谁告别。" % r.name)
+				_letter("left_town", {"who": p.who})
 				log.append("第 %d 周：%s离镇。" % [week, r.name])
 			"window":
 				stats.cash -= 10
-				letters.append("周一早上报社的玻璃碎了一地，修窗十块钱。")
+				_letter("window")
 				log.append("第 %d 周：报社窗户被砸。" % week)
 			"arson":
 				flags.burned_until = week + 2
 				stats.cash -= 60
-				letters.append("报社烧了。火是后半夜起的，印刷机还在，屋顶没了。重建要六十块钱，两周内印不了报。")
+				_letter("arson")
 				log.append("第 %d 周：报社被纵火。" % week)
 			"suicide":
 				r.alive = false
-				letters.append("讣告：%s。教堂周四办事。没有人提报纸。" % r.name)
+				_letter("mourning", {"who": p.who})
 				log.append("第 %d 周：%s去世。" % [week, r.name])
 	pending = keep
 	# 官司
@@ -1204,22 +1270,100 @@ func _apply_pending() -> void:
 		else: win = rng.chance(stats.credibility / 100.0)
 		if win:
 			stats.credibility = minf(100.0, stats.credibility + 10)
-			letters.append("法院判了：%s告你诽谤，败诉。镇上都在传。" % r.name)
+			_letter("lawsuit_won", {"who": l.who})
 			r.player_rel.fear = minf(1.0, r.player_rel.fear + 0.3)
 		else:
 			stats.credibility = maxf(0.0, stats.credibility - 10)
 			stats.cash -= 25
 			flags.lawsuits_lost += 1
-			letters.append("法院判了：你输给了%s，赔二十五块钱，登报道歉。" % r.name)
+			_letter("lawsuit_lost", {"who": l.who})
 		log.append("第 %d 周：官司%s。" % [week, "赢了" if win else "输了"])
 	lawsuits = keep_l
 	# 读者来信
 	_reader_letters()
 
 
+## 周一的读者来信：对上一期报纸的反应。2 到 4 封，是玩家读「镇民态度」的主要窗口。
+## 谁来写信是模拟决定的（走 world.rng），写成什么样是文本引擎决定的。
 func _reader_letters() -> void:
+	var cands: Array = []   # {kind, roles, vars, w}
+	var last: Dictionary = issues[-1] if not issues.is_empty() else {}
+	if not last.is_empty() and int(last.week) == week - 1:
+		var any_hot := false
+		var all_calm := true
+		var hard := 0
+		for a in last.articles:
+			var e: Dictionary = event_by_id(a.event)
+			if e.is_empty():
+				continue
+			if a.tone == "hot":
+				any_hot = true
+			if a.tone != "calm":
+				all_calm = false
+			var subj: String = e.roles[e.target][0]
+			if not residents.has(subj):
+				continue
+			var sr: Dictionary = residents[subj]
+			if e.soft:
+				if sr.in_town and sr.alive and rng.chance(0.5):
+					cands.append({"kind": "soft_thanks", "roles": {"who": subj}, "w": 1.0})
+				continue
+			hard += 1
+			var mult: float = {"head": 1.0, "second": 0.8, "third": 0.6, "small": 0.3}[a.slot]
+			# 当事人的亲友抱怨
+			var near: Array = []
+			for oid in sr.family + sr.friends:
+				if residents.has(oid) and residents[oid].in_town and residents[oid].alive and oid != subj:
+					near.append(oid)
+			if not near.is_empty() and rng.chance(0.7 * mult):
+				cands.append({"kind": "complaint", "roles": {"who": rng.pick(near), "subject": subj}, "w": 2.0})
+			# 仇人叫好
+			var foes: Array = []
+			for oid in sr.enemies:
+				if residents.has(oid) and residents[oid].in_town and residents[oid].alive:
+					foes.append(oid)
+			if not foes.is_empty() and rng.chance(0.5 * mult):
+				cands.append({"kind": "praise_exposure", "roles": {"who": rng.pick(foes), "subject": subj}, "w": 1.5})
+			# 受害者道谢
+			for role in ["victim", "creditor", "wife", "boss"]:
+				if e.roles.has(role):
+					var vid: String = e.roles[role][0]
+					if vid != subj and residents[vid].in_town and not (vid in sr.family) and rng.chance(0.5 * mult):
+						cands.append({"kind": "thanks_victim", "roles": {"who": vid, "subject": subj}, "w": 1.5})
+						break
+			# 印了假话：知道真相的人来更正
+			for fid in a.facts:
+				if facts[fid].truth < 0.5:
+					var knowers: Array = []
+					for oid in living_ids():
+						if oid == subj:
+							continue
+						for tf in e.facts:
+							if residents[oid].knows.has(tf):
+								knowers.append(oid)
+								break
+					if knowers.is_empty():
+						knowers = near
+					if not knowers.is_empty() and rng.chance(0.7):
+						cands.append({"kind": "correction", "roles": {"who": rng.pick(knowers), "subject": subj}, "vars": {"fact_id": fid}, "w": 3.0})
+					break
+		var readers: Array = []
+		for oid in living_ids():
+			if residents[oid].subscribed and residents[oid].literate:
+				readers.append(oid)
+		if not readers.is_empty():
+			if any_hot and rng.chance(0.45):
+				cands.append({"kind": "tone_hot", "roles": {"who": rng.pick(readers)}, "w": 1.0})
+			elif all_calm and hard > 0 and rng.chance(0.3):
+				cands.append({"kind": "tone_calm", "roles": {"who": rng.pick(readers)}, "w": 1.0})
+			if hard == 0 and not last.articles.is_empty() and rng.chance(0.5):
+				cands.append({"kind": "no_news", "roles": {"who": rng.pick(readers)}, "w": 1.0})
+	# 订户的态度：喜欢的写信夸，讨厌的退订
 	var pool := living_ids()
 	rng.shuffle(pool)
+	var head := ""
+	if not last.is_empty() and not last.articles.is_empty():
+		head = last.articles[0].headline
 	var n := 0
 	for rid in pool:
 		if n >= 2:
@@ -1228,13 +1372,28 @@ func _reader_letters() -> void:
 		if not r.literate or not r.subscribed:
 			continue
 		if r.player_rel.like > 0.65 and flags.get("last_fan", "") != rid and rng.chance(0.5):
-			letters.append("%s来信：报纸我每期都读，这周的还行。" % r.name)
+			cands.append({"kind": "fan", "roles": {"who": rid}, "vars": {"headline": head}, "w": 1.0})
 			flags.last_fan = rid
 			n += 1
 		elif r.player_rel.like < 0.25:
-			letters.append("%s来信：退订。别再往我家送了。" % r.name)
-			r.subscribed = false
+			cands.append({"kind": "unsubscribe", "roles": {"who": rid}, "w": 2.0, "unsub": rid})
 			n += 1
+	# 挑 2 到 4 封：权重高的优先，同一个人只写一封
+	rng.shuffle(cands)
+	cands.sort_custom(func(x, y): return float(x.w) > float(y.w))
+	var used := {}
+	var taken := 0
+	for c in cands:
+		if taken >= 4:
+			break
+		var who: String = c.roles.get("who", "")
+		if used.has(who):
+			continue
+		used[who] = true
+		_letter(c.kind, c.roles, c.get("vars", {}))
+		if c.has("unsub"):
+			residents[c.unsub].subscribed = false
+		taken += 1
 
 
 func _check_game_over() -> void:

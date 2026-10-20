@@ -1,0 +1,264 @@
+{
+ "_note": "Grammar rules. #symbol# picks one entry; name@tone and name@season are specialised versions and win when present. Source lead-ins are sentence prefixes: they end in ', ' or ': ' and the fact prose follows straight on.",
+ "src_witness": [
+  "This paper's reporter saw it firsthand: ",
+  "A reporter for this paper was there and saw it: ",
+  "This paper's reporter was close by that night and saw it plainly: ",
+  "This paper's reporter kept watch all night, and this is what was seen: ",
+  "This paper's reporter was not far off that night, and saw that ",
+  "This paper's reporter saw that ",
+  "A reporter for this paper, close by, saw that "
+ ],
+ "src_archive": [
+  "According to records at {loc}, ",
+  "Records kept at {loc} show that ",
+  "The records this paper examined at {loc} leave no doubt: ",
+  "This paper went through the files at {loc}, and they show that "
+ ],
+ "src_public": [
+  "",
+  "",
+  "It is common knowledge in town that "
+ ],
+ "src_interview": [
+  "According to a person familiar with the matter, ",
+  "Someone who knows the particulars told this paper that ",
+  "This paper has learned that ",
+  "A source confirmed to this paper that "
+ ],
+ "src_interview_who": [
+  "A {src_who} told this paper that ",
+  "According to a {src_who}, ",
+  "A {src_who} interviewed by this paper confirmed that ",
+  "A {src_who} who asked not to be named told this paper that "
+ ],
+ "src_informer": [
+  "According to this paper's sources, ",
+  "An informant says that ",
+  "Word reaching this paper is that "
+ ],
+ "src_informer_who": [
+  "According to this paper's sources, ",
+  "An informant says that ",
+  "A {src_who} has let this paper know that "
+ ],
+ "src_visitor": [
+  "A caller at the Gazette office told this paper that ",
+  "A visitor to this office said that "
+ ],
+ "src_visitor_who": [
+  "A {src_who} came by the office to tell this paper that ",
+  "According to a {src_who} who called at the office, "
+ ],
+ "src_eavesdrop": [
+  "Talk at the tavern has it that ",
+  "According to talk around town, ",
+  "Someone at the tavern was heard to say that ",
+  "The story going around is that "
+ ],
+ "src_eavesdrop_who": [
+  "Talk at the tavern has it that ",
+  "According to talk around town, ",
+  "A {src_who} was heard saying at the tavern that ",
+  "The story going around is that "
+ ],
+ "src_letter": [
+  "An unsigned letter to this paper states that ",
+  "A letter received without a signature claims that ",
+  "According to an anonymous letter, "
+ ],
+ "evidence_note": [
+  "A copy of the record is reproduced on this page.",
+  "A copy of the record in question appears below.",
+  "The copy is printed alongside, and readers may judge it for themselves.",
+  "A transcript of the record is kept at the Gazette office, where readers may see it.",
+  "Anyone who wishes to see the record this paper holds may come and see it.",
+  "This paper made a copy of the record, and keeps it at the office."
+ ],
+ "resp_unreached": [
+  "{target.short} could not be reached before this paper went to press.",
+  "{target.short} has not answered this paper's inquiries.",
+  "{target.short} was away from home this week and could not be asked in person.",
+  "This paper called twice at the home of {target.short} and found no one in.",
+  "This paper left word for {target.short}, and has had no answer.",
+  "{target.short} has been out of town all week."
+ ],
+ "resp_declined": [
+  "{target.short} declined to answer this paper's questions.",
+  "Asked to confirm the account, {target.short} would not comment.",
+  "When asked about the matter, {target.short} shut the door."
+ ],
+ "resp_pleaded": [
+  "{target.short} sent word asking this paper not to print the story. This paper weighed the request, and printed it.",
+  "This paper is aware that some would rather this story had not appeared.",
+  "{target.short} called at the Gazette office. What was said there has been noted, but is not repeated here."
+ ],
+ "resp_denied": [
+  "{target.short} denied the account to this paper.",
+  "Asked about the matter, {target.short} said only: \"There is nothing to it.\"",
+  "{target.short} says it did not happen that way.",
+  "{target.short} denies it."
+ ],
+ "close": [
+  "This paper will follow the matter.",
+  "The Gazette will report further as it learns more.",
+  "Anyone with knowledge of the matter is welcome at the Gazette office."
+ ],
+ "close@calm": [
+  "This paper will follow the matter.",
+  "Nothing is settled, and this paper draws no conclusions.",
+  "The rights and wrongs of it remain to be established.",
+  "This paper prints only what it can confirm.",
+  "When there is more to tell, this paper will tell it.",
+  "This paper will report what follows.",
+  "The matter rests here for now."
+ ],
+ "close@neutral": [
+  "This paper will follow the matter.",
+  "Anyone with knowledge of the matter is welcome at the Gazette office.",
+  "More in the next issue.",
+  "This is not the end of it.",
+  "The door of the Gazette office stands open all day.",
+  "This paper will go on asking.",
+  "Anyone who knows more is welcome to sit down at the Gazette office."
+ ],
+ "close@hot": [
+  "The people of Greyriver have a right to know.",
+  "This will not be allowed to rest.",
+  "Readers may judge for themselves.",
+  "How much longer will this town look the other way?",
+  "This paper will be watching.",
+  "Who will be next?",
+  "The people of this town are not blind.",
+  "The days of looking the other way should be over."
+ ],
+ "close_soft": [
+  "",
+  " The Gazette passes this along for its readers.",
+  ""
+ ],
+ "recent": [
+  "last week",
+  "in recent days",
+  "earlier this month",
+  "over the past few weeks",
+  "not long ago"
+ ],
+ "night": [
+  "in the small hours",
+  "after dark",
+  "after the tavern closed",
+  "a little past ten at night"
+ ],
+ "night@winter": [
+  "on a freezing night",
+  "on a night of falling snow",
+  "in the small hours"
+ ],
+ "night@summer": [
+  "in the small hours",
+  "after dark",
+  "after the tavern closed"
+ ],
+ "river": [
+  "the Grey River",
+  "the river",
+  "the river below town"
+ ],
+ "river@winter": [
+  "the half-frozen river",
+  "the Grey River"
+ ],
+ "town": [
+  "Greyriver",
+  "the town",
+  "this town"
+ ],
+ "weather": [
+  "with the weather holding fair",
+  "under grey skies"
+ ],
+ "weather@spring": [
+  "after the thaw",
+  "once the snow had melted",
+  "with the spring high water"
+ ],
+ "weather@summer": [
+  "once the hot weather came",
+  "as the wheat turned yellow"
+ ],
+ "weather@autumn": [
+  "around harvest time",
+  "after the leaves came down"
+ ],
+ "weather@winter": [
+  "after winter set in",
+  "once the river froze",
+  "around the first snow"
+ ],
+ "many": [
+  "several people",
+  "several people",
+  "at least two people"
+ ],
+ "said": [
+  "said",
+  "told this paper",
+  "remarked"
+ ],
+ "obit_tail": [
+  "Rest in peace.",
+  "",
+  "The family asks that no flowers be sent."
+ ],
+ "wedding_tail": [
+  "The Gazette offers its congratulations.",
+  "",
+  "The couple will make their home on the east side of town."
+ ],
+ "hedge": [
+  "This paper has not yet found a second person to confirm it.",
+  "This paper has not been able to verify the account, and prints it here for readers to weigh.",
+  "Whether it is true, this paper is still working to establish.",
+  "So far, this paper has heard it from only one source."
+ ],
+ "corroborated": [
+  "This paper checked the account with a second source, who told it the same way.",
+  "This paper put the question to several people, and the answers agreed.",
+  "Two people, asked separately by this paper, gave the same account."
+ ],
+ "counter_in": [
+  "There is, however, another story going around town. ",
+  "Not everyone tells it that way. ",
+  "Another account has reached this paper, and is printed here as well. "
+ ],
+ "limit_witness": [
+  "This paper was too far off to make out anything more.",
+  "This paper did not see the rest, and will not guess at it.",
+  "It was dark, and that is all this paper could see."
+ ],
+ "season_open": [
+  "lately",
+  "these past weeks"
+ ],
+ "season_open@spring": [
+  "since the thaw",
+  "since the spring high water",
+  "since the snow melted"
+ ],
+ "season_open@summer": [
+  "since summer came in",
+  "since the hot weather came",
+  "since the wheat turned yellow"
+ ],
+ "season_open@autumn": [
+  "since autumn came in",
+  "since harvest time",
+  "since the leaves came down"
+ ],
+ "season_open@winter": [
+  "since winter set in",
+  "since the river froze",
+  "since the first snow"
+ ]
+}

@@ -1,0 +1,169 @@
+{
+ "predecessor": {"sign": false, "items": [
+  "A letter left by the previous editor: The postman is a friend; when in doubt, ask the postman first. Don't let the sawmill's advertisement lapse, because it pays for two weeks of newsprint. Go to the tavern at night and listen, but don't believe all of it. The front page is empty. Fill it yourself.",
+  "A letter left by the previous editor: The roof leaks. The lever on the left side of the press wants a hard pull. The postman can be trusted; take half of what you hear at the tavern. The sawmill's advertisement pays for two weeks of paper, so think twice before you lose it. I've left the front page blank for you."
+ ]},
+ "anon_tip": {"sign": false, "items": [
+  "A letter with no signature: \"{fact}.\"",
+  "A scrap of paper pushed under the door, in a hand that looks as if it were written with the left: \"{fact}.\"",
+  "An envelope with no stamp, holding a single line: \"{fact}.\"",
+  "No return address on the envelope, and the letter inside folded very small: \"{fact}. Look into it.\"",
+  "A page torn out of an account book: \"{fact}. Don't say where you heard it.\"",
+  "An anonymous letter in pencil, with a few words misspelled: \"{fact}.\""
+ ]},
+ "left_town": {"sign": false, "items": [
+  "{who} took the south train and said goodbye to no one.",
+  "{who} is gone. The station hands say it was a one-way ticket.",
+  "The door of {who}'s house is locked, and nobody waters the flowers on the sill.",
+  "{who} has left Greyriver. Before going, {who.ta} stood a while outside the Gazette office, and did not come in.",
+  "Word is that {who} has moved down south."
+ ]},
+ "window": {"sign": false, "items": [
+  "Monday morning, the front window of the Gazette office lay in pieces on the floor. Ten dollars to fix it.",
+  "Someone smashed the front window. The stone was still lying on the type case. The repair cost ten dollars.",
+  "Something struck the window in the small hours. In the morning the glass was all over the floor, and a brick with it. Ten dollars for the window.",
+  "The window was broken. Two words had been chalked on the brick, but the dew had blurred them past reading. Ten dollars for the glass.",
+  "Opening up in the morning, you found the glass of the door in pieces on the step. Nobody saw who did it. Ten dollars to replace it."
+ ]},
+ "arson": {"sign": false, "items": [
+  "The Gazette office burned. The fire started in the small hours. The press survived; the roof did not. Rebuilding will cost sixty dollars, and there will be no paper for two weeks.",
+  "A fire broke out after midnight. The neighbors came running with buckets, but the roof could not be saved. Sixty dollars to rebuild, and two weeks without printing.",
+  "The office caught fire. An empty kerosene can lay in the alley behind. Sixty dollars to rebuild, and no paper for two weeks.",
+  "The fire began at the back window. Half the type melted, and the roof fell in. Rebuilding will take sixty dollars, and the paper cannot print for two weeks."
+ ]},
+ "mourning": {"sign": false, "items": [
+  "Death notice: {who}. The service is Thursday at the church. No one mentioned the paper.",
+  "{who} is dead. On the day of the funeral, people passed the Gazette office with their heads down.",
+  "You did not go to the funeral of {who}. Perhaps going would have been worse."
+ ]},
+ "lawsuit_won": {"sign": false, "items": [
+  "The court has ruled: {who} sued you for libel, and lost. The whole town is talking about it.",
+  "The case is won. Outside the courthouse, {who} would not look at you.",
+  "The judge found the report to be true, and the suit brought by {who} was dismissed.",
+  "The libel case is decided in favor of {paper}. The lawyer for {who} left on the train that same day."
+ ]},
+ "lawsuit_lost": {"sign": false, "items": [
+  "The court has ruled against you and for {who}: twenty-five dollars in damages, and an apology to be printed.",
+  "The case is lost. Twenty-five dollars to {who}, and an apology in the next issue.",
+  "The judge found the report to be untrue. Damages of twenty-five dollars, and a printed apology to {who}.",
+  "Lost. Outside the courthouse, {who} shook hands all round and laughed loudly. Twenty-five dollars in damages."
+ ]},
+ "fan": {"sign": true, "items": [
+  "I read {paper} every week. This week I read the piece aloud to my family.",
+  "The paper comes Monday morning, and I make it last until Monday night.",
+  "I keep every issue. I have a whole drawer full of them.",
+  "Last week's piece was too soft. This week's I liked.",
+  "At last somebody in this town is telling the truth.",
+  {"t": "I have worked at the sawmill eleven years and never seen anybody dare to print such things. Keep at it.", "if": {"occ": ["worker", "foreman", "smith"]}},
+  {"t": "I cut out this week's paper and pinned it up on the wall of my shop.", "if": {"occ": ["grocer", "barkeep", "tailor"]}},
+  {"t": "My family says the paper is for people with time on their hands. I have no time on my hands, and I read it anyway.", "if": {"female": true}},
+  {"t": "There are people at church who speak ill of you. I don't join in.", "if": {"trait": ["pious"]}},
+  {"t": "Well written. That is all.", "if": {"trait": ["tight"]}},
+  {"t": "I heard \"{headline}\" read out three times at the tavern.", "if": {"trait": ["drinker", "gossip"]}}
+ ]},
+ "unsubscribe": {"sign": true, "items": [
+  "Cancel my subscription. Don't deliver to my house again.",
+  "Stop delivery from next week. You know why.",
+  "I took the paper for six years. That's the end of it.",
+  "The subscription money will go on lamp oil. At least lamp oil doesn't bite.",
+  "{paper} has changed. I'm done with it.",
+  {"t": "I've paid through the end of the month. After that, don't bother.", "if": {"bucket": ["practical"]}},
+  {"t": "I don't want my children seeing what you print. Cancel it.", "if": {"trait": ["pious"]}},
+  {"t": "Stop sending it. Send it again and I'll throw it back on your doorstep.", "if": {"bucket": ["hot"]}},
+  {"t": "I would rather not have this paper in the house. Please stop delivery.", "if": {"bucket": ["timid"]}},
+  {"t": "Half of what you print I don't believe, and the other half I don't care to know. Cancel it.", "if": {"trait": ["suspicious"]}},
+  {"t": "Stop delivery. No need to reply.", "if": {"trait": ["tight"]}},
+  {"t": "I subscribed as a courtesy to the previous editor. The courtesy is used up.", "if": {"bucket": ["powerful"]}}
+ ]},
+ "complaint": {"sign": true, "items": [
+  "I watched {subject.short} grow up. When you wrote those things, did you stop to think how {subject.ta} is supposed to go on living in this town?",
+  "I've known {subject.short} for twenty years. What you printed may be true, but you had no business printing it the way you did.",
+  "{subject.short} hasn't left the house in days. Are you satisfied?",
+  "A newspaper can write about a person, or it can ruin one. This week you chose the second.",
+  "When you wrote about {subject.short}, did you ask {subject.him} even one question?",
+  "When I saw {subject.short}'s name in the paper, my hands shook.",
+  "I can't write, so I've had someone write this for me. I only want to say that {subject.short} is not a bad person.",
+  {"t": "If {subject.short} did wrong, there are people whose job it is to deal with it. It is no business of a newspaper.", "if": {"bucket": ["powerful"]}},
+  {"t": "I sat a whole afternoon at {subject.short}'s house. {subject.ta} said nothing at all, just sat.", "if": {"trait": ["kind"]}},
+  {"t": "Remember, this is a small town. Everyone runs into everyone sooner or later.", "if": {"bucket": ["hot"]}},
+  {"t": "I didn't mean to write this letter. But everyone at church is talking, and I can't bear to listen to it.", "if": {"trait": ["pious"]}},
+  {"t": "You printed half of it. The other half you don't know, and don't want to.", "if": {"trait": ["sly"]}},
+  {"t": "Please, next time you write about {subject.short}, ask those of us who know {subject.him} first.", "if": {"bucket": ["timid"]}},
+  {"t": "I've never written to a newspaper in my life. This is the first letter, and the last.", "if": {"trait": ["tight", "grudge"]}}
+ ]},
+ "praise_exposure": {"sign": true, "items": [
+  "It was high time somebody wrote it. I know more about {subject.short} than you printed.",
+  "I bought two copies this week: one for me, and one to mail to my brother down south.",
+  "Well done. {subject.short} has strutted around this town for years. It was time someone stood in the way.",
+  "I've waited a long time for this. Thank you.",
+  "I take no pleasure in another person's misfortune. But you were right to print this.",
+  "You only printed half of what {subject.short} has done. When you want the other half, come and see me.",
+  {"t": "I read this week's front page aloud at the tavern, and not one soul spoke up for {subject.short}.", "if": {"trait": ["drinker", "gossip"]}},
+  {"t": "Seeing {subject.short}'s name in the paper, I slept well for the first time in a long while.", "if": {"trait": ["grudge"]}},
+  {"t": "I told people long ago that {subject.short} couldn't be trusted, and nobody believed me. They believe me now.", "if": {"trait": ["gossip", "suspicious"]}},
+  {"t": "Good work. But be careful; {subject.short} is not one to take this lying down.", "if": {"bucket": ["practical"]}}
+ ]},
+ "thanks_victim": {"sign": true, "items": [
+  "Nobody cared about our trouble before. After you printed it, people in town came by to ask. Thank you.",
+  "I'm no good with words, so I'll just say thank you.",
+  "I cut out the article and put it under the glass on my table.",
+  "Folks like us have never been in the paper. The first time we were, it was you speaking up for us.",
+  "Since that business with {subject.short} was printed, I passed {subject.him} on the road, and {subject.ta} couldn't look me in the eye.",
+  "I sent a basket of eggs over to the office. It isn't much.",
+  "There are things I've kept to myself for years. You said them for me.",
+  {"t": "My husband didn't want me to write this letter. I wrote it anyway.", "if": {"female": true}}
+ ]},
+ "correction": {"sign": true, "items": [
+  "You printed that \"{fact}.\" It isn't true. I know who said it first, and I know why.",
+  "I want to correct something. \"{fact}\": there is no basis for it. Where did you hear it?",
+  "You got it wrong this week. \"{fact}\": I can swear that never happened.",
+  "A paper that prints a mistake can be forgiven. A paper that won't correct one can't. \"{fact}\" is false.",
+  "I don't know you, and you don't know me. I'll say only this: \"{fact}\" is made up.",
+  "{subject.short} has done plenty, but \"{fact}\" is not one of those things.",
+  "You've been fooled. \"{fact}\" is drunken talk from the tavern.",
+  "Please print a correction in the next issue: \"{fact}\" is untrue."
+ ]},
+ "tone_hot": {"sign": true, "items": [
+  "This week's paper reads like a quarrel.",
+  "The headline was printed so large I could read it from across the street. Was that necessary?",
+  "Are you running a newspaper, or shouting in a tavern?",
+  "A little less heat, and things might come clearer.",
+  "Too many exclamation marks.",
+  {"t": "I liked this week's paper. It had some fight in it.", "if": {"bucket": ["hot"]}}
+ ]},
+ "tone_calm": {"sign": true, "items": [
+  "This week's paper was a steady read.",
+  "You wrote with restraint. I think that is right.",
+  "I read it twice and couldn't tell whose side you were on. That is a good thing.",
+  "That is how a newspaper ought to be: say it plainly, and don't shout.",
+  {"t": "Too polite by half. Some things won't be taken seriously unless you say them less politely.", "if": {"bucket": ["hot", "practical"]}}
+ ]},
+ "soft_thanks": {"sign": true, "items": [
+  "Thank you for printing the news of our family. All the relatives saw it.",
+  "I bought extra copies that day and mailed them to family out of town.",
+  "Being in the paper made me feel I count for something in this town.",
+  "Thank you. I will keep those few lines always.",
+  "{paper} wrote about our family very handsomely. Thank you.",
+  "Nothing much happens in our family. It was kind of you to think us worth printing.",
+  "You spelled the name right. Somebody spelled it wrong once before, but not this time.",
+  "I took the paper to show the old folks at home, and they smiled."
+ ]},
+ "no_news": {"sign": true, "items": [
+  "This week's paper was nothing but a death notice and the trains. Did nothing at all happen in town?",
+  "I take the paper to learn what is going on in town, not to learn who is getting married.",
+  "The paper gets thinner every week.",
+  "I finished this week's paper in five minutes.",
+  {"t": "Have you lost your nerve?", "if": {"bucket": ["hot", "powerful"]}}
+ ]},
+ "ad_pulled": {"sign": true, "items": [
+  "From the next issue on, my advertisement will not run. You know the reason.",
+  "I have advertised in your paper for three years. No longer.",
+  "I'll pay for this month's advertisement in full. After that, you needn't keep the space.",
+  "Nobody in trade picks a quarrel with a newspaper. But I won't pay to print a paper that insults me."
+ ]},
+ "ad_back": {"sign": true, "items": [
+  "I'd like to advertise again, in the same spot as before.",
+  "That business is behind us. Keep some space for me in the next issue.",
+  "Business is business. The advertisement runs as usual."
+ ]}
+}

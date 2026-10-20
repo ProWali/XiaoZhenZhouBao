@@ -6,6 +6,7 @@ extends SceneTree
 const World = preload("res://scripts/sim/world.gd")
 const Auto = preload("res://scripts/sim/autoplayer.gd")
 const Save = preload("res://scripts/sim/save.gd")
+const TE = preload("res://scripts/text/text_engine.gd")
 
 var failures: Array = []
 
@@ -17,6 +18,8 @@ func _init() -> void:
 	_test_templates_reachable()
 	_test_fact_text()
 	_test_unattended()
+	_test_language_independent()
+	_test_text_lint()
 	if failures.is_empty():
 		print("全部通过")
 		quit(0)
@@ -30,8 +33,8 @@ func _fail(msg: String) -> void:
 	failures.append(msg)
 
 
-func _play(seed_v: int, strategy: String, weeks: int) -> Dictionary:
-	var world = World.new(seed_v, {"total_weeks": weeks})
+func _play(seed_v: int, strategy: String, weeks: int, lang: String = "zh") -> Dictionary:
+	var world = World.new(seed_v, {"total_weeks": weeks, "lang": lang})
 	var auto = Auto.new(strategy, seed_v)
 	while world.game_over == "":
 		var issue: Dictionary = auto.play_week(world)
@@ -153,3 +156,45 @@ func _test_unattended() -> void:
 	if elections < 3:
 		_fail("10 局里只有 %d 局办了选举（局中途结束的除外）" % elections)
 	print("无人跑：需求驱动 %d，后续 %d，选举 %d，死亡 %d" % [driven, followups, elections, deaths])
+
+
+## 文本层不能碰模拟：同一种子中文局和英文局，故事日志和数值逐字相同。
+func _test_language_independent() -> void:
+	for st in ["cautious", "sensational"]:
+		var a = _play(4, st, 30, "zh").world
+		var b = _play(4, st, 30, "en").world
+		if JSON.stringify(a.history) != JSON.stringify(b.history):
+			_fail("换语言后数值变了（%s）" % st)
+		if JSON.stringify(a.log) != JSON.stringify(b.log):
+			_fail("换语言后故事日志变了（%s）" % st)
+
+
+## 实际印出来的文字（报道、信、来访、采访反馈）过 lint。每种已有数据的语言都查。
+func _test_text_lint() -> void:
+	for lang in ["zh", "en"]:
+		if not FileAccess.file_exists("res://data/text/%s/events.json" % lang):
+			continue
+		var bad := 0
+		var first := ""
+		for s in range(1, 4):
+			var world = World.new(s, {"total_weeks": 26, "lang": lang})
+			var auto = Auto.new("random", s)
+			while world.game_over == "":
+				var issue: Dictionary = auto.play_week(world)
+				var texts: Array = auto.last_letters.duplicate()
+				for v in auto.last_visitors:
+					texts.append_array(v.lines)
+				if not issue.is_empty():
+					for a in issue.articles:
+						texts.append(a.headline)
+						texts.append_array(a.body)
+				for t in texts:
+					var probs: Array = TE.lint(str(t), lang)
+					if not probs.is_empty():
+						bad += 1
+						if first == "":
+							first = "%s ← %s" % [t, probs]
+				if issue.is_empty():
+					break
+		if bad > 0:
+			_fail("%s 文本 lint 有 %d 处问题，例如：%s" % [lang, bad, first])
