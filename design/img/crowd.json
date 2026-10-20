@@ -1,0 +1,38 @@
+{
+  "tool": "liclick",
+  "created_at": "2026-10-19T13:00:36.837Z",
+  "workspace_id": "8e76629c-6d1f-4e6d-8a83-016ebea94117",
+  "request_id": "eb316f2b-16ee-49e1-bd6e-56b4ab518d3a",
+  "task_type": "image",
+  "status": "Finished",
+  "credit_cost": 11,
+  "err_msg": null,
+  "files": [
+    "crowd.png"
+  ],
+  "estimate": 11,
+  "request": {
+    "backend": "openai",
+    "request_type": "single_image",
+    "params": {
+      "model": "gpt-image-2.5-flare",
+      "prompt": "Game concept art for an indie narrative simulation game, consequence scene in a 1930s small riverside town. View from inside a dark newspaper office through its front window: outside at night, a crowd of a dozen townsfolk with lanterns and a few raised torches has gathered on the street, faces lit from below, some angry, some only curious, a woman in the front holding up a crumpled newspaper. The reflection of the lanterns glows on the glass; in the foreground inside the office a typewriter and a half-drawn blind. Gouache painted look with a deliberately limited 16-colour muted palette (ochre, slate blue, brick red, bottle green, cream), visible paper grain, soft dithering like upscaled pixel art, ominous but restrained mood, no violence shown. No legible text anywhere, the newspaper headline is an abstract block, no modern objects.",
+      "name": "crowd",
+      "n": 1,
+      "aspect_ratio": "16:9",
+      "image_size": "2K",
+      "quality": "high"
+    },
+    "workspace_id": "8e76629c-6d1f-4e6d-8a83-016ebea94117",
+    "ext_infos": {
+      "task_type": "generate",
+      "model": "gpt-image-2.5-flare"
+    }
+  },
+  "assets": [
+    {
+      "file": "crowd.png",
+      "asset_id": "99359063-584f-40ad-82a0-9ba26be4ec02"
+    }
+  ]
+}

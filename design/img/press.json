@@ -1,0 +1,38 @@
+{
+  "tool": "liclick",
+  "created_at": "2026-10-19T13:00:36.834Z",
+  "workspace_id": "8e76629c-6d1f-4e6d-8a83-016ebea94117",
+  "request_id": "7975f82e-6277-4b8b-a201-c555a6622bec",
+  "task_type": "image",
+  "status": "Finished",
+  "credit_cost": 11,
+  "err_msg": null,
+  "files": [
+    "press.png"
+  ],
+  "estimate": 11,
+  "request": {
+    "backend": "openai",
+    "request_type": "single_image",
+    "params": {
+      "model": "gpt-image-2.5-flare",
+      "prompt": "Game concept art for an indie narrative simulation game, Sunday printing night in a 1930s small-town print shop. Close, low-angle view of a cast-iron flatbed letterpress, trays of lead type, ink rollers, and a stack of freshly printed broadsheet newspapers still damp with ink. Ink-stained hands of the editor placing a single line of lead type into a composing stick. A single bare bulb overhead, deep shadows, warm ink-black and cream tones. Gouache painted look with a deliberately limited 16-colour muted palette (ochre, slate blue, brick red, bottle green, cream), visible paper grain, soft dithering like upscaled pixel art, tense and ritualistic atmosphere. No legible text on the newspapers or type, headlines are abstract blocks, no modern objects.",
+      "name": "press",
+      "n": 1,
+      "aspect_ratio": "16:9",
+      "image_size": "2K",
+      "quality": "high"
+    },
+    "workspace_id": "8e76629c-6d1f-4e6d-8a83-016ebea94117",
+    "ext_infos": {
+      "task_type": "generate",
+      "model": "gpt-image-2.5-flare"
+    }
+  },
+  "assets": [
+    {
+      "file": "press.png",
+      "asset_id": "979838cd-12e4-494e-b977-b5aa57a5554e"
+    }
+  ]
+}

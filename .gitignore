@@ -1,0 +1,16 @@
+# Godot 4
+.godot/
+*.import
+export/
+export_presets.cfg.bak
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.tmp
+.vscode/
+.idea/
+
+# 本地 Godot 编辑器状态
+.editorconfig.local
+override.cfg

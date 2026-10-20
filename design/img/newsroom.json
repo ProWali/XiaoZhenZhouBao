@@ -1,0 +1,38 @@
+{
+  "tool": "liclick",
+  "created_at": "2026-10-19T13:00:36.396Z",
+  "workspace_id": "8e76629c-6d1f-4e6d-8a83-016ebea94117",
+  "request_id": "03a3b60e-8ec4-48c2-8794-2517ddd3827a",
+  "task_type": "image",
+  "status": "Finished",
+  "credit_cost": 11,
+  "err_msg": null,
+  "files": [
+    "newsroom.png"
+  ],
+  "estimate": 11,
+  "request": {
+    "backend": "openai",
+    "request_type": "single_image",
+    "params": {
+      "model": "gpt-image-2.5-flare",
+      "prompt": "Game concept art, interior scene for an indie narrative simulation game, 1930s small-town newspaper editor's office at night. A cluttered wooden desk with a black typewriter, a green glass banker's lamp, scattered notebooks and a cold cup of coffee. Behind the desk a large cork investigation board covered with pinned portrait sketches of townsfolk, index cards and red string connecting them. Rain streaks on the window, the street outside glowing faintly. Gouache painted look with a deliberately limited 16-colour muted palette (ochre, slate blue, brick red, bottle green, cream), visible paper grain, soft dithering like upscaled pixel art, intimate and slightly paranoid mood. No legible text anywhere, cards and papers are blank or abstract scribbles, no people in frame.",
+      "name": "newsroom",
+      "n": 1,
+      "aspect_ratio": "16:9",
+      "image_size": "2K",
+      "quality": "high"
+    },
+    "workspace_id": "8e76629c-6d1f-4e6d-8a83-016ebea94117",
+    "ext_infos": {
+      "task_type": "generate",
+      "model": "gpt-image-2.5-flare"
+    }
+  },
+  "assets": [
+    {
+      "file": "newsroom.png",
+      "asset_id": "cc1d18ab-7e5a-485f-bf32-143b844920a8"
+    }
+  ]
+}
