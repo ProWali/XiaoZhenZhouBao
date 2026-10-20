@@ -1,0 +1,35 @@
+{
+ "id": "budget",
+ "name": "镇议会预算",
+ "severity": 0,
+ "soft": true,
+ "manual": true,
+ "cooldown": 0,
+ "weeks": 1,
+ "target": "mayor",
+ "roles": {
+  "mayor": {}
+ },
+ "fragments": [
+  {
+   "key": "budget",
+   "subject": "mayor",
+   "text": "镇议会定了今年的钱花在{x_decision}上，{mayor}拍的板",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "镇议会今年预算：{x_decision}"
+  ],
+  "neutral": [
+   "{mayor}主持镇议会，今年预算用于{x_decision}"
+  ],
+  "hot": [
+   "钱又花在{x_decision}上！镇议会听谁的"
+  ]
+ }
+}

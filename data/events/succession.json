@@ -1,0 +1,35 @@
+{
+ "id": "succession",
+ "name": "代理镇长",
+ "severity": 0,
+ "soft": true,
+ "manual": true,
+ "cooldown": 0,
+ "weeks": 1,
+ "target": "mayor",
+ "roles": {
+  "mayor": {}
+ },
+ "fragments": [
+  {
+   "key": "succession",
+   "subject": "mayor",
+   "text": "镇长一职空缺，{mayor}暂代",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "{mayor}代理镇长"
+  ],
+  "neutral": [
+   "镇长空缺，{mayor}暂代"
+  ],
+  "hot": [
+   "谁让{mayor}坐上镇长的椅子的"
+  ]
+ }
+}

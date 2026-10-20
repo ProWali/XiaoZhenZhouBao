@@ -1,0 +1,35 @@
+{
+ "id": "arrival",
+ "name": "新来的",
+ "severity": 0,
+ "soft": true,
+ "manual": true,
+ "cooldown": 0,
+ "weeks": 1,
+ "target": "newcomer",
+ "roles": {
+  "newcomer": {}
+ },
+ "fragments": [
+  {
+   "key": "arrival",
+   "subject": "newcomer",
+   "text": "火车带来一个叫{newcomer}的人，暂住在火车站后面",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "新面孔：{newcomer}"
+  ],
+  "neutral": [
+   "{newcomer}乘火车抵镇，暂住站后"
+  ],
+  "hot": [
+   "又一个外乡人！{newcomer}来干什么的"
+  ]
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "id": "separation",
+ "name": "分居",
+ "severity": 0,
+ "soft": true,
+ "manual": true,
+ "cooldown": 0,
+ "weeks": 1,
+ "target": "lover",
+ "roles": {
+  "lover": {},
+  "spouse": {}
+ },
+ "fragments": [
+  {
+   "key": "separation",
+   "subject": "lover",
+   "text": "{lover}的课停了，{spouse}一个人搬去了河湾农场",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "镇上两家人搬了家"
+  ],
+  "neutral": [
+   "{lover}停课，{spouse}迁居河湾农场"
+  ],
+  "hot": [
+   "报道之后：{lover}和{spouse}各奔东西"
+  ]
+ },
+ "effects": {
+  "move": "lover"
+ }
+}

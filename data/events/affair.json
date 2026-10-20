@@ -1,0 +1,95 @@
+{
+ "id": "affair",
+ "name": "私情",
+ "severity": 2,
+ "weeks": 14,
+ "target": "lover",
+ "roles": {
+  "lover": {
+   "occupation": [
+    "teacher",
+    "nurse",
+    "tailor",
+    "newcomer"
+   ],
+   "single": true
+  },
+  "spouse": {
+   "married": true
+  },
+  "wife": {
+   "spouse_of": "spouse"
+  }
+ },
+ "fragments": [
+  {
+   "key": "bridge",
+   "subject": "lover",
+   "text": "{lover}和{spouse}深夜在桥头同行，不止一个人看见",
+   "secrecy": "semi",
+   "witness": "bridge",
+   "known_by": [
+    "lover",
+    "spouse",
+    "random:2"
+   ]
+  },
+  {
+   "key": "letters",
+   "subject": "spouse",
+   "text": "{spouse}每周往邮局寄一封信给{lover}，收信人就住在镇上",
+   "secrecy": "secret",
+   "archive": "post",
+   "known_by": [
+    "spouse"
+   ]
+  },
+  {
+   "key": "suspect",
+   "subject": "wife",
+   "text": "{wife}已经怀疑另一半夜里去了哪，哭过好几回",
+   "secrecy": "secret",
+   "known_by": [
+    "wife",
+    "friends:wife"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "lover",
+   "text": "{lover}是被人花钱从外地请来拆散这家人的",
+   "truth": 0.1,
+   "known_by": [
+    "enemies:lover"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "桥头夜深人静，有些人却不睡"
+  ],
+  "neutral": [
+   "{lover}与某位已婚人士深夜同行，见者不止一人"
+  ],
+  "hot": [
+   "{lover}插足他人婚姻！这镇子的体面还剩多少"
+  ]
+ },
+ "detail": "桥头的煤气灯",
+ "driven_by": [
+  "desire",
+  "belonging"
+ ],
+ "followups": [
+  {
+   "tid": "separation",
+   "map": {
+    "lover": "lover",
+    "spouse": "spouse"
+   },
+   "delay": 3,
+   "chance": 0.6
+  }
+ ]
+}

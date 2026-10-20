@@ -1,0 +1,41 @@
+{
+ "id": "funeral",
+ "name": "丧事",
+ "severity": 0,
+ "soft": true,
+ "weeks": 1,
+ "target": "widow",
+ "positive": true,
+ "roles": {
+  "widow": {
+   "occupation": [
+    "widow"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "obit",
+   "subject": "widow",
+   "text": "{widow}家的老人走了，周四下葬，教堂办事",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "讣告：{widow}家老人辞世"
+  ],
+  "neutral": [
+   "{widow}家老人辞世，周四下葬"
+  ],
+  "hot": [
+   "又一位老人走了，这镇子在变老"
+  ]
+ },
+ "detail": "周四的雨",
+ "once": true,
+ "cooldown": 8
+}

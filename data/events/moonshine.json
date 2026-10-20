@@ -1,0 +1,78 @@
+{
+ "id": "moonshine",
+ "name": "私酿",
+ "severity": 2,
+ "weeks": 10,
+ "target": "brewer",
+ "roles": {
+  "brewer": {
+   "occupation": [
+    "farmer",
+    "veteran"
+   ]
+  },
+  "buyer": {
+   "occupation": [
+    "barkeep"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "smell",
+   "subject": "brewer",
+   "text": "{brewer}家谷仓后面一直有股酒糟味",
+   "secrecy": "semi",
+   "known_by": [
+    "brewer",
+    "family:brewer",
+    "random:1"
+   ]
+  },
+  {
+   "key": "buy",
+   "subject": "buyer",
+   "text": "酒馆卖的散酒有一半是从{brewer}那进的，没交税",
+   "secrecy": "secret",
+   "known_by": [
+    "buyer",
+    "brewer"
+   ]
+  },
+  {
+   "key": "wagon",
+   "subject": "brewer",
+   "text": "{brewer}半夜赶车穿过树林，车上盖着油布",
+   "secrecy": "secret",
+   "witness": "woods",
+   "known_by": [
+    "brewer"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "brewer",
+   "text": "{brewer}的酒喝瞎过人",
+   "truth": 0.1,
+   "known_by": [
+    "enemies:brewer"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "树林里夜有车声，有人睡不安稳"
+  ],
+  "neutral": [
+   "{brewer}被指私酿售卖，酒馆散酒来源存疑"
+  ],
+  "hot": [
+   "{brewer}私酒流进酒馆！你喝的每一口都没交税"
+  ]
+ },
+ "detail": "油布下的酒糟味",
+ "driven_by": [
+  "money"
+ ]
+}

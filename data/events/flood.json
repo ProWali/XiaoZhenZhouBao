@@ -1,0 +1,43 @@
+{
+ "id": "flood",
+ "name": "春汛",
+ "severity": 0,
+ "soft": true,
+ "weeks": 2,
+ "target": "farmer",
+ "season": [
+  1
+ ],
+ "roles": {
+  "farmer": {
+   "occupation": [
+    "farmer",
+    "fisher"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "flood",
+   "subject": "farmer",
+   "text": "春汛漫过桥头，{farmer}家的地淹了一半",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "春汛漫桥，河湾地淹"
+  ],
+  "neutral": [
+   "春汛漫过桥头，{farmer}家受灾"
+  ],
+  "hot": [
+   "灰河发怒！桥头被淹，谁来修"
+  ]
+ },
+ "detail": "桥头的水位线",
+ "cooldown": 6
+}

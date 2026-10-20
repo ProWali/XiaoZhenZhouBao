@@ -1,0 +1,38 @@
+{
+ "id": "resign",
+ "name": "辞职",
+ "severity": 0,
+ "soft": true,
+ "manual": true,
+ "cooldown": 0,
+ "weeks": 1,
+ "target": "official",
+ "roles": {
+  "official": {}
+ },
+ "fragments": [
+  {
+   "key": "resign",
+   "subject": "official",
+   "text": "{official}辞去了职务，说是身体原因",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "{official}辞职"
+  ],
+  "neutral": [
+   "{official}以身体为由辞去职务"
+  ],
+  "hot": [
+   "{official}下台了！"
+  ]
+ },
+ "effects": {
+  "job": "retired"
+ }
+}

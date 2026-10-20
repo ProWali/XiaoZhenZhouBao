@@ -1,0 +1,39 @@
+{
+ "id": "train",
+ "name": "火车晚点",
+ "severity": 0,
+ "soft": true,
+ "weeks": 1,
+ "target": "master",
+ "roles": {
+  "master": {
+   "occupation": [
+    "stationmaster"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "late",
+   "subject": "master",
+   "text": "南来的火车连着三天晚点，{master}说是上游桥在修",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "南线火车连日晚点"
+  ],
+  "neutral": [
+   "南线火车连日晚点，站长称上游修桥"
+  ],
+  "hot": [
+   "火车又晚了！邮件和盐都在路上"
+  ]
+ },
+ "detail": "站台上没人领的包裹",
+ "cooldown": 10
+}

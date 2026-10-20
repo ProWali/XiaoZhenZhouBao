@@ -1,0 +1,564 @@
+<title>小镇周报</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Noto+Serif+SC:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* 版式概念：一张对开报纸。顶部报头，正文按「版」分节，栏间用细铅线，所有强调只用一枚红色胶章。 */
+:root{
+  --paper:#EDEBE4;        /* 新闻纸，偏冷灰 */
+  --paper-2:#E2DFD6;      /* 纸张折痕 / 表头 */
+  --ink:#1D1C1A;          /* 油墨 */
+  --ink-2:#55524C;        /* 淡墨 */
+  --rule:#B9B5AA;         /* 铅线 */
+  --stamp:#A3302B;        /* 「急件」胶章红 */
+  --stamp-ink:#FFFFFF;
+  --tint:#D7DBD3;         /* 校样铅笔灰绿 */
+  --f-display:'ZCOOL XiaoWei','Noto Serif SC','Songti SC',serif;
+  --f-body:'Noto Serif SC','Songti SC','SimSun',serif;
+  --f-mono:'IBM Plex Mono','Consolas',monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#1F1E1B; --paper-2:#2A2926; --ink:#E6E2D8; --ink-2:#A7A299;
+    --rule:#4A4843; --stamp:#C9524B; --stamp-ink:#1F1E1B; --tint:#2F342E;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#1F1E1B; --paper-2:#2A2926; --ink:#E6E2D8; --ink-2:#A7A299;
+  --rule:#4A4843; --stamp:#C9524B; --stamp-ink:#1F1E1B; --tint:#2F342E;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--f-body); font-size:16px; line-height:1.8;
+  padding-block:0 64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+.sheet{max-width:1080px;margin:0 auto}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:400;line-height:1.25;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:inherit}
+.k{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+
+/* 报头 */
+.masthead{border-top:4px solid var(--ink);border-bottom:1px solid var(--ink);padding-block:18px 14px;margin-top:24px}
+.masthead .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 24px;font-family:var(--f-mono);font-size:12px;color:var(--ink-2)}
+.masthead h1{font-size:clamp(44px,8vw,84px);text-align:center;letter-spacing:.12em;margin-block:14px 8px}
+.masthead .sub{text-align:center;font-size:15px;color:var(--ink-2)}
+.masthead .rule2{border-top:1px solid var(--ink);border-bottom:3px double var(--ink);height:6px;margin-top:12px}
+
+/* 要点条 */
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-bottom:1px solid var(--rule);margin-bottom:8px}
+.facts div{padding:12px 12px 12px 0;border-right:1px solid var(--rule);margin-right:12px}
+.facts div:last-child{border-right:0}
+.facts b{display:block;font-family:var(--f-display);font-size:19px;font-weight:400;margin-top:2px}
+
+/* 版 */
+.ban{padding-block:40px 8px;border-bottom:1px solid var(--rule)}
+.ban-head{display:flex;align-items:baseline;gap:16px;border-bottom:3px double var(--ink);padding-bottom:6px;margin-bottom:22px}
+.ban-head .k{white-space:nowrap}
+.ban h2{font-size:30px}
+.ban h3{font-size:21px;margin-block:26px 10px;border-left:3px solid var(--ink);padding-left:10px}
+.ban h4{font-family:var(--f-body);font-weight:700;font-size:16px;margin-block:14px 4px}
+.cols{columns:2;column-gap:36px;column-rule:1px solid var(--rule)}
+.cols>*{break-inside:avoid}
+.cols p,.lead p{margin-bottom:12px;max-width:40em}
+@media (max-width:760px){.cols{columns:1}}
+.lead{font-size:18px;line-height:1.75;max-width:36em}
+.lead p:first-child::first-letter{font-family:var(--f-display);font-size:3.2em;float:left;line-height:.85;padding:4px 8px 0 0}
+ul,ol{margin:0 0 12px;padding-left:1.4em}
+li{margin-bottom:4px}
+li::marker{color:var(--ink-2)}
+
+/* 胶章 */
+.stamp{display:inline-block;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;color:var(--stamp);border:1.5px solid var(--stamp);padding:1px 7px;transform:rotate(-2deg);vertical-align:middle;border-radius:2px}
+.stamp.fill{background:var(--stamp);color:var(--stamp-ink)}
+
+/* 表格 */
+.tbl{overflow-x:auto;margin-block:10px 18px}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.55}
+th{text-align:left;font-family:var(--f-mono);font-weight:500;font-size:12px;letter-spacing:.06em;color:var(--ink-2);background:var(--paper-2);padding:8px 10px;border-bottom:1px solid var(--ink)}
+td{padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+td.n,th.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* 循环图 */
+.loop{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;border:1px solid var(--ink);margin-block:12px 20px}
+.loop>div{padding:14px 14px 16px;border-right:1px solid var(--rule);position:relative}
+.loop>div:last-child{border-right:0}
+.loop .k{display:block;margin-bottom:6px}
+.loop b{font-family:var(--f-display);font-weight:400;font-size:20px;display:block;margin-bottom:6px}
+.loop p{font-size:14px;line-height:1.6;color:var(--ink-2)}
+@media (max-width:760px){.loop>div{border-right:0;border-bottom:1px solid var(--rule)}.loop>div:last-child{border-bottom:0}}
+
+/* 校样框：示例文本 */
+.proof{background:var(--tint);border:1px solid var(--rule);padding:16px 18px;margin-block:10px 18px;font-size:14.5px;line-height:1.7}
+.proof .hl{font-family:var(--f-display);font-size:22px;line-height:1.3;display:block;margin-bottom:6px}
+.proof .by{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);display:block;margin-bottom:8px;letter-spacing:.06em}
+.proof.wide{columns:2;column-gap:28px;column-rule:1px solid var(--rule)}
+@media (max-width:760px){.proof.wide{columns:1}}
+.proof.wide>*{break-inside:avoid}
+pre{font-family:var(--f-mono);font-size:13px;line-height:1.55;background:var(--paper-2);border:1px solid var(--rule);padding:12px 14px;overflow-x:auto;margin-block:8px 16px}
+code{font-family:var(--f-mono);font-size:.92em}
+
+/* 氛围图 */
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:26px 28px;margin-block:12px 24px}
+@media (max-width:760px){.gallery{grid-template-columns:1fr}}
+figure{margin:0}
+figure img{width:100%;max-width:100%;aspect-ratio:16/9;object-fit:cover;display:block;border:1px solid var(--ink);background:var(--paper-2)}
+figcaption{font-size:14px;line-height:1.6;margin-top:8px}
+figcaption .k{display:block;margin-bottom:2px}
+figcaption .q{color:var(--ink-2);display:block;margin-top:4px}
+
+/* 审查单 */
+.review li{margin-bottom:10px}
+.review li b{font-weight:700}
+.foot{margin-top:40px;border-top:3px double var(--ink);padding-top:12px;font-family:var(--f-mono);font-size:12px;color:var(--ink-2);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+:focus-visible{outline:2px solid var(--stamp);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="sheet">
+
+<header class="masthead">
+  <div class="row"><span>游戏策划案 · 第二稿</span><span>1935 年 · 灰河镇</span><span>2026-10-19 · 决策已定稿，进入 M1</span></div>
+  <h1>小镇周报</h1>
+  <p class="sub">一款系统驱动的叙事模拟游戏 · 你是一座程序生成小镇上唯一一份报纸的主编</p>
+  <div class="rule2"></div>
+</header>
+
+<div class="facts">
+  <div><span class="k">类型</span><b>叙事模拟 / 策略</b></div>
+  <div><span class="k">平台</span><b>Steam · Win / Mac / Linux · Deck</b></div>
+  <div><span class="k">引擎</span><b>Godot 4.7 · GDScript</b></div>
+  <div><span class="k">画面</span><b>16 色像素 · 640×360</b></div>
+  <div><span class="k">定价</span><b>¥58 / $12.99</b></div>
+  <div><span class="k">单局时长</span><b>两年 104 周 · 8 到 12 小时</b></div>
+</div>
+
+<!-- ============ 头版 ============ -->
+<section class="ban" id="b1">
+  <div class="ban-head"><span class="k">头版</span><h2>这是个什么游戏</h2></div>
+  <div class="lead">
+    <p>灰河镇有六十来个人，一家锯木厂，一座教堂，一条冬天会结冰的河，和一份只有你一个人在办的报纸。镇上每个人都有自己的日程、债务、旧情和不想被人知道的事，世界在后台自己转。你每周出门采访六天，周日排版印报。你登出来的每一个字，都会反过来改变这座镇子。</p>
+    <p>没有预写的主线。故事全部从模拟里长出来：一局你揭发了锯木厂往河里排污，三周后报社被人烧了；另一局你为了订阅量编了一条绯闻，第二年发现那条假新闻变成了真的。</p>
+  </div>
+
+  <h3>设计支柱</h3>
+  <div class="cols">
+    <h4>一、报纸既是玩法也是界面</h4>
+    <p>玩家所有的操作最终都落到一张可以读的报纸上。没有抽象的技能树和数值面板，公信力、发行量、镇民态度全部通过读者来信、广告位、退订单这些「纸上的东西」反映。后台的模拟再复杂，玩家看到的永远是铅字。</p>
+    <h4>二、说出来的话收不回</h4>
+    <p>每条报道都是不可撤销的公开行为。游戏不提供撤回、不提供读档改稿（铁人模式默认开启，可关）。玩家的核心张力来自「我知道这件事，但要不要印」。</p>
+    <h4>三、镇民不是任务发布器</h4>
+    <p>每个居民是一组需求、关系和秘密，而不是一组对话选项。他们会在玩家不在场时互相影响，会因为报纸改变行为，也会主动找上门来：送线索、求你别登、威胁、登广告、或者什么都不说只是退订。</p>
+    <h4>四、生成的文本必须像人写的</h4>
+    <p>这是本项目最大的技术赌注。程序生成的标题、正文、读者来信如果读起来像填空题，游戏就垮了。文本生成系统的优先级高于所有画面表现。</p>
+  </div>
+
+  <h3>目标玩家与参照</h3>
+  <div class="cols">
+    <p>核心受众是玩过《Papers, Please》《Return of the Obra Dinn》《Shadows of Doubt》《RimWorld》《Wildermyth》《Citizen Sleeper》并愿意读字的人。他们接受低保真画面，追求系统深度和能讲出来的个人故事。年龄 22 到 40，Steam 标签：模拟、叙事、程序生成、独立、调查。</p>
+    <div class="tbl"><table>
+      <tr><th>参照</th><th>借什么</th><th>不借什么</th></tr>
+      <tr><td>Papers, Please</td><td>用一份文书承载道德压力；每日结算的节奏</td><td>固定剧本、固定结局</td></tr>
+      <tr><td>Dwarf Fortress / RimWorld</td><td>关系网和需求驱动的涌现事件</td><td>战斗、建造、资源管理</td></tr>
+      <tr><td>Shadows of Doubt</td><td>完整模拟的居民日程和证据追踪</td><td>第一人称 3D、硬核潜行</td></tr>
+      <tr><td>Wildermyth</td><td>把生成事件写成有味道的文本</td><td>战棋战斗</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============ 二版 ============ -->
+<section class="ban" id="b2">
+  <div class="ban-head"><span class="k">二版</span><h2>世界：灰河镇</h2></div>
+  <div class="cols">
+    <p>架空的 1935 年，一座内陆河畔小镇，国别故意模糊，人名和地名用生成器拼出「听起来像哪里都有」的味道。没有电话普及，消息靠电报、邮差和嘴。这个年代选得很实际：信息传播慢，一份周报真的能左右一座镇，而且不需要处理互联网和手机。</p>
+    <p>镇子每局重新生成，但骨架固定：一条主街、一条河、一座桥。生成器决定的是哪些建筑存在、谁住在哪、谁欠谁钱、谁和谁有过去。</p>
+    <h4>固定地点（每局 14 到 18 处）</h4>
+    <div class="tbl"><table>
+      <tr><th>地点</th><th>在模拟里的作用</th></tr>
+      <tr><td>报社（你家）</td><td>排版、收信、接待来访者，可被纵火</td></tr>
+      <tr><td>锯木厂 / 磨坊（二选一）</td><td>最大雇主，污染源，最大广告主</td></tr>
+      <tr><td>教堂</td><td>周日集会，流言集散地，道德压力来源</td></tr>
+      <tr><td>酒馆</td><td>夜间偷听效率最高，醉话可信度低</td></tr>
+      <tr><td>杂货店 / 邮局</td><td>债务和包裹记录，可查档案</td></tr>
+      <tr><td>镇公所</td><td>地契、税单、选举登记，需要关系才进得去</td></tr>
+      <tr><td>医生诊所</td><td>病历是最高价值秘密，职业伦理阻碍</td></tr>
+      <tr><td>火车站 / 码头</td><td>外来者进出，新居民和离镇者的通道</td></tr>
+      <tr><td>民居 × 8 到 12</td><td>采访、偷窥窗户、翻垃圾</td></tr>
+      <tr><td>河、桥、树林</td><td>户外事件发生地：失踪、幽会、倾倒</td></tr>
+    </table></div>
+    <h4>居民（每局 50 到 70 人）</h4>
+    <p>每人由职业原型、三条性格特征、一组家庭关系和零到三个秘密组成。职业原型 24 种（镇长、牧师、厂主、工头、工人、医生、教师、店主、邮差、警长、寡妇、农户、流浪汉、新来的……），性格特征 36 种，秘密类型 40 种。秘密有「严重度」和「牵连者」，一个秘密可以同时属于两个人，这是故事交叉的主要来源。</p>
+    <p>居民有年龄，会结婚、生子、生病、死亡、离镇。一局跑完两年，镇子的人口结构会明显变样。</p>
+  </div>
+</section>
+
+<!-- ============ 三版 ============ -->
+<section class="ban" id="b3">
+  <div class="ban-head"><span class="k">三版</span><h2>核心循环：一周</h2></div>
+  <div class="loop">
+    <div><span class="k">周一至周六</span><b>采访</b><p>每天上午、下午两个行动点，共 12 个。晚上可以「熬夜」，一周最多两次，只能偷听或蹲守。去地点、找人谈、翻档案、偷听、读匿名信。每个行动产出「事实碎片」。</p></div>
+    <div><span class="k">周六夜</span><b>来访</b><p>镇民主动上门：求情、威胁、送料、登广告。这是模拟在向玩家施压的时刻，不可跳过。</p></div>
+    <div><span class="k">周日</span><b>排版</b><p>把碎片拼成报道，选版位、定语气、决定点名还是匿名、配不配图。预览生成的标题和正文，拍板付印。</p></div>
+    <div><span class="k">周日夜</span><b>结算</b><p>报纸传播，每个居民读到与自己相关的内容后做出反应。公信力、发行量、现金和关系网更新。新一周的事件从后果里长出来。</p></div>
+  </div>
+
+  <div class="cols">
+    <h3>采访阶段</h3>
+    <p>玩家在镇子的俯视像素地图上走动，进入地点，选择在场的人交谈。交谈不是对话树，而是「问什么人、关于什么」的两级选择：先选对象，再从你已知的事实碎片里挑一条当话头。对方根据关系、性格、自己是否牵连其中，决定说真话、说谎、含糊、拒谈或者反过来打探你。</p>
+    <p>六种取料方式各有代价：</p>
+    <div class="tbl"><table>
+      <tr><th>方式</th><th>产出</th><th>代价</th></tr>
+      <tr><td>正面采访</td><td>可信度中，可引用，署名</td><td>对方知道你在查</td></tr>
+      <tr><td>酒馆偷听</td><td>量大，可信度低</td><td>只能晚上，可能听到假的</td></tr>
+      <tr><td>查档案</td><td>可信度高，硬证据</td><td>需要关系或贿赂才能进</td></tr>
+      <tr><td>线人</td><td>定向、准</td><td>按次付钱，可能被收买反咬</td></tr>
+      <tr><td>匿名信</td><td>免费、偶发</td><td>来源不明，可能是陷阱</td></tr>
+      <tr><td>亲眼所见</td><td>可信度最高</td><td>要在对的时间出现在对的地方</td></tr>
+    </table></div>
+
+    <h3>排版阶段</h3>
+    <p>一期报纸四个版位：头条、二条、三条、小栏（告示 / 讣告 / 天气 / 广告）。每条报道由玩家从事实碎片里挑 1 到 4 条组合，然后做四个决定：</p>
+    <ol>
+      <li><b>版位</b>：决定曝光度倍率，头条 ×3，二条 ×2，三条 ×1，小栏 ×0.3。</li>
+      <li><b>语气</b>：克制 / 中立 / 煽动。煽动卖得多，但公信力随证据不足而掉得快。</li>
+      <li><b>署名方式</b>：点名、化名（「某厂主」）、完全匿名。点名伤害最大，也最容易招报复；化名镇上人也猜得到，但当事人拿你没办法。</li>
+      <li><b>证据展示</b>：是否附上档案影印。附了公信力涨，但档案来源可能因此暴露。</li>
+    </ol>
+    <p>玩家不手写文字。文本引擎根据这四个决定和碎片内容生成标题、导语和正文，玩家可以在三个候选标题里选一个，或者让引擎重写。这保证了文本质量下限，也保证玩家决策落在「登什么、怎么登」而不是「怎么措辞」上。</p>
+
+    <h3>结算阶段</h3>
+    <p>报纸发行后，每个居民按「阅读概率」（取决于识字、订阅、社交圈）读到报道。与自己有关的人根据牵连程度、性格和对你的态度，从反应表里抽一个动作，次周生效。</p>
+    <div class="tbl"><table>
+      <tr><th>被曝光者性格 →</th><th>怯懦</th><th>务实</th><th>暴躁</th><th>有权势</th></tr>
+      <tr><td>轻度曝光</td><td>回避你</td><td>登门解释</td><td>酒馆骂你</td><td>撤广告</td></tr>
+      <tr><td>中度曝光</td><td>离镇</td><td>私下交易</td><td>砸窗</td><td>施压广告主退订</td></tr>
+      <tr><td>重度点名</td><td>自杀倾向（见伦理条）</td><td>反向爆料对手</td><td>纵火</td><td>起诉、动用警长</td></tr>
+    </table></div>
+    <p>被夸的人同理：感激会变成线索、广告、保护。镇子整体也有反应：公信力高时陌生人主动送料，低时连订户都在酒馆笑你。</p>
+  </div>
+</section>
+
+<!-- ============ 四版 ============ -->
+<section class="ban" id="b4">
+  <div class="ban-head"><span class="k">四版</span><h2>系统设计</h2></div>
+  <div class="cols">
+    <h3>居民模拟</h3>
+    <p>每个居民每天按日程表在地点之间移动，日程由职业决定基础，由需求和事件临时改写。需求五项：钱、安全、名声、归属、欲望。需求长期得不到满足就会触发「铤而走险」类事件：偷窃、出轨、酗酒、告密。这是秘密的来源，也是新事件的来源。</p>
+    <p>关系是有向边，四个维度：好感、信任、恐惧、亏欠。报纸直接改写这些边。两个居民之间的关系变化会沿着社交圈传播（朋友的朋友受影响打三折）。</p>
+    <p>模拟每天跑一次全局 tick，六十个人的日程和关系更新在毫秒级完成，不需要实时。玩家在地图上走动时，看到的居民位置来自当前时段的日程快照。</p>
+
+    <h3>事实碎片</h3>
+    <p>碎片是游戏的货币，结构固定：</p>
+<pre>fact {
+  subject:   居民 / 地点 / 组织
+  predicate: 做了 / 欠 / 见过 / 患有 / 拥有 …
+  object:    居民 / 物 / 金额 / 时间
+  when:      第 N 周 第 M 天
+  source:    谁告诉你的 / 哪份档案
+  truth:     0.0 – 1.0（玩家看不到，只看信源可信度）
+  secrecy:   公开 / 半公开 / 秘密
+}</pre>
+    <p>关键设计：玩家看不到 truth，只看到信源。同一件事从三个来源听到才算「交叉验证」。印了没验证的假事实，公信力按 truth 的差值扣。这让「要不要再查一周」成为真实的权衡。</p>
+
+    <h3>公信力、发行量、现金</h3>
+    <p>三条主数值，互相拉扯：</p>
+    <ul>
+      <li><b>公信力</b>（0 到 100）：印真事、附证据涨，印假事、煽动过度掉。决定档案能不能查、线人敢不敢来、镇民信不信你。</li>
+      <li><b>发行量</b>（份）：决定收入和影响力倍率。煽动和点名短期涨，公信力低时长期掉。</li>
+      <li><b>现金</b>：订阅 + 广告 − 纸张油墨 − 线人 − 赔偿。广告主有自己的诉求，接了锯木厂的广告再写它排污，它会撤广告并煽动工人退订。</li>
+    </ul>
+
+    <h3>文本引擎</h3>
+    <p>不用大语言模型做运行时生成（离线、确定性、可审核）。采用三层结构：</p>
+    <ol>
+      <li><b>事件模板层</b>：每种事件有 3 到 8 个模板，带语气变体，共约 300 个事件 × 平均 5 = 1500 条。</li>
+      <li><b>语法层</b>：基于追踪式语法（Tracery 类），槽位按居民性别、职业、关系称谓、季节填充，保证称呼和代词一致。</li>
+      <li><b>润色层</b>：规则集处理中文的量词、的地得、句长节奏，避免「某某做了某事」的机械句。</li>
+    </ol>
+    <p>全部文本由我在开发阶段写好并通过工具批量审读，运行时只做组合。这意味着文本上限取决于我写多少，下限由规则保证。</p>
+
+    <h3>一局的时间与终局</h3>
+    <p>一局默认两年，104 周；新局可选一年短局（与 Demo 等长），通关一次后解锁三年长局。可能的结束方式：</p>
+    <ul>
+      <li>破产：连续四周现金为负。</li>
+      <li>报社被毁且无钱重建。</li>
+      <li>被起诉败诉，报纸停刊。</li>
+      <li>最后一年秋天的镇长选举结束（无论谁当选）。</li>
+      <li>玩家主动选择「登上火车离开」。</li>
+    </ul>
+    <p>终局时游戏生成一份「年度回顾」特刊：把这一局所有头条按时间排版成一张长报纸，附上镇民名单的变动（谁来了、谁走了、谁死了、谁当了镇长），可导出为图片分享。这就是游戏的「结局画面」，也是传播物料。</p>
+  </div>
+
+  <h3>两段示例局</h3>
+  <div class="proof wide">
+    <div>
+      <span class="by">示例局 A · 第 11 周</span>
+      <span class="hl">锯木厂夜间向灰河排放废液，下游三户井水变味</span>
+      <p>第 6 周在酒馆听到工人抱怨河水味道，第 8 周查邮局记录发现厂主订购了大量石灰，第 10 周夜里亲眼看到排放。三条交叉验证后头条点名。结算：公信力 +18，厂主撤广告、施压杂货店退订；工头来访说厂主要「找人谈谈」；第 13 周报社后窗被砸。第 20 周镇公所来人：州里派了检查员。厂主在第 31 周离镇，锯木厂换了东家，四十个工人里一半失业，发行量掉了三成。</p>
+    </div>
+    <div>
+      <span class="by">示例局 B · 第 47 周</span>
+      <span class="hl">教师与某位已婚人士深夜同行，见者不止一人</span>
+      <p>现金告急，只有一条来源不明的匿名信。玩家选了化名 + 煽动语气，头条。发行量 +40%，公信力 −9。实际 truth 为 0.2，匿名信是教师的前房东为了逼她搬走编的。结算后教师被教堂圈子孤立，第 52 周搬去了镇外农场。第 70 周，她真的和那位已婚人士在一起了，对方妻子登门哭诉是你的报纸「把他们推到一块的」。第 88 周，前房东作为线人主动找上门，玩家此时已知道当初那封信是谁写的。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 五版 ============ -->
+<section class="ban" id="b5">
+  <div class="ban-head"><span class="k">五版</span><h2>内容量与数据</h2></div>
+  <div class="cols">
+    <div class="tbl"><table>
+      <tr><th>内容类型</th><th class="n">目标数量</th><th>说明</th></tr>
+      <tr><td>事件模板</td><td class="n">300</td><td>按严重度分三档，每档配 3 到 8 个文本变体</td></tr>
+      <tr><td>秘密类型</td><td class="n">40</td><td>债务、情感、违法、健康、身份、过去</td></tr>
+      <tr><td>职业原型</td><td class="n">24</td><td>各自带日程骨架和需求权重</td></tr>
+      <tr><td>性格特征</td><td class="n">36</td><td>决定反应表抽取权重</td></tr>
+      <tr><td>地点类型</td><td class="n">18</td><td>含室内像素场景</td></tr>
+      <tr><td>读者来信模板</td><td class="n">120</td><td>结算后随机 2 到 4 封，是玩家读「镇民态度」的主要窗口</td></tr>
+      <tr><td>广告模板</td><td class="n">60</td><td>兼作世界观填充</td></tr>
+      <tr><td>来访对话</td><td class="n">80</td><td>周六夜来访者用</td></tr>
+      <tr><td>居民头像</td><td class="n">组合式</td><td>脸型 × 发型 × 衣着 × 年龄，像素拼接</td></tr>
+      <tr><td>文本总量（中文）</td><td class="n">约 25 万字</td><td>全部需要双语，英文另计</td></tr>
+    </table></div>
+    <p>所有数据走 JSON，事件模板用带条件的 DSL 写，编辑器内可以热重载。设计目标是让我一天能写 15 到 20 个事件模板并跑完自动测试（模板在 200 个随机种子里都能触发、文本无称谓错误）。</p>
+    <h4>季节与年度事件</h4>
+    <p>四季影响日程和事件池：春汛、夏季集市、秋收、冬天封河。固定年度节点只有两个：每年秋天的镇议会预算和最后一年的镇长选举。其他一切涌现。</p>
+  </div>
+</section>
+
+<!-- ============ 六版 ============ -->
+<section class="ban" id="b6">
+  <div class="ban-head"><span class="k">六版</span><h2>表现：画面、氛围、声音</h2></div>
+  <div class="cols">
+    <p>原生分辨率 640×360，整数倍放大到 1080p 和 1440p。全局 16 色调色板，色相限定在赭石、石板蓝、砖红、瓶绿、米白五个方向，让一切看起来像油墨印在旧纸上。地图是 3/4 俯视像素，室内是单屏固定镜头。</p>
+    <p>报纸界面不是像素风，而是真实比例的打字机排版：等宽字体、铅线、双线、胶章。这是刻意的材质对比，让「纸」在游戏里显得比「镇子」更真实。</p>
+    <h4>声音</h4>
+    <ul>
+      <li>配乐：一架略微走调的立式钢琴，六到八首短曲按季节和公信力高低切换，不循环，弹完就安静。</li>
+      <li>音效以打字机、印刷机、邮件投递口、木地板为主，全程没有语音。</li>
+      <li>结算时的印刷机声是整个游戏最响的声音，之后是长时间的安静，然后是信件投进门缝的声音。</li>
+    </ul>
+  </div>
+
+  <h3>氛围图 <span class="stamp">待审</span></h3>
+  <p style="max-width:40em;margin-bottom:6px">四张用来定调子的概念图，不是最终像素画面。审查重点是色彩、年代感和情绪，不是细节正确性。每张下面标了我自己看完后的疑问。</p>
+  <div class="gallery">
+    <figure>
+      <img src="img/town.jpg" alt="黄昏时分的灰河镇全景，前景是报社亮着灯的窗">
+      <figcaption><span class="k">氛围图 01 · 灰河镇全景</span>黄昏，主街、教堂、桥、锯木厂冒烟，前景是亮着一盏灯的报社。这是主菜单和每周开场的镜头基准。<span class="q">结论：镇子偏大。像素地图按 14 到 18 处地点重画，主街一屏走完，这张图只用于主菜单远景。</span></figcaption>
+    </figure>
+    <figure>
+      <img src="img/newsroom.jpg" alt="夜晚的报社编辑室，打字机、台灯和钉满线索的软木板">
+      <figcaption><span class="k">氛围图 02 · 编辑室</span>玩家「家」的基准。打字机、台灯、线索板。线索板会做成真实的游戏界面，红线连接的就是事实碎片之间的关系。<span class="q">结论：红线板废弃，改为「选题簿」。见九版决策 4。墙上钉的是上一期报纸和广告主的催款单。</span></figcaption>
+    </figure>
+    <figure>
+      <img src="img/press.jpg" alt="印刷夜，铁制印刷机、铅字盘和刚印好的报纸">
+      <figcaption><span class="k">氛围图 03 · 周日印刷夜</span>结算阶段的镜头基准。付印是不可撤销的那一刻，画面要有仪式感和压迫感。<span class="q">结论：不露玩家形象。付印只有一个拉杆和印刷机的声音。</span></figcaption>
+    </figure>
+    <figure>
+      <img src="img/crowd.jpg" alt="从报社窗内看出去，夜里提着灯笼聚在街上的镇民">
+      <figcaption><span class="k">氛围图 04 · 后果</span>重度曝光后的一种结算画面：镇民聚在报社门口。情绪要「不确定」，不是暴乱，是你不知道他们来干什么。<span class="q">结论：不做过场。编辑室固定画面叠 12 层可变元素（碎窗、门缝下的信、窗外人影、撤空的广告栏），其余交给声音。见九版决策 5。</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 七版 ============ -->
+<section class="ban" id="b7">
+  <div class="ban-head"><span class="k">七版</span><h2>技术与生产</h2></div>
+  <div class="cols">
+    <h4>技术选型</h4>
+    <ul>
+      <li>Godot 4.7，全部 GDScript，不引入 C#。确定性靠每个子系统各自持有带种子的随机数发生器，批量测试用无头模式跑脚本。放弃 C# 是因为单人项目里多一条工具链不值得，GDScript 的速度对「每天一次、六十人」的 tick 绰绰有余。</li>
+      <li>模拟与表现严格分层：模拟层是纯数据、可无头运行，同一个种子永远跑出同一座镇。这是能自动测试和复现玩家 bug 的前提。</li>
+      <li>文本引擎独立成库，带命令行工具，可以不开游戏批量生成一万条标题做质量抽检。</li>
+      <li>存档即种子 + 玩家操作日志，回放式存档，文件极小。</li>
+    </ul>
+    <h4>里程碑</h4>
+    <div class="tbl"><table>
+      <tr><th>阶段</th><th>验证目标</th><th>完成标准</th></tr>
+      <tr><td>M1 纸上原型</td><td>一周循环好不好玩</td><td>无画面，纯文本终端版，自己连跑 10 局不腻</td></tr>
+      <tr><td>M2 模拟核心</td><td>镇子自己能生出故事</td><td>无玩家干预跑 104 周，人工阅读事件日志，每局至少有 3 条能复述的故事线</td></tr>
+      <tr><td>M3 文本引擎</td><td>生成的报道像人写的</td><td>盲测：混入 20% 手写报道，读者分不出</td></tr>
+      <tr><td>M4 垂直切片</td><td>完整表现的第 1 到 4 周</td><td>可发给外部试玩，收集「看不懂模拟」的反馈</td></tr>
+      <tr><td>M5 内容填充</td><td>达到内容量表的数字</td><td>300 事件、120 来信全部入库并通过自动测试</td></tr>
+      <tr><td>M6 Demo</td><td>Steam 新品节</td><td>第 1 年完整可玩，留存和愿望单数据</td></tr>
+      <tr><td>M7 发售</td><td>两年完整局 + 英文版</td><td>两种语言、成就、云存档、年度回顾导出、Deck 验证</td></tr>
+    </table></div>
+    <p>顺序刻意把文本引擎放在画面之前。如果 M3 盲测过不了，这个项目就该停，不该靠美术把它救回来。</p>
+  </div>
+</section>
+
+<!-- ============ 八版 ============ -->
+<section class="ban" id="b8">
+  <div class="ban-head"><span class="k">八版</span><h2>风险与伦理边界</h2></div>
+  <div class="cols">
+    <h4>最大风险：模拟做得越深，玩家越看不见</h4>
+    <p>后台六十个人的关系网玩家永远不会直接看到。对策有三条：读者来信作为「镇民态度」的固定窗口；周六夜来访作为模拟向玩家的主动输出；选题簿里每个人的页面上列出你已知的他和谁有关系。如果 M4 试玩反馈仍然是「不知道我的报道有没有影响」，就加一个每周「镇上在说什么」的小栏，由模拟直接生成三句流言。</p>
+    <h4>生成文本乏味</h4>
+    <p>对策写在三版和四版。补充一条：每个事件模板写作时强制带一个「只有这件事才有的细节」（石灰的气味、冬天井绳上的冰），禁止通用句。</p>
+    <h4>内容伦理 <span class="stamp">已定</span></h4>
+    <p>模拟会自然产出自杀、家暴、种族偏见这类后果。原则：这些可以作为后果存在，让玩家为报道负责；但不做成可被玩家「利用」的手段，不展示过程，只用讣告、来信、空出来的座位表现。自杀作为反应表的一项默认关闭，设置里可开启并有明确提示。种族相关内容不做，年代感用阶级和宗教差异表达。</p>
+    <h4>双语成本</h4>
+    <p>25 万字中文模板不能直接翻译，英文版的语法层要重写。计划在 M3 同时建两套语法层，之后所有模板双语并行写，避免发售前集中翻译。</p>
+    <h4>被当成「假新闻模拟器」</h4>
+    <p>游戏确实允许玩家编造。但设计上编造总是短期得利、长期代价，并且示例局 B 那样的后果会写进年度回顾。商店页面要诚实说明这是一款关于「说出来的话收不回」的游戏，不是教人造谣的游戏。</p>
+  </div>
+</section>
+
+<!-- ============ 九版 ============ -->
+<section class="ban" id="b9">
+  <div class="ban-head"><span class="k">九版</span><h2>商业与决策记录</h2></div>
+  <div class="cols">
+    <h4>商业</h4>
+    <ul>
+      <li>定价 ¥58 / $12.99，首发九折。单人开发、低保真画面，这个价位买家不会用 3A 标准审视。</li>
+      <li>Steam 新品节放 Demo，Demo 包含完整第一年，终局生成「一年回顾」可分享图。回顾图就是病毒传播物料。</li>
+      <li>发售前愿望单目标 2 万，这是独立叙事模拟类在 Steam 首周能进「热门新品」的经验线。</li>
+      <li>不做 DLC 规划，更新以新事件包为主，免费。</li>
+    </ul>
+    <h4>决策记录 <span class="stamp fill">已拍板</span></h4>
+    <p>第一稿留了七个问题给审查人。本项目由我独立完成，没有审查人，以下是我的决定和理由。之后若改，在这里追加一行，不改原文。</p>
+    <ol class="review">
+      <li><b>行动点定为 12。</b>每天上午、下午各一次。晚上是可选的「熬夜」，一周最多两次，只能做酒馆偷听或蹲守两件事；第三次熬夜让次日上午作废。12 点逼玩家取舍，熬夜给「我就差这一条」留一个出口。第一周的焦虑由首周引导吃掉（见十版）。</li>
+      <li><b>不开放手写。</b>三个候选标题选一个，或让引擎重写一次。另外开放一个槽位：当事人的称呼可以在「真名 / 化名 / 职业」里改，这和署名方式决定是同一件事。「报纸不是我写的」这个顾虑用署名解决：每期报纸右下角印玩家起的报名和主编名。</li>
+      <li><b>铁人默认开。</b>新局设置里可关，关掉只影响一个成就「一字未改」，不影响年度回顾导出。</li>
+      <li><b>线索板废弃，改为「选题簿」。</b>一本可翻页的笔记本，每个居民一页，页上列已知碎片和已知关系；同一件事从不同来源听到就在旁边多盖一枚印章，三枚即交叉验证。没有红线，没有图钉，符合「一切在纸上」的支柱。</li>
+      <li><b>不做后果过场。</b>编辑室只有一张固定画面，叠 12 层可变元素：碎窗、木板封窗、门缝下的信、窗外人影一到三个、撤空的广告栏、桌上的传票、冬天的霜。重度后果靠这些元素加声音，不画 15 张过场。</li>
+      <li><b>自杀默认关闭，维持。</b>补一条：家庭暴力只以「搬走」「诊所记录」出现，不进标题候选，不做成可印的素材。</li>
+      <li><b>一局改为两年 104 周。</b>按每周 5 到 7 分钟估，三年要 15 到 18 小时，太长。两年是 8 到 12 小时，镇长选举放在第二年秋天。一年短局等于 Demo 的长度；三年长局通关一次后解锁，给想住下来的人。</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 十版 ============ -->
+<section class="ban" id="b10">
+  <div class="ban-head"><span class="k">十版</span><h2>数值初稿与首周体验</h2></div>
+  <div class="cols">
+    <p>这些数字是 M1 纸上原型的起点，不是定稿。原型要回答的问题只有一个：在这组数字下，「再查一周还是现在就印」是不是每周都让人犹豫。</p>
+    <h4>经济</h4>
+    <div class="tbl"><table>
+      <tr><th>项目</th><th class="n">初值</th><th>说明</th></tr>
+      <tr><td>起始现金</td><td class="n">30</td><td>货币单位「元」，架空。够撑三周亏损</td></tr>
+      <tr><td>起始发行量</td><td class="n">180 份</td><td>镇上六十户，加周边农场和火车带走的</td></tr>
+      <tr><td>每份售价</td><td class="n">0.05</td><td>周收入 = 发行量 × 售价，起始约 9 元</td></tr>
+      <tr><td>广告位</td><td class="n">3 个</td><td>每个 2 到 6 元，按广告主财力、对你的好感和当期发行量定</td></tr>
+      <tr><td>纸张油墨与房租</td><td class="n">10 + 发行量 × 0.02</td><td>发行量涨成本也涨，防止无限扩张</td></tr>
+      <tr><td>线人</td><td class="n">2 到 5 / 次</td><td>按次付，不付就断</td></tr>
+      <tr><td>修窗 / 败诉 / 重建</td><td class="n">10 / 25 / 60</td><td>重度后果的现金出口</td></tr>
+    </table></div>
+    <p>起始每周净利约 10 到 14 元。一次纵火（重建 60 元）加一场败诉（赔 25 元）足以让人连续四周亏损，这就是破产线的设计位置。原型实测见十二版。</p>
+    <h4>公信力与发行量</h4>
+    <ul>
+      <li>公信力起始 50。印一条碎片：真实度 ≥ 0.8 时附证据 +4、交叉验证 +2、都没有 +1，涨幅按 (1 − 公信力/150) 递减；真实度 &lt; 0.5 扣 (1 − 真实度) × 10，不递减。煽动语气每篇再扣 1，篇中每条未验证碎片再扣 0.5。软新闻不加不减。</li>
+      <li>交叉验证（三个独立来源）把碎片的「玩家可见可信度」标为「确认」，但 truth 不变。假的东西三个人说也还是假的，这是示例局 B 的根。</li>
+      <li>发行量每周涨幅 = Σ 版位系数 × 语气系数（克制 2%，中立 4%，煽动 9%）× (1 + 0.4 × 严重度)，再乘 (0.25 + 公信力/100) 和 (1 − 发行量/600)。公信力低于 20 每周另扣 2%，低于 10 再扣 3%，高于 70 加 1%；连续两周没有硬新闻每周扣 3%。</li>
+      <li>居民阅读概率：订户 0.9，订户的直接社交圈 0.5，其余 0.2。读到才反应，没读到的下周可能听别人说，再按 0.5 折算。</li>
+    </ul>
+    <h4>首周引导</h4>
+    <p>没有教程弹窗。开局是前任主编留下的一封信和一张未完成的版样：信里交代了三件事（邮差是朋友、锯木厂的广告别断、酒馆晚上去听听），版样上已经排好了一条告示和一条广告，空着头条。第一周的事件池保证出现一件软事件（集市、春汛、火车晚点）和一条两步之内能交叉验证的半公开秘密，确保第一期一定有东西印、一定印得出区别。第二周起不再保底。</p>
+    <h4>界面清单</h4>
+    <div class="tbl"><table>
+      <tr><th>界面</th><th>一句话</th></tr>
+      <tr><td>主菜单</td><td>氛围图 01 的像素重绘，报社窗户亮着</td></tr>
+      <tr><td>新局设定</td><td>种子、局长（一年 / 两年 / 三年）、铁人开关、报名与主编名</td></tr>
+      <tr><td>镇子地图</td><td>3/4 俯视，一屏走完主街，地点可点，显示当前时段在场的人</td></tr>
+      <tr><td>地点内景</td><td>单屏固定镜头，点人交谈，点柜台查档案</td></tr>
+      <tr><td>交谈</td><td>两级选择：对象 → 话头（来自选题簿）。回答以一段生成文本出现</td></tr>
+      <tr><td>选题簿</td><td>翻页笔记本，按人分页，印章计数交叉验证</td></tr>
+      <tr><td>排版台</td><td>四个版位的真实比例报纸，拖碎片进版位，四个决定，三个候选标题</td></tr>
+      <tr><td>印刷夜</td><td>拉杆，印刷机声，不可撤销</td></tr>
+      <tr><td>周一早晨</td><td>编辑室固定画面 + 可变层，门缝下的信逐封读</td></tr>
+      <tr><td>年度回顾</td><td>所有头条按时间排成一张长报纸，导出 PNG</td></tr>
+      <tr><td>设置</td><td>音量、语言、整数缩放、字体放大、自杀后果开关、手柄</td></tr>
+    </table></div>
+    <p>输入：鼠标键盘为主，全程可用手柄（Steam Deck 验证目标）。所有界面都是回合制，没有限时操作。</p>
+  </div>
+</section>
+
+<!-- ============ 十一版 ============ -->
+<section class="ban" id="b11">
+  <div class="ban-head"><span class="k">十一版</span><h2>产品、Steam 与发行清单</h2></div>
+  <div class="cols">
+    <h4>Steam 集成</h4>
+    <ul>
+      <li>Steamworks 用 GodotSteam 的 GDExtension 版，不编译引擎。只用三样：成就、云存档、Deck 输入提示。</li>
+      <li>云存档走 Steam Auto-Cloud，同步 user://saves 目录。存档是种子 + 操作日志，单局不超过 200 KB。</li>
+      <li>成就 20 个，全部由模拟事件触发，不做收集类：「一字未改」（铁人通关）、「三个来源」（首次交叉验证）、「灰河清了」（污染被查）、「火」（报社被烧后重建）、「火车」（主动离开）等。</li>
+      <li>Steam Deck：640×360 整数放大 2 倍到 1280×720，上下各 40 像素黑边，手柄全覆盖，字体不小于 12 像素字号。</li>
+      <li>平台：Windows、macOS、Linux 三个导出预设，同一份 PCK。</li>
+    </ul>
+    <h4>商店页面</h4>
+    <ul>
+      <li>页面在 M4 垂直切片结束后上线，先于 Demo 半年，愿望单从那时开始积累。</li>
+      <li>素材：小胶囊 231×87、主胶囊 616×353、头图 460×215、大胶囊 1232×706、库封面 600×900、库主图 1920×620、透明 Logo；全部从像素原画放大，不用氛围图。</li>
+      <li>预告片 75 秒：一周循环各阶段各 10 秒，结尾是年度回顾长报纸从上往下滚过。无旁白。</li>
+      <li>标签：模拟、叙事、程序生成、独立、调查、像素、回合制、文字丰富。</li>
+      <li>语言：简体中文、英语，界面与全文本。日语、繁中看发售后数据。</li>
+      <li>年龄分级：Steam 自评问卷，含成人主题（酗酒、死亡、不展示的暴力），无血腥、无性描写。</li>
+      <li>Steam Direct 费用 100 美元，页面上线前支付。</li>
+    </ul>
+    <h4>素材与授权</h4>
+    <ul>
+      <li>像素字体：Fusion Pixel 12px（OFL），中英都覆盖；报纸界面用 OFL 的等宽字体。不用授权不明的字体。</li>
+      <li>配乐：先用生成工具出草稿定调，发售版六到八首由我按草稿重写为 MIDI 钢琴，避免生成音乐的授权争议。</li>
+      <li>音效：CC0 来源加自录，列清单存 assets/audio/CREDITS.md。</li>
+      <li>四张氛围图只用于设计文档，不进游戏，不进商店页。</li>
+      <li>人名地名生成器的词表不含真实在世公众人物的姓名组合。</li>
+    </ul>
+    <h4>存档、设置与无障碍</h4>
+    <ul>
+      <li>存档带版本号，旧版本存档加载时按操作日志重放，模拟规则变化导致不一致时提示「这局是在旧版本开始的」。</li>
+      <li>字体可放大一档（UI 切到 2 倍字号布局），16 色调色板在色盲模式下保证重要状态有形状差异，不只靠颜色。</li>
+      <li>无限时操作、无快速反应，全部文本可用键盘翻页。</li>
+    </ul>
+    <h4>发售后</h4>
+    <ul>
+      <li>首月修复为主，之后每季一个免费事件包（30 到 50 个事件模板）。不做付费 DLC。</li>
+      <li>年度回顾图自带报名、种子和版本号，玩家晒图时别人可以用同一个种子开局。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 十二版 ============ -->
+<section class="ban" id="b12">
+  <div class="ban-head"><span class="k">十二版</span><h2>生产排期与不做清单</h2></div>
+  <div class="cols">
+    <h4>排期</h4>
+    <p>单人全职。日期是估计，每个里程碑结束时在此处记实际完成日。M3 是唯一的生死关：盲测过不了就停。</p>
+    <div class="tbl"><table>
+      <tr><th>阶段</th><th class="n">计划完成</th><th>交付物</th></tr>
+      <tr><td>M1 纸上原型</td><td class="n">2026-11-15</td><td>无头终端版一周循环，自动玩家跑 10 局，调十版数字。<span class="stamp">2026-10-19 首版跑通</span>，记录见 design/notes/M1-原型记录.md</td></tr>
+      <tr><td>M2 模拟核心</td><td class="n">2026-12-31</td><td>居民、关系、需求、秘密、日程、反应表，104 周无人跑。<span class="stamp">2026-10-20 完成</span>，记录见 design/notes/M2-模拟核心记录.md</td></tr>
+      <tr><td>M3 文本引擎</td><td class="n">2027-02-28</td><td>三层引擎、中英两套语法层、命令行抽检工具、盲测</td></tr>
+      <tr><td>M4 垂直切片</td><td class="n">2027-04-30</td><td>第 1 到 4 周全表现，Steam 页面上线</td></tr>
+      <tr><td>M5 内容填充</td><td class="n">2027-08-31</td><td>内容量表达标，自动测试全绿</td></tr>
+      <tr><td>M6 Demo</td><td class="n">2027-10</td><td>一年短局，Steam 新品节</td></tr>
+      <tr><td>M7 发售</td><td class="n">2028-02</td><td>两年局、英文、成就、云存档、Deck 验证</td></tr>
+    </table></div>
+    <h4>测试</h4>
+    <ul>
+      <li>模拟层单元测试：同一种子两次生成的镇子逐字节相同；104 周无人跑不崩、不出现 NaN、人口不归零。</li>
+      <li>文本测试：每个模板在 200 个种子里都能触发；称谓、代词、量词检查；禁用词表（通用句）命中即失败。</li>
+      <li>自动玩家：四种策略（谨慎、煽动、只印软新闻、随机）各跑 20 局，统计破产率、公信力分布、平均周数，任何策略稳赢或稳输都是设计 bug。</li>
+      <li>性能：一次周结算在 Deck 上低于 100 毫秒，年度回顾导出低于 2 秒。</li>
+    </ul>
+    <h4>不做清单</h4>
+    <ul>
+      <li>不做语音、不做多人、不做手机版、不做付费 DLC。</li>
+      <li>运行时不用大语言模型，文本全部离线确定性生成。</li>
+      <li>不做战斗、建造、资源管理、技能树。</li>
+      <li>不做手写文本，不做实时制，不做限时操作。</li>
+      <li>不做 3D，不做过场动画，不露玩家形象。</li>
+      <li>不指明国别，不做种族议题。</li>
+    </ul>
+  </div>
+  <div class="foot"><span>《小镇周报》策划案 · 第二稿 · 2026-10-19</span><span>模拟层、文本引擎、画面：全部由我独立完成</span></div>
+</section>
+
+</div>

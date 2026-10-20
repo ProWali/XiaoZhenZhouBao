@@ -1,0 +1,89 @@
+{
+ "id": "pollution",
+ "name": "排污",
+ "severity": 3,
+ "weeks": 12,
+ "target": "culprit",
+ "roles": {
+  "culprit": {
+   "occupation": [
+    "owner"
+   ]
+  },
+  "victim": {
+   "occupation": [
+    "farmer",
+    "fisher"
+   ],
+   "count": 2
+  }
+ },
+ "fragments": [
+  {
+   "key": "smell",
+   "subject": "victim",
+   "text": "{victim}家的井水这几周有一股石灰味",
+   "secrecy": "semi",
+   "known_by": [
+    "victim",
+    "friends:victim"
+   ]
+  },
+  {
+   "key": "lime",
+   "subject": "culprit",
+   "text": "{culprit}通过邮局订了四十袋石灰，锯木厂用不了这么多",
+   "secrecy": "secret",
+   "archive": "post",
+   "known_by": [
+    "culprit"
+   ]
+  },
+  {
+   "key": "dump",
+   "subject": "culprit",
+   "text": "{culprit}让人趁夜把厂里的废液倒进灰河",
+   "secrecy": "secret",
+   "witness": "river",
+   "known_by": [
+    "culprit",
+    "work:culprit:1"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "culprit",
+   "text": "{culprit}给州里来的检查员塞过钱",
+   "truth": 0.2,
+   "known_by": [
+    "enemies:culprit"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "灰河下游井水异味，{culprit}称与锯木厂无关"
+  ],
+  "neutral": [
+   "{culprit}被指夜间向灰河倾倒废液"
+  ],
+  "hot": [
+   "{culprit}在毒害灰河！下游人家喝的是什么水"
+  ]
+ },
+ "detail": "石灰的气味",
+ "driven_by": [
+  "money"
+ ],
+ "followups": [
+  {
+   "tid": "inspector",
+   "map": {
+    "official": "culprit"
+   },
+   "delay": 3,
+   "chance": 0.7
+  }
+ ]
+}

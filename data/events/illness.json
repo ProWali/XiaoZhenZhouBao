@@ -1,0 +1,79 @@
+{
+ "id": "illness",
+ "name": "隐瞒病情",
+ "severity": 2,
+ "weeks": 16,
+ "target": "sick",
+ "roles": {
+  "sick": {
+   "occupation": [
+    "mayor",
+    "owner",
+    "priest"
+   ]
+  },
+  "nurse": {
+   "occupation": [
+    "nurse",
+    "doctor"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "faint",
+   "subject": "sick",
+   "text": "{sick}上周在镇公所晕倒过一次，对外说是没吃早饭",
+   "secrecy": "semi",
+   "known_by": [
+    "sick",
+    "work:sick:2"
+   ]
+  },
+  {
+   "key": "chart",
+   "subject": "sick",
+   "text": "诊所病历上{sick}的病是肺上的，医生写了「不宜过劳」",
+   "secrecy": "secret",
+   "archive": "clinic",
+   "known_by": [
+    "sick",
+    "nurse"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "sick",
+   "text": "{sick}已经在立遗嘱了",
+   "truth": 0.25,
+   "known_by": [
+    "enemies:sick",
+    "gossip:1"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "{sick}近来少露面，称是旧疾复发"
+  ],
+  "neutral": [
+   "{sick}被指隐瞒病情，曾于公所晕倒"
+  ],
+  "hot": [
+   "{sick}病入膏肓还在撑！谁在替这个镇子做决定"
+  ]
+ },
+ "detail": "没吃早饭的借口",
+ "once": true,
+ "followups": [
+  {
+   "tid": "resign",
+   "map": {
+    "official": "sick"
+   },
+   "delay": 4,
+   "chance": 0.4
+  }
+ ]
+}

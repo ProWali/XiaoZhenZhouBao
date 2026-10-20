@@ -1,0 +1,38 @@
+{
+ "id": "fired",
+ "name": "辞退",
+ "severity": 0,
+ "soft": true,
+ "manual": true,
+ "cooldown": 0,
+ "weeks": 1,
+ "target": "worker",
+ "roles": {
+  "worker": {}
+ },
+ "fragments": [
+  {
+   "key": "fired",
+   "subject": "worker",
+   "text": "{worker}被锯木厂辞退了，工头说再不用这个人",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "锯木厂辞退一名工人"
+  ],
+  "neutral": [
+   "{worker}被锯木厂辞退"
+  ],
+  "hot": [
+   "{worker}丢了饭碗，一家人怎么办"
+  ]
+ },
+ "effects": {
+  "job": "drifter"
+ }
+}

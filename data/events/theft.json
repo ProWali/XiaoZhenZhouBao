@@ -1,0 +1,88 @@
+{
+ "id": "theft",
+ "name": "偷窃",
+ "severity": 2,
+ "weeks": 8,
+ "target": "thief",
+ "roles": {
+  "thief": {
+   "occupation": [
+    "worker",
+    "apprentice",
+    "smith"
+   ]
+  },
+  "boss": {
+   "occupation": [
+    "foreman"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "missing",
+   "subject": "thief",
+   "text": "锯木厂这个月丢了两把锯条和一箱钉子，{boss}在查",
+   "secrecy": "semi",
+   "known_by": [
+    "boss",
+    "work:boss:3"
+   ]
+  },
+  {
+   "key": "sold",
+   "subject": "thief",
+   "text": "{thief}把锯条卖给了河湾农场，杂货店的收货单上有记录",
+   "secrecy": "secret",
+   "archive": "store",
+   "known_by": [
+    "thief"
+   ]
+  },
+  {
+   "key": "night",
+   "subject": "thief",
+   "text": "{thief}夜里从锯木厂后门出来，手里拎着东西",
+   "secrecy": "secret",
+   "witness": "mill",
+   "known_by": [
+    "thief"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "boss",
+   "text": "丢东西是{boss}自己监守自盗，栽赃给工人",
+   "truth": 0.2,
+   "known_by": [
+    "enemies:boss"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "锯木厂近期失窃，厂方正在自查"
+  ],
+  "neutral": [
+   "{thief}被指盗卖锯木厂工具"
+  ],
+  "hot": [
+   "{thief}偷厂里东西养家！工友的饭碗谁来管"
+  ]
+ },
+ "detail": "钉子箱上的厂标",
+ "driven_by": [
+  "money"
+ ],
+ "followups": [
+  {
+   "tid": "fired",
+   "map": {
+    "worker": "thief"
+   },
+   "delay": 1,
+   "chance": 0.8
+  }
+ ]
+}

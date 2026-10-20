@@ -1,0 +1,36 @@
+{
+ "id": "candidacy",
+ "name": "竞选",
+ "severity": 0,
+ "soft": true,
+ "manual": true,
+ "cooldown": 0,
+ "weeks": 2,
+ "target": "challenger",
+ "roles": {
+  "challenger": {},
+  "mayor": {}
+ },
+ "fragments": [
+  {
+   "key": "candidacy",
+   "subject": "challenger",
+   "text": "{challenger}宣布竞选镇长，对手是现任的{mayor}，投票在十周后",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "{challenger}宣布参选镇长"
+  ],
+  "neutral": [
+   "{challenger}挑战{mayor}，镇长选举十周后举行"
+  ],
+  "hot": [
+   "{challenger}要把{mayor}赶下台！"
+  ]
+ }
+}

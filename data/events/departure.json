@@ -1,0 +1,35 @@
+{
+ "id": "departure",
+ "name": "离镇",
+ "severity": 0,
+ "soft": true,
+ "manual": true,
+ "cooldown": 0,
+ "weeks": 1,
+ "target": "kin",
+ "roles": {
+  "kin": {}
+ },
+ "fragments": [
+  {
+   "key": "departure",
+   "subject": "kin",
+   "text": "{x_leaver}走了，{kin}去车站送的，没说去哪",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "{x_leaver}离镇"
+  ],
+  "neutral": [
+   "{x_leaver}乘南线火车离镇，{kin}送行"
+  ],
+  "hot": [
+   "{x_leaver}走了，这镇子留不住人"
+  ]
+ }
+}

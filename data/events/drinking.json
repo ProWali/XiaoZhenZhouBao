@@ -1,0 +1,81 @@
+{
+ "id": "drinking",
+ "name": "暗中酗酒",
+ "severity": 1,
+ "weeks": 10,
+ "target": "drunk",
+ "roles": {
+  "drunk": {
+   "occupation": [
+    "priest",
+    "teacher",
+    "doctor",
+    "clerk"
+   ]
+  },
+  "maid": {
+   "occupation": [
+    "maid"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "bottles",
+   "subject": "drunk",
+   "text": "{maid}每周从{drunk}家后院清出一筐空酒瓶",
+   "secrecy": "semi",
+   "known_by": [
+    "maid",
+    "friends:maid"
+   ]
+  },
+  {
+   "key": "backdoor",
+   "subject": "drunk",
+   "text": "{drunk}从酒馆后门进出，不走前门",
+   "secrecy": "secret",
+   "witness": "tavern",
+   "known_by": [
+    "drunk",
+    "barkeep"
+   ]
+  },
+  {
+   "key": "record",
+   "subject": "drunk",
+   "text": "诊所记录写着{drunk}的手抖是酒精所致",
+   "secrecy": "secret",
+   "archive": "clinic",
+   "known_by": [
+    "drunk"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "drunk",
+   "text": "{drunk}醉后打过人",
+   "truth": 0.1,
+   "known_by": [
+    "enemies:drunk"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "镇上酒瓶越来越多，有人该少喝点了"
+  ],
+  "neutral": [
+   "{drunk}被指长期酗酒，不走酒馆前门"
+  ],
+  "hot": [
+   "{drunk}白天讲体面，夜里灌黄汤"
+  ]
+ },
+ "detail": "后院筐里的碎玻璃",
+ "driven_by": [
+  "belonging",
+  "reputation"
+ ]
+}

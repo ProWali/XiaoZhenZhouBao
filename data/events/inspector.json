@@ -1,0 +1,38 @@
+{
+ "id": "inspector",
+ "name": "检查员",
+ "severity": 0,
+ "soft": true,
+ "manual": true,
+ "cooldown": 0,
+ "weeks": 1,
+ "target": "official",
+ "roles": {
+  "official": {}
+ },
+ "fragments": [
+  {
+   "key": "inspector",
+   "subject": "official",
+   "text": "州里的检查员在锯木厂待了三天，{official}被罚了款，排水沟填了",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "州检查员到访锯木厂"
+  ],
+  "neutral": [
+   "州检查员查处锯木厂，{official}受罚"
+  ],
+  "hot": [
+   "罚得好！{official}终于付了代价"
+  ]
+ },
+ "effects": {
+  "wealth": -1
+ }
+}

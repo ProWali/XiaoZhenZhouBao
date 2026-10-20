@@ -1,0 +1,44 @@
+{
+ "id": "wedding",
+ "name": "婚礼",
+ "severity": 0,
+ "soft": true,
+ "weeks": 2,
+ "target": "groom",
+ "positive": true,
+ "roles": {
+  "groom": {
+   "single": true,
+   "female": false
+  },
+  "bride": {
+   "single": true,
+   "female": true
+  }
+ },
+ "fragments": [
+  {
+   "key": "wed",
+   "subject": "groom",
+   "text": "{groom}和{bride}周日在教堂成婚，牧师主持",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "{groom}与{bride}成婚"
+  ],
+  "neutral": [
+   "{groom}与{bride}周日成婚，全镇道贺"
+  ],
+  "hot": [
+   "教堂钟声为{groom}和{bride}而响"
+  ]
+ },
+ "detail": "借来的婚纱",
+ "marry": true,
+ "cooldown": 5
+}

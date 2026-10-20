@@ -1,0 +1,44 @@
+{
+ "id": "fair",
+ "name": "集市",
+ "severity": 0,
+ "soft": true,
+ "weeks": 2,
+ "target": "host",
+ "season": [
+  2
+ ],
+ "positive": true,
+ "roles": {
+  "host": {
+   "occupation": [
+    "grocer",
+    "mayor"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "fair",
+   "subject": "host",
+   "text": "{host}张罗的夏季集市定在下周六，河湾农场出两头猪",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "夏季集市下周六开张"
+  ],
+  "neutral": [
+   "夏季集市下周六开张，{host}主持"
+  ],
+  "hot": [
+   "全镇都去！夏季集市下周六"
+  ]
+ },
+ "detail": "两头猪",
+ "cooldown": 8
+}

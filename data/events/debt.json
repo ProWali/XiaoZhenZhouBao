@@ -1,0 +1,67 @@
+{
+ "id": "debt",
+ "name": "欠债",
+ "severity": 1,
+ "weeks": 8,
+ "target": "debtor",
+ "roles": {
+  "debtor": {
+   "wealth_max": 1
+  },
+  "creditor": {
+   "occupation": [
+    "grocer"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "ledger",
+   "subject": "debtor",
+   "text": "{debtor}在杂货店赊的账已经欠了半年",
+   "secrecy": "secret",
+   "archive": "store",
+   "known_by": [
+    "debtor",
+    "creditor"
+   ]
+  },
+  {
+   "key": "pawn",
+   "subject": "debtor",
+   "text": "{debtor}把家里的座钟拿去火车站当了",
+   "secrecy": "semi",
+   "known_by": [
+    "debtor",
+    "family:debtor",
+    "friends:creditor"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "debtor",
+   "text": "{debtor}欠的是赌债，不是店账",
+   "truth": 0.15,
+   "known_by": [
+    "enemies:debtor"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "镇上赊账渐多，店主盼早日结清"
+  ],
+  "neutral": [
+   "{debtor}赊账半年未还，杂货店难以为继"
+  ],
+  "hot": [
+   "{debtor}赖账半年！体面人家的钱去哪了"
+  ]
+ },
+ "detail": "当票上的座钟",
+ "once": true,
+ "driven_by": [
+  "money"
+ ]
+}

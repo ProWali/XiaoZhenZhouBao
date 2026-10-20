@@ -1,0 +1,98 @@
+{
+ "id": "bribery",
+ "name": "受贿",
+ "severity": 3,
+ "weeks": 14,
+ "target": "official",
+ "roles": {
+  "official": {
+   "occupation": [
+    "mayor",
+    "sheriff"
+   ]
+  },
+  "payer": {
+   "occupation": [
+    "owner",
+    "grocer",
+    "barkeep"
+   ]
+  },
+  "clerk": {
+   "occupation": [
+    "clerk"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "ledger",
+   "subject": "official",
+   "text": "镇公所账上有一笔{payer}付的「修路款」，可路没修",
+   "secrecy": "secret",
+   "archive": "hall",
+   "known_by": [
+    "clerk"
+   ]
+  },
+  {
+   "key": "envelope",
+   "subject": "official",
+   "text": "{payer}在酒馆后间递给{official}一个信封",
+   "secrecy": "secret",
+   "witness": "tavern",
+   "known_by": [
+    "official",
+    "payer",
+    "barkeep"
+   ]
+  },
+  {
+   "key": "contract",
+   "subject": "payer",
+   "text": "今年的木料采买合同没有招标就给了{payer}",
+   "secrecy": "semi",
+   "known_by": [
+    "clerk",
+    "work:payer:2",
+    "enemies:payer"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "official",
+   "text": "{official}在州里有人罩着，查不动",
+   "truth": 0.3,
+   "known_by": [
+    "gossip:2"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "修路款到账半年，路还是那条路"
+  ],
+  "neutral": [
+   "{official}被指收受{payer}款项，采买合同未经招标"
+  ],
+  "hot": [
+   "{official}卖了这个镇子！信封里装的是我们的路"
+  ]
+ },
+ "detail": "没修的那条路",
+ "driven_by": [
+  "money"
+ ],
+ "followups": [
+  {
+   "tid": "resign",
+   "map": {
+    "official": "official"
+   },
+   "delay": 4,
+   "chance": 0.6,
+   "needs_evidence": true
+  }
+ ]
+}

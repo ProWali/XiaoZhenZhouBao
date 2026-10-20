@@ -1,0 +1,37 @@
+{
+ "id": "birth",
+ "name": "添丁",
+ "severity": 0,
+ "soft": true,
+ "manual": true,
+ "cooldown": 0,
+ "weeks": 1,
+ "target": "mother",
+ "roles": {
+  "mother": {},
+  "father": {}
+ },
+ "fragments": [
+  {
+   "key": "birth",
+   "subject": "mother",
+   "text": "{mother}生了，是{father}家的第几个没人数清",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "{father}家添丁"
+  ],
+  "neutral": [
+   "{mother}平安产子，{father}家添丁"
+  ],
+  "hot": [
+   "{father}家又添一口，这镇子还养得起吗"
+  ]
+ },
+ "positive": true
+}

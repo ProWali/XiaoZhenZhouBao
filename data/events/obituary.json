@@ -1,0 +1,36 @@
+{
+ "id": "obituary",
+ "name": "讣告",
+ "severity": 0,
+ "soft": true,
+ "manual": true,
+ "cooldown": 0,
+ "weeks": 1,
+ "target": "kin",
+ "roles": {
+  "kin": {}
+ },
+ "fragments": [
+  {
+   "key": "obituary",
+   "subject": "kin",
+   "text": "{kin}家的{x_deceased}走了，{x_age} 岁，教堂周四办事",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "讣告：{x_deceased}辞世，享年 {x_age} 岁"
+  ],
+  "neutral": [
+   "{x_deceased}辞世，{kin}家周四办丧事"
+  ],
+  "hot": [
+   "又走了一个，{x_deceased}只活到 {x_age} 岁"
+  ]
+ },
+ "positive": true
+}

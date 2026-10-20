@@ -1,0 +1,66 @@
+{
+ "id": "past",
+ "name": "来历不明",
+ "severity": 2,
+ "weeks": 12,
+ "target": "stranger",
+ "roles": {
+  "stranger": {
+   "occupation": [
+    "newcomer",
+    "drifter"
+   ]
+  },
+  "recognizer": {
+   "occupation": [
+    "veteran",
+    "stationmaster"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "recognize",
+   "subject": "stranger",
+   "text": "{recognizer}认得{stranger}，说那人在南边用的是另一个名字",
+   "secrecy": "semi",
+   "known_by": [
+    "recognizer",
+    "friends:recognizer"
+   ]
+  },
+  {
+   "key": "letter",
+   "subject": "stranger",
+   "text": "邮局有一封寄给{stranger}的信，封口印着法院的章",
+   "secrecy": "secret",
+   "archive": "post",
+   "known_by": [
+    "stranger"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "stranger",
+   "text": "{stranger}是逃兵，手上有人命",
+   "truth": 0.15,
+   "known_by": [
+    "gossip:2"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "火车带来的人，不都留下名字"
+  ],
+  "neutral": [
+   "{stranger}来历存疑，曾以他名示人"
+  ],
+  "hot": [
+   "{stranger}改名换姓混进灰河镇，在躲什么"
+  ]
+ },
+ "detail": "封口上的法院章",
+ "once": true
+}

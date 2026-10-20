@@ -1,0 +1,36 @@
+{
+ "id": "election",
+ "name": "选举结果",
+ "severity": 0,
+ "soft": true,
+ "manual": true,
+ "cooldown": 0,
+ "weeks": 2,
+ "target": "winner",
+ "roles": {
+  "winner": {}
+ },
+ "fragments": [
+  {
+   "key": "election",
+   "subject": "winner",
+   "text": "镇长选举揭晓，{winner} {x_v1} 票胜{x_loser} {x_v2} 票",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "{winner}当选镇长"
+  ],
+  "neutral": [
+   "{winner}以 {x_v1} 票对 {x_v2} 票当选镇长"
+  ],
+  "hot": [
+   "{winner}赢了！{x_loser}的时代结束了"
+  ]
+ },
+ "positive": true
+}

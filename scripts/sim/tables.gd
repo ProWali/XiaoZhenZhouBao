@@ -1,0 +1,108 @@
+## 静态数据表：地点、职业原型、性格特征。M1 先放在脚本里，M2 迁到 JSON。
+extends RefCounted
+
+## 地点类型。kind 用于事件模板的 requires；archive 表示这里有可查的档案；night 表示晚上有人。
+const LOCATIONS := [
+	{"id": "office", "name": "报社", "kind": "office"},
+	{"id": "mill", "name": "锯木厂", "kind": "mill", "ads": true},
+	{"id": "church", "name": "教堂", "kind": "church", "sunday": true},
+	{"id": "tavern", "name": "酒馆", "kind": "tavern", "night": true, "ads": true},
+	{"id": "store", "name": "杂货店", "kind": "store", "ads": true, "archive": true},
+	{"id": "post", "name": "邮局", "kind": "post", "archive": true},
+	{"id": "hall", "name": "镇公所", "kind": "hall", "archive": true},
+	{"id": "clinic", "name": "诊所", "kind": "clinic", "archive": true},
+	{"id": "station", "name": "火车站", "kind": "station"},
+	{"id": "school", "name": "学校", "kind": "school"},
+	{"id": "farm_a", "name": "北边农场", "kind": "farm"},
+	{"id": "farm_b", "name": "河湾农场", "kind": "farm"},
+	{"id": "river", "name": "河边", "kind": "river", "outdoor": true},
+	{"id": "bridge", "name": "桥头", "kind": "bridge", "outdoor": true},
+	{"id": "woods", "name": "树林", "kind": "woods", "outdoor": true},
+]
+
+## 职业原型。
+## count: [min,max] 每局人数；work: 工作地点 id；power: 0 平民 1 有点地位 2 有权势；
+## wealth: 0 穷 1 普通 2 富；female: 女性概率；literate: 识字概率；keeper: 看管哪处档案
+const OCCUPATIONS := [
+	{"id": "mayor", "name": "镇长", "count": [1, 1], "work": "hall", "power": 2, "wealth": 2, "female": 0.0, "literate": 1.0},
+	{"id": "priest", "name": "牧师", "count": [1, 1], "work": "church", "power": 2, "wealth": 1, "female": 0.0, "literate": 1.0},
+	{"id": "owner", "name": "厂主", "count": [1, 1], "work": "mill", "power": 2, "wealth": 2, "female": 0.0, "literate": 1.0, "advertiser": true},
+	{"id": "foreman", "name": "工头", "count": [1, 1], "work": "mill", "power": 1, "wealth": 1, "female": 0.0, "literate": 0.7},
+	{"id": "worker", "name": "工人", "count": [10, 14], "work": "mill", "power": 0, "wealth": 0, "female": 0.1, "literate": 0.4},
+	{"id": "doctor", "name": "医生", "count": [1, 1], "work": "clinic", "power": 1, "wealth": 2, "female": 0.1, "literate": 1.0, "keeper": "clinic"},
+	{"id": "nurse", "name": "护士", "count": [1, 1], "work": "clinic", "power": 0, "wealth": 1, "female": 0.9, "literate": 1.0},
+	{"id": "teacher", "name": "教师", "count": [1, 2], "work": "school", "power": 1, "wealth": 1, "female": 0.6, "literate": 1.0},
+	{"id": "grocer", "name": "店主", "count": [1, 1], "work": "store", "power": 1, "wealth": 1, "female": 0.3, "literate": 0.9, "advertiser": true, "keeper": "store"},
+	{"id": "postman", "name": "邮差", "count": [1, 1], "work": "post", "power": 0, "wealth": 1, "female": 0.1, "literate": 1.0, "keeper": "post"},
+	{"id": "sheriff", "name": "警长", "count": [1, 1], "work": "hall", "power": 2, "wealth": 1, "female": 0.0, "literate": 0.9},
+	{"id": "clerk", "name": "书记员", "count": [1, 1], "work": "hall", "power": 1, "wealth": 1, "female": 0.4, "literate": 1.0, "keeper": "hall"},
+	{"id": "barkeep", "name": "酒馆老板", "count": [1, 1], "work": "tavern", "power": 1, "wealth": 1, "female": 0.3, "literate": 0.7, "advertiser": true},
+	{"id": "stationmaster", "name": "站长", "count": [1, 1], "work": "station", "power": 1, "wealth": 1, "female": 0.0, "literate": 1.0},
+	{"id": "widow", "name": "寡妇", "count": [2, 3], "work": "home", "power": 0, "wealth": 1, "female": 1.0, "literate": 0.6},
+	{"id": "farmer", "name": "农户", "count": [4, 6], "work": "farm", "power": 0, "wealth": 0, "female": 0.4, "literate": 0.4},
+	{"id": "drifter", "name": "流浪汉", "count": [1, 2], "work": "station", "power": 0, "wealth": 0, "female": 0.1, "literate": 0.3, "informer": true},
+	{"id": "newcomer", "name": "新来的", "count": [1, 2], "work": "tavern", "power": 0, "wealth": 1, "female": 0.5, "literate": 0.8},
+	{"id": "tailor", "name": "裁缝", "count": [1, 1], "work": "store", "power": 0, "wealth": 1, "female": 0.7, "literate": 0.7},
+	{"id": "smith", "name": "铁匠", "count": [1, 1], "work": "mill", "power": 0, "wealth": 1, "female": 0.0, "literate": 0.5},
+	{"id": "fisher", "name": "渔夫", "count": [2, 3], "work": "river", "power": 0, "wealth": 0, "female": 0.1, "literate": 0.3},
+	{"id": "maid", "name": "女佣", "count": [2, 3], "work": "home", "power": 0, "wealth": 0, "female": 1.0, "literate": 0.5, "informer": true},
+	{"id": "apprentice", "name": "学徒", "count": [1, 2], "work": "store", "power": 0, "wealth": 0, "female": 0.2, "literate": 0.6, "informer": true},
+	{"id": "veteran", "name": "退伍兵", "count": [1, 2], "work": "tavern", "power": 0, "wealth": 0, "female": 0.0, "literate": 0.6},
+]
+
+## 性格特征。bucket 决定反应表那一列；其余是模拟里用到的倾向。
+## 每人抽三条，互斥组内不同时出现。
+const TRAITS := [
+	{"id": "timid", "name": "怯懦", "bucket": "timid", "excl": "temper"},
+	{"id": "practical", "name": "务实", "bucket": "practical", "excl": "temper"},
+	{"id": "hot", "name": "暴躁", "bucket": "hot", "excl": "temper"},
+	{"id": "vain", "name": "虚荣", "excl": "pride"},
+	{"id": "pious", "name": "虔诚"},
+	{"id": "greedy", "name": "贪财", "excl": "money"},
+	{"id": "gossip", "name": "多嘴", "excl": "mouth"},
+	{"id": "tight", "name": "守口如瓶", "excl": "mouth"},
+	{"id": "grudge", "name": "记仇", "excl": "heart"},
+	{"id": "kind", "name": "宽厚", "excl": "heart"},
+	{"id": "drinker", "name": "好酒"},
+	{"id": "ambitious", "name": "野心", "excl": "pride"},
+	{"id": "suspicious", "name": "多疑", "excl": "faith"},
+	{"id": "gullible", "name": "轻信", "excl": "faith"},
+	{"id": "honest", "name": "正直", "excl": "truth"},
+	{"id": "sly", "name": "狡猾", "excl": "truth"},
+]
+
+## 版位曝光倍率
+const SLOT_MULT := {"head": 3.0, "second": 2.0, "third": 1.0, "small": 0.3}
+const SLOT_NAME := {"head": "头条", "second": "二条", "third": "三条", "small": "小栏"}
+## 语气
+const TONE_MULT := {"calm": 0.8, "neutral": 1.0, "hot": 1.4}
+const TONE_NAME := {"calm": "克制", "neutral": "中立", "hot": "煽动"}
+const TONE_CIRC := {"calm": 0.02, "neutral": 0.04, "hot": 0.09}
+## 署名方式
+const NAMING_MULT := {"named": 1.0, "alias": 0.6, "anon": 0.3}
+const NAMING_NAME := {"named": "点名", "alias": "化名", "anon": "匿名"}
+
+## 取料来源的玩家可见可信度
+const SOURCE_CRED := {"interview": 0.6, "eavesdrop": 0.4, "archive": 0.9, "informer": 0.7, "letter": 0.3, "witness": 1.0, "visitor": 0.5, "public": 0.8}
+const SOURCE_NAME := {"interview": "采访", "eavesdrop": "偷听", "archive": "档案", "informer": "线人", "letter": "匿名信", "witness": "亲眼所见", "visitor": "来访", "public": "众所周知"}
+
+
+static func location_by_id(id: String) -> Dictionary:
+	for l in LOCATIONS:
+		if l.id == id:
+			return l
+	return {}
+
+
+static func occupation_by_id(id: String) -> Dictionary:
+	for o in OCCUPATIONS:
+		if o.id == id:
+			return o
+	return {}
+
+
+static func trait_by_id(id: String) -> Dictionary:
+	for t in TRAITS:
+		if t.id == id:
+			return t
+	return {}
