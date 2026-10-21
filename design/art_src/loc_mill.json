@@ -1,0 +1,38 @@
+{
+  "tool": "liclick",
+  "created_at": "2026-10-21T12:51:10.294Z",
+  "workspace_id": "8e76629c-6d1f-4e6d-8a83-016ebea94117",
+  "request_id": "56dc27e5-8dad-4591-b08f-9d20de92e191",
+  "task_type": "image",
+  "status": "Finished",
+  "credit_cost": 11,
+  "err_msg": null,
+  "files": [
+    "loc_mill.png"
+  ],
+  "estimate": 11,
+  "request": {
+    "backend": "openai",
+    "request_type": "single_image",
+    "params": {
+      "model": "gpt-image-2.5-flare",
+      "prompt": "Pixel art game background, 16-bit era, crisp hard pixels, no anti-aliasing. Limited 16-colour muted palette: ochre, umber brown, slate blue, brick red, bottle green, cream paper. 1930s rural river town, unspecified country. No people, no text, no letters or words or numbers anywhere, all signs and papers blank. Fixed side-on interior view with slight 3/4 perspective, like a stage set, the lower third of the picture is clear empty floor in the foreground where characters will stand. Interior of a steam-powered sawmill shed: a big circular saw bench, stacked timber planks, a belt-driven engine, sawdust on the floor, a small foreman's office window at the back, shafts of dusty daylight.",
+      "name": "loc_mill",
+      "n": 1,
+      "aspect_ratio": "16:9",
+      "image_size": "2K",
+      "quality": "high"
+    },
+    "workspace_id": "8e76629c-6d1f-4e6d-8a83-016ebea94117",
+    "ext_infos": {
+      "task_type": "generate",
+      "model": "gpt-image-2.5-flare"
+    }
+  },
+  "assets": [
+    {
+      "file": "loc_mill.png",
+      "asset_id": "c8df92e2-14a9-42b8-a6d1-37b1ccb85ea9"
+    }
+  ]
+}

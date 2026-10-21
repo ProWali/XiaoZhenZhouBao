@@ -1,0 +1,38 @@
+{
+  "tool": "liclick",
+  "created_at": "2026-10-21T12:50:46.068Z",
+  "workspace_id": "8e76629c-6d1f-4e6d-8a83-016ebea94117",
+  "request_id": "293a4a0e-e703-4f2b-994d-93f4f5ea0dbb",
+  "task_type": "image",
+  "status": "Finished",
+  "credit_cost": 11,
+  "err_msg": null,
+  "files": [
+    "loc_post.png"
+  ],
+  "estimate": 11,
+  "request": {
+    "backend": "openai",
+    "request_type": "single_image",
+    "params": {
+      "model": "gpt-image-2.5-flare",
+      "prompt": "Pixel art game background, 16-bit era, crisp hard pixels, no anti-aliasing. Limited 16-colour muted palette: ochre, umber brown, slate blue, brick red, bottle green, cream paper. 1930s rural river town, unspecified country. No people, no text, no letters or words or numbers anywhere, all signs and papers blank. Fixed side-on interior view with slight 3/4 perspective, like a stage set, the lower third of the picture is clear empty floor in the foreground where characters will stand. Interior of a tiny rural post office: a counter with a brass grille window, wall of wooden pigeonhole mail sorting boxes, parcels on a shelf, a telegraph key on a desk, a wall clock, daylight.",
+      "name": "loc_post",
+      "n": 1,
+      "aspect_ratio": "16:9",
+      "image_size": "2K",
+      "quality": "high"
+    },
+    "workspace_id": "8e76629c-6d1f-4e6d-8a83-016ebea94117",
+    "ext_infos": {
+      "task_type": "generate",
+      "model": "gpt-image-2.5-flare"
+    }
+  },
+  "assets": [
+    {
+      "file": "loc_post.png",
+      "asset_id": "81d8575d-17d3-44ca-a803-f5d8c1114328"
+    }
+  ]
+}

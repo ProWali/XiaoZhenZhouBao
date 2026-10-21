@@ -947,6 +947,26 @@ func headline_candidates(a: Dictionary) -> Array:
 	return TE.headline_candidates(self, e, a, lang)
 
 
+## 排版台预览：按付印时的顺序生成每篇的候选标题和正文，不改任何状态。
+## 付印时前一篇会记下用过的句子，影响后一篇的措辞，所以必须整期一起预览，预览才和印出来的逐字相同。
+## 返回 [{candidates: [String], headline, paragraphs}]，和 articles 一一对应。
+func preview_issue(articles: Array, headline_choice := {}) -> Array:
+	var saved: Dictionary = text_memory.duplicate(true)
+	var out: Array = []
+	for a0 in articles:
+		var a: Dictionary = a0.duplicate(true)
+		var e := event_of(a.facts[0])
+		if e.soft:
+			a.naming = "named"
+		a["choice"] = int(headline_choice.get(a.slot, 0))
+		a["remember"] = true
+		var cands: Array = TE.headline_candidates(self, e, a, lang)
+		var art: Dictionary = TE.article(self, e, a, lang)
+		out.append({"candidates": cands, "headline": art.headline, "paragraphs": art.paragraphs})
+	text_memory = saved
+	return out
+
+
 ## 付印并结算。返回 issue 字典。
 func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 	assert(day >= 6, "还没到周日")
@@ -975,7 +995,8 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 		var rl: Dictionary = ra.duplicate()
 		rl["use_memory"] = false
 		rl["remember"] = false
-		var hl_log: String = str(TE.headline_candidates(self, e, rl, "zh")[ra.choice])
+		var log_cands: Array = TE.headline_candidates(self, e, rl, "zh")
+		var hl_log: String = str(log_cands[clampi(int(ra.choice), 0, log_cands.size() - 1)]) if not log_cands.is_empty() else hl
 		var exposure: float = T.SLOT_MULT[a.slot] * T.TONE_MULT[a.tone]
 		var avg_truth := 0.0
 		var gain_scale: float = (1.0 - stats.credibility / 150.0) * {"named": 1.0, "alias": 0.7, "anon": 0.4}[a.naming]
@@ -1245,6 +1266,7 @@ func _apply_pending() -> void:
 				log.append("第 %d 周：%s离镇。" % [week, r.name])
 			"window":
 				stats.cash -= 10
+				flags["window_week"] = week
 				_letter("window")
 				log.append("第 %d 周：报社窗户被砸。" % week)
 			"arson":

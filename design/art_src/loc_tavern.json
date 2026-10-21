@@ -1,0 +1,38 @@
+{
+  "tool": "liclick",
+  "created_at": "2026-10-21T12:50:45.635Z",
+  "workspace_id": "8e76629c-6d1f-4e6d-8a83-016ebea94117",
+  "request_id": "babb051c-a230-42ce-bcd6-e7a5840b430f",
+  "task_type": "image",
+  "status": "Finished",
+  "credit_cost": 11,
+  "err_msg": null,
+  "files": [
+    "loc_tavern.png"
+  ],
+  "estimate": 11,
+  "request": {
+    "backend": "openai",
+    "request_type": "single_image",
+    "params": {
+      "model": "gpt-image-2.5-flare",
+      "prompt": "Pixel art game background, 16-bit era, crisp hard pixels, no anti-aliasing. Limited 16-colour muted palette: ochre, umber brown, slate blue, brick red, bottle green, cream paper. 1930s rural river town, unspecified country. No people, no text, no letters or words or numbers anywhere, all signs and papers blank. Fixed side-on interior view with slight 3/4 perspective, like a stage set, the lower third of the picture is clear empty floor in the foreground where characters will stand. Interior of a small dim country tavern in the evening: a long wooden bar counter on the left with bottles on shelves behind, a few round tables and chairs, a pot-belly stove, oil lamps, a dartboard, smoky warm light.",
+      "name": "loc_tavern",
+      "n": 1,
+      "aspect_ratio": "16:9",
+      "image_size": "2K",
+      "quality": "high"
+    },
+    "workspace_id": "8e76629c-6d1f-4e6d-8a83-016ebea94117",
+    "ext_infos": {
+      "task_type": "generate",
+      "model": "gpt-image-2.5-flare"
+    }
+  },
+  "assets": [
+    {
+      "file": "loc_tavern.png",
+      "asset_id": "66f3d167-f8dc-49fb-862b-dbf52b718af4"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "tool": "liclick",
+  "created_at": "2026-10-21T12:51:22.270Z",
+  "workspace_id": "8e76629c-6d1f-4e6d-8a83-016ebea94117",
+  "request_id": "8dfa2be4-de6c-4a1f-88ad-b7e64ee57ea9",
+  "task_type": "image",
+  "status": "Finished",
+  "credit_cost": 11,
+  "err_msg": null,
+  "files": [
+    "loc_station.png"
+  ],
+  "estimate": 11,
+  "request": {
+    "backend": "openai",
+    "request_type": "single_image",
+    "params": {
+      "model": "gpt-image-2.5-flare",
+      "prompt": "Pixel art game background, 16-bit era, crisp hard pixels, no anti-aliasing. Limited 16-colour muted palette: ochre, umber brown, slate blue, brick red, bottle green, cream paper. 1930s rural river town, unspecified country. No people, no text, no letters or words or numbers anywhere, all signs and papers blank. Fixed side-on interior view with slight 3/4 perspective, like a stage set, the lower third of the picture is clear empty floor in the foreground where characters will stand. A small rural railway station platform seen side-on: wooden platform in the foreground, a waiting bench, station building with a ticket window and a big clock, railway tracks behind, telegraph poles, open sky, daylight.",
+      "name": "loc_station",
+      "n": 1,
+      "aspect_ratio": "16:9",
+      "image_size": "2K",
+      "quality": "high"
+    },
+    "workspace_id": "8e76629c-6d1f-4e6d-8a83-016ebea94117",
+    "ext_infos": {
+      "task_type": "generate",
+      "model": "gpt-image-2.5-flare"
+    }
+  },
+  "assets": [
+    {
+      "file": "loc_station.png",
+      "asset_id": "d51dbeb2-7296-47ec-b35d-a9073c2a0809"
+    }
+  ]
+}

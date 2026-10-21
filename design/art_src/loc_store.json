@@ -1,0 +1,38 @@
+{
+  "tool": "liclick",
+  "created_at": "2026-10-21T12:50:46.795Z",
+  "workspace_id": "8e76629c-6d1f-4e6d-8a83-016ebea94117",
+  "request_id": "4c7c201b-63ee-4f5f-9223-8efd1cf15f9a",
+  "task_type": "image",
+  "status": "Finished",
+  "credit_cost": 11,
+  "err_msg": null,
+  "files": [
+    "loc_store.png"
+  ],
+  "estimate": 11,
+  "request": {
+    "backend": "openai",
+    "request_type": "single_image",
+    "params": {
+      "model": "gpt-image-2.5-flare",
+      "prompt": "Pixel art game background, 16-bit era, crisp hard pixels, no anti-aliasing. Limited 16-colour muted palette: ochre, umber brown, slate blue, brick red, bottle green, cream paper. 1930s rural river town, unspecified country. No people, no text, no letters or words or numbers anywhere, all signs and papers blank. Fixed side-on interior view with slight 3/4 perspective, like a stage set, the lower third of the picture is clear empty floor in the foreground where characters will stand. Interior of a 1930s rural general store: a long wooden counter with a brass scale and a big ledger book, shelves of tins and jars, sacks of flour and seed, barrels, hanging tools, a cash register, daylight through the front window.",
+      "name": "loc_store",
+      "n": 1,
+      "aspect_ratio": "16:9",
+      "image_size": "2K",
+      "quality": "high"
+    },
+    "workspace_id": "8e76629c-6d1f-4e6d-8a83-016ebea94117",
+    "ext_infos": {
+      "task_type": "generate",
+      "model": "gpt-image-2.5-flare"
+    }
+  },
+  "assets": [
+    {
+      "file": "loc_store.png",
+      "asset_id": "d429ae0a-0102-4de5-b63e-84b6ee519ec7"
+    }
+  ]
+}

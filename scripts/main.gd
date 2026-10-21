@@ -1,6 +1,10 @@
-extends Node2D
-## 项目入口占位。M1 纸上原型阶段先不做画面，模拟核心放在 scripts/sim，文本引擎放在 scripts/text。
+extends Node
+## 游戏入口。带 --walkthrough 参数启动时交给自动走查脚本（截图审界面用），否则进主菜单。
 
 
 func _ready() -> void:
-	print("小镇周报 · 项目骨架已就绪")
+	var args := OS.get_cmdline_user_args()
+	Game.boot()
+	if "--walkthrough" in args:
+		var w: Node = load("res://scripts/debug/walkthrough.gd").new()
+		add_child(w)

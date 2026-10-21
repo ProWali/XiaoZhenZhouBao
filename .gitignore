@@ -13,3 +13,7 @@ Thumbs.db
 # 本地 Godot 编辑器状态
 .editorconfig.local
 override.cfg
+
+# 生成素材的原稿：配乐原稿和 assets 里的重编码版本重复，只留请求记录；出图的过程日志不要
+design/music_src/*.mp3
+design/art_src/*.log

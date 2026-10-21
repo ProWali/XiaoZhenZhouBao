@@ -20,6 +20,7 @@ func _init() -> void:
 	_test_unattended()
 	_test_language_independent()
 	_test_text_lint()
+	_test_preview_matches_print()
 	if failures.is_empty():
 		print("全部通过")
 		quit(0)
@@ -198,3 +199,37 @@ func _test_text_lint() -> void:
 					break
 		if bad > 0:
 			_fail("%s 文本 lint 有 %d 处问题，例如：%s" % [lang, bad, first])
+
+
+## 排版台的预览必须和付印后印出来的逐字相同（含候选标题的选择和重写）。
+func _test_preview_matches_print() -> void:
+	var checked := 0
+	for seed_v in range(1, 7):
+		var world = World.new(seed_v, {"total_weeks": 12})
+		var auto = Auto.new("cautious", seed_v)
+		auto._world = world
+		while world.game_over == "":
+			while world.day <= 6 and world.game_over == "":
+				if world.can_act_day():
+					auto._day_action(world)
+				elif auto._want_night(world):
+					auto._night_action(world)
+				else:
+					world.end_day()
+			if world.game_over != "":
+				break
+			world.saturday_visitors()
+			var arts: Array = auto._compose(world)
+			var choice := {}
+			for i in arts.size():
+				choice[arts[i].slot] = (seed_v + i + world.week) % 3
+				if (seed_v + world.week) % 4 == 0:
+					arts[i]["reroll"] = 1
+			var pv: Array = world.preview_issue(arts, choice)
+			var issue: Dictionary = world.print_issue(arts, choice)
+			for i in issue.articles.size():
+				var a: Dictionary = issue.articles[i]
+				if a.headline != pv[i].headline or a.body != pv[i].paragraphs:
+					_fail("排版预览和付印不一致：种子 %d 第 %d 周 %s" % [seed_v, int(issue.week), a.slot])
+				checked += 1
+	print("预览一致：核对 %d 篇" % checked)
