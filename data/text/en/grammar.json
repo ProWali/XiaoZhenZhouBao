@@ -360,5 +360,31 @@
  ],
  "_headline_formula": [
   "Accused of"
+ ],
+ "src_archive_two": [
+  "This paper read the records at {loc} and had the record keeper check them: ",
+  "This paper has seen the records at {loc}, and nobody there disputes them: ",
+  "The records at {loc}, which this paper checked twice, show that "
+ ],
+ "src_interview_two": [
+  "Two people who do not know each other both told this paper that ",
+  "This paper asked two people separately, and both said that ",
+  "More than one person with knowledge of the matter told this paper that "
+ ],
+ "src_informer_two": [
+  "Two of this paper's sources, independently, say the same thing: ",
+  "The same word has reached this paper from two quarters: "
+ ],
+ "src_visitor_two": [
+  "Two callers came to the Gazette office, one after the other, to tell this paper that ",
+  "Two visitors to this office, on separate days, told this paper the same thing: "
+ ],
+ "link": [
+  "That is not all.",
+  "There is more.",
+  "Nor is that the whole of it.",
+  "This paper found something else as well.",
+  "The matter does not end there.",
+  "The next part came from another quarter."
  ]
 }

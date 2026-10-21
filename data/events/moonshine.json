@@ -3,6 +3,7 @@
  "name": "私酿",
  "severity": 2,
  "weeks": 10,
+ "cooldown": 20,
  "target": "brewer",
  "roles": {
   "brewer": {

@@ -23,3 +23,5 @@
 回答本报的问题  # 乙：M3 第一版 resp_declined
 本报将继续关注  # 乙：M3 第一版 close
 杂货店的进货单  # 甲：short_weight.books 事实原文「杂货店的进货单上，面粉比卖出去的账多出一成」
+诊所这个月看了好几个闹肚子的孩子  # 甲：watered_milk.sick_kids 事实原文
+赶着车从林子里出来，车上装满了圆木  # 甲：timber_theft.logs 事实原文「{cutter}半夜赶着车从林子里出来，车上装满了圆木」

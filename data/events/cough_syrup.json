@@ -1,0 +1,85 @@
+{
+ "id": "cough_syrup",
+ "name": "止咳糖浆",
+ "severity": 2,
+ "weeks": 10,
+ "cooldown": 20,
+ "target": "seller",
+ "driven_by": [
+  "money"
+ ],
+ "roles": {
+  "seller": {
+   "occupation": [
+    "newcomer",
+    "drifter"
+   ]
+  },
+  "victim": {
+   "occupation": [
+    "widow",
+    "farmer",
+    "fisher",
+    "worker"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "door",
+   "subject": "seller",
+   "text": "{seller}挨家挨户卖一种止咳糖浆，五毛钱一瓶，说孩子喝了夜里不咳",
+   "secrecy": "semi",
+   "known_by": [
+    "seller",
+    "victim",
+    "random:4"
+   ]
+  },
+  {
+   "key": "sleep",
+   "subject": "seller",
+   "text": "{victim}家的孩子喝了那种糖浆，睡了一天一夜叫不醒，诊所的记录说糖浆里有鸦片酊",
+   "secrecy": "secret",
+   "archive": "clinic",
+   "known_by": [
+    "victim",
+    "family:victim"
+   ]
+  },
+  {
+   "key": "seal",
+   "subject": "seller",
+   "text": "糖浆瓶的标签上印着州卫生局的章，州卫生局给邮局回信说从没发过这个章",
+   "secrecy": "secret",
+   "archive": "post",
+   "known_by": [
+    "seller",
+    "random:1"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "seller",
+   "text": "那糖浆是照着医生的方子配的",
+   "truth": 0.1,
+   "known_by": [
+    "seller",
+    "friends:seller"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "一瓶止咳糖浆"
+  ],
+  "neutral": [
+   "{seller}兜售含鸦片酊的糖浆"
+  ],
+  "hot": [
+   "孩子喝了睡一天一夜的糖浆"
+  ]
+ },
+ "detail": "标签上的章"
+}

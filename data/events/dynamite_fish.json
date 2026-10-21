@@ -1,0 +1,78 @@
+{
+ "id": "dynamite_fish",
+ "name": "炸鱼",
+ "severity": 2,
+ "weeks": 8,
+ "cooldown": 20,
+ "target": "fisher",
+ "driven_by": [
+  "money"
+ ],
+ "roles": {
+  "fisher": {
+   "occupation": [
+    "fisher",
+    "veteran",
+    "drifter"
+   ]
+  },
+  "keeper": {
+   "occupation": [
+    "foreman"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "deadfish",
+   "subject": "fisher",
+   "text": "灰河下游这个月好几回漂上来死鱼，鱼肚子都是破的",
+   "secrecy": "semi",
+   "known_by": [
+    "random:5"
+   ]
+  },
+  {
+   "key": "powder",
+   "subject": "fisher",
+   "text": "锯木厂炸树根用的炸药，库房账上少了半箱，{keeper}在查",
+   "secrecy": "semi",
+   "known_by": [
+    "keeper",
+    "work:keeper:2"
+   ]
+  },
+  {
+   "key": "blast",
+   "subject": "fisher",
+   "text": "{fisher}天亮前在河湾把一个纸包点着扔进水里，水面炸开以后，撑船去捞鱼",
+   "secrecy": "secret",
+   "witness": "river",
+   "known_by": [
+    "fisher"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "keeper",
+   "text": "炸药是{keeper}私下卖给{fisher}的",
+   "truth": 0.3,
+   "known_by": [
+    "enemies:keeper"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "河里漂上来的死鱼"
+  ],
+  "neutral": [
+   "{fisher}被指在灰河炸鱼"
+  ],
+  "hot": [
+   "锯木厂的炸药炸了灰河的鱼"
+  ]
+ },
+ "detail": "破了肚子的鱼"
+}

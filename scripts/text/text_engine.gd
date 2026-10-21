@@ -419,6 +419,14 @@ static func needs_ok(it: Dictionary, fact_keys: Dictionary) -> bool:
 	for k in it.get("needs_all", []):
 		if not fact_keys.has(str(k)):
 			return false
+	# season: ["winter", ...]：只在这些季节用（键 "@winter" 由 article() 放进 fact_keys）
+	if it.has("season"):
+		var hit := false
+		for sv in it.season:
+			if fact_keys.has("@" + str(sv)):
+				hit = true
+		if not hit:
+			return false
 	return true
 
 
@@ -558,8 +566,15 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 	var small: bool = a.get("slot", "") == "small"
 	# 导语
 	var keys := _fact_keys(world, a.get("facts", []))
+	keys["@" + season_key(world)] = true
 	var leads: Dictionary = et.get("lead", {})
-	var lead := g.pick_expand(tone_pool(leads, [tone + "_" + naming, tone], keys))
+	# 人写的导语多从一个具体的场面起头（季节、地方、人在做什么），「本报查了什么」只是备用
+	var scenes := _fresh(g, eligible_strict(leads.get("scene", []), keys))
+	var lead := ""
+	if not scenes.is_empty() and rng.chance(0.4 if tone == "hot" else 0.7):
+		lead = g.pick_expand(scenes)
+	else:
+		lead = g.pick_expand(tone_pool(leads, [tone + "_" + naming, tone], keys))
 	if e.soft:
 		var body := g.pick_expand(et.get("body", []))
 		var text := lead + body
@@ -580,6 +595,7 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 	var ordered: Array = a.facts.duplicate()
 	ordered.sort_custom(func(x, y): return world.verify_score(x) > world.verify_score(y))
 	var main_sents: Array = []
+	var main_kinds: Array = []
 	var counter_sents: Array = []
 	var evidence_noted := false
 	var detail_used := false
@@ -616,7 +632,12 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 		var sym := "src_" + str(src.kind)
 		if vars.src_who != "" and g.has_rule(sym + "_who"):
 			sym += "_who"
-		if g.has_rule(sym) and not own_voice:
+		var verified: bool = world.is_verified(fid)
+		# 核实过的，有一半写进信源说法里（「据两位互不相识的知情人说」），不再在句尾另加一句
+		if verified and not own_voice and not corroborated and g.has_rule("src_" + str(src.kind) + "_two") and rng.chance(0.5):
+			lead_in = g.expand("#src_" + str(src.kind) + "_two#")
+			corroborated = true
+		elif g.has_rule(sym) and not own_voice:
 			lead_in = g.expand("#" + sym + "#")
 		var tail := ""
 		var tail_n := 0
@@ -626,7 +647,6 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 			evidence_noted = true
 			tail_n += 1
 		# 消息靠不靠得住，人写报道时会交代一句
-		var verified: bool = world.is_verified(fid)
 		if tail_n == 0 and src.kind == "witness" and not own_voice and g.has_rule("limit_witness") and rng.chance(0.25):
 			tail += sep + g.expand("#limit_witness#")
 			tail_n += 1
@@ -643,7 +663,7 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 				csym = "corroborated_witness"
 			elif not (src.kind in ["interview", "informer", "visitor"]):
 				csym = ""
-			if csym != "" and g.has_rule(csym) and rng.chance(0.4):
+			if csym != "" and g.has_rule(csym) and rng.chance(0.25):
 				tail += sep + g.expand("#" + csym + "#")
 				corroborated = true
 		var sentence := fill(world, lead_in + g.expand(body_tpl), ctx, lang) + fill(world, tail, ctx, lang)
@@ -660,11 +680,15 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 		else:
 			if main_sents.is_empty():
 				sentence = _swap_lead(sentence, data(lang).grammar.get("_lead_swap", {}))
+			elif str(main_kinds[-1]) != str(src.kind) and g.has_rule("link") and rng.chance(0.5):
+				# 换了一种证据（看见的 → 查到的），中间交代一句，读起来才不像两张卡片拼在一起
+				sentence = g.expand("#link#") + sep + sentence
 			main_sents.append(sentence)
+			main_kinds.append(src.kind)
 	# 段落：一段放一到两句，长短不齐
 	var i := 0
 	while i < main_sents.size():
-		var take := 2 if (i + 1 < main_sents.size() and rng.chance(0.55)) else 1
+		var take := 2 if (i + 1 < main_sents.size() and rng.chance(0.35)) else 1
 		var chunk: String = main_sents[i]
 		if take == 2:
 			chunk += sep + main_sents[i + 1]

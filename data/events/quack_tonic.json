@@ -3,6 +3,7 @@
  "name": "假药",
  "severity": 2,
  "weeks": 10,
+ "cooldown": 20,
  "target": "seller",
  "driven_by": [
   "money"

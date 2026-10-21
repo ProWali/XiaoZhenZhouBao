@@ -3,6 +3,7 @@
  "name": "牛奶掺水",
  "severity": 2,
  "weeks": 10,
+ "cooldown": 20,
  "target": "farmer",
  "driven_by": [
   "money"

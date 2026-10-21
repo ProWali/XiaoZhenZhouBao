@@ -3,6 +3,7 @@
  "name": "偷窃",
  "severity": 2,
  "weeks": 8,
+ "cooldown": 20,
  "target": "thief",
  "roles": {
   "thief": {

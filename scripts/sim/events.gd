@@ -79,6 +79,10 @@ func cast_roles(tpl: Dictionary, world, preset: Dictionary = {}) -> Dictionary:
 				# 预设的人也得符合角色条件（后续事件的角色条件是空的，天然通过）
 				if not spec.is_empty() and (not _fits(world.residents[rid], spec, world) or world.residents[rid].done.has(tpl.id)):
 					return {}
+				# 需求驱动的当事人也守同样的规矩：一年内不再当同类事件的当事人，半年内只当一次秘密事件的当事人
+				# （后续事件的角色条件是空的，当事人本来就是同一个人，不受这条限制）
+				if role == tpl.target and not spec.is_empty() and not _target_free(world.residents[rid], tpl, world):
+					return {}
 		elif spec.has("spouse_of"):
 			var base: Array = roles.get(spec.spouse_of, [])
 			if base.is_empty():
@@ -93,9 +97,7 @@ func cast_roles(tpl: Dictionary, world, preset: Dictionary = {}) -> Dictionary:
 				if taken.has(rid) or world.residents[rid].done.has(tpl.id):
 					continue
 				# 一年内当过这类事件当事人的人，不再当（一个人两年里卖四回假药，镇子就假了）
-				if role == tpl.target and int(world.residents[rid].get("target_week", {}).get(tpl.id, -999)) > world.week - 52:
-					continue
-				if role == tpl.target and not tpl.get("soft", false) and int(world.residents[rid].get("target_week", {}).get("_any", -999)) > world.week - 26:
+				if role == tpl.target and not _target_free(world.residents[rid], tpl, world):
 					continue
 				if _fits(world.residents[rid], spec, world):
 					pool.append(rid)
@@ -106,6 +108,15 @@ func cast_roles(tpl: Dictionary, world, preset: Dictionary = {}) -> Dictionary:
 			taken[rid] = true
 		roles[role] = picked
 	return roles
+
+
+static func _target_free(res: Dictionary, tpl: Dictionary, world) -> bool:
+	var tw: Dictionary = res.get("target_week", {})
+	if int(tw.get(tpl.id, -999)) > world.week - 52:
+		return false
+	if not tpl.get("soft", false) and int(tw.get("_any", -999)) > world.week - 26:
+		return false
+	return true
 
 
 ## 实例化：生成事实碎片并分发「谁知道」。extras 是模板里 {x_键} 槽位的填充文本。

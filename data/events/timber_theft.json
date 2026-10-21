@@ -1,0 +1,80 @@
+{
+ "id": "timber_theft",
+ "name": "偷砍林木",
+ "severity": 1,
+ "weeks": 8,
+ "cooldown": 20,
+ "target": "cutter",
+ "driven_by": [
+  "money"
+ ],
+ "roles": {
+  "cutter": {
+   "occupation": [
+    "farmer",
+    "veteran",
+    "drifter",
+    "worker"
+   ]
+  },
+  "landowner": {
+   "occupation": [
+    "owner"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "stumps",
+   "subject": "cutter",
+   "text": "锯木厂林子北边这个月多了三十几个新树桩",
+   "secrecy": "semi",
+   "known_by": [
+    "landowner",
+    "work:landowner:2"
+   ]
+  },
+  {
+   "key": "firewood",
+   "subject": "cutter",
+   "text": "{cutter}挨家送柴，一车只要一块钱，比市价便宜一半",
+   "secrecy": "semi",
+   "known_by": [
+    "cutter",
+    "random:5"
+   ]
+  },
+  {
+   "key": "logs",
+   "subject": "cutter",
+   "text": "{cutter}半夜赶着车从林子里出来，车上装满了圆木",
+   "secrecy": "secret",
+   "witness": "woods",
+   "known_by": [
+    "cutter"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "cutter",
+   "text": "是工头收了钱，放{cutter}进的林子",
+   "truth": 0.3,
+   "known_by": [
+    "gossip:1"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "林子北边的新树桩"
+  ],
+  "neutral": [
+   "{cutter}被指偷砍锯木厂的树"
+  ],
+  "hot": [
+   "一块钱一车的柴"
+  ]
+ },
+ "detail": "树桩"
+}

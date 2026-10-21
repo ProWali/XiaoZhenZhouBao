@@ -3,6 +3,7 @@
  "name": "偷猎",
  "severity": 1,
  "weeks": 8,
+ "cooldown": 20,
  "target": "poacher",
  "driven_by": [
   "money"

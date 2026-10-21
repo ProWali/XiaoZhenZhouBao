@@ -1,0 +1,79 @@
+{
+ "id": "depot_theft",
+ "name": "货栈失窃",
+ "severity": 2,
+ "weeks": 8,
+ "cooldown": 20,
+ "target": "thief",
+ "driven_by": [
+  "money"
+ ],
+ "roles": {
+  "thief": {
+   "occupation": [
+    "worker",
+    "drifter",
+    "fisher"
+   ]
+  },
+  "boss": {
+   "occupation": [
+    "stationmaster"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "manifest",
+   "subject": "thief",
+   "text": "火车站货栈的货单上少了六箱罐头桃子，{boss}在查",
+   "secrecy": "semi",
+   "known_by": [
+    "boss",
+    "random:2"
+   ]
+  },
+  {
+   "key": "market",
+   "subject": "thief",
+   "text": "{thief}在集上半价卖罐头桃子，一罐五分钱",
+   "secrecy": "semi",
+   "known_by": [
+    "thief",
+    "random:4"
+   ]
+  },
+  {
+   "key": "cart",
+   "subject": "thief",
+   "text": "{thief}半夜推着一辆手推车从货栈后面出来，车上压着两只木箱",
+   "secrecy": "secret",
+   "witness": "station",
+   "known_by": [
+    "thief"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "boss",
+   "text": "罐头是{boss}自己拿去卖的，货单是他改的",
+   "truth": 0.2,
+   "known_by": [
+    "enemies:boss"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "货栈少了六箱罐头"
+  ],
+  "neutral": [
+   "{thief}被指偷货栈的罐头"
+  ],
+  "hot": [
+   "货栈的罐头上了集"
+  ]
+ },
+ "detail": "货单"
+}

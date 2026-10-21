@@ -1,0 +1,78 @@
+{
+ "id": "butter_lard",
+ "name": "黄油掺假",
+ "severity": 1,
+ "weeks": 10,
+ "cooldown": 20,
+ "target": "farmer",
+ "driven_by": [
+  "money"
+ ],
+ "roles": {
+  "farmer": {
+   "occupation": [
+    "farmer"
+   ]
+  },
+  "grocer": {
+   "occupation": [
+    "grocer"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "lardy",
+   "subject": "farmer",
+   "text": "杂货店收的{farmer}家的黄油，化开以后有一股猪油味，{grocer}退过两回货",
+   "secrecy": "semi",
+   "known_by": [
+    "grocer",
+    "farmer",
+    "random:2"
+   ]
+  },
+  {
+   "key": "tally",
+   "subject": "farmer",
+   "text": "杂货店的收货簿上，{farmer}这半年卖来的黄油，比{farmer}家两头奶牛能出的多一倍",
+   "secrecy": "secret",
+   "archive": "store",
+   "known_by": [
+    "grocer"
+   ]
+  },
+  {
+   "key": "mixing",
+   "subject": "farmer",
+   "text": "{farmer}天不亮在河边的冷泉旁，把猪油揉进黄油，再压进模子",
+   "secrecy": "secret",
+   "witness": "river",
+   "known_by": [
+    "farmer"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "farmer",
+   "text": "{farmer}家的奶牛早就卖了一头",
+   "truth": 0.3,
+   "known_by": [
+    "enemies:farmer"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "杂货店的黄油"
+  ],
+  "neutral": [
+   "{farmer}被指往黄油里掺猪油"
+  ],
+  "hot": [
+   "你买的黄油一半是猪油"
+  ]
+ },
+ "detail": "黄油模子"
+}
