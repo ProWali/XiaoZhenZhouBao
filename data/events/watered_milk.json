@@ -1,0 +1,78 @@
+{
+ "id": "watered_milk",
+ "name": "牛奶掺水",
+ "severity": 2,
+ "weeks": 10,
+ "target": "farmer",
+ "driven_by": [
+  "money"
+ ],
+ "roles": {
+  "farmer": {
+   "occupation": [
+    "farmer"
+   ]
+  },
+  "teacher": {
+   "occupation": [
+    "teacher"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "thin",
+   "subject": "farmer",
+   "text": "学校的孩子们说，{farmer}送来的牛奶淡得像米汤",
+   "secrecy": "semi",
+   "known_by": [
+    "teacher",
+    "friends:teacher",
+    "random:2"
+   ]
+  },
+  {
+   "key": "sick_kids",
+   "subject": "farmer",
+   "text": "诊所这个月看了好几个闹肚子的孩子，都是喝学校牛奶的",
+   "secrecy": "secret",
+   "archive": "clinic",
+   "known_by": [
+    "teacher"
+   ]
+  },
+  {
+   "key": "water",
+   "subject": "farmer",
+   "text": "{farmer}天亮前在河边往奶桶里灌河水",
+   "secrecy": "secret",
+   "witness": "river",
+   "known_by": [
+    "farmer"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "farmer",
+   "text": "{farmer}家的奶牛得了病，奶本来就不能喝",
+   "truth": 0.25,
+   "known_by": [
+    "gossip:1",
+    "enemies:farmer"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "学校的牛奶"
+  ],
+  "neutral": [
+   "{farmer}被指往牛奶里掺水"
+  ],
+  "hot": [
+   "孩子们喝的是河水！"
+  ]
+ },
+ "detail": "奶桶上的河泥"
+}

@@ -1,0 +1,88 @@
+{
+ "id": "sheriff_beating",
+ "name": "警长打人",
+ "severity": 3,
+ "weeks": 12,
+ "target": "sheriff",
+ "roles": {
+  "sheriff": {
+   "occupation": [
+    "sheriff"
+   ]
+  },
+  "victim": {
+   "occupation": [
+    "drifter",
+    "newcomer",
+    "veteran"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "injury",
+   "subject": "sheriff",
+   "text": "{victim}被人扶进诊所，肋骨断了两根，诊所记下的原因是「摔伤」",
+   "secrecy": "secret",
+   "archive": "clinic",
+   "known_by": [
+    "victim"
+   ]
+  },
+  {
+   "key": "baton",
+   "subject": "sheriff",
+   "text": "{sheriff}在火车站后面用警棍打{victim}",
+   "secrecy": "secret",
+   "witness": "station",
+   "known_by": [
+    "sheriff",
+    "victim"
+   ]
+  },
+  {
+   "key": "told",
+   "subject": "sheriff",
+   "text": "{victim}对人说，是{sheriff}打的",
+   "secrecy": "semi",
+   "known_by": [
+    "victim",
+    "friends:victim"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "victim",
+   "text": "{victim}先偷了{sheriff}家的东西",
+   "truth": 0.2,
+   "known_by": [
+    "friends:sheriff",
+    "family:sheriff"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "火车站后面的那一夜"
+  ],
+  "neutral": [
+   "{sheriff}被指殴打{victim}"
+  ],
+  "hot": [
+   "警长的警棍打断了两根肋骨"
+  ]
+ },
+ "followups": [
+  {
+   "tid": "resign",
+   "map": {
+    "official": "sheriff"
+   },
+   "delay": 4,
+   "chance": 0.4,
+   "needs_evidence": true
+  }
+ ],
+ "detail": "诊所记录上的「摔伤」二字"
+}

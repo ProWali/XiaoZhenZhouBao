@@ -1,0 +1,100 @@
+{
+ "id": "land_fraud",
+ "name": "改地契",
+ "severity": 3,
+ "weeks": 14,
+ "target": "official",
+ "driven_by": [
+  "money"
+ ],
+ "once": true,
+ "roles": {
+  "official": {
+   "occupation": [
+    "clerk"
+   ]
+  },
+  "buyer": {
+   "occupation": [
+    "owner",
+    "grocer",
+    "mayor"
+   ]
+  },
+  "victim": {
+   "occupation": [
+    "farmer",
+    "widow"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "complain",
+   "subject": "victim",
+   "text": "{victim}说自家河边那块地从没卖过，却有人来量地了",
+   "secrecy": "semi",
+   "known_by": [
+    "victim",
+    "friends:victim",
+    "family:victim"
+   ]
+  },
+  {
+   "key": "deed",
+   "subject": "official",
+   "text": "镇公所的地契登记簿上，{victim}家河边那块地去年改记到了{buyer}名下，改动的是{official}的笔迹",
+   "secrecy": "secret",
+   "archive": "hall",
+   "known_by": [
+    "official",
+    "buyer"
+   ]
+  },
+  {
+   "key": "lamp",
+   "subject": "official",
+   "text": "{official}天黑以后还留在镇公所，{buyer}也在里面",
+   "secrecy": "secret",
+   "witness": "hall",
+   "known_by": [
+    "official",
+    "buyer"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "official",
+   "text": "{official}改过的地契不止这一份",
+   "truth": 0.3,
+   "known_by": [
+    "gossip:2",
+    "enemies:official"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "一块地，两个主人"
+  ],
+  "neutral": [
+   "{official}被指篡改地契"
+  ],
+  "hot": [
+   "{official}拿笔把{victim}的地改没了"
+  ]
+ },
+ "followups": [
+  {
+   "tid": "resign",
+   "map": {
+    "official": "official"
+   },
+   "delay": 3,
+   "chance": 0.5,
+   "needs_evidence": true
+  }
+ ],
+ "detail": "登记簿上那一页的墨迹"
+}

@@ -1,0 +1,79 @@
+{
+ "id": "mail_tampering",
+ "name": "私拆信件",
+ "severity": 2,
+ "weeks": 12,
+ "target": "postman",
+ "driven_by": [
+  "money"
+ ],
+ "once": true,
+ "roles": {
+  "postman": {
+   "occupation": [
+    "postman"
+   ]
+  },
+  "victim": {
+   "occupation": [
+    "newcomer",
+    "widow",
+    "teacher"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "opened",
+   "subject": "postman",
+   "text": "{victim}收到的信，封口有被蒸开又粘上的痕迹",
+   "secrecy": "semi",
+   "known_by": [
+    "victim",
+    "friends:victim"
+   ]
+  },
+  {
+   "key": "money_order",
+   "subject": "postman",
+   "text": "汇款单存根上，{victim}收的一笔汇款，领款人签的不是{victim}的名字",
+   "secrecy": "secret",
+   "archive": "post",
+   "known_by": [
+    "postman"
+   ]
+  },
+  {
+   "key": "steam",
+   "subject": "postman",
+   "text": "{postman}关门以后还在邮局里，对着水壶的蒸汽拆信",
+   "secrecy": "secret",
+   "witness": "post",
+   "known_by": [
+    "postman"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "postman",
+   "text": "{postman}把镇上人的信拿给锯木厂的人看",
+   "truth": 0.2,
+   "known_by": [
+    "gossip:2"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "谁拆了你的信"
+  ],
+  "neutral": [
+   "{postman}被指私拆信件"
+  ],
+  "hot": [
+   "邮差在偷看你的信！"
+  ]
+ },
+ "detail": "封口上的水渍"
+}

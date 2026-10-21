@@ -21,6 +21,9 @@ var suffixes: Array = []   # 例如 ["@hot", "@autumn"]，越靠前越优先
 ## 只影响措辞，不影响模拟；存在 world.text_memory 里，重放时按同样顺序重建。
 var memory = null
 var week := 0
+## 这一次展开里已经说过的符号。规则表的 "_again" 指定第二次出现时改用哪个符号
+## （「后半夜」说过了，再说就是「那天夜里」），一篇报道用同一个 Grammar，时间地点只交代一次。
+var said := {}
 const FRESH_WEEKS := 26
 
 static var _re_sym: RegEx
@@ -99,6 +102,11 @@ func expand(text: String, depth: int = 0) -> String:
 
 
 func _expand_symbol(name: String, depth: int) -> String:
+	var again: Dictionary = rules.get("_again", {})
+	if said.has(name) and again.has(name):
+		name = str(again[name])
+	elif again.has(name):
+		said[name] = true
 	var options = null
 	for suf in suffixes:
 		if rules.has(name + suf):

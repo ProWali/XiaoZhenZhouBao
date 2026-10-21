@@ -92,6 +92,11 @@ func cast_roles(tpl: Dictionary, world, preset: Dictionary = {}) -> Dictionary:
 			for rid in world.residents:
 				if taken.has(rid) or world.residents[rid].done.has(tpl.id):
 					continue
+				# 一年内当过这类事件当事人的人，不再当（一个人两年里卖四回假药，镇子就假了）
+				if role == tpl.target and int(world.residents[rid].get("target_week", {}).get(tpl.id, -999)) > world.week - 52:
+					continue
+				if role == tpl.target and not tpl.get("soft", false) and int(world.residents[rid].get("target_week", {}).get("_any", -999)) > world.week - 26:
+					continue
 				if _fits(world.residents[rid], spec, world):
 					pool.append(rid)
 			if pool.size() < count:
@@ -129,6 +134,12 @@ func instantiate(tpl: Dictionary, roles: Dictionary, world, extras: Dictionary =
 	for role in roles:
 		for rid in roles[role]:
 			world.residents[rid].busy_until = inst.week_end
+			if role == tpl.target:
+				if not world.residents[rid].has("target_week"):
+					world.residents[rid]["target_week"] = {}
+				world.residents[rid].target_week[tpl.id] = world.week
+				if not tpl.get("soft", false):
+					world.residents[rid].target_week["_any"] = world.week
 			if tpl.get("once", false):
 				world.residents[rid].done[tpl.id] = true
 	if tpl.get("marry", false):

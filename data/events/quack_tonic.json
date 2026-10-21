@@ -1,0 +1,82 @@
+{
+ "id": "quack_tonic",
+ "name": "假药",
+ "severity": 2,
+ "weeks": 10,
+ "target": "seller",
+ "driven_by": [
+  "money"
+ ],
+ "roles": {
+  "seller": {
+   "occupation": [
+    "newcomer",
+    "drifter"
+   ]
+  },
+  "victim": {
+   "occupation": [
+    "widow",
+    "farmer",
+    "fisher"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "selling",
+   "subject": "seller",
+   "text": "{seller}在火车站卖一种「强身药水」，一瓶一块钱",
+   "secrecy": "semi",
+   "known_by": [
+    "seller",
+    "victim",
+    "random:5"
+   ]
+  },
+  {
+   "key": "harm",
+   "subject": "seller",
+   "text": "{victim}喝了那种药水以后上吐下泻，诊所记了一笔",
+   "secrecy": "secret",
+   "archive": "clinic",
+   "known_by": [
+    "victim",
+    "family:victim"
+   ]
+  },
+  {
+   "key": "bottling",
+   "subject": "seller",
+   "text": "{seller}在火车站后面用河水兑糖浆，一瓶一瓶装起来",
+   "secrecy": "secret",
+   "witness": "station",
+   "known_by": [
+    "seller"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "seller",
+   "text": "那药水是从城里大药房进的，正经货",
+   "truth": 0.1,
+   "known_by": [
+    "seller",
+    "friends:seller"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "火车站的药水"
+  ],
+  "neutral": [
+   "{seller}被指兜售假药"
+  ],
+  "hot": [
+   "一块钱一瓶的糖水"
+  ]
+ },
+ "detail": "瓶子上手写的标签"
+}

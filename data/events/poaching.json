@@ -1,0 +1,81 @@
+{
+ "id": "poaching",
+ "name": "偷猎",
+ "severity": 1,
+ "weeks": 8,
+ "target": "poacher",
+ "driven_by": [
+  "money"
+ ],
+ "roles": {
+  "poacher": {
+   "occupation": [
+    "farmer",
+    "veteran",
+    "drifter",
+    "fisher"
+   ]
+  },
+  "landowner": {
+   "occupation": [
+    "owner"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "snares",
+   "subject": "poacher",
+   "text": "锯木厂的林子里这个月发现了十几个套子",
+   "secrecy": "semi",
+   "known_by": [
+    "landowner",
+    "work:landowner:2",
+    "random:1"
+   ]
+  },
+  {
+   "key": "sack",
+   "subject": "poacher",
+   "text": "{poacher}天不亮从林子里出来，背着一只鼓鼓的麻袋",
+   "secrecy": "secret",
+   "witness": "woods",
+   "known_by": [
+    "poacher"
+   ]
+  },
+  {
+   "key": "hides",
+   "subject": "poacher",
+   "text": "杂货店收过{poacher}卖的鹿皮，一张三块钱",
+   "secrecy": "secret",
+   "archive": "store",
+   "known_by": [
+    "poacher",
+    "family:poacher"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "poacher",
+   "text": "{poacher}在林子里放过火赶鹿",
+   "truth": 0.1,
+   "known_by": [
+    "enemies:poacher"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "林子里的套子"
+  ],
+  "neutral": [
+   "{poacher}被指在锯木厂林子里偷猎"
+  ],
+  "hot": [
+   "{poacher}偷了厂主的鹿"
+  ]
+ },
+ "detail": "套子上的铁丝"
+}

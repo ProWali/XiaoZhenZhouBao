@@ -1,0 +1,82 @@
+{
+ "id": "usury",
+ "name": "高利贷",
+ "severity": 2,
+ "weeks": 14,
+ "target": "lender",
+ "driven_by": [
+  "money"
+ ],
+ "roles": {
+  "lender": {
+   "occupation": [
+    "owner",
+    "grocer"
+   ]
+  },
+  "borrower": {
+   "occupation": [
+    "worker",
+    "farmer",
+    "fisher"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "note",
+   "subject": "lender",
+   "text": "镇公所存着一张借据：{borrower}借了{lender}二十块钱，一个月利息三块",
+   "secrecy": "secret",
+   "archive": "hall",
+   "known_by": [
+    "lender",
+    "borrower"
+   ]
+  },
+  {
+   "key": "seized",
+   "subject": "lender",
+   "text": "{lender}的人上门把{borrower}家的缝纫机抬走了，说是抵利息",
+   "secrecy": "semi",
+   "known_by": [
+    "borrower",
+    "family:borrower",
+    "friends:borrower"
+   ]
+  },
+  {
+   "key": "half",
+   "subject": "lender",
+   "text": "锯木厂有一半工人欠着{lender}的钱",
+   "secrecy": "secret",
+   "known_by": [
+    "lender",
+    "work:borrower:2"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "lender",
+   "text": "{lender}借钱给工人，是要压得他们不敢罢工",
+   "truth": 0.4,
+   "known_by": [
+    "enemies:lender",
+    "gossip:1"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "一张借据"
+  ],
+  "neutral": [
+   "{lender}被指放高利贷"
+  ],
+  "hot": [
+   "{lender}吸着工人的血"
+  ]
+ },
+ "detail": "借据上的手印"
+}

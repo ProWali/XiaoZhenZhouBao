@@ -1,77 +1,35 @@
 [
  {
   "body": [
-   "镇上很多人信得过牧师吉林·托尔。本报查到的事，可能会让一些人改变看法。",
-   "本报在诊所查到的记录写得清楚：吉林牧师的手抖是饮酒所致，这是医生写下的。诊所的药柜里，治手抖的药这一年进得特别勤。",
-   "吉林牧师说自己滴酒不沾。报社的门白天都开着。"
-  ],
-  "event": "暗中酗酒",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "诊所记录写着吉林·托尔的手抖是酒精所致",
-    "verified": true
-   }
-  ],
-  "headline": "吉林·托尔的手抖，病历上写着原因",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "吉林·托尔",
-    "occ": "牧师",
-    "role": "drunk",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "卡森·米拉",
-    "occ": "女佣",
-    "role": "maid",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "夏天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "drinking",
-  "tone": "neutral",
-  "week": 24
- },
- {
-  "body": [
    "酒馆里最便宜的那种散酒，本报查了查来路。",
-   "夜里十点多的林子里有车声。本报记者循着声音过去，看见赶车的是莫维·索尔，车斗上的油布捆得很紧。油布底下露出一角，是酒缸的缸沿。",
-   "地里的收成不好，这一年谁家都难。难，也不能不交税。莫维·索尔本人还没有回应。"
+   "夜里十点多的林子里有车声。本报记者循着声音过去，看见赶车的是萨尔森·瑞比，车斗上的油布捆得很紧。本报后来又问到一个看见的人。林间那条小道上，车辙压得比运木头的大道还深。",
+   "地里的收成不好，这一年谁家都难。难，也不能不交税。",
+   "截至付印，本报没能见到萨尔森·瑞比。"
   ],
   "event": "私酿",
   "evidence": true,
   "facts": [
    {
     "source": "witness",
-    "text": "莫维·索尔半夜赶车穿过树林，车上盖着油布",
+    "text": "萨尔森·瑞比半夜赶车穿过树林，车上盖着油布",
     "verified": true
    }
   ],
-  "headline": "莫维·索尔被指私酿",
+  "headline": "萨尔森·瑞比被指私酿",
   "naming": "named",
   "pleaded": false,
   "roles": [
    {
     "female": false,
-    "name": "莫维·索尔",
+    "name": "萨尔森·瑞比",
     "occ": "农户",
     "role": "brewer",
     "shown_as": "named",
     "target": true
    },
    {
-    "female": true,
-    "name": "雷宁·格拉",
+    "female": false,
+    "name": "艾林·恩特",
     "occ": "酒馆老板",
     "role": "buyer",
     "shown_as": "named",
@@ -79,283 +37,48 @@
    }
   ],
   "season": "秋天",
-  "seed": 13,
+  "seed": 1,
   "strategy": "cautious",
   "tid": "moonshine",
   "tone": "neutral",
-  "week": 32
+  "week": 85
  },
  {
   "body": [
-   "这几天本报查了镇公所的一笔账。",
-   "本报在镇公所查到的记录写得清楚：账上有一笔哈克·艾蒂付的「修路款」，可路没修。影印件附后，读者可以自己看。那条路上最深的一个坑，去年秋天陷进去过一辆运粮的马车。天黑以后，本报记者在酒馆后间看见哈克女士把一个信封推到托利·卢顿面前。信封里是什么，本报没有看见。",
-   "修路的钱是镇上每户人家交的税。钱去了哪里，每户人家都有权知道。",
-   "托利镇长说这是有人存心害他。知道更多的人，可以来报社坐坐。"
-  ],
-  "event": "受贿",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "镇公所账上有一笔哈克·艾蒂付的「修路款」，可路没修",
-    "verified": true
-   },
-   {
-    "source": "witness",
-    "text": "哈克·艾蒂在酒馆后间递给托利·卢顿一个信封",
-    "verified": true
-   }
-  ],
-  "headline": "托利·卢顿与哈克·艾蒂：一个信封",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "托利·卢顿",
-    "occ": "镇长",
-    "role": "official",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "哈克·艾蒂",
-    "occ": "店主",
-    "role": "payer",
-    "shown_as": "named",
-    "target": false
-   },
-   {
-    "female": true,
-    "name": "诺尔森·薇拉",
-    "occ": "书记员",
-    "role": "clerk",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "春天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "bribery",
-  "tone": "neutral",
-  "week": 64
- },
- {
-  "body": [
-   "镇上关于教师拉彻·莉德的议论，本报听到不止一次。",
-   "有人对本报证实，拉彻女士来灰河镇之前就做过这种事。本报另向知情人核实过，说法一致。",
-   "教书的人，镇上向来看得比别人重一些，这对拉彻女士也许不公平。",
-   "拉彻女士说那天晚上只是碰巧遇见。有知情者，欢迎到报社来。"
-  ],
-  "event": "私情",
-  "evidence": false,
-  "facts": [
-   {
-    "source": "interview",
-    "text": "拉彻·莉德是被人花钱从外地请来拆散这家人的",
-    "verified": true
-   }
-  ],
-  "headline": "拉彻·莉德卷入一桩家事",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": true,
-    "name": "拉彻·莉德",
-    "occ": "教师",
-    "role": "lover",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "塔森·贝塔",
-    "occ": "家眷",
-    "role": "spouse",
-    "shown_as": "named",
-    "target": false
-   },
-   {
-    "female": false,
-    "name": "塔森·恩森",
-    "occ": "农户",
-    "role": "wife",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "冬天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "affair",
-  "tone": "neutral",
-  "week": 40
- },
- {
-  "body": [
-   "锯木厂失窃一事，本报追查到了一个人：工人法比·卡比。",
-   "这一幕本报记者在场看见：后半夜，法比先生从锯木厂后门出来，手里拎着东西。那晚锯木厂的狗没有叫。",
-   "厂里谁丢了饭碗，全镇都看得见；谁手里多了钱，也一样。",
-   "法比先生坚称自己清白。"
-  ],
-  "event": "偷窃",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "witness",
-    "text": "法比·卡比夜里从锯木厂后门出来，手里拎着东西",
-    "verified": true
-   }
-  ],
-  "headline": "法比·卡比夜里在锯木厂后门被人看见",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "法比·卡比",
-    "occ": "工人",
-    "role": "thief",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "拉森·拉姆",
-    "occ": "工头",
-    "role": "boss",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "夏天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "theft",
-  "tone": "neutral",
-  "week": 66
- },
- {
-  "body": [
-   "关于牧师吉林·托尔，镇上有一种说法，本报查了查。",
-   "本报记者当晚就在附近，看得清楚：吉林牧师进出酒馆走后门，从不走前门。后巷那盏灯坏了半年，一直没人修。",
-   "教堂的钥匙在吉林牧师手里，酒馆后门的路，他也走得熟。",
-   "被问到喝酒的事，吉林牧师说那是别人看错了。本报不劝人戒酒，只把看到的写下来。"
-  ],
-  "event": "暗中酗酒",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "witness",
-    "text": "吉林·托尔从酒馆后门进出，不走前门",
-    "verified": true
-   }
-  ],
-  "headline": "吉林·托尔被指长期酗酒，不走酒馆前门",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "吉林·托尔",
-    "occ": "牧师",
-    "role": "drunk",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "罗森·艾塔",
-    "occ": "女佣",
-    "role": "maid",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "秋天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "drinking",
-  "tone": "neutral",
-  "week": 32
- },
- {
-  "body": [
-   "关于新来的雷尔森·菲娜的来历，镇上有些说法，本报核实了一部分。",
-   "本报查阅了邮局的存档：一封盖着法院印章的信寄到了灰河镇，收信人是雷尔森女士。本报已将影印件附于本版。",
-   "新来的人总要被人多看两眼，这不公平，可小镇就是这样。",
-   "截至付印，本报没能见到雷尔森·菲娜。"
-  ],
-  "event": "来历不明",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "邮局有一封寄给雷尔森·菲娜的信，封口印着法院的章",
-    "verified": true
-   }
-  ],
-  "headline": "雷尔森·菲娜的来历，镇上有说法",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": true,
-    "name": "雷尔森·菲娜",
-    "occ": "新来的",
-    "role": "stranger",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "莫沃·艾克",
-    "occ": "退伍兵",
-    "role": "recognizer",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "夏天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "past",
-  "tone": "neutral",
-  "week": 26
- },
- {
-  "body": [
-   "酒馆里最便宜的那种散酒，本报查了查来路。",
-   "本报记者夜里十点多守在林子边上，看见莫沃·艾克赶着一辆马车穿过树林，车上盖着油布。林子里那条小路，车辙比运木头的大道还深。",
-   "打过仗的人，什么苦日子都过过。可私酒这门生意，不是苦日子能解释的。莫沃先生说，本报登的这些，他一个字也不认。本报将继续关注。"
+   "农户卡比·汉尔的名字，最近在酒馆里被提起好几回。",
+   "有人对本报证实，卡比先生的酒喝瞎过人。本报记者在酒馆打烊之后的林边小路上等了一个多钟头，等来的是卡比·汉尔的马车，车斗上的油布鼓鼓囊囊。那晚在场的还有别人，本报问过，说的是同一回事。油布底下露出一角，是酒缸的缸沿。",
+   "地里的收成不好，这一年谁家都难。难，也不能不交税。",
+   "卡比先生坚称自己清白。"
   ],
   "event": "私酿",
   "evidence": true,
   "facts": [
    {
+    "source": "interview",
+    "text": "卡比·汉尔的酒喝瞎过人",
+    "verified": true
+   },
+   {
     "source": "witness",
-    "text": "莫沃·艾克半夜赶车穿过树林，车上盖着油布",
+    "text": "卡比·汉尔半夜赶车穿过树林，车上盖着油布",
     "verified": true
    }
   ],
-  "headline": "莫沃·艾克被指私酿",
+  "headline": "卡比·汉尔被指私酿",
   "naming": "named",
   "pleaded": false,
   "roles": [
    {
     "female": false,
-    "name": "莫沃·艾克",
-    "occ": "退伍兵",
+    "name": "卡比·汉尔",
+    "occ": "农户",
     "role": "brewer",
     "shown_as": "named",
     "target": true
    },
    {
-    "female": true,
-    "name": "雷宁·格拉",
+    "female": false,
+    "name": "艾林·恩特",
     "occ": "酒馆老板",
     "role": "buyer",
     "shown_as": "named",
@@ -363,121 +86,257 @@
    }
   ],
   "season": "春天",
-  "seed": 13,
+  "seed": 1,
   "strategy": "cautious",
   "tid": "moonshine",
-  "tone": "neutral",
-  "week": 59
- },
- {
-  "body": [
-   "镇上很多人信得过书记员诺尔森·薇拉。本报查到的事，可能会让一些人改变看法。",
-   "本报记者不止一次在结冰的夜里看见诺尔森女士从酒馆后门进出。前门就在街上，她从来不走。酒馆老板说，有些客人从来不坐在窗边。",
-   "一个人进酒馆非要绕到后门，总有她的缘故。被问到喝酒的事，诺尔森女士说那是别人看错了。下期本报再续。"
-  ],
-  "event": "暗中酗酒",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "witness",
-    "text": "诺尔森·薇拉从酒馆后门进出，不走前门",
-    "verified": true
-   }
-  ],
-  "headline": "诺尔森·薇拉被指长期酗酒，不走酒馆前门",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": true,
-    "name": "诺尔森·薇拉",
-    "occ": "书记员",
-    "role": "drunk",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "卡森·米拉",
-    "occ": "女佣",
-    "role": "maid",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "冬天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "drinking",
-  "tone": "neutral",
-  "week": 98
- },
- {
-  "body": [
-   "最近一段时间本报收到下游人家的反映：井水发涩，烧开了也是一股怪味。本报一路追查到了锯木厂。",
-   "据本报采访，贝利·安恩家的井水这几周有一股石灰味，烧开了也去不掉。下游那几户人家，这一阵改去镇东的公用井挑水，来回要走半个钟头。",
-   "截至付印，本报没能见到德林·安尔。"
-  ],
-  "event": "排污",
-  "evidence": false,
-  "facts": [
-   {
-    "source": "interview",
-    "text": "贝利·安恩家的井水这几周有一股石灰味",
-    "verified": true
-   }
-  ],
-  "headline": "灰河下游井水变味，矛头指向德林·安尔",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "德林·安尔",
-    "occ": "厂主",
-    "role": "culprit",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "贝利·安恩",
-    "occ": "渔夫",
-    "role": "victim",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "春天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "pollution",
   "tone": "neutral",
   "week": 55
  },
  {
   "body": [
-   "麦子黄的时候，桥头的夜里并不安静。",
-   "天黑以后，本报记者在桥头看见艾利·本尔和雷宁·格拉并肩走过，两人挨得很近。桥头那盏煤气灯，是镇上唯一一盏整夜亮着的灯。",
-   "本报不评判谁对谁错。两家人都还住在镇上，往后的日子怎么过，是他们自己的事。",
-   "艾利先生说那天晚上只是碰巧遇见。下期本报再续。"
+   "一封信怎么会被人拆过，本报查到了邮局。",
+   "本报查了邮局的汇款单存根：寄给艾彻·卢比的一笔钱已经被人领走，领款人那一栏签的字，不是艾彻先生的。本报已将影印件附于本版。本报记者在夜里十点多看见诺尔森·艾比一个人坐在邮局里，面前的水壶冒着气，手边摆着一摞信。",
+   "汇款是从南边寄来的，三块钱。",
+   "诺尔森先生说在邮局干了这么多年，从没出过差错。"
   ],
-  "event": "私情",
+  "event": "私拆信件",
   "evidence": true,
   "facts": [
    {
+    "source": "archive",
+    "text": "汇款单存根上，艾彻·卢比收的一笔汇款，领款人签的不是艾彻·卢比的名字",
+    "verified": true
+   },
+   {
     "source": "witness",
-    "text": "艾利·本尔和雷宁·格拉深夜在桥头同行，不止一个人看见",
+    "text": "诺尔森·艾比关门以后还在邮局里，对着水壶的蒸汽拆信",
     "verified": true
    }
   ],
-  "headline": "艾利·本尔与某位已婚人士深夜同行，见者不止一人",
+  "headline": "邮局里出了事",
   "naming": "named",
   "pleaded": false,
   "roles": [
    {
     "female": false,
-    "name": "艾利·本尔",
+    "name": "诺尔森·艾比",
+    "occ": "邮差",
+    "role": "postman",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "艾彻·卢比",
+    "occ": "新来的",
+    "role": "victim",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "秋天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "mail_tampering",
+  "tone": "neutral",
+  "week": 37
+ },
+ {
+  "body": [
+   "一笔二十块钱的借款，本报算了算它的利息。",
+   "镇公所留存的记录显示，镇公所存着一张借据：雷兰·格蒂借了瓦彻·卡比二十块钱，一个月利息三块。影印件附后，读者可以自己看。",
+   "镇上的人赊账、借钱，都得看同一家店的脸色。瓦彻先生本周不在家，本报没能当面问到。"
+  ],
+  "event": "高利贷",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "镇公所存着一张借据：雷兰·格蒂借了瓦彻·卡比二十块钱，一个月利息三块",
+    "verified": true
+   }
+  ],
+  "headline": "一笔二十块钱的借款",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "瓦彻·卡比",
+    "occ": "店主",
+    "role": "lender",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": true,
+    "name": "雷兰·格蒂",
+    "occ": "农户",
+    "role": "borrower",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "冬天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "usury",
+  "tone": "neutral",
+  "week": 45
+ },
+ {
+  "body": [
+   "周六晚上，酒馆的后屋比前面热闹。本报去看了看。",
+   "本报记者在后半夜进过一回后屋。牌桌边上放着一只铁盒子，艾林·恩特每一局都往里面放钱。事后本报找到另一位在场的人，说法一致。那只铁盒子上了锁，钥匙挂在艾林先生的腰上。",
+   "开牌局的人，不管谁输谁赢，总是赢的那一个。",
+   "艾林先生说酒馆里从来没出过事。下期本报再续。"
+  ],
+  "event": "赌局",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "艾林·恩特在后屋收桌钱，每一局抽一成",
+    "verified": true
+   }
+  ],
+  "headline": "后屋里那一桌牌",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "艾林·恩特",
+    "occ": "酒馆老板",
+    "role": "barkeep",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "雷林·约比",
+    "occ": "工人",
+    "role": "loser",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "夏天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "gambling",
+  "tone": "neutral",
+  "week": 26
+ },
+ {
+  "body": [
+   "教堂的钱是怎么花的，本报替教友们问了问。",
+   "本报在邮局的汇票存根上看到，诺德·卡比每个月往南边寄一笔钱，数目和捐款少掉的那一截差不多。那些汇票寄往南边的同一个地址。",
+   "牧师本该是镇上最让人放心的人。",
+   "本报尚未得到诺德牧师的回应。本报将继续关注。"
+  ],
+  "event": "挪用捐款",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "诺德·卡比每个月往南边寄一张汇票，数目正好是捐款少掉的那一截",
+    "verified": true
+   }
+  ],
+  "headline": "教堂的账，本报查了查",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "诺德·卡比",
+    "occ": "牧师",
+    "role": "priest",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": true,
+    "name": "罗特·佩塔",
+    "occ": "家眷",
+    "role": "counter",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "冬天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "church_funds",
+  "tone": "neutral",
+  "week": 51
+ },
+ {
+  "body": [
+   "这几天，锯木厂的工头哈顿·拉姆一直在查一件事：工具房里的东西到哪去了。",
+   "后半夜，本报记者在锯木厂外面看见雷林·约比从后门出来，手里提着东西，脚步匆忙。那晚锯木厂的狗没有叫。",
+   "雷林·约比本人还没有回应。厂里的工具房，如今多了一把锁。"
+  ],
+  "event": "偷窃",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "雷林·约比夜里从锯木厂后门出来，手里拎着东西",
+    "verified": true
+   }
+  ],
+  "headline": "雷林·约比深夜离开锯木厂，手里拎着东西",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "雷林·约比",
+    "occ": "工人",
+    "role": "thief",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "哈顿·拉姆",
+    "occ": "工头",
+    "role": "boss",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "夏天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "theft",
+  "tone": "neutral",
+  "week": 72
+ },
+ {
+  "body": [
+   "关于新来的艾彻·卢比的闲话，好几个礼拜都没停过。",
+   "本报查阅了邮局的存档：同住一个镇子，帕沃·格琳却每周给艾彻先生写一封信。",
+   "艾彻先生说两人只是朋友。"
+  ],
+  "event": "私情",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "帕沃·格琳每周往邮局寄一封信给艾彻·卢比，收信人就住在镇上",
+    "verified": true
+   }
+  ],
+  "headline": "帕沃·格琳每周寄信给艾彻·卢比",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "艾彻·卢比",
     "occ": "新来的",
     "role": "lover",
     "shown_as": "named",
@@ -485,839 +344,40 @@
    },
    {
     "female": true,
-    "name": "雷宁·格拉",
-    "occ": "酒馆老板",
+    "name": "帕沃·格琳",
+    "occ": "家眷",
     "role": "spouse",
     "shown_as": "named",
     "target": false
    },
    {
     "female": false,
-    "name": "雷宁·达斯",
-    "occ": "家眷",
+    "name": "帕沃·安恩",
+    "occ": "渔夫",
     "role": "wife",
     "shown_as": "named",
     "target": false
    }
   ],
-  "season": "夏天",
-  "seed": 13,
+  "season": "春天",
+  "seed": 1,
   "strategy": "cautious",
   "tid": "affair",
-  "tone": "neutral",
-  "week": 68
- },
- {
-  "body": [
-   "厂主德林·安尔的病情一直没有公开。本报得到了一些情况。",
-   "本报看过诊所的病历，德林先生的病在肺上，医生在上面写的是「不宜过劳」。",
-   "德林·安尔本人还没有回应。"
-  ],
-  "event": "隐瞒病情",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "诊所病历上德林·安尔的病是肺上的，医生写了「不宜过劳」",
-    "verified": true
-   }
-  ],
-  "headline": "医生嘱德林·安尔不宜过劳",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "德林·安尔",
-    "occ": "厂主",
-    "role": "sick",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "帕宁·维德",
-    "occ": "医生",
-    "role": "nurse",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "夏天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "illness",
-  "tone": "neutral",
-  "week": 24
- },
- {
-  "body": [
-   "天热起来以后，林子边上的人家夜里常被车声吵醒。",
-   "本报记者那天夜里就在不远处。后半夜，一辆盖着油布的马车穿过树林，赶车的是莫维·索尔。",
-   "地里的收成不好，这一年谁家都难。难，也不能不交税。",
-   "截至付印，本报没能见到莫维·索尔。"
-  ],
-  "event": "私酿",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "witness",
-    "text": "莫维·索尔半夜赶车穿过树林，车上盖着油布",
-    "verified": true
-   }
-  ],
-  "headline": "莫维·索尔被指私酿",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "莫维·索尔",
-    "occ": "农户",
-    "role": "brewer",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "雷宁·格拉",
-    "occ": "酒馆老板",
-    "role": "buyer",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "夏天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "moonshine",
-  "tone": "neutral",
-  "week": 15
- },
- {
-  "body": [
-   "开春以来，酒馆后巷那扇门，夜里开合得特别勤。",
-   "夜里十点多，本报记者在酒馆后巷看见吉林·托尔推门出来，帽檐压得很低。酒馆后门的台阶被踩出了一道亮印子。诊所的病历本报看过：吉林牧师的手抖，医生写下的原因是酒。",
-   "吉林牧师说自己滴酒不沾。本报不劝人戒酒，只把看到的写下来。"
-  ],
-  "event": "暗中酗酒",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "witness",
-    "text": "吉林·托尔从酒馆后门进出，不走前门",
-    "verified": true
-   },
-   {
-    "source": "archive",
-    "text": "诊所记录写着吉林·托尔的手抖是酒精所致",
-    "verified": true
-   }
-  ],
-  "headline": "吉林·托尔深夜出入酒馆后门",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "吉林·托尔",
-    "occ": "牧师",
-    "role": "drunk",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "罗森·艾塔",
-    "occ": "女佣",
-    "role": "maid",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "春天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "drinking",
   "tone": "neutral",
   "week": 64
  },
  {
   "body": [
-   "医生帕宁·维德在镇上是受人尊敬的人。本报得知，他有长期饮酒的习惯，而且一直在遮掩。",
-   "有熟悉内情的人告诉本报，帕宁医生家后院的空酒瓶，卡森·米拉每周要清一筐。卡森女士说，那些瓶子她都是天不亮就拎出去的。诊所自己的记录里有这么一条：帕宁医生的手抖，是酒的缘故。记录的人是诊所的护士。",
-   "本报记者守了一夜，看到的是这样：天黑以后，帕宁医生从酒馆后门出来，帽檐压得很低。其余的，本报没有看见，不敢乱写。",
-   "帕宁·维德本人还没有回应。"
-  ],
-  "event": "暗中酗酒",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "interview",
-    "text": "卡森·米拉每周从帕宁·维德家后院清出一筐空酒瓶",
-    "verified": true
-   },
-   {
-    "source": "archive",
-    "text": "诊所记录写着帕宁·维德的手抖是酒精所致",
-    "verified": true
-   },
-   {
-    "source": "witness",
-    "text": "帕宁·维德从酒馆后门进出，不走前门",
-    "verified": true
-   }
-  ],
-  "headline": "帕宁·维德饮酒成习，一直在遮掩",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "帕宁·维德",
-    "occ": "医生",
-    "role": "drunk",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "卡森·米拉",
-    "occ": "女佣",
-    "role": "maid",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "春天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "drinking",
-  "tone": "neutral",
-  "week": 2
- },
- {
-  "body": [
-   "这个月，有人在下着雪的夜里看见教师拉彻·莉德和一位已婚的人在桥头并肩走着。",
-   "本报记者在附近看见，结冰的夜里，拉彻女士和瓦尔·卡斯在桥头同行，看见的人不止一个。瓦尔先生是有家室的人。",
-   "拉彻女士说两人只是朋友。这件事还没完。"
-  ],
-  "event": "私情",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "witness",
-    "text": "拉彻·莉德和瓦尔·卡斯深夜在桥头同行，不止一个人看见",
-    "verified": true
-   }
-  ],
-  "headline": "拉彻·莉德与瓦尔·卡斯深夜桥头同行",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": true,
-    "name": "拉彻·莉德",
-    "occ": "教师",
-    "role": "lover",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "瓦尔·卡斯",
-    "occ": "赋闲的人",
-    "role": "spouse",
-    "shown_as": "named",
-    "target": false
-   },
-   {
-    "female": true,
-    "name": "瓦尔·珂丝",
-    "occ": "家眷",
-    "role": "wife",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "冬天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "affair",
-  "tone": "neutral",
-  "week": 49
- },
- {
-  "body": [
-   "教师拉彻·莉德的事，镇上已经有人在说。本报把能查到的写在下面。",
-   "邮局留存的记录显示，艾顿·薇雅每周寄一封信，收信人是拉彻女士。记录本报抄了一份，留在报社。",
-   "拉彻·莉德本人还没有回应。本报将继续关注。"
-  ],
-  "event": "私情",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "艾顿·薇雅每周往邮局寄一封信给拉彻·莉德，收信人就住在镇上",
-    "verified": true
-   }
-  ],
-  "headline": "关于拉彻·莉德的议论",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": true,
-    "name": "拉彻·莉德",
-    "occ": "教师",
-    "role": "lover",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "艾顿·薇雅",
-    "occ": "工人",
-    "role": "spouse",
-    "shown_as": "named",
-    "target": false
-   },
-   {
-    "female": false,
-    "name": "艾顿·维顿",
-    "occ": "家眷",
-    "role": "wife",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "夏天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "affair",
-  "tone": "neutral",
-  "week": 16
- },
- {
-  "body": [
-   "叶子落了以后，下游有三户人家不再喝自家的井水了。本报沿着灰河往上查，查到了厂主德林·安尔的锯木厂。",
-   "本报记者后半夜在河边等了很久，等到锯木厂的人推着木桶出来，把桶里的东西一桶一桶倒进河里。锯木厂后门到河边，有一道被木桶轮子压出来的车辙。",
-   "这不是哪一家跟哪一家的事。灰河往下，还流过好几户人家的地头。德林·安尔本人还没有回应。下期本报再续。"
-  ],
-  "event": "排污",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "witness",
-    "text": "德林·安尔让人趁夜把厂里的废液倒进灰河",
-    "verified": true
-   }
-  ],
-  "headline": "下游井水变味，德林·安尔脱不了干系",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "德林·安尔",
-    "occ": "厂主",
-    "role": "culprit",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "塔克·恩特",
-    "occ": "农户",
-    "role": "victim",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "秋天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "pollution",
-  "tone": "neutral",
-  "week": 39
- },
- {
-  "body": [
-   "镇长托利·卢顿的身体，比他对外说的要差。",
-   "据诊所的记录，托利镇长的病在肺上，医生的嘱咐是「不宜过劳」。记录的抄件存在报社，读者可以来看。",
-   "托利镇长只说了一句：「我没事。」后面的事，本报会接着问。"
-  ],
-  "event": "隐瞒病情",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "诊所病历上托利·卢顿的病是肺上的，医生写了「不宜过劳」",
-    "verified": true
-   }
-  ],
-  "headline": "托利·卢顿病情比对外说的重",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "托利·卢顿",
-    "occ": "镇长",
-    "role": "sick",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "凯德·妮雅",
-    "occ": "护士",
-    "role": "nurse",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "冬天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "illness",
-  "tone": "neutral",
-  "week": 44
- },
- {
-  "body": [
-   "叶子落了以后，林子边上的人家夜里常被车声吵醒。",
-   "本报记者在附近看见，酒馆打烊之后，卡利·达斯赶车穿过树林，车上盖着油布。油布底下露出一角，是酒缸的缸沿。",
-   "卡利·达斯本人还没有回应。这件事还没完。"
-  ],
-  "event": "私酿",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "witness",
-    "text": "卡利·达斯半夜赶车穿过树林，车上盖着油布",
-    "verified": true
-   }
-  ],
-  "headline": "卡利·达斯被指私酿",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "卡利·达斯",
-    "occ": "农户",
-    "role": "brewer",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "雷宁·格拉",
-    "occ": "酒馆老板",
-    "role": "buyer",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "秋天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "moonshine",
-  "tone": "neutral",
-  "week": 80
- },
- {
-  "body": [
-   "镇长帕宁·维德经手的一笔修路款，本报查不到它花在了哪里。",
-   "据镇公所的记录，德林·安尔付过一笔钱，记在「修路」名下，此后再没有下文。相关记录的影印件附在本版下方。本报记者当晚就在附近，看得清楚：德林先生在酒馆后间递给帕宁镇长一个信封。",
-   "截至付印，本报没能见到帕宁·维德。报社的门白天都开着。"
-  ],
-  "event": "受贿",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "镇公所账上有一笔德林·安尔付的「修路款」，可路没修",
-    "verified": true
-   },
-   {
-    "source": "witness",
-    "text": "德林·安尔在酒馆后间递给帕宁·维德一个信封",
-    "verified": true
-   }
-  ],
-  "headline": "帕宁·维德与德林·安尔：一个信封",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "帕宁·维德",
-    "occ": "镇长",
-    "role": "official",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "德林·安尔",
-    "occ": "厂主",
-    "role": "payer",
-    "shown_as": "named",
-    "target": false
-   },
-   {
-    "female": true,
-    "name": "诺尔森·薇拉",
-    "occ": "书记员",
-    "role": "clerk",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "秋天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "bribery",
-  "tone": "neutral",
-  "week": 86
- },
- {
-  "body": [
-   "灰河下游的井水变味已有一段时日。本报查访发现，这件事可能和上游厂主德林·安尔的锯木厂有关。",
-   "本报查阅了邮局的存档：德林先生这个月通过邮购订了四十袋石灰，锯木厂平时用不了这么多。",
-   "倒进河里的东西，不会只流到下游三户人家门口为止。",
-   "德林·安尔本人还没有回应。"
-  ],
-  "event": "排污",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "德林·安尔通过邮局订了四十袋石灰，锯木厂用不了这么多",
-    "verified": true
-   }
-  ],
-  "headline": "德林·安尔的锯木厂与下游井水异味有关",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "德林·安尔",
-    "occ": "厂主",
-    "role": "culprit",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "莫伯·卢克",
-    "occ": "渔夫",
-    "role": "victim",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "夏天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "pollution",
-  "tone": "neutral",
-  "week": 75
- },
- {
-  "body": [
-   "酒馆里最便宜的那种散酒，本报查了查来路。",
-   "本报记者后半夜守在林子边上，看见拉林·贝拉赶着一辆马车穿过树林，车上盖着油布。林子里那条小路，车辙比运木头的大道还深。",
-   "地里的收成不好，这一年谁家都难。难，也不能不交税。拉林·贝拉本人还没有回应。有知情者，欢迎到报社来。"
-  ],
-  "event": "私酿",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "witness",
-    "text": "拉林·贝拉半夜赶车穿过树林，车上盖着油布",
-    "verified": true
-   }
-  ],
-  "headline": "拉林·贝拉被指私酿",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": true,
-    "name": "拉林·贝拉",
-    "occ": "农户",
-    "role": "brewer",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "雷宁·格拉",
-    "occ": "酒馆老板",
-    "role": "buyer",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "秋天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "moonshine",
-  "tone": "neutral",
-  "week": 89
- },
- {
-  "body": [
-   "锯木厂丢的工具找到了下落，经手的是厂里的工人罗林·卢尔。",
-   "杂货店留存的记录显示，罗林先生把锯条卖给了河湾农场，转手的单子还在。据知情人说，拉森·拉姆发现工具房少了东西：两把锯条，一箱钉子。工具房的钥匙只有三把，一把在工头手里。",
-   "厂里谁丢了饭碗，全镇都看得见；谁手里多了钱，也一样。罗林先生说，本报登的这些，他一个字也不认。后面的事，本报会接着问。"
-  ],
-  "event": "偷窃",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "罗林·卢尔把锯条卖给了河湾农场，杂货店的收货单上有记录",
-    "verified": true
-   },
-   {
-    "source": "interview",
-    "text": "锯木厂这个月丢了两把锯条和一箱钉子，拉森·拉姆在查",
-    "verified": true
-   }
-  ],
-  "headline": "锯木厂的锯条出现在河湾农场",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "罗林·卢尔",
-    "occ": "工人",
-    "role": "thief",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "拉森·拉姆",
-    "occ": "工头",
-    "role": "boss",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "秋天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "theft",
-  "tone": "neutral",
-  "week": 81
- },
- {
-  "body": [
-   "入秋以来，锯木厂的工具房一直对不上账。",
-   "本报记者亲眼所见：天黑以后，有人从锯木厂后门出来，往河湾农场的方向去了，那人是罗利·索特。那晚锯木厂的狗没有叫。",
-   "厂里谁丢了饭碗，全镇都看得见；谁手里多了钱，也一样。",
-   "截至付印，本报没能见到罗利·索特。"
+   "锯木厂丢东西的事，厂里的人私下议论了好一阵。本报去问了问。",
+   "本报记者在酒馆打烊之后亲眼看见马林·弗特从锯木厂后门出来，手里没空着。当时附近另有旁人，所见相同。",
+   "马林先生说这是有人存心害他。"
   ],
   "event": "偷窃",
   "evidence": true,
   "facts": [
    {
     "source": "witness",
-    "text": "罗利·索特夜里从锯木厂后门出来，手里拎着东西",
-    "verified": true
-   }
-  ],
-  "headline": "锯木厂的夜里不太平",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "罗利·索特",
-    "occ": "工人",
-    "role": "thief",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "拉森·拉姆",
-    "occ": "工头",
-    "role": "boss",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "秋天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "theft",
-  "tone": "neutral",
-  "week": 36
- },
- {
-  "body": [
-   "雪化了以后，镇上那条路还是老样子。",
-   "本报查阅了镇公所的账：有一笔德林·安尔付的钱，记在「修路」名下。那条路到今天没有动过。本报记者亲眼看见德林先生在酒馆后间递给瓦尔·卡斯一个牛皮纸信封，瓦尔警长收下了。那个信封很厚，封口压着火漆。",
-   "公家的钱怎么花，从来不是一个人说了算的事。",
-   "截至付印，本报没能见到瓦尔·卡斯。修路的事，本报会追问到底。"
-  ],
-  "event": "受贿",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "镇公所账上有一笔德林·安尔付的「修路款」，可路没修",
-    "verified": true
-   },
-   {
-    "source": "witness",
-    "text": "德林·安尔在酒馆后间递给瓦尔·卡斯一个信封",
-    "verified": true
-   }
-  ],
-  "headline": "修路款去向不明，瓦尔·卡斯难辞其咎",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "瓦尔·卡斯",
-    "occ": "警长",
-    "role": "official",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "德林·安尔",
-    "occ": "厂主",
-    "role": "payer",
-    "shown_as": "named",
-    "target": false
-   },
-   {
-    "female": true,
-    "name": "诺尔森·薇拉",
-    "occ": "书记员",
-    "role": "clerk",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "春天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "bribery",
-  "tone": "neutral",
-  "week": 8
- },
- {
-  "body": [
-   "上周，店主哈克·艾蒂为一笔收不回来的账发愁。",
-   "也有人说，凯林·妮娜欠的其实是赌债。",
-   "杂货店柜台后面新挂了一块小黑板，写着「本店概不赊账」。",
-   "杂货店赊账给人，是看在街坊的情分上。凯林·妮娜本人还没有回应。"
-  ],
-  "event": "欠债",
-  "evidence": false,
-  "facts": [
-   {
-    "source": "interview",
-    "text": "凯林·妮娜欠的是赌债，不是店账",
-    "verified": true
-   }
-  ],
-  "headline": "凯林·妮娜手头吃紧",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": true,
-    "name": "凯林·妮娜",
-    "occ": "寡妇",
-    "role": "debtor",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "哈克·艾蒂",
-    "occ": "店主",
-    "role": "creditor",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "春天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "debt",
-  "tone": "neutral",
-  "week": 7
- },
- {
-  "body": [
-   "锯木厂失窃一事，本报追查到了一个人：工人斯曼·恩尔。",
-   "本报记者在酒馆打烊之后亲眼看见斯曼先生从锯木厂后门出来，手里没空着。",
-   "截至付印，本报没能见到斯曼·恩尔。知道更多的人，可以来报社坐坐。"
-  ],
-  "event": "偷窃",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "witness",
-    "text": "斯曼·恩尔夜里从锯木厂后门出来，手里拎着东西",
-    "verified": true
-   }
-  ],
-  "headline": "斯曼·恩尔深夜离开锯木厂，手里拎着东西",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "斯曼·恩尔",
-    "occ": "工人",
-    "role": "thief",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "拉森·拉姆",
-    "occ": "工头",
-    "role": "boss",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "春天",
-  "seed": 13,
-  "strategy": "cautious",
-  "tid": "theft",
-  "tone": "neutral",
-  "week": 4
- },
- {
-  "body": [
-   "近来，锯木厂的工头拉森·拉姆一直在查一件事：工具房里的东西到哪去了。",
-   "酒馆打烊之后，本报记者在锯木厂外面看见艾顿·薇雅从后门出来，手里拎着东西，走得很急。那晚锯木厂的狗没有叫。",
-   "艾顿女士坚称自己清白。"
-  ],
-  "event": "偷窃",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "witness",
-    "text": "艾顿·薇雅夜里从锯木厂后门出来，手里拎着东西",
+    "text": "马林·弗特夜里从锯木厂后门出来，手里拎着东西",
     "verified": true
    }
   ],
@@ -1326,8 +386,8 @@
   "pleaded": false,
   "roles": [
    {
-    "female": true,
-    "name": "艾顿·薇雅",
+    "female": false,
+    "name": "马林·弗特",
     "occ": "工人",
     "role": "thief",
     "shown_as": "named",
@@ -1335,7 +395,7 @@
    },
    {
     "female": false,
-    "name": "拉森·拉姆",
+    "name": "哈顿·拉姆",
     "occ": "工头",
     "role": "boss",
     "shown_as": "named",
@@ -1343,61 +403,962 @@
    }
   ],
   "season": "春天",
-  "seed": 13,
+  "seed": 1,
   "strategy": "cautious",
   "tid": "theft",
   "tone": "neutral",
-  "week": 61
+  "week": 9
  },
  {
   "body": [
-   "本报查访发现，店主哈克·艾蒂和镇长托利·卢顿之间有一笔说不清的钱。",
-   "本报记者看见，酒馆打烊之后，酒馆后间里，哈克女士把一个牛皮纸信封推到托利镇长面前。当时天黑，本报只看到这些。",
-   "下次投票之前，镇上的人该想想这件事。托利镇长说那笔钱的去向，账上都写着。"
+   "酒馆的酒是从哪里来的，本报查了一回。",
+   "本报记者夜里十点多守在林子边上，看见韦曼·萨拉赶着一辆马车穿过树林，车上盖着油布。",
+   "半夜赶车穿林子，不像是运柴火。",
+   "截至付印，本报没能见到韦曼·萨拉。知道更多的人，可以来报社坐坐。"
+  ],
+  "event": "私酿",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "韦曼·萨拉半夜赶车穿过树林，车上盖着油布",
+    "verified": true
+   }
+  ],
+  "headline": "韦曼·萨拉被指私酿",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": true,
+    "name": "韦曼·萨拉",
+    "occ": "农户",
+    "role": "brewer",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "艾林·恩特",
+    "occ": "酒馆老板",
+    "role": "buyer",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "春天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "moonshine",
+  "tone": "neutral",
+  "week": 10
+ },
+ {
+  "body": [
+   "林子里偷猎的事，镇上传了有一阵了。本报查了查。",
+   "杂货店的收货单上记着，萨彻·托特卖过几张鹿皮，一张三块钱。影印件附后，读者可以自己看。",
+   "截至付印，本报未能联系到萨彻先生本人。"
+  ],
+  "event": "偷猎",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "杂货店收过萨彻·托特卖的鹿皮，一张三块钱",
+    "verified": true
+   }
+  ],
+  "headline": "谁在林子里下套",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "萨彻·托特",
+    "occ": "流浪汉",
+    "role": "poacher",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "马宁·恩森",
+    "occ": "厂主",
+    "role": "landowner",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "春天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "poaching",
+  "tone": "neutral",
+  "week": 7
+ },
+ {
+  "body": [
+   "一座仓库烧了，本报查了火灾前后的几件事。",
+   "邮局里存着一张保险公司的回执：火灾前一个月，艾林·恩特给这座仓库投了火险。保险公司的回执是从南边寄来的，盖着蓝色的章。",
+   "酒馆老板天天跟灯油打交道，最知道煤油怎么烧。艾林先生说那天晚上他一直在家。下期本报再续。"
+  ],
+  "event": "仓库失火",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "火灾前一个月，艾林·恩特通过邮局给仓库投了一份火险",
+    "verified": true
+   }
+  ],
+  "headline": "一座仓库的火灾前后",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "艾林·恩特",
+    "occ": "酒馆老板",
+    "role": "owner",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": true,
+    "name": "雷兰·格蒂",
+    "occ": "农户",
+    "role": "witness",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "夏天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "insurance_fire",
+  "tone": "neutral",
+  "week": 69
+ },
+ {
+  "body": [
+   "一桩伤人的事，本报追查了两个礼拜。",
+   "诊所的记录本报查看过：艾彻·卢比那天夜里被人扶进来，肋骨断了两根，原因一栏写的是「摔伤」。",
+   "镇上的警长是诺克·安特。警长是镇上唯一能合法动手的人，所以更不能随便动手。诺克警长这一周都不在镇上。"
+  ],
+  "event": "警长打人",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "艾彻·卢比被人扶进诊所，肋骨断了两根，诊所记下的原因是「摔伤」",
+    "verified": true
+   }
+  ],
+  "headline": "火车站后面发生了什么",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "诺克·安特",
+    "occ": "警长",
+    "role": "sheriff",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "艾彻·卢比",
+    "occ": "新来的",
+    "role": "victim",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "春天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "sheriff_beating",
+  "tone": "neutral",
+  "week": 4
+ },
+ {
+  "body": [
+   "镇长马宁·恩森的病情一直没有公开。本报得到了一些情况。",
+   "据诊所的记录，马宁镇长的病在肺上，医生的嘱咐是「不宜过劳」。那张病历的边角，已经翻得起了毛。",
+   "马宁镇长只说了一句：「我没事。」"
+  ],
+  "event": "隐瞒病情",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "诊所病历上马宁·恩森的病是肺上的，医生写了「不宜过劳」",
+    "verified": true
+   }
+  ],
+  "headline": "医生嘱马宁·恩森不宜过劳",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "马宁·恩森",
+    "occ": "镇长",
+    "role": "sick",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": true,
+    "name": "帕彻·黛德",
+    "occ": "护士",
+    "role": "nurse",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "冬天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "illness",
+  "tone": "neutral",
+  "week": 98
+ },
+ {
+  "body": [
+   "牧师诺德·卡比在镇上是受人尊敬的人。本报得知，他有长期饮酒的习惯，而且一直在遮掩。",
+   "酒馆后巷没有灯。本报记者在下着雪的夜里看见一个人从后门出来，走到街口才认出是诺德牧师。酒馆老板说，有些客人从来不坐在窗边。",
+   "布道的人，也该先把自己的话听进去。诺德·卡比本人还没有回应。知道更多的人，可以来报社坐坐。"
+  ],
+  "event": "暗中酗酒",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "诺德·卡比从酒馆后门进出，不走前门",
+    "verified": true
+   }
+  ],
+  "headline": "诺德·卡比饮酒成习，一直在遮掩",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "诺德·卡比",
+    "occ": "牧师",
+    "role": "drunk",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": true,
+    "name": "莫维·菲德",
+    "occ": "女佣",
+    "role": "maid",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "冬天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "drinking",
+  "tone": "neutral",
+  "week": 94
+ },
+ {
+  "body": [
+   "一个人来灰河镇之前在哪里、做过什么，向来没人追问。这一回有人问了。",
+   "本报查阅了邮局的存档：一封盖着法院印章的信寄到了灰河镇，收信人是拉维·佩丝。邮局的底册和本报抄下的一字不差。那封信至今没有人去领。",
+   "一个人从哪里来，本来不关别人的事。可一封法院的信寄到了灰河镇，这就不只是一个人的事了。拉维女士说南边那些事和她无关。"
+  ],
+  "event": "来历不明",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "邮局有一封寄给拉维·佩丝的信，封口印着法院的章",
+    "verified": true
+   }
+  ],
+  "headline": "法院来信寄给拉维·佩丝",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": true,
+    "name": "拉维·佩丝",
+    "occ": "新来的",
+    "role": "stranger",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "帕森·维斯",
+    "occ": "退伍兵",
+    "role": "recognizer",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "秋天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "past",
+  "tone": "neutral",
+  "week": 34
+ },
+ {
+  "body": [
+   "镇公所的人说，牧师诺德·卡比最近常常下午才来。",
+   "诊所的病历本报查看过：诺德牧师患的是肺上的病，病历上的医嘱是「不宜过劳」。记录的抄件存在报社，读者可以来看。诺德·卡比桌上的药瓶，这个月换了三回标签。",
+   "诺德·卡比本人还没有回应。"
+  ],
+  "event": "隐瞒病情",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "诊所病历上诺德·卡比的病是肺上的，医生写了「不宜过劳」",
+    "verified": true
+   }
+  ],
+  "headline": "诺德·卡比的身体比对外说的差",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "诺德·卡比",
+    "occ": "牧师",
+    "role": "sick",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "诺宁·拉克",
+    "occ": "医生",
+    "role": "nurse",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "秋天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "illness",
+  "tone": "neutral",
+  "week": 27
+ },
+ {
+  "body": [
+   "警长办公室门前这几天很安静，镇上的人都绕着走。",
+   "酒馆打烊之后，本报记者在火车站后面听见有人叫喊。走近一看，是诺克·安特拿着警棍，地上蜷着帕森·维斯。",
+   "警棍是镇上出钱买的，是用来保护镇上的人的。",
+   "本报给诺克警长留了话，至今没有回音。"
+  ],
+  "event": "警长打人",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "诺克·安特在火车站后面用警棍打帕森·维斯",
+    "verified": true
+   }
+  ],
+  "headline": "诺克·安特被指殴打帕森·维斯",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "诺克·安特",
+    "occ": "警长",
+    "role": "sheriff",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "帕森·维斯",
+    "occ": "退伍兵",
+    "role": "victim",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "夏天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "sheriff_beating",
+  "tone": "neutral",
+  "week": 69
+ },
+ {
+  "body": [
+   "孩子们在学校喝的牛奶，本报追了它的来路。",
+   "本报记者在结冰的夜里守在河边，天快亮时，看见塔克·本尔把奶桶浸进河里，提上来时满满的。奶桶的外壁上，沾着一层河泥。",
+   "本报去过塔克先生家两回，都没见到人。这件事还没完。"
+  ],
+  "event": "牛奶掺水",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "塔克·本尔天亮前在河边往奶桶里灌河水",
+    "verified": true
+   }
+  ],
+  "headline": "塔克·本尔被指往牛奶里掺水",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "塔克·本尔",
+    "occ": "农户",
+    "role": "farmer",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "诺尔森·维德",
+    "occ": "教师",
+    "role": "teacher",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "冬天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "watered_milk",
+  "tone": "neutral",
+  "week": 41
+ },
+ {
+  "body": [
+   "新来的兰克·吉德的事，镇上已经有人在说。本报把能查到的写在下面。",
+   "邮局的寄件簿上，哈顿·拉姆每周都有一封寄给兰克先生的信。",
+   "夜里说几句话不犯法，瞒着家里人是另一回事。",
+   "兰克先生说两人只是朋友。报社的门白天都开着。"
+  ],
+  "event": "私情",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "哈顿·拉姆每周往邮局寄一封信给兰克·吉德，收信人就住在镇上",
+    "verified": true
+   }
+  ],
+  "headline": "每周一封的信",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "兰克·吉德",
+    "occ": "新来的",
+    "role": "lover",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "哈顿·拉姆",
+    "occ": "工头",
+    "role": "spouse",
+    "shown_as": "named",
+    "target": false
+   },
+   {
+    "female": true,
+    "name": "罗曼·诺琳",
+    "occ": "寡妇",
+    "role": "wife",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "冬天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "affair",
+  "tone": "neutral",
+  "week": 44
+ },
+ {
+  "body": [
+   "学校里的事，本报很少登。这一件和孩子有关。",
+   "诊所留存的记录显示，诊所这个月看了好几个闹肚子的孩子，都是喝学校牛奶的。记录的抄件存在报社，读者可以来看。",
+   "天亮之前，本报记者看见韦曼·萨拉在河边弯着腰，一只一只往奶桶里舀河水。这件事的目击者不止一位。",
+   "农户的日子不好过，本报知道。可地里的难处，不该让学校的孩子来担。韦曼女士说送去学校的奶一向是好奶。"
+  ],
+  "event": "牛奶掺水",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "诊所这个月看了好几个闹肚子的孩子，都是喝学校牛奶的",
+    "verified": true
+   },
+   {
+    "source": "witness",
+    "text": "韦曼·萨拉天亮前在河边往奶桶里灌河水",
+    "verified": true
+   }
+  ],
+  "headline": "学校的牛奶出了问题",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": true,
+    "name": "韦曼·萨拉",
+    "occ": "农户",
+    "role": "farmer",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "诺尔森·维德",
+    "occ": "教师",
+    "role": "teacher",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "冬天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "watered_milk",
+  "tone": "neutral",
+  "week": 94
+ },
+ {
+  "body": [
+   "店主瓦彻·卡比的杂货店，这个月进货少了一半。原因之一，是一笔收不回来的账。",
+   "本报在杂货店查到的记录写得清楚：瓦沃·维德的名字在杂货店的赊账簿上写了半年，从面粉到灯油都有。本报已将影印件附于本版。杂货店的赊账簿用的是蓝墨水，最早那几笔的字已经褪了色。",
+   "瓦沃·维德本人还没有回应。报社的门白天都开着。"
+  ],
+  "event": "欠债",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "瓦沃·维德在杂货店赊的账已经欠了半年",
+    "verified": true
+   }
+  ],
+  "headline": "瓦沃·维德欠杂货店半年账款",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "瓦沃·维德",
+    "occ": "家眷",
+    "role": "debtor",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "瓦彻·卡比",
+    "occ": "店主",
+    "role": "creditor",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "春天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "debt",
+  "tone": "neutral",
+  "week": 3
+ },
+ {
+  "body": [
+   "教师格林·安森是镇上人人认得的人。本报这一期要说的，是他的另一面。",
+   "天黑以后，本报记者在酒馆后巷看见格林先生推门出来，帽檐压得很低。本报后来又问到一个看见的人。酒馆后门的台阶被踩出了一道亮印子。",
+   "截至付印，本报没能见到格林·安森。有知情者，欢迎到报社来。"
+  ],
+  "event": "暗中酗酒",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "格林·安森从酒馆后门进出，不走前门",
+    "verified": true
+   }
+  ],
+  "headline": "格林·安森被指长期酗酒，不走酒馆前门",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "格林·安森",
+    "occ": "教师",
+    "role": "drunk",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": true,
+    "name": "莫维·菲德",
+    "occ": "女佣",
+    "role": "maid",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "秋天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "drinking",
+  "tone": "neutral",
+  "week": 39
+ },
+ {
+  "body": [
+   "火车站门口那个药水摊子，本报去看了几回。",
+   "天黑以后，火车站后面的空地上，马林·弗特借着一盏马灯装瓶。本报记者看见盆里的水是从河边提来的。这件事的目击者不止一位。",
+   "火车站后面那片空地，平时堆着煤渣。",
+   "镇上有医生，大家有病还是该去诊所。马林先生说药水里放的是正经草药。"
+  ],
+  "event": "假药",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "马林·弗特在火车站后面用河水兑糖浆，一瓶一瓶装起来",
+    "verified": true
+   }
+  ],
+  "headline": "一种药水的来历",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "马林·弗特",
+    "occ": "流浪汉",
+    "role": "seller",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": true,
+    "name": "瓦沃·安莉",
+    "occ": "农户",
+    "role": "victim",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "夏天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "quack_tonic",
+  "tone": "neutral",
+  "week": 68
+ },
+ {
+  "body": [
+   "新来的凯比·米妲的来历，本报查了一部分。",
+   "本报在邮局查到的记录写得清楚：有一封寄给凯比女士的信，封口印着法院的章。这份记录本报请邮局的人看过，确是原件。那封信的信封是灰蓝色的，邮戳来自南边一个大城市。",
+   "凯比女士说自己从来只有这一个名字。"
+  ],
+  "event": "来历不明",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "邮局有一封寄给凯比·米妲的信，封口印着法院的章",
+    "verified": true
+   }
+  ],
+  "headline": "凯比·米妲的来历，镇上有说法",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": true,
+    "name": "凯比·米妲",
+    "occ": "新来的",
+    "role": "stranger",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "塔彻·吉姆",
+    "occ": "站长",
+    "role": "recognizer",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "秋天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "past",
+  "tone": "neutral",
+  "week": 87
+ },
+ {
+  "body": [
+   "地契的事一向复杂，这一件却简单得叫人吃惊。",
+   "本报查阅了镇公所的地契登记簿。萨尔森·瑞比家那块地的主人一栏有涂改的痕迹，改成了马宁·恩森，笔迹和兰利·维森平时写的一样。河边那块地，挨着锯木厂新修的路。",
+   "夜里十点多，镇公所早该锁门了。本报记者看见马宁镇长从侧门进去，兰利先生在门里等着。",
+   "书记员的本分就是把字写对。兰利先生写错的，偏偏是别人家的地。兰利先生说本报看不懂公家的账本。"
+  ],
+  "event": "改地契",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "镇公所的地契登记簿上，萨尔森·瑞比家河边那块地去年改记到了马宁·恩森名下，改动的是兰利·维森的笔迹",
+    "verified": true
+   },
+   {
+    "source": "witness",
+    "text": "兰利·维森天黑以后还留在镇公所，马宁·恩森也在里面",
+    "verified": true
+   }
+  ],
+  "headline": "兰利·维森经手的一份地契有问题",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "兰利·维森",
+    "occ": "书记员",
+    "role": "official",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "马宁·恩森",
+    "occ": "镇长",
+    "role": "buyer",
+    "shown_as": "named",
+    "target": false
+   },
+   {
+    "female": false,
+    "name": "萨尔森·瑞比",
+    "occ": "农户",
+    "role": "victim",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "春天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "land_fraud",
+  "tone": "neutral",
+  "week": 62
+ },
+ {
+  "body": [
+   "镇上关于新来的法维·莉德的议论，本报听到不止一次。",
+   "瓦沃·安莉对朋友说，夜里常常醒来，身边没有人。本报分头问过几个人，说的都对得上。那户人家的晚饭，这一阵总是一个人吃。",
+   "法维女士说两人只是朋友。后面的事，本报会接着问。"
+  ],
+  "event": "私情",
+  "evidence": false,
+  "facts": [
+   {
+    "source": "interview",
+    "text": "瓦沃·安莉已经怀疑另一半夜里去了哪，哭过好几回",
+    "verified": true
+   }
+  ],
+  "headline": "法维·莉德卷入一桩家事",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": true,
+    "name": "法维·莉德",
+    "occ": "新来的",
+    "role": "lover",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "瓦沃·维德",
+    "occ": "家眷",
+    "role": "spouse",
+    "shown_as": "named",
+    "target": false
+   },
+   {
+    "female": true,
+    "name": "瓦沃·安莉",
+    "occ": "农户",
+    "role": "wife",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "秋天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "affair",
+  "tone": "neutral",
+  "week": 37
+ },
+ {
+  "body": [
+   "工具房对不上数，锯木厂里的人人都被看了一眼。本报把查到的写在下面。",
+   "杂货店的收货单上记着，德森·瑞克把锯条卖给了河湾农场。本报手里那份记录，谁想看都可以来看。锯条的柄上刻着锯木厂工具房的编号。",
+   "东西卖到了农场，钱进了谁的口袋，单子上写得清楚。",
+   "德森先生拒绝回答本报的问题。本报将继续关注。"
+  ],
+  "event": "偷窃",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "德森·瑞克把锯条卖给了河湾农场，杂货店的收货单上有记录",
+    "verified": true
+   }
+  ],
+  "headline": "德森·瑞克被指盗卖锯木厂工具",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "德森·瑞克",
+    "occ": "工人",
+    "role": "thief",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "哈顿·拉姆",
+    "occ": "工头",
+    "role": "boss",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "夏天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "theft",
+  "tone": "neutral",
+  "week": 22
+ },
+ {
+  "body": [
+   "林子是锯木厂的，林子里的鹿却一年比一年少。本报查了查。",
+   "天还没亮，本报记者看见萨彻·托特从林子深处走出来，肩上的麻袋往下坠着，看分量不轻。那只麻袋的底下，渗出一片深色的印子。",
+   "一个人背着麻袋天不亮出林子，不像是去拾柴的。萨彻先生说林子里的事和他没有关系。"
+  ],
+  "event": "偷猎",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "萨彻·托特天不亮从林子里出来，背着一只鼓鼓的麻袋",
+    "verified": true
+   }
+  ],
+  "headline": "天不亮从林子里出来的人",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "萨彻·托特",
+    "occ": "流浪汉",
+    "role": "poacher",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "马宁·恩森",
+    "occ": "厂主",
+    "role": "landowner",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "夏天",
+  "seed": 1,
+  "strategy": "cautious",
+  "tid": "poaching",
+  "tone": "neutral",
+  "week": 18
+ },
+ {
+  "body": [
+   "这个月本报查了镇公所的一笔账。",
+   "后半夜，本报记者在酒馆后间看见瓦彻·卡比把一个信封推到斯利·拉特面前。信封里是什么，本报没有看见。那个信封很厚，封口压着火漆。",
+   "本报曾向斯利镇长求证，对方不愿置评。"
   ],
   "event": "受贿",
   "evidence": true,
   "facts": [
    {
     "source": "witness",
-    "text": "哈克·艾蒂在酒馆后间递给托利·卢顿一个信封",
+    "text": "瓦彻·卡比在酒馆后间递给斯利·拉特一个信封",
     "verified": true
    }
   ],
-  "headline": "托利·卢顿经手的一笔钱说不清",
+  "headline": "斯利·拉特经手的一笔钱说不清",
   "naming": "named",
   "pleaded": false,
   "roles": [
    {
     "female": false,
-    "name": "托利·卢顿",
+    "name": "斯利·拉特",
     "occ": "镇长",
     "role": "official",
     "shown_as": "named",
     "target": true
    },
    {
-    "female": true,
-    "name": "哈克·艾蒂",
+    "female": false,
+    "name": "瓦彻·卡比",
     "occ": "店主",
     "role": "payer",
     "shown_as": "named",
     "target": false
    },
    {
-    "female": true,
-    "name": "诺尔森·薇拉",
+    "female": false,
+    "name": "兰利·维森",
     "occ": "书记员",
     "role": "clerk",
     "shown_as": "named",
     "target": false
    }
   ],
-  "season": "秋天",
-  "seed": 13,
+  "season": "夏天",
+  "seed": 1,
   "strategy": "cautious",
   "tid": "bribery",
   "tone": "neutral",
-  "week": 33
+  "week": 16
  }
 ]

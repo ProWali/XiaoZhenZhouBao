@@ -136,7 +136,7 @@
   "You wrote with restraint. I think that is right.",
   "I read it twice and couldn't tell whose side you were on. That is a good thing.",
   "That is how a newspaper ought to be: say it plainly, and don't shout.",
-  {"t": "Too polite by half. Some things won't be taken seriously unless you say them less politely.", "if": {"bucket": ["hot", "practical"]}}
+  {"t": "Too polite by half. There are matters nobody takes seriously unless they are put less politely.", "if": {"bucket": ["hot", "practical"]}}
  ]},
  "soft_thanks": {"sign": true, "items": [
   "Thank you for printing the news of our family. All the relatives saw it.",

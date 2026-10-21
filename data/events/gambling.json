@@ -1,0 +1,82 @@
+{
+ "id": "gambling",
+ "name": "赌局",
+ "severity": 2,
+ "weeks": 12,
+ "target": "barkeep",
+ "driven_by": [
+  "money"
+ ],
+ "roles": {
+  "barkeep": {
+   "occupation": [
+    "barkeep"
+   ]
+  },
+  "loser": {
+   "occupation": [
+    "worker",
+    "fisher",
+    "smith"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "cards",
+   "subject": "barkeep",
+   "text": "酒馆后屋每周六开牌局，赌的是现钱",
+   "secrecy": "semi",
+   "known_by": [
+    "barkeep",
+    "loser",
+    "random:3"
+   ]
+  },
+  {
+   "key": "loss",
+   "subject": "loser",
+   "text": "{loser}一个晚上输掉了半个月的工钱",
+   "secrecy": "semi",
+   "known_by": [
+    "loser",
+    "family:loser",
+    "friends:loser"
+   ]
+  },
+  {
+   "key": "cut",
+   "subject": "barkeep",
+   "text": "{barkeep}在后屋收桌钱，每一局抽一成",
+   "secrecy": "secret",
+   "witness": "tavern",
+   "known_by": [
+    "barkeep",
+    "loser"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "barkeep",
+   "text": "{barkeep}的牌是做过手脚的",
+   "truth": 0.3,
+   "known_by": [
+    "loser",
+    "enemies:barkeep"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "酒馆后屋的牌局"
+  ],
+  "neutral": [
+   "{barkeep}被指在后屋开赌局"
+  ],
+  "hot": [
+   "{barkeep}抽走了工人的工钱"
+  ]
+ },
+ "detail": "后屋桌上的烟灰"
+}

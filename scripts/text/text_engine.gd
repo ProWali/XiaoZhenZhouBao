@@ -221,12 +221,13 @@ static func _person_slot(world, role: String, field: String, ctx: Dictionary, la
 	match field:
 		"occ":
 			return occ
-		"ta", "he":
-			return pronoun(world, rid, lang, "he")
-		"him":
-			return pronoun(world, rid, lang, "him")
-		"his":
-			return pronoun(world, rid, lang, "his")
+		"ta", "he", "him", "his":
+			# 匿名报道里，「他」「她」等于告诉读者性别
+			if mode == "anon":
+				if lang == "en":
+					return "this person's" if field == "his" else "this person"
+				return "此人"
+			return pronoun(world, rid, lang, "he" if field == "ta" else field)
 		"yiwei":
 			if lang == "en":
 				return ("an " if occ.substr(0, 1).to_lower() in ["a", "e", "i", "o", "u"] else "a ") + occ
@@ -257,6 +258,8 @@ static func _person_slot(world, role: String, field: String, ctx: Dictionary, la
 	mentions[role] = n + 1
 	if mode != "named":
 		return _alias_first(occ, oid, fem, mode, lang, field == "full") if n == 0 else _alias_later(occ, oid, fem, mode, lang)
+	if n == 2 and field == "":
+		return person_name(world, rid, lang)
 	if n == 0:
 		# 家眷、赋闲的人不算职业，同位语里不写
 		if field == "full" and not (oid in NO_APPOSITION):
@@ -550,32 +553,47 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 		if g.has_rule(sym) and not own_voice:
 			lead_in = g.expand("#" + sym + "#")
 		var tail := ""
+		var tail_n := 0
 		# 影印件只能是档案，一篇最多说一次，也不是每次都说
 		if a.get("evidence", false) and src.kind == "archive" and not evidence_noted and g.has_rule("evidence_note") and rng.chance(0.4):
 			tail += sep + g.expand("#evidence_note#")
 			evidence_noted = true
+			tail_n += 1
 		# 消息靠不靠得住，人写报道时会交代一句
 		var verified: bool = world.is_verified(fid)
-		if src.kind == "witness" and not own_voice and g.has_rule("limit_witness") and rng.chance(0.25):
+		if tail_n == 0 and src.kind == "witness" and not own_voice and g.has_rule("limit_witness") and rng.chance(0.25):
 			tail += sep + g.expand("#limit_witness#")
-		if not verified and src.kind in ["interview", "informer", "visitor", "eavesdrop", "letter"] and not hedged and g.has_rule("hedge") and rng.chance(0.5):
+			tail_n += 1
+		if tail_n > 0:
+			pass
+		elif not verified and src.kind in ["interview", "informer", "visitor", "eavesdrop", "letter"] and not hedged and g.has_rule("hedge") and rng.chance(0.5):
 			tail += sep + g.expand("#hedge#")
 			hedged = true
-		elif verified and src.kind in ["interview", "informer", "visitor"] and not corroborated and g.has_rule("corroborated") and rng.chance(0.35):
-			tail += sep + g.expand("#corroborated#")
-			corroborated = true
+		elif verified and not corroborated:
+			var csym := "corroborated"
+			if src.kind == "archive":
+				csym = "corroborated_archive"
+			elif src.kind == "witness":
+				csym = "corroborated_witness"
+			elif not (src.kind in ["interview", "informer", "visitor"]):
+				csym = ""
+			if csym != "" and g.has_rule(csym) and rng.chance(0.4):
+				tail += sep + g.expand("#" + csym + "#")
+				corroborated = true
 		var sentence := fill(world, lead_in + g.expand(body_tpl), ctx, lang) + fill(world, tail, ctx, lang)
 		var tied: Array = []
 		for it in et.get("detail", []):
-			if it is Dictionary and str(it.get("needs", "")) == str(f.key):
+			if it is Dictionary and str(it.get("needs", "")) == str(f.key) and _unused(g, str(it.t)):
 				tied.append(str(it.t))
-		if not tied.is_empty() and not detail_used and rng.chance(0.6):
+		if not tied.is_empty() and not detail_used and rng.chance(0.5):
 			ctx["vars"] = {}
 			sentence += sep + fill(world, g.pick_fresh(tied), ctx, lang)
 			detail_used = true
 		if spec.get("counter", false) or (f.subject != target and f.get("is_rumor", false) and not spec.get("same_side", false)):
 			counter_sents.append(sentence)
 		else:
+			if main_sents.is_empty():
+				sentence = _swap_lead(sentence, data(lang).grammar.get("_lead_swap", {}))
 			main_sents.append(sentence)
 	# 段落：一段放一到两句，长短不齐
 	var i := 0
@@ -593,8 +611,9 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 	# 只有这件事才有的细节：有时跟在上一段后面，有时自成一小段，有时不写
 	var details: Array = []
 	for it in et.get("detail", []):
-		if it is String or keys.has(str(it.get("needs", ""))):
-			details.append(it if it is String else str(it.t))
+		var dt: String = it if it is String else str(it.t)
+		if (it is String or keys.has(str(it.get("needs", "")))) and _unused(g, dt):
+			details.append(dt)
 	if not details.is_empty() and not detail_used and rng.chance(0.3):
 		ctx["vars"] = {}
 		var d := fill(world, g.pick_expand(details), ctx, lang)
@@ -604,19 +623,41 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 			paras.append(polish(d, lang))
 	# 编辑的判断：这件事为什么值得读者知道
 	var comments: Array = []
+	var tied_comments: Array = []
 	var occ_comments: Array = []
 	var t_occ: String = str(e.get("occ_at", {}).get(target, world.residents[target].occ))
 	for it in et.get("comment", {}).get(tone, []) + et.get("comment", {}).get("any", []):
 		if it is Dictionary and it.has("occ"):
 			if t_occ in it.occ and (not it.has("needs") or keys.has(str(it.needs))):
 				occ_comments.append(str(it.t))
-		elif it is String or keys.has(str(it.get("needs", ""))):
-			comments.append(it if it is String else str(it.t))
+		elif it is String:
+			comments.append(it)
+		elif keys.has(str(it.get("needs", ""))):
+			tied_comments.append(str(it.t))
+	# 能落到本篇某条证据上的评论，读起来才不像贴上去的。只剩空道理时，多半不写。
+	var fresh_tied: Array = []
+	for t in tied_comments:
+		if _unused(g, str(t)):
+			fresh_tied.append(t)
+	var comment_p := 0.75
+	if not fresh_tied.is_empty():
+		comments = fresh_tied
+	elif not tied_comments.is_empty() and rng.chance(0.5):
+		comments = tied_comments
+	else:
+		comment_p = 0.3
 	# 按职业写的评论会把化名、匿名的人认出来，只在点名时用
-	if naming == "named" and not occ_comments.is_empty() and (comments.is_empty() or rng.chance(0.6)):
-		comments = occ_comments
+	if naming == "named" and not occ_comments.is_empty():
+		var unused: Array = []
+		for t in occ_comments:
+			if g.memory == null or int(g.memory.get("n:" + str(t), 0)) == 0:
+				unused.append(t)
+		if not unused.is_empty() and (comments.is_empty() or rng.chance(0.6)):
+			comments = unused
+		else:
+			comments = comments + occ_comments
 	var comment_text := ""
-	if not comments.is_empty() and rng.chance(0.7):
+	if not comments.is_empty() and rng.chance(comment_p):
 		ctx["vars"] = {}
 		comment_text = fill(world, g.pick_expand(comments), ctx, lang)
 	# 当事人回应：先用这类事件自己的说法，没有再用通用的
@@ -635,14 +676,18 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 		resp = g.expand("#resp_" + resp_kind + "#")
 	var close := ""
 	var ev_close: Array = et.get("close", {}).get(tone, [])
-	if rng.chance(0.45):
+	if rng.chance(0.35):
 		if not ev_close.is_empty() and rng.chance(0.5):
 			close = g.pick_expand(ev_close)
 		elif g.has_rule("close"):
 			close = g.expand("#close#")
 	ctx["vars"] = {}
+	var intro := ""
+	# 化名、匿名的人不介绍（「镇上的警长是某位警长」）
+	if naming == "named" and int(ctx.mentions.get(str(e.target), 0)) == 0 and not et.get("intro", []).is_empty():
+		intro = fill(world, g.pick_expand(et.intro), ctx, lang)
 	var ending := ""
-	for piece in [comment_text, fill(world, resp, ctx, lang), fill(world, close, ctx, lang)]:
+	for piece in [intro, comment_text, fill(world, resp, ctx, lang), fill(world, close, ctx, lang)]:
 		if piece != "":
 			ending += (sep if ending != "" else "") + piece
 	if ending != "":
@@ -675,10 +720,25 @@ static func _prose_for(items: Array, src_kind: String, t_occ: String = "") -> Ar
 					out.append(str(it.t))
 			else:
 				generic.append(str(it.t))
-	# 有专为这个信源写的，优先用（七成）
+	# 有专为这个信源写的：目击只用它（通用句前面硬加「本报记者看见，」会把时间地点叠在一起），其它信源优先用它
 	if not out.is_empty():
-		return out if generic.is_empty() else (out + out + generic)
+		if src_kind == "witness" or generic.is_empty():
+			return out
+		return out + out + generic
 	return generic
+
+
+## 句首是「还有人说」这类承接说法、前面却没有别的说法时，换成能单独起头的说法。
+static func _swap_lead(sentence: String, swaps: Dictionary) -> String:
+	for k in swaps:
+		if sentence.begins_with(str(k)):
+			return str(swaps[k]) + sentence.substr(str(k).length())
+	return sentence
+
+
+## 这句话本局还没用过（措辞记忆里计数为零）。没有记忆时一律算没用过。
+static func _unused(g: Grammar, text: String) -> bool:
+	return g.memory == null or int(g.memory.get("n:" + text, 0)) == 0
 
 
 static func _role_of(e: Dictionary, rid: String) -> String:

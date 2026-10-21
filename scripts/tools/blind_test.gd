@@ -105,7 +105,19 @@ func _brief() -> void:
 
 
 func _packet() -> void:
-	var picked: Array = JSON.parse_string(FileAccess.get_file_as_string(DIR + "pool_zh.json"))
+	# 出卷前必须通过防污染检查：生成器模板不能和任何一轮手写稿雷同
+	var out: Array = []
+	var code := OS.execute("python", ["-I", ProjectSettings.globalize_path("res://scripts/tools/check_contamination.py")], out, true)
+	if code != 0:
+		print("防污染检查没通过，不出卷：")
+		for line in out:
+			print(line)
+		return
+	var saved: Array = JSON.parse_string(FileAccess.get_file_as_string(DIR + "pool_zh.json"))
+	# 生成稿必须是现在的引擎渲染的，不能用生成提要时存下的旧文字；题目（哪一局、哪一周、哪件事）必须不变
+	var picked := _pick(_collect())
+	for i in picked.size():
+		assert(picked[i].tid == saved[i].tid and int(picked[i].week) == int(saved[i].week), "题库变了，要重新生成提要和手写稿")
 	var hand: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(DIR + "handwritten_zh.json"))
 	var items: Array = []
 	for i in picked.size():
@@ -116,7 +128,7 @@ func _packet() -> void:
 			items.append({"headline": hand[bid].headline, "body": hand[bid].body, "hand": true, "src": bid, "week": r.week})
 		else:
 			items.append({"headline": r.headline, "body": r.body, "hand": false, "src": "%s·种子%d·%s·第%d周" % [r.tid, r.seed, r.strategy, r.week], "week": r.week})
-	var rng := Rng.new(77)
+	var rng := Rng.new(int(picked.size()) * 131 + int(str(picked[0].seed)))
 	rng.shuffle(items)
 	var md := "# 《灰河周报》剪报 " + str(items.size()) + " 篇\n\n这些报道出自同一份小镇周报。其中有一部分是人手写的，其余是程序生成的。请读完后写下你认为是人手写的编号，以及把握有多大。\n\n"
 	var key := {}

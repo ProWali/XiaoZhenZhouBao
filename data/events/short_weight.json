@@ -1,0 +1,79 @@
+{
+ "id": "short_weight",
+ "name": "缺斤短两",
+ "severity": 1,
+ "weeks": 10,
+ "target": "grocer",
+ "driven_by": [
+  "money"
+ ],
+ "roles": {
+  "grocer": {
+   "occupation": [
+    "grocer"
+   ]
+  },
+  "victim": {
+   "occupation": [
+    "widow",
+    "homemaker",
+    "maid"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "short",
+   "subject": "grocer",
+   "text": "{victim}在杂货店称的两斤面粉，回家一称少了二两",
+   "secrecy": "semi",
+   "known_by": [
+    "victim",
+    "friends:victim",
+    "random:2"
+   ]
+  },
+  {
+   "key": "lead_weight",
+   "subject": "grocer",
+   "text": "{grocer}打烊以后往秤盘底下粘了一块铅",
+   "secrecy": "secret",
+   "witness": "store",
+   "known_by": [
+    "grocer"
+   ]
+  },
+  {
+   "key": "books",
+   "subject": "grocer",
+   "text": "杂货店的进货单上，面粉比卖出去的账多出一成",
+   "secrecy": "secret",
+   "archive": "store",
+   "known_by": [
+    "grocer"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "grocer",
+   "text": "{grocer}的面粉里掺了石膏粉",
+   "truth": 0.15,
+   "known_by": [
+    "enemies:grocer"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "杂货店的秤准不准"
+  ],
+  "neutral": [
+   "{grocer}被指缺斤短两"
+  ],
+  "hot": [
+   "{grocer}的秤吃了你的面粉"
+  ]
+ },
+ "detail": "秤盘底下的那块铅"
+}

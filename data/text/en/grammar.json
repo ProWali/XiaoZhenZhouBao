@@ -1,13 +1,10 @@
 {
  "_note": "Grammar rules. #symbol# picks one entry; name@tone and name@season are specialised versions and win when present. Source lead-ins are sentence prefixes: they end in ', ' or ': ' and the fact prose follows straight on.",
  "src_witness": [
-  "This paper's reporter saw it firsthand: ",
-  "A reporter for this paper was there and saw it: ",
-  "This paper's reporter was close by that night and saw it plainly: ",
-  "This paper's reporter kept watch all night, and this is what was seen: ",
-  "This paper's reporter was not far off that night, and saw that ",
   "This paper's reporter saw that ",
-  "A reporter for this paper, close by, saw that "
+  "This paper's reporter, close by, saw that ",
+  "A reporter for this paper saw firsthand that ",
+  "This paper's reporter was there and saw it: "
  ],
  "src_archive": [
   "According to records at {loc}, ",
@@ -217,13 +214,13 @@
   "The couple will make their home on the east side of town."
  ],
  "hedge": [
-  "This paper has not yet found a second person to confirm it.",
-  "This paper has not been able to verify the account, and prints it here for readers to weigh.",
+  "So far this rests on a single source.",
+  "This account has yet to be confirmed; this paper sets it down as received.",
   "Whether it is true, this paper is still working to establish.",
   "So far, this paper has heard it from only one source."
  ],
  "corroborated": [
-  "This paper checked the account with a second source, who told it the same way.",
+  "This paper asked several people separately, and their accounts agree.",
   "This paper put the question to several people, and the answers agreed.",
   "Two people, asked separately by this paper, gave the same account."
  ],
@@ -260,5 +257,45 @@
   "since winter set in",
   "since the river froze",
   "since the first snow"
+ ],
+ "_again": {
+  "night": "night_again",
+  "season_open": "season_again",
+  "weather": "season_again",
+  "recent": "recent_again"
+ },
+ "night_again": [
+  "that night",
+  "the same night",
+  "that same night"
+ ],
+ "season_again": [
+  "around the same time",
+  "in those same weeks"
+ ],
+ "recent_again": [
+  "around the same time",
+  "in those same days"
+ ],
+ "_lead_swap": {
+  "There is another story in town, too, that ": "There is a story in town that ",
+  "There is another story, too, that ": "There is a story going round that ",
+  "There are those who say, too, that ": "There are those who say that ",
+  "Some also say that ": "Some say that ",
+  "Some also say ": "Some say "
+ },
+ "corroborated_archive": [
+  "This paper had the record looked over by the people at {loc}, who say it is the original.",
+  "This paper checked it against the books kept at {loc}, and they agree.",
+  "No one at {loc} has denied this record.",
+  "The record bears the stamp of {loc}, and this paper saw it plainly.",
+  "The books at {loc} match what this paper copied down, word for word."
+ ],
+ "corroborated_witness": [
+  "Someone else was nearby at the time, and saw the same.",
+  "Afterward this paper found another person who had been there, and the accounts agree.",
+  "There were others about that night. This paper asked them, and they tell the same story.",
+  "There was more than one witness to this.",
+  "This paper later found one more person who saw it."
  ]
 }

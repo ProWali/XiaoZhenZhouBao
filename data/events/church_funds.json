@@ -1,0 +1,79 @@
+{
+ "id": "church_funds",
+ "name": "挪用捐款",
+ "severity": 2,
+ "weeks": 14,
+ "target": "priest",
+ "driven_by": [
+  "money"
+ ],
+ "once": true,
+ "roles": {
+  "priest": {
+   "occupation": [
+    "priest"
+   ]
+  },
+  "counter": {
+   "occupation": [
+    "widow",
+    "homemaker",
+    "teacher"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "less",
+   "subject": "priest",
+   "text": "{counter}说，这半年礼拜天的捐款每回都比往年少一截",
+   "secrecy": "semi",
+   "known_by": [
+    "counter",
+    "friends:counter"
+   ]
+  },
+  {
+   "key": "drafts",
+   "subject": "priest",
+   "text": "{priest}每个月往南边寄一张汇票，数目正好是捐款少掉的那一截",
+   "secrecy": "secret",
+   "archive": "post",
+   "known_by": [
+    "priest"
+   ]
+  },
+  {
+   "key": "roof",
+   "subject": "priest",
+   "text": "教堂说了两年要修屋顶，到现在还在漏雨",
+   "secrecy": "public",
+   "known_by": [
+    "random:6"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "priest",
+   "text": "{priest}在南边养着一个家",
+   "truth": 0.15,
+   "known_by": [
+    "gossip:2",
+    "enemies:priest"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "教堂的捐款箱"
+  ],
+  "neutral": [
+   "{priest}被指挪用教会捐款"
+  ],
+  "hot": [
+   "捐给教堂的钱去了南边"
+  ]
+ },
+ "detail": "漏雨的那一排长椅"
+}

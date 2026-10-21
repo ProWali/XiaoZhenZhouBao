@@ -1,0 +1,84 @@
+{
+ "id": "insurance_fire",
+ "name": "仓库失火",
+ "severity": 3,
+ "weeks": 12,
+ "target": "owner",
+ "driven_by": [
+  "money"
+ ],
+ "once": true,
+ "roles": {
+  "owner": {
+   "occupation": [
+    "grocer",
+    "owner",
+    "barkeep"
+   ]
+  },
+  "witness": {
+   "occupation": [
+    "fisher",
+    "drifter",
+    "veteran",
+    "farmer"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "fire",
+   "subject": "owner",
+   "text": "{owner}家的仓库半夜着了火，烧得只剩一堵墙",
+   "secrecy": "semi",
+   "known_by": [
+    "owner",
+    "witness",
+    "random:6"
+   ]
+  },
+  {
+   "key": "policy",
+   "subject": "owner",
+   "text": "火灾前一个月，{owner}通过邮局给仓库投了一份火险",
+   "secrecy": "secret",
+   "archive": "post",
+   "known_by": [
+    "owner"
+   ]
+  },
+  {
+   "key": "kerosene",
+   "subject": "owner",
+   "text": "{witness}说起火前看见{owner}从仓库里出来，手里提着煤油桶",
+   "secrecy": "semi",
+   "known_by": [
+    "witness",
+    "friends:witness"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "owner",
+   "text": "仓库是{owner}的仇家放的火",
+   "truth": 0.2,
+   "known_by": [
+    "friends:owner",
+    "family:owner"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "仓库失火，原因待查"
+  ],
+  "neutral": [
+   "{owner}的仓库失火前刚投了火险"
+  ],
+  "hot": [
+   "{owner}自己点的火？"
+  ]
+ },
+ "detail": "烧剩下的那堵墙"
+}
