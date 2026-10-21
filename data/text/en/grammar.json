@@ -70,7 +70,10 @@
   "The copy is printed alongside, and readers may judge it for themselves.",
   "A transcript of the record is kept at the Gazette office, where readers may see it.",
   "Anyone who wishes to see the record this paper holds may come and see it.",
-  "This paper made a copy of the record, and keeps it at the office."
+  "This paper made a copy of the record, and keeps it at the office.",
+  "This paper holds a copy of that page.",
+  "A photographic copy of the page appears at the foot of this column.",
+  "One page of the record is reproduced below."
  ],
  "resp_unreached": [
   "{target.short} could not be reached before this paper went to press.",
@@ -78,12 +81,23 @@
   "{target.short} was away from home this week and could not be asked in person.",
   "This paper called twice at the home of {target.short} and found no one in.",
   "This paper left word for {target.short}, and has had no answer.",
-  "{target.short} has been out of town all week."
+  "{target.short} has been out of town all week.",
+  "{target.short} has not yet responded.",
+  "This paper wrote to {target.short}, and no reply had come by the time the paper went to press.",
+  "This paper sent word to {target.short} through a friend, and heard nothing back.",
+  "Before the paper went to press, this paper could not get a word with {target.short}.",
+  "This paper would like to hear from {target.short}, and has not yet had the chance.",
+  "The family of {target.short} said {target.ta} was out, and this paper could not put the question.",
+  "This paper did not manage to see {target.short} this week.",
+  "This paper is still waiting to hear back from {target.short}."
  ],
  "resp_declined": [
   "{target.short} declined to answer this paper's questions.",
   "Asked to confirm the account, {target.short} would not comment.",
-  "When asked about the matter, {target.short} shut the door."
+  "When asked about the matter, {target.short} shut the door.",
+  "{target.short} said there was nothing to talk about.",
+  "{target.short} sent word through the family that no reporters would be seen.",
+  "When this paper called, {target.short} waved the question away."
  ],
  "resp_pleaded": [
   "{target.short} sent word asking this paper not to print the story. This paper weighed the request, and printed it.",
@@ -94,12 +108,23 @@
   "{target.short} denied the account to this paper.",
   "Asked about the matter, {target.short} said only: \"There is nothing to it.\"",
   "{target.short} says it did not happen that way.",
-  "{target.short} denies it."
+  "{target.short} denies it.",
+  "{target.short} says this paper has got it wrong.",
+  "{target.short} says this paper has listened to one side only.",
+  "{target.short} says there is more to it, but would not go into it.",
+  "{target.short} says the talk around town is all wrong."
+ ],
+ "resp_denied_charge": [
+  "{target.short} maintains {target.his} innocence.",
+  "{target.short} says someone is out to do {target.him} harm.",
+  "{target.short} says {target.ta} will not accept a single word of what this paper has printed."
  ],
  "close": [
   "This paper will follow the matter.",
   "The Gazette will report further as it learns more.",
-  "Anyone with knowledge of the matter is welcome at the Gazette office."
+  "Anyone with knowledge of the matter is welcome at the Gazette office.",
+  "This paper will ask again.",
+  "This paper has not finished asking about this."
  ],
  "close@calm": [
   "This paper will follow the matter.",
@@ -108,7 +133,10 @@
   "This paper prints only what it can confirm.",
   "When there is more to tell, this paper will tell it.",
   "This paper will report what follows.",
-  "The matter rests here for now."
+  "The matter rests here for now.",
+  "That is as far as this paper can go for now.",
+  "The matter is still open, and this paper will look at it again.",
+  "This paper leaves it there for now."
  ],
  "close@neutral": [
   "This paper will follow the matter.",
@@ -117,7 +145,12 @@
   "This is not the end of it.",
   "The door of the Gazette office stands open all day.",
   "This paper will go on asking.",
-  "Anyone who knows more is welcome to sit down at the Gazette office."
+  "Anyone who knows more is welcome to sit down at the Gazette office.",
+  "This paper will ask again.",
+  "When there is news, this paper will print it.",
+  "This paper has not finished asking about this.",
+  "Readers who know more are welcome to write in.",
+  "This paper will return to it next week."
  ],
  "close@hot": [
   "The people of Greyriver have a right to know.",
@@ -127,7 +160,10 @@
   "This paper will be watching.",
   "Who will be next?",
   "The people of this town are not blind.",
-  "The days of looking the other way should be over."
+  "The days of looking the other way should be over.",
+  "This town is owed an answer.",
+  "This paper will not let it drop.",
+  "Everyone knows who ought to speak up."
  ],
  "close_soft": [
   "",
@@ -217,22 +253,37 @@
   "So far this rests on a single source.",
   "This account has yet to be confirmed; this paper sets it down as received.",
   "Whether it is true, this paper is still working to establish.",
-  "So far, this paper has heard it from only one source."
+  "So far, this paper has heard it from only one source.",
+  "So far only one person has said so. This paper prints it, and asks readers to bear that in mind.",
+  "This paper has not been able to confirm it.",
+  "This is one person's word."
  ],
  "corroborated": [
   "This paper asked several people separately, and their accounts agree.",
   "This paper put the question to several people, and the answers agreed.",
-  "Two people, asked separately by this paper, gave the same account."
+  "Two people, asked separately by this paper, gave the same account.",
+  "Two people who do not know each other have told this paper the same thing.",
+  "This paper has checked it; it does not rest on a single account.",
+  "More than one person says so, and they are not acquainted.",
+  "This paper put the question to someone else, and got the same answer.",
+  "Two people with knowledge of it were asked separately, and said the same.",
+  "This paper asked three people, and not one told it differently.",
+  "This paper did not take one person's word for it."
  ],
  "counter_in": [
   "There is, however, another story going around town. ",
   "Not everyone tells it that way. ",
-  "Another account has reached this paper, and is printed here as well. "
+  "Another account has reached this paper, and is printed here as well. ",
+  "Others tell it the other way round. ",
+  "Not everyone sees it that way, and another account has reached this paper. "
  ],
  "limit_witness": [
   "This paper was too far off to make out anything more.",
   "This paper did not see the rest, and will not guess at it.",
-  "It was dark, and that is all this paper could see."
+  "It was dark, and that is all this paper could see.",
+  "This paper did not follow any further.",
+  "That is all this paper saw.",
+  "This paper had only a glimpse, and will write no more than that."
  ],
  "season_open": [
   "lately",
@@ -289,13 +340,25 @@
   "This paper checked it against the books kept at {loc}, and they agree.",
   "No one at {loc} has denied this record.",
   "The record bears the stamp of {loc}, and this paper saw it plainly.",
-  "The books at {loc} match what this paper copied down, word for word."
+  "The books at {loc} match what this paper copied down, word for word.",
+  "This paper checked the record twice.",
+  "{loc} keeps its own copy of the page, and the two agree.",
+  "The original is still at {loc}, where anyone may see it.",
+  "When this paper copied the page, someone from {loc} stood by."
  ],
  "corroborated_witness": [
   "Someone else was nearby at the time, and saw the same.",
   "Afterward this paper found another person who had been there, and the accounts agree.",
   "There were others about that night. This paper asked them, and they tell the same story.",
   "There was more than one witness to this.",
-  "This paper later found one more person who saw it."
+  "This paper later found one more person who saw it.",
+  "Someone else was there at the time.",
+  "Another passer-by saw the same thing at the same hour.",
+  "Another resident of the town saw it too.",
+  "Afterward this paper asked someone else who had been nearby, and the accounts agree.",
+  "Others were there that night, and saw what this paper saw."
+ ],
+ "_headline_formula": [
+  "Accused of"
  ]
 }

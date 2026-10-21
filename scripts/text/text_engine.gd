@@ -102,35 +102,37 @@ static func surname(world, rid: String, lang: String) -> String:
 
 
 ## 1935 年的报纸称呼：先生、太太、小姐。
-static func short_ref(world, rid: String, lang: String) -> String:
+static func short_ref(world, rid: String, lang: String, occ_id: String = "") -> String:
 	var r: Dictionary = world.residents[rid]
-	var married: bool = r.spouse != "" or r.occ == "widow" or r.get("widowed_week", -99) > -99
+	# 报道里按事发时的职业称呼（当时是牧师，后来当了镇长，这篇里仍是牧师）
+	var oc: String = occ_id if occ_id != "" else str(r.occ)
+	var married: bool = r.spouse != "" or oc == "widow" or r.get("widowed_week", -99) > -99
 	if lang == "en":
 		var title := "Mr"
 		if r.female:
 			title = "Mrs" if married else "Miss"
 			if married and r.spouse != "" and world.residents.has(r.spouse) and surname(world, r.spouse, lang) != surname(world, rid, lang):
 				return person_name(world, rid, lang)
-		if r.occ in ["doctor"]:
+		if oc == "doctor":
 			title = "Dr"
-		elif r.occ == "priest":
+		elif oc == "priest":
 			title = "Father"
-		elif r.occ == "mayor":
+		elif oc == "mayor":
 			title = "Mayor"
-		elif r.occ == "sheriff":
+		elif oc == "sheriff":
 			title = "Sheriff"
 		return title + " " + surname(world, rid, lang)
 	# 1935 年的报纸称女性「女士」，不论婚否；这样也不会把自己的姓配上「太太」
 	var t := "先生"
 	if r.female:
 		t = "女士"
-	if r.occ == "doctor":
+	if oc == "doctor":
 		t = "医生"
-	elif r.occ == "priest":
+	elif oc == "priest":
 		t = "牧师"
-	elif r.occ == "mayor":
+	elif oc == "mayor":
 		t = "镇长"
-	elif r.occ == "sheriff":
+	elif oc == "sheriff":
 		t = "警长"
 	return surname(world, rid, lang) + t
 
@@ -245,7 +247,7 @@ static func _person_slot(world, role: String, field: String, ctx: Dictionary, la
 					return person_name(world, rid, lang)
 				return (occ + " " + person_name(world, rid, lang)) if lang == "en" else (occ + person_name(world, rid, lang))
 			if mode == "named":
-				return short_ref(world, rid, lang)
+				return short_ref(world, rid, lang, occ_id)
 			return _alias_later(occ, oid, fem, mode, lang)
 		"name":
 			var cn: int = int(mentions.get(role, 0))
@@ -265,7 +267,7 @@ static func _person_slot(world, role: String, field: String, ctx: Dictionary, la
 		if field == "full" and not (oid in NO_APPOSITION):
 			return (occ + " " + person_name(world, rid, lang)) if lang == "en" else (occ + person_name(world, rid, lang))
 		return person_name(world, rid, lang)
-	return short_ref(world, rid, lang)
+	return short_ref(world, rid, lang, occ_id)
 
 
 const NO_APPOSITION := ["homemaker", "retired"]
@@ -356,21 +358,72 @@ static func fact_note(world, fid: String, lang: String) -> String:
 	return polish(fill(world, tpl, ctx, lang), lang).trim_suffix("。").trim_suffix(".")
 
 
-## 模板条目可以是字符串，也可以是 {t, needs}：needs 是事实的 key，报道里登了这条事实才能用。
+## 模板条目可以是字符串，也可以是 {t, needs, needs_all}：报道里登了对应的事实才能用。
+##   needs: "key"          要有这条事实
+##   needs: ["a", "b"]     有其中任一条即可
+##   needs_all: ["a", "b"] 每一条都要有（评论里拿两条证据互相印证时用）
 ## 报纸不能在标题和细节里写自己没掌握的事。全被筛掉时退回不带条件的条目。
 static func eligible(items: Array, fact_keys: Dictionary) -> Array:
 	var out: Array = []
-	var plain: Array = []
 	for it in items:
 		if it is String:
 			out.append(it)
-			plain.append(it)
-		elif it is Dictionary and fact_keys.has(str(it.get("needs", ""))):
+		elif it is Dictionary and needs_ok(it, fact_keys):
 			out.append(str(it.t))
 	if out.is_empty():
 		for it in items:
 			out.append(it if it is String else str(it.t))
 	return out
+
+
+## 和 eligible 一样筛，但全被筛掉时就是空的。回应、评论宁可不写，也不能对不上正文。
+static func eligible_strict(items: Array, fact_keys: Dictionary) -> Array:
+	var out: Array = []
+	for it in items:
+		if it is String:
+			out.append(it)
+		elif it is Dictionary and needs_ok(it, fact_keys):
+			out.append(str(it.t))
+	return out
+
+
+## 按语气取一组候选，只留对得上登出事实的。这个语气里一条都对不上时，先借别的语气里对得上的，
+## 实在没有才退回不加筛选（标题不能空着）。免得只登了「夜里赶车」，标题却写「私酒卖进酒馆」。
+static func tone_pool(by_tone: Dictionary, prefer: Array, fact_keys: Dictionary) -> Array:
+	var order: Array = []
+	for t in prefer + ["neutral", "calm", "hot"]:
+		if by_tone.has(t) and not (t in order):
+			order.append(t)
+	for t in order:
+		var strict := eligible_strict(by_tone[t], fact_keys)
+		if not strict.is_empty():
+			return strict
+	for t in order:
+		if not by_tone[t].is_empty():
+			return eligible(by_tone[t], fact_keys)
+	return []
+
+
+static func needs_ok(it: Dictionary, fact_keys: Dictionary) -> bool:
+	if it.has("needs"):
+		var nd = it.needs
+		if nd is Array:
+			var any := false
+			for k in nd:
+				if fact_keys.has(str(k)):
+					any = true
+			if not any:
+				return false
+		elif not fact_keys.has(str(nd)):
+			return false
+	for k in it.get("needs_all", []):
+		if not fact_keys.has(str(k)):
+			return false
+	return true
+
+
+static func _has_needs(it) -> bool:
+	return it is Dictionary and (it.has("needs") or it.has("needs_all"))
 
 
 static func _fact_keys(world, facts_list: Array) -> Dictionary:
@@ -422,8 +475,7 @@ static func headline_candidates(world, e: Dictionary, a: Dictionary, lang: Strin
 	var et := event_text(lang, e.tid)
 	var tone: String = a.get("tone", "neutral")
 	var naming: String = "named" if e.soft else a.get("naming", "named")
-	var raw: Array = et.get("headlines", {}).get(tone, et.get("headlines", {}).get("neutral", []))
-	var pool: Array = _roles_ok(eligible(raw, _fact_keys(world, a.get("facts", []))), _roles_in_facts(world, e, a.get("facts", [])))
+	var pool: Array = _roles_ok(tone_pool(et.get("headlines", {}), [tone], _fact_keys(world, a.get("facts", []))), _roles_in_facts(world, e, a.get("facts", [])))
 	var out: Array = []
 	if pool.is_empty():
 		# 没写文本的事件退回模拟层自带的标题
@@ -435,8 +487,22 @@ static func headline_candidates(world, e: Dictionary, a: Dictionary, lang: Strin
 	rng.shuffle(order)
 	# 半年内用过的标题模板排到后面（只读，不记；付印时由 article() 记下）
 	var mem: Dictionary = world.text_memory.get(lang, {}) if a.get("use_memory", true) else {}
-	if not mem.is_empty():
-		order.sort_custom(func(x, y): return int(mem.get("hln:" + str(x), 0)) < int(mem.get("hln:" + str(y), 0)))
+	# 「某某被指某事」是公文腔，一份报纸里见多了就成了套路：排序时当它已经用过两回
+	var formula: Array = data(lang).grammar.get("_headline_formula", [])
+	var rank := func(t) -> int:
+		var r: int = int(mem.get("hln:" + str(t), 0))
+		for f in formula:
+			if str(t).find(str(f)) >= 0:
+				r += 2
+		return r
+	if not mem.is_empty() or not formula.is_empty():
+		var ranked: Array = []
+		for i in order.size():
+			ranked.append([rank.call(order[i]), i, order[i]])
+		ranked.sort_custom(func(x, y): return x[0] < y[0] or (x[0] == y[0] and x[1] < y[1]))
+		order = []
+		for x in ranked:
+			order.append(x[2])
 	last_headline_templates.clear()
 	var tries := 0
 	while out.size() < 3 and tries < 12:
@@ -493,7 +559,7 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 	# 导语
 	var keys := _fact_keys(world, a.get("facts", []))
 	var leads: Dictionary = et.get("lead", {})
-	var lead := g.pick_expand(eligible(leads.get(tone + "_" + naming, leads.get(tone, leads.get("neutral", []))), keys))
+	var lead := g.pick_expand(tone_pool(leads, [tone + "_" + naming, tone], keys))
 	if e.soft:
 		var body := g.pick_expand(et.get("body", []))
 		var text := lead + body
@@ -612,7 +678,7 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 	var details: Array = []
 	for it in et.get("detail", []):
 		var dt: String = it if it is String else str(it.t)
-		if (it is String or keys.has(str(it.get("needs", "")))) and _unused(g, dt):
+		if (it is String or needs_ok(it, keys)) and _unused(g, dt):
 			details.append(dt)
 	if not details.is_empty() and not detail_used and rng.chance(0.3):
 		ctx["vars"] = {}
@@ -628,34 +694,27 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 	var t_occ: String = str(e.get("occ_at", {}).get(target, world.residents[target].occ))
 	for it in et.get("comment", {}).get(tone, []) + et.get("comment", {}).get("any", []):
 		if it is Dictionary and it.has("occ"):
-			if t_occ in it.occ and (not it.has("needs") or keys.has(str(it.needs))):
+			if t_occ in it.occ and needs_ok(it, keys):
 				occ_comments.append(str(it.t))
-		elif it is String:
-			comments.append(it)
-		elif keys.has(str(it.get("needs", ""))):
+		elif it is String or not _has_needs(it):
+			comments.append(it if it is String else str(it.t))
+		elif needs_ok(it, keys):
 			tied_comments.append(str(it.t))
 	# 能落到本篇某条证据上的评论，读起来才不像贴上去的。只剩空道理时，多半不写。
-	var fresh_tied: Array = []
-	for t in tied_comments:
-		if _unused(g, str(t)):
-			fresh_tied.append(t)
+	# 评论一局只用一次：同一句判断在两篇报道里一字不差地出现，比不写更糟。
+	var fresh_tied := _fresh(g, tied_comments)
+	var fresh_plain := _fresh(g, comments)
+	# 按职业写的评论会把化名、匿名的人认出来，只在点名时用；它多半是一句道理，排在落到证据上的评论后面
+	var fresh_occ: Array = _fresh(g, occ_comments) if naming == "named" else []
 	var comment_p := 0.75
 	if not fresh_tied.is_empty():
-		comments = fresh_tied
-	elif not tied_comments.is_empty() and rng.chance(0.5):
-		comments = tied_comments
+		comments = fresh_occ if (not fresh_occ.is_empty() and rng.chance(0.2)) else fresh_tied
+	elif not fresh_occ.is_empty():
+		comments = fresh_occ
+		comment_p = 0.5
 	else:
+		comments = fresh_plain
 		comment_p = 0.3
-	# 按职业写的评论会把化名、匿名的人认出来，只在点名时用
-	if naming == "named" and not occ_comments.is_empty():
-		var unused: Array = []
-		for t in occ_comments:
-			if g.memory == null or int(g.memory.get("n:" + str(t), 0)) == 0:
-				unused.append(t)
-		if not unused.is_empty() and (comments.is_empty() or rng.chance(0.6)):
-			comments = unused
-		else:
-			comments = comments + occ_comments
 	var comment_text := ""
 	if not comments.is_empty() and rng.chance(comment_p):
 		ctx["vars"] = {}
@@ -668,14 +727,21 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 		resp_kind = "denied"
 	elif world.residents[target].get("aware", false):
 		resp_kind = "declined"
+	# 这类事件自己的说法和通用说法放在一起挑，挑用得最少的；自己的说法只对得上登出的事实才能用
 	var resp := ""
-	var ev_resp: Array = eligible(et.get("resp", {}).get(resp_kind, []), keys) if not et.get("resp", {}).get(resp_kind, []).is_empty() else []
-	if not ev_resp.is_empty():
-		resp = g.pick_expand(ev_resp)
-	elif g.has_rule("resp_" + resp_kind):
-		resp = g.expand("#resp_" + resp_kind + "#")
+	var resp_pool: Array = eligible_strict(et.get("resp", {}).get(resp_kind, []), keys)
+	# 「坚称清白」这类说法只配得上被指做了坏事的人；生病、来历、私情这类事件标了 no_charge，不用
+	var gsyms: Array = ["resp_" + resp_kind]
+	if not et.get("no_charge", false):
+		gsyms.append("resp_" + resp_kind + "_charge")
+	for gs in gsyms:
+		var generic_resp = data(lang).grammar.get(gs, [])
+		if generic_resp is Array:
+			resp_pool = resp_pool + generic_resp
+	if not resp_pool.is_empty():
+		resp = g.pick_expand(resp_pool)
 	var close := ""
-	var ev_close: Array = et.get("close", {}).get(tone, [])
+	var ev_close: Array = eligible_strict(et.get("close", {}).get(tone, []), keys)
 	if rng.chance(0.35):
 		if not ev_close.is_empty() and rng.chance(0.5):
 			close = g.pick_expand(ev_close)
@@ -686,20 +752,31 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 	# 化名、匿名的人不介绍（「镇上的警长是某位警长」）
 	if naming == "named" and int(ctx.mentions.get(str(e.target), 0)) == 0 and not et.get("intro", []).is_empty():
 		intro = fill(world, g.pick_expand(et.intro), ctx, lang)
-	var ending := ""
-	for piece in [intro, comment_text, fill(world, resp, ctx, lang), fill(world, close, ctx, lang)]:
-		if piece != "":
-			ending += (sep if ending != "" else "") + piece
-	if ending != "":
-		# 判断和回应有时分两段
-		if comment_text != "" and resp != "" and rng.chance(0.5):
-			paras.append(polish(comment_text, lang))
-			ending = ending.substr(comment_text.length()).strip_edges()
-			if ending != "":
-				paras.append(polish(ending, lang))
-		else:
-			paras.append(polish(ending, lang))
+	# 介绍当事人的话跟着判断走；判断和回应有时分两段
+	var judge := _join([intro, comment_text], sep)
+	var answer := _join([fill(world, resp, ctx, lang), fill(world, close, ctx, lang)], sep)
+	if comment_text != "" and answer != "" and rng.chance(0.5):
+		paras.append(polish(judge, lang))
+		paras.append(polish(answer, lang))
+	elif judge != "" or answer != "":
+		paras.append(polish(_join([judge, answer], sep), lang))
 	return {"headline": headline, "paragraphs": paras}
+
+
+static func _fresh(g: Grammar, items: Array) -> Array:
+	var out: Array = []
+	for t in items:
+		if _unused(g, str(t)):
+			out.append(t)
+	return out
+
+
+static func _join(pieces: Array, sep: String) -> String:
+	var out := ""
+	for p in pieces:
+		if str(p) != "":
+			out += (sep if out != "" else "") + str(p)
+	return out
 
 
 static func _prose_for(items: Array, src_kind: String, t_occ: String = "") -> Array:

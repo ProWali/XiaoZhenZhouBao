@@ -1,5 +1,6 @@
 ## M3 盲测工具：生成稿里混入 20% 手写稿，看读者分不分得出。
-##   第一步 godot --headless -s res://scripts/tools/blind_test.gd -- --brief
+##   第一步 godot --headless -s res://scripts/tools/blind_test.gd -- --brief [--from 20]
+##          --from：从哪个种子往上找镇子。每轮换一个起点，读者就是在读一座新镇子；起点记在 round.json，出卷时沿用
 ##          从一局真实对局里抽 30 篇硬新闻，前 6 篇只写出事实提要（design/blind/briefs_zh.md），等人手写
 ##   第二步 把手写稿填进 design/blind/handwritten_zh.json：{"b01": {"headline": "...", "body": ["段落", ...]}, ...}
 ##   第三步 godot --headless -s res://scripts/tools/blind_test.gd -- --packet
@@ -18,10 +19,18 @@ const HAND := 6
 const DIR := "res://design/blind/"
 
 
+var seed_from := 1
+
+
 func _init() -> void:
 	var args := OS.get_cmdline_user_args()
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(DIR))
+	if FileAccess.file_exists(DIR + "round.json"):
+		seed_from = int(JSON.parse_string(FileAccess.get_file_as_string(DIR + "round.json")).get("seed_from", 1))
+	if "--from" in args:
+		seed_from = int(args[args.find("--from") + 1])
 	if "--brief" in args:
+		_write(DIR + "round.json", JSON.stringify({"seed_from": seed_from}, " "))
 		_brief()
 	elif "--packet" in args:
 		_packet()
@@ -33,9 +42,9 @@ func _init() -> void:
 
 
 ## 只取一座镇子、一局：试卷里的人名、职业、镇长前后一致，读者不会因为「设定冲突」认出程序稿。
-## 从种子 1 往上找，第一个能凑够题量的局就用它。同一类事件最多取 8 篇。
+## 从种子 seed_from 往上找，第一个能凑够题量的局就用它。同一类事件最多取 8 篇。
 func _collect() -> Array:
-	for s in range(1, 60):
+	for s in range(seed_from, seed_from + 60):
 		var world = World.new(s, {"total_weeks": 104, "lang": "zh"})
 		var auto = Auto.new("cautious", s)
 		var pool: Array = []

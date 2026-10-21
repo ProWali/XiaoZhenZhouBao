@@ -22,3 +22,4 @@
 截至付印本报未能联系到  # 乙：M3 第一版 resp_unreached
 回答本报的问题  # 乙：M3 第一版 resp_declined
 本报将继续关注  # 乙：M3 第一版 close
+杂货店的进货单  # 甲：short_weight.books 事实原文「杂货店的进货单上，面粉比卖出去的账多出一成」

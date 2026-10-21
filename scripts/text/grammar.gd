@@ -116,7 +116,7 @@ func _expand_symbol(name: String, depth: int) -> String:
 		options = rules.get(name, null)
 	if options == null:
 		return "〔%s〕" % name  # 缺规则时留下显眼标记，lint 会抓
-	var chosen: String = options if options is String else (pick_fresh(options) if options.size() >= 3 else str(rng.pick(options)))
+	var chosen: String = options if options is String else (pick_fresh(options) if options.size() >= 2 else str(rng.pick(options)))
 	return expand(chosen, depth + 1)
 
 

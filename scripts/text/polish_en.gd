@@ -30,7 +30,7 @@ static func _compile() -> void:
 	_re_sentence.compile("[^.!?]+[.!?]+[\"”]?|[^.!?]+$")
 	# 元音开头却读辅音的词用 a；h 不发音的词用 an
 	_re_an_exc = RegEx.new()
-	_re_an_exc.compile("\\b([Aa])n (one|once|union|unique|usual|useful|uniform|universal|European|eulogy)\\b")
+	_re_an_exc.compile("\\b([Aa])n (one|once|union|unique|usual|usually|use|uses|used|useful|useless|user|unit|united|uniform|universal|university|utility|European|eulogy|ewe)\\b")
 	_re_a_exc = RegEx.new()
 	_re_a_exc.compile("\\b([Aa]) (hour|honest|heir|honour|honor)\\b")
 
