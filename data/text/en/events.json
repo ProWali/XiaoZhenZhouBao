@@ -128,10 +128,6 @@
      "needs": "smell"
     },
     "The river runs past the sawmill's gate, and below it lie the wells of several households. This paper has spent the past weeks walking its banks.",
-    {
-     "t": "The sawmill owned by {culprit.full} ordered forty sacks of lime this season. This paper set out to learn where the lime went.",
-     "needs": "lime"
-    },
     "A few households along the river have had one worry on their minds lately. This paper went and asked.",
     "This paper has spent several weeks following a matter between the sawmill and the families downriver."
    ],
@@ -151,10 +147,15 @@
    ],
    "scene": [
     {
-     "t": "The few households downriver draw their drinking water from their own wells, and none of those wells stands more than a few dozen paces from the river."
+     "t": "The few households downriver draw their drinking water from their own wells, and none of those wells stands more than a few dozen paces from the river.",
+     "needs": "smell"
     },
     {
      "t": "In summer the river runs low, and the children downriver spend their afternoons picking stones off the gravel bars.",
+     "needs": [
+      "smell",
+      "dump"
+     ],
      "season": [
       "summer"
      ]
@@ -231,10 +232,6 @@
    {
     "t": "Those households now fetch their water from the public well on the east side of town, half an hour there and back.",
     "needs": "smell"
-   },
-   {
-    "t": "In other years the sawmill has ordered five or six sacks of lime at most.",
-    "needs": "lime"
    }
   ],
   "comment": {
@@ -428,10 +425,9 @@
   "lead": {
    "calm": [
     {
-     "t": "In the credit book at the general store, a few accounts have been standing open a long while.",
+     "t": "Small trade is never easy in Greyriver, and the general store has lately had more trouble than most collecting what it is owed.",
      "needs": "ledger"
     },
-    "Small trade is never easy in Greyriver, and the general store has lately had more trouble than most collecting what it is owed.",
     "A new sign hangs at the door of the general store: No credit.",
     {
      "t": "#season_open#, the credit book at the general store has grown by several pages.",
@@ -443,7 +439,10 @@
     }
    ],
    "neutral": [
-    "An account at the general store has gone unpaid for six months. It stands in the name of {debtor}.",
+    {
+     "t": "An account at the general store has gone unpaid for six months. It stands in the name of {debtor}.",
+     "needs": "ledger"
+    },
     {
      "t": "{creditor.full} has a debt on the books that will not be collected, and it has been weighing on the store.",
      "needs": "ledger"
@@ -460,8 +459,14 @@
      "t": "#recent#, the mantel clock from the home of {debtor.full} turned up on the pawnshop counter.",
      "needs": "pawn"
     },
-    "This paper had a look through a certain credit book this week.",
-    "The general store has been fretting over an old account, and this paper asked whose it was."
+    {
+     "t": "This paper had a look through a certain credit book this week.",
+     "needs": "ledger"
+    },
+    {
+     "t": "The general store has been fretting over an old account, and this paper asked whose it was.",
+     "needs": "ledger"
+    }
    ],
    "hot": [
     {
@@ -479,10 +484,12 @@
    ],
    "scene": [
     {
-     "t": "Under the counter at the general store lies a credit book, and half the families in town have their names in it."
+     "t": "Under the counter at the general store lies a credit book, and half the families in town have their names in it.",
+     "needs": "ledger"
     },
     {
      "t": "The end of the year is when the general store settles up, and the storekeeper goes from house to house with the credit book, one family at a time.",
+     "needs": "ledger",
      "season": [
       "winter"
      ]
@@ -750,18 +757,24 @@
    "scene": [
     {
      "t": "On summer nights the heat drives people out onto the bridge for the breeze, and they seldom drift home before ten.",
+     "needs": "bridge",
      "season": [
       "summer"
      ]
     },
     {
      "t": "On winter nights the wind comes hard across the bridge, and after nine hardly anyone crosses it.",
+     "needs": "bridge",
      "season": [
       "winter"
      ]
     },
     {
-     "t": "Greyriver is a small town. Everyone knows what time the lamp goes out next door."
+     "t": "Greyriver is a small town. Everyone knows what time the lamp goes out next door.",
+     "needs": [
+      "suspect",
+      "bridge"
+     ]
     }
    ]
   },
@@ -1073,10 +1086,6 @@
   "lead": {
    "calm": [
     {
-     "t": "The sawmill lost two saw blades and a crate of nails #recent#, and the mill is looking into it.",
-     "needs": "missing"
-    },
-    {
      "t": "The tool room at the sawmill could not account for its stock this month.",
      "needs": "missing"
     },
@@ -1134,16 +1143,26 @@
    ],
    "scene": [
     {
-     "t": "The sawmill whistle blows at six every morning. The men come in by the back gate and draw their tools from the tool room before they start work."
+     "t": "The sawmill whistle blows at six every morning. The men come in by the back gate and draw their tools from the tool room before they start work.",
+     "needs": [
+      "missing",
+      "night"
+     ]
     },
     {
      "t": "Since the cold set in there has been less work at the sawmill, and some of the men get only three days a week.",
+     "needs": [
+      "missing",
+      "night",
+      "sold"
+     ],
      "season": [
       "winter"
      ]
     },
     {
      "t": "In summer the sawmill starts early, and by first light there is a line at the tool room door.",
+     "needs": "missing",
      "season": [
       "summer"
      ]
@@ -1461,16 +1480,19 @@
    ],
    "scene": [
     {
-     "t": "The tavern's front door opens onto Main Street. Its back door gives onto an alley with no lamp."
+     "t": "The tavern's front door opens onto Main Street. Its back door gives onto an alley with no lamp.",
+     "needs": "backdoor"
     },
     {
      "t": "Winter nights are long, the tavern stove is kept roaring, and closing time seldom comes before midnight.",
+     "needs": "backdoor",
      "season": [
       "winter"
      ]
     },
     {
-     "t": "The tavern windows face Main Street, and from across the way anyone can see who goes in and who comes out."
+     "t": "The tavern windows face Main Street, and from across the way anyone can see who goes in and who comes out.",
+     "needs": "backdoor"
     }
    ]
   },
@@ -1784,7 +1806,6 @@
    "calm": [
     "{sick.full} has seldom been seen in public of late.",
     "{sick.full} has not been seen about town for several weeks, and people have begun to ask how {sick.short} is keeping.",
-    "{sick.full} has not been to church this month.",
     "#season_open#, {sick.full} has been seen in public less and less."
    ],
    "neutral": [
@@ -1796,7 +1817,6 @@
      ]
     },
     "{sick.full} has been ill, and the illness has never been made public. This paper has learned some of the facts.",
-    "People at the town hall say {sick.full} often does not come in until the afternoon these days.",
     "The town has been talking about the health of {sick} for some while. This paper went and asked.",
     "This paper asked a few more questions than usual about how {sick.full} is faring.",
     "There is something about {sick.full} the town ought to know."
@@ -1812,6 +1832,7 @@
    "scene": [
     {
      "t": "Since winter set in, the clinic's waiting room has filled up with coughing.",
+     "needs": "chart",
      "season": [
       "winter"
      ]
@@ -2080,7 +2101,7 @@
   "lead": {
    "calm": [
     {
-     "t": "The town hall books show a payment for road repairs. The money came in six months ago; the road has not been touched.",
+     "t": "Six months ago the town hall had money in hand for the station road. Anyone who has walked it since can judge what became of it.",
      "needs": "ledger"
     },
     {
@@ -2160,16 +2181,19 @@
    ],
    "scene": [
     {
-     "t": "On a rainy day, one step on the road to the railway station sinks a man's shoe in mud up past the laces."
+     "t": "On a rainy day, one step on the road to the railway station sinks a man's shoe in mud up past the laces.",
+     "needs": "ledger"
     },
     {
      "t": "With the spring thaw the town's roads have gone to ruin again, and a freight wagon can bog down several times in a day.",
+     "needs": "ledger",
      "season": [
       "spring"
      ]
     },
     {
-     "t": "The town hall's account books are locked in the clerk's cabinet, and are read aloud only once a year, at the town meeting."
+     "t": "The town hall's account books are locked in the clerk's cabinet, and are read aloud only once a year, at the town meeting.",
+     "needs": "ledger"
     }
    ]
   },
@@ -2539,10 +2563,6 @@
    ],
    "neutral": [
     {
-     "t": "Half the cheap liquor sold at the tavern comes from the barn of {brewer}, and no tax has been paid on it.",
-     "needs": "buy"
-    },
-    {
      "t": "This paper looked into where the tavern gets its cheap liquor, and the trail led to {brewer}.",
      "needs": "buy"
     },
@@ -2583,16 +2603,19 @@
    ],
    "scene": [
     {
-     "t": "The tavern counter offers two kinds of liquor: bottled, with the tax stamp on it, and loose, ladled out of a crock."
+     "t": "The tavern counter offers two kinds of liquor: bottled, with the tax stamp on it, and loose, ladled out of a crock.",
+     "needs": "buy"
     },
     {
      "t": "There is no work in the fields in winter, and once night falls the farmhouse lamps go out one by one.",
+     "needs": "wagon",
      "season": [
       "winter"
      ]
     },
     {
      "t": "Since the thaw, the wheel ruts on the woodland tracks have grown deeper by the day.",
+     "needs": "wagon",
      "season": [
       "spring"
      ]
@@ -3820,10 +3843,15 @@
    ],
    "scene": [
     {
-     "t": "Those few plots along the river were never worth much. Then the sawmill's new road went through, and that changed."
+     "t": "Those few plots along the river were never worth much. Then the sawmill's new road went through, and that changed.",
+     "needs": [
+      "deed",
+      "complain"
+     ]
     },
     {
-     "t": "The town hall's deed register is a great leather-bound ledger, kept in the cabinet behind the clerk's desk."
+     "t": "The town hall's deed register is a great leather-bound ledger, kept in the cabinet behind the clerk's desk.",
+     "needs": "deed"
     }
    ]
   },
@@ -4099,10 +4127,6 @@
      "needs": "short"
     },
     {
-     "t": "Flour that {victim.full} bought at the general store came up three ounces short when weighed at home. This paper followed it from there.",
-     "needs": "short"
-    },
-    {
      "t": "Everyone in town buys at the general store, and hardly anyone weighs the goods again at home. This paper did.",
      "needs": "short"
     },
@@ -4111,7 +4135,7 @@
      "needs": "short"
     },
     {
-     "t": "This paper set the general store's invoices beside its sales book and went through them line by line.",
+     "t": "This paper has been doing sums with the general store's books.",
      "needs": "books"
     },
     "This paper went to look over the town's general store on behalf of those who shop there.",
@@ -4141,15 +4165,28 @@
    "scene": [
     {
      "t": "At pickling time in the fall, families in town buy their salt and sugar by the pound.",
+     "needs": [
+      "short",
+      "lead_weight"
+     ],
      "season": [
       "autumn"
      ]
     },
     {
-     "t": "The scale at the general store hangs in the middle of the counter. Flour, sugar, nails: everything is weighed on it."
+     "t": "The scale at the general store hangs in the middle of the counter. Flour, sugar, nails: everything is weighed on it.",
+     "needs": [
+      "short",
+      "lead_weight"
+     ]
     },
     {
      "t": "As the cold comes on, every household lays in fifty pounds of flour or more, and for those few days the general store is busy from morning to night.",
+     "needs": [
+      "short",
+      "lead_weight",
+      "books"
+     ],
      "season": [
       "winter",
       "autumn"
@@ -4429,10 +4466,6 @@
      "needs": "fire"
     },
     {
-     "t": "#recent#, the warehouse belonging to {owner.full} caught fire in the night and burned down to one wall.",
-     "needs": "fire"
-    },
-    {
      "t": "For days after the warehouse burned, the whole town could smell it.",
      "needs": "fire"
     }
@@ -4478,6 +4511,7 @@
     },
     {
      "t": "Winter is the dry season, and as soon as the cold set in, the fire company wheeled its hose cart round to stand at the town hall door.",
+     "needs": "fire",
      "season": [
       "winter"
      ]
@@ -4743,10 +4777,6 @@
       "sack"
      ]
     },
-    {
-     "t": "A dozen snares have been found in the sawmill's woods this month.",
-     "needs": "snares"
-    },
     "The sawmill's woods are large, and usually nobody goes in but people gathering firewood."
    ],
    "neutral": [
@@ -4758,7 +4788,7 @@
     "This paper walked the edge of the sawmill's woods several times over what has been happening there.",
     "The woods belong to the sawmill, but there are fewer deer in them every year. This paper looked into it.",
     {
-     "t": "Men from the mill have been taking up snares in the woods for a month now.",
+     "t": "The sawmill's men have been finding wire in the woods where no wire should be.",
      "needs": "snares"
     },
     "This paper went out to the sawmill's woods several times this month.",
@@ -4781,18 +4811,31 @@
    "scene": [
     {
      "t": "Fall is when the deer are fattest. In other years, at this season, they could often be seen grazing at the edge of the woods.",
+     "needs": [
+      "sack",
+      "snares",
+      "hides"
+     ],
      "season": [
       "autumn"
      ]
     },
     {
      "t": "In the woods after a snowfall, anything that passes leaves tracks.",
+     "needs": [
+      "sack",
+      "snares"
+     ],
      "season": [
       "winter"
      ]
     },
     {
      "t": "The snow has gone, and the deer in the woods have begun moving down toward the river.",
+     "needs": [
+      "sack",
+      "snares"
+     ],
      "season": [
       "spring"
      ]
@@ -5358,21 +5401,13 @@
     },
     "#season_open#, the lamp in the tavern's back room has burned late every Saturday night.",
     {
-     "t": "Every Saturday night there is a card game in the tavern's back room.",
+     "t": "On Saturday nights the lamp in the tavern's back room burns late.",
      "needs": "cards"
     },
     "The tavern is where the town rests its feet. The back room is another matter."
    ],
    "neutral": [
     "This paper looked into what goes on in the tavern's back room on Saturday nights.",
-    {
-     "t": "The game in the tavern's back room is played for cash, and the one who runs it is {barkeep.full}.",
-     "needs": "cards"
-    },
-    {
-     "t": "#recent#, {loser.full} lost half a month's wages in a single night.",
-     "needs": "loss"
-    },
     "This paper has knocked at the door of the tavern's back room more than once.",
     {
      "t": "Several households in town have nothing in the pot the day after wages are paid. This paper looked into why.",
@@ -5404,10 +5439,18 @@
    ],
    "scene": [
     {
-     "t": "The sawmill pays its wages at four o'clock every Saturday afternoon."
+     "t": "The sawmill pays its wages at four o'clock every Saturday afternoon.",
+     "needs": [
+      "loss",
+      "cards"
+     ]
     },
     {
-     "t": "The tavern's back room has no windows. With the door shut, nobody out front can hear what goes on inside."
+     "t": "The tavern's back room has no windows. With the door shut, nobody out front can hear what goes on inside.",
+     "needs": [
+      "cards",
+      "cut"
+     ]
     }
    ]
   },
@@ -5722,7 +5765,11 @@
      "t": "The post office is one room, one counter and one postman."
     },
     {
-     "t": "At three every afternoon the postman carries the mailbags off the train into the post office and sorts them, letter by letter."
+     "t": "At three every afternoon the postman carries the mailbags off the train into the post office and sorts them, letter by letter.",
+     "needs": [
+      "opened",
+      "steam"
+     ]
     }
    ]
   },
@@ -5974,10 +6021,6 @@
    "calm": [
     "Seeing a doctor in this town means the clinic, and the clinic's medicine is not cheap.",
     "#season_open#, a new stall has appeared outside the railway station.",
-    {
-     "t": "Someone has been selling a strengthening tonic at the railway station lately.",
-     "needs": "selling"
-    },
     "People who are ill will often try any medicine at all."
    ],
    "neutral": [
@@ -6025,30 +6068,38 @@
    "scene": [
     {
      "t": "Since spring came, the station platform has been busy again, and among those getting off the train there are always a few peddlers with sample cases.",
+     "needs": "selling",
      "season": [
       "spring"
      ]
     },
     {
      "t": "In hot weather the station platform offers no shade, and everyone waiting for a train crowds in under the eaves.",
+     "needs": [
+      "selling",
+      "bottling"
+     ],
      "season": [
       "summer"
      ]
     },
     {
      "t": "After the harvest the farmers have a little money in hand, and the stalls outside the railway station have multiplied to match.",
+     "needs": "selling",
      "season": [
       "autumn"
      ]
     },
     {
      "t": "In winter a good many people in town have coughs, and every morning there is a line outside the clinic.",
+     "needs": "harm",
      "season": [
       "winter"
      ]
     },
     {
-     "t": "The stalls outside the railway station have always sold a bit of everything: needles and thread, combs, old books. Lately a few bottles of medicine have joined them."
+     "t": "The stalls outside the railway station have always sold a bit of everything: needles and thread, combs, old books. Lately a few bottles of medicine have joined them.",
+     "needs": "selling"
     }
    ]
   },
@@ -6305,7 +6356,7 @@
     "When people in town are short, they have to borrow from somebody.",
     "Borrowing and paying back is as old as money.",
     {
-     "t": "#season_open#, men have come to the house of {borrower.full} and carried off the sewing machine.",
+     "t": "#season_open#, there has been one sewing machine fewer on the street where {borrower.full} lives.",
      "needs": "seized"
     },
     "There is no bank in town, and households short of money have to borrow from someone."
@@ -6313,11 +6364,7 @@
    "neutral": [
     "There is a moneylending business in town, and this paper has found the lender.",
     {
-     "t": "{borrower.full} borrowed twenty dollars and must pay three dollars a month in interest. This paper went over the figures.",
-     "needs": "note"
-    },
-    {
-     "t": "#recent#, men came to the house of {borrower.full} and carried off the sewing machine, saying it was against the interest.",
+     "t": "The neighbors of {borrower.full} watched from their doorsteps the day the sewing machine left the house. This paper asked why it was taken.",
      "needs": "seized"
     },
     "Some households in town owe a sum they can never seem to pay off. This paper looked into it.",
@@ -6349,6 +6396,10 @@
     },
     {
      "t": "Since winter set in the sawmill has had less work, and the men are drawing only half a month's wages each month.",
+     "needs": [
+      "half",
+      "seized"
+     ],
      "season": [
       "winter"
      ]
@@ -6606,10 +6657,6 @@
      "t": "#season_open#, the clinic has taken in someone badly hurt.",
      "needs": "injury"
     },
-    {
-     "t": "{victim.full} was helped into the clinic with two broken ribs.",
-     "needs": "injury"
-    },
     "The sheriff's is a hard post, and this paper knows it."
    ],
    "neutral": [
@@ -6626,7 +6673,7 @@
      "needs": "injury"
     },
     {
-     "t": "{victim.full} has told people that the one who did the beating was the sheriff.",
+     "t": "{victim.full} has a name to give for the beating, and has been giving it to anyone who will listen.",
      "needs": "told"
     },
     {
@@ -6657,7 +6704,8 @@
    ],
    "scene": [
     {
-     "t": "Behind the railway station is a stretch of open ground heaped with cinders. There is no lamp there at night, and men with nowhere else to go often sleep on it."
+     "t": "Behind the railway station is a stretch of open ground heaped with cinders. There is no lamp there at night, and men with nowhere else to go often sleep on it.",
+     "needs": "baton"
     },
     {
      "t": "The town has one sheriff, one office and one pair of handcuffs."
@@ -6937,21 +6985,13 @@
      "t": "#season_open#, there have been fewer people in the pews than in other years.",
      "needs": "less"
     },
-    {
-     "t": "The church has talked of mending the roof for two years now, and it still leaks.",
-     "needs": "roof"
-    },
     "The Sunday collection box is filled a penny at a time by the congregation."
    ],
    "neutral": [
     "In the church's accounts, this paper has found matters that are hard to put into print.",
-    {
-     "t": "For half a year, the Sunday collection at the church has come in smaller than in other years. This paper looked into where the difference went.",
-     "needs": "less"
-    },
     "How the church's money is spent, this paper has asked on behalf of the congregation.",
     {
-     "t": "Money to mend the roof has been collected for two years, and the roof still leaks. This paper looked into it.",
+     "t": "On rainy Sundays the buckets still go down in the church aisle. This paper asked about the roof fund.",
      "needs": "roof"
     },
     "{priest.full} has led the church for many years. What this paper has to say this week concerns the church's accounts.",
@@ -7240,7 +7280,7 @@
   "lead": {
    "calm": [
     {
-     "t": "#season_open#, someone has been knocking on doors around town selling cough syrup.",
+     "t": "#season_open#, there has been a new knock at the doors of houses with small children.",
      "needs": "door"
     },
     {
@@ -7253,19 +7293,7 @@
     }
    ],
    "neutral": [
-    {
-     "t": "#recent#, {seller.full} went door to door selling a cough syrup. This paper looked into that syrup.",
-     "needs": "door"
-    },
-    {
-     "t": "A child took a dose of cough syrup and slept for a day and a night. This paper looked into where the syrup came from.",
-     "needs": "sleep"
-    },
-    "A syrup has been selling well in town, and this paper asked some questions about it on behalf of every household with children.",
-    {
-     "t": "The syrup bottles carry a State Board of Health seal. This paper wrote to the state to ask about it.",
-     "needs": "seal"
-    }
+    "A syrup has been selling well in town, and this paper asked some questions about it on behalf of every household with children."
    ],
    "hot": [
     {
@@ -7277,15 +7305,27 @@
    "scene": [
     {
      "t": "Winter brings coughs to the children, and when a child coughs at night nobody in the house sleeps.",
+     "needs": [
+      "door",
+      "sleep"
+     ],
      "season": [
       "winter"
      ]
     },
     {
-     "t": "The clinic is half an hour's walk from the farms north of town. When a child coughs in the night, the parents can only sit up and wait for morning."
+     "t": "The clinic is half an hour's walk from the farms north of town. When a child coughs in the night, the parents can only sit up and wait for morning.",
+     "needs": [
+      "door",
+      "sleep"
+     ]
     },
     {
      "t": "Once the fall chill comes, more and more children in town begin to cough.",
+     "needs": [
+      "door",
+      "sleep"
+     ],
      "season": [
       "autumn"
      ]
@@ -7538,7 +7578,7 @@
      "needs": "manifest"
     },
     {
-     "t": "#season_open#, someone has been selling cheap canned peaches at the market.",
+     "t": "#season_open#, canned peaches have been cheaper at the market than anywhere else in the county.",
      "needs": "market"
     }
    ],
@@ -7546,10 +7586,6 @@
     {
      "t": "For some weeks now, {boss.full} has been trying to answer one question: where did the six cases of canned peaches on the waybill go?",
      "needs": "manifest"
-    },
-    {
-     "t": "#recent#, canned peaches turned up at the market at half price. This paper looked into where they came from.",
-     "needs": "market"
     },
     "This paper has followed a matter at the station freight house for two weeks.",
     "Something has gone missing from the freight house, and nobody at the station has had an easy time of it since. This paper went and asked."
@@ -7566,13 +7602,19 @@
    ],
    "scene": [
     {
-     "t": "Every Tuesday the freight from the south is unloaded at the railway station, and the freight house stays open until dark."
+     "t": "Every Tuesday the freight from the south is unloaded at the railway station, and the freight house stays open until dark.",
+     "needs": [
+      "manifest",
+      "cart"
+     ]
     },
     {
-     "t": "On market day the stalls stretch from the bridge all the way to the general store door, selling a bit of everything."
+     "t": "On market day the stalls stretch from the bridge all the way to the general store door, selling a bit of everything.",
+     "needs": "market"
     },
     {
      "t": "Things cost more at market in winter. A can of peaches goes for ten cents.",
+     "needs": "market",
      "season": [
       "winter"
      ]
@@ -7817,7 +7859,7 @@
   "lead": {
    "calm": [
     {
-     "t": "#recent#, a patch of fresh stumps turned up on the north side of the sawmill's woods.",
+     "t": "#recent#, the sawmill's woods have been thinning out on the north side, and not by the mill's own felling crew.",
      "needs": "stumps"
     },
     {
@@ -7827,11 +7869,7 @@
    ],
    "neutral": [
     {
-     "t": "Men from the sawmill counted thirty-odd new stumps on the north side of the woods. This paper looked into where those trees went.",
-     "needs": "stumps"
-    },
-    {
-     "t": "#recent#, {cutter.full} went door to door delivering firewood at half the going price. This paper looked into where the wood came from.",
+     "t": "Some households in town have had their woodpiles filled cheap this season. This paper looked into where the wood came from.",
      "needs": "firewood"
     },
     "This paper has followed a matter in the sawmill's woods for several weeks.",
@@ -7853,18 +7891,24 @@
    "scene": [
     {
      "t": "Since winter came, every house has a woodpile stacked by the door, and a household burns two cartloads at the very least before spring.",
+     "needs": "firewood",
      "season": [
       "winter"
      ]
     },
     {
      "t": "Fall is the time to lay in firewood, and families in town have begun hauling it home a cartload at a time.",
+     "needs": "firewood",
      "season": [
       "autumn"
      ]
     },
     {
-     "t": "The woods north of the sawmill are entered only by the mill's own felling crew, once a year, in spring."
+     "t": "The woods north of the sawmill are entered only by the mill's own felling crew, once a year, in spring.",
+     "needs": [
+      "stumps",
+      "logs"
+     ]
     }
    ]
   },
@@ -8102,7 +8146,7 @@
   "lead": {
    "calm": [
     {
-     "t": "#recent#, the general store sent butter back twice.",
+     "t": "#recent#, the general store has taken to sniffing its butter before it pays for it.",
      "needs": "lardy"
     },
     {
@@ -8112,12 +8156,8 @@
    ],
    "neutral": [
     {
-     "t": "In the general store's receiving book, the butter brought in by {farmer.full} comes to a surprising amount. This paper looked into it.",
+     "t": "To judge by the general store's books, the cows of {farmer.full} are remarkable animals. This paper looked into it.",
      "needs": "tally"
-    },
-    {
-     "t": "#recent#, a batch of butter taken in by the general store gave off a strange smell once melted. This paper looked into that butter.",
-     "needs": "lardy"
     },
     "This time, this paper looked into where the town's butter comes from.",
     "On behalf of the customers, this paper took a closer look at one of the things on the general store counter."
@@ -8141,16 +8181,25 @@
    ],
    "scene": [
     {
-     "t": "The butter at the general store is kept in a wooden tub beside the counter and sold by weight, each block stamped with a flower."
+     "t": "The butter at the general store is kept in a wooden tub beside the counter and sold by weight, each block stamped with a flower.",
+     "needs": [
+      "lardy",
+      "tally"
+     ]
     },
     {
      "t": "In hot weather butter will not keep, and the general store keeps its butter sitting in a basin of cold water.",
+     "needs": [
+      "lardy",
+      "mixing"
+     ],
      "season": [
       "summer"
      ]
     },
     {
      "t": "Cows give less milk in winter, and butter is never dearer than at this time of year.",
+     "needs": "tally",
      "season": [
       "winter"
      ]
@@ -8413,23 +8462,11 @@
   "lead": {
    "calm": [
     {
-     "t": "Dead fish have washed up on the lower Grey River several times #recent#.",
-     "needs": "deadfish"
-    },
-    {
      "t": "#recent#, the count in the sawmill storeroom came up short.",
      "needs": "powder"
     }
    ],
    "neutral": [
-    {
-     "t": "#recent#, dead fish kept washing up on the lower Grey River, every one with its belly burst. This paper looked into why.",
-     "needs": "deadfish"
-    },
-    {
-     "t": "Half a case of the dynamite the sawmill uses for blasting stumps has gone missing, and {keeper.full} has been looking into it ever since.",
-     "needs": "powder"
-    },
     "This paper has followed a matter on the Grey River for several weeks.",
     "Over a matter at the river bend, this paper kept watch by the water more than once."
    ],
@@ -8451,16 +8488,22 @@
    ],
    "scene": [
     {
-     "t": "Before dawn the river bend is at its quietest; the only sound is the fishermen poling out to set their nets."
+     "t": "Before dawn the river bend is at its quietest; the only sound is the fishermen poling out to set their nets.",
+     "needs": "blast"
     },
     {
      "t": "Once spring comes the fish run upstream, and the water in the bend is at its deepest.",
+     "needs": [
+      "blast",
+      "deadfish"
+     ],
      "season": [
       "spring"
      ]
     },
     {
      "t": "In summer the river runs low, and the stretch at the bend is the only place left near town where a net can still be set.",
+     "needs": "blast",
      "season": [
       "summer"
      ]
@@ -8609,6 +8652,1352 @@
   "intro": [
    "This paper's inquiries led to {fisher.full}.",
    "The one this paper traced it to is {fisher.full}."
+  ]
+ },
+ "chicken_theft": {
+  "name": "the stolen chickens",
+  "headlines": {
+   "calm": [
+    {
+     "t": "A Henhouse Eleven Birds Short",
+     "needs": "coop"
+    },
+    {
+     "t": "Trouble at the Henhouse of {victim}",
+     "needs": "coop"
+    },
+    {
+     "t": "Chickens in the Tavern Kitchen",
+     "needs": "kitchen"
+    },
+    {
+     "t": "Feathers by the River",
+     "needs": "feathers"
+    }
+   ],
+   "neutral": [
+    {
+     "t": "{thief} Selling Chickens to the Tavern Kitchen",
+     "needs": "kitchen"
+    },
+    {
+     "t": "{thief} Plucking Chickens by the River After Dark",
+     "needs": "feathers"
+    },
+    {
+     "t": "{victim} Loses Eleven Chickens in a Month",
+     "needs": "coop"
+    },
+    {
+     "t": "Dressed Chickens at Twenty Cents Apiece",
+     "needs": "kitchen"
+    },
+    {
+     "t": "An Empty Sack and a Drift of Feathers",
+     "needs": "feathers"
+    },
+    {
+     "t": "Empty Roosts in the Henhouse",
+     "needs": "coop"
+    },
+    {
+     "t": "{thief} Accused of Stealing Chickens for the Tavern",
+     "needs": [
+      "kitchen",
+      "feathers"
+     ]
+    }
+   ],
+   "hot": [
+    {
+     "t": "Eleven Hens in One Month!",
+     "needs": "coop"
+    },
+    {
+     "t": "Stolen Chickens in the Tavern Pot",
+     "needs": "kitchen"
+    },
+    {
+     "t": "{thief}'s Empty Sack",
+     "needs": "feathers"
+    }
+   ]
+  },
+  "lead": {
+   "calm": [
+    {
+     "t": "#season_open#, the hens of {victim.full} have been vanishing one by one.",
+     "needs": "coop"
+    }
+   ],
+   "neutral": [
+    {
+     "t": "A few households in town have been sleeping poorly, getting up at every noise in the night to look at the henhouse.",
+     "needs": "coop"
+    },
+    {
+     "t": "This paper asked where the tavern kitchen has been getting its chickens lately.",
+     "needs": "kitchen"
+    },
+    {
+     "t": "It is a small matter, but this paper followed it for weeks, because the household losing out is among the poorest in town.",
+     "needs": "coop"
+    },
+    "There is a matter down by the river that this paper went to watch more than once."
+   ],
+   "hot": [
+    {
+     "t": "Someone has been robbing a henhouse that can least afford it.",
+     "needs": "coop"
+    },
+    {
+     "t": "The chicken you ate at the tavern may have come out of a neighbor's henhouse.",
+     "needs": "kitchen"
+    }
+   ],
+   "scene": [
+    {
+     "t": "On the farms, the first chore at daybreak is to open the henhouse, count the birds and scatter a handful of grain.",
+     "needs": "coop"
+    },
+    {
+     "t": "Chickens are fattest in the fall, and a dressed bird at the general store fetches thirty-five cents.",
+     "needs": "kitchen",
+     "season": [
+      "autumn"
+     ]
+    },
+    {
+     "t": "The reeds along the river grow taller than a man, and whatever is done among them at night cannot be seen from the road.",
+     "needs": "feathers"
+    }
+   ]
+  },
+  "facts": {
+   "coop": {
+    "note": "eleven chickens have gone from the henhouse of {victim} this month",
+    "prose": [
+     "eleven chickens have gone from the henhouse of {victim} this month.",
+     {
+      "t": "!{victim} told this paper that eleven chickens have gone from the henhouse in a single month, and every one of them went in the night.",
+      "src": [
+       "interview",
+       "visitor"
+      ]
+     }
+    ]
+   },
+   "kitchen": {
+    "note": "{thief} has sold dressed chickens to the tavern kitchen several times, at twenty cents a bird",
+    "prose": [
+     "{thief} has sold dressed chickens to the tavern kitchen several times, at twenty cents a bird.",
+     "the tavern kitchen has lately bought dressed chickens from {thief} more than once, paying twenty cents apiece."
+    ]
+   },
+   "feathers": {
+    "note": "{thief} plucks chickens by the river after dark, with an empty sack nearby",
+    "prose": [
+     "{thief} plucks chickens down by the river after dark, with an empty sack lying nearby.",
+     {
+      "t": "!#night#, this paper's reporter saw {thief} crouched by the reeds at the river's edge, plucking a chicken. An empty sack lay nearby, and the ground was white with feathers.",
+      "src": [
+       "witness"
+      ]
+     },
+     {
+      "t": "!Walking along the river #night#, this paper's reporter caught the smell of blood. {thief} was crouched at the water's edge, plucking a chicken, with an empty sack alongside.",
+      "src": [
+       "witness"
+      ]
+     },
+     {
+      "t": "!#night#, there was a glimmer of lantern light down by the river. Coming closer, this paper's reporter saw {thief} laying plucked chickens out one by one on a flat stone, an empty sack rolled up nearby.",
+      "src": [
+       "witness"
+      ]
+     }
+    ]
+   },
+   "rumor": {
+    "note": "{victim} sold the chickens and claims they were stolen",
+    "prose": [
+     "!Some say {victim} sold the chickens and is only calling them stolen.",
+     "!There are those who say, too, that the chickens of {victim} were in fact sold by the household itself."
+    ]
+   }
+  },
+  "detail": [
+   {
+    "t": "A dressed chicken at the general store costs thirty-five cents.",
+    "needs": "kitchen"
+   },
+   {
+    "t": "The next day a few white feathers were still stuck to that stone by the river.",
+    "needs": "feathers"
+   }
+  ],
+  "comment": {
+   "calm": [
+    {
+     "t": "Eleven chickens may be nothing to some households. To the household of {victim.short}, they are a winter's eggs.",
+     "needs": "coop"
+    }
+   ],
+   "neutral": [
+    {
+     "t": "The general store sells a dressed chicken for thirty-five cents; the tavern kitchen pays twenty. Nobody who raised the birds would take that price. Somebody who never raised them might.",
+     "needs": "kitchen"
+    },
+    {
+     "t": "Nobody who kills a chicken in the back yard needs to go down to the river to pluck it.",
+     "needs": "feathers"
+    }
+   ],
+   "hot": [
+    {
+     "t": "Stealing from a poor family's henhouse is lower than stealing saw blades from the mill.",
+     "needs": "coop"
+    }
+   ],
+   "any": [
+    {
+     "t": "The household of {victim.short} lost eleven chickens in a month, and in the same month the tavern kitchen bought dressed chickens more than once. This paper is still matching the two counts.",
+     "needs_all": [
+      "coop",
+      "kitchen"
+     ]
+    },
+    {
+     "t": "Plucked by the river at night, in the tavern kitchen by morning.",
+     "needs_all": [
+      "feathers",
+      "kitchen"
+     ]
+    },
+    {
+     "t": "A laying hen gives five or six eggs a week. What was taken was not only the chickens but every egg they would have laid.",
+     "needs": "coop"
+    },
+    {
+     "t": "As for the talk that {victim.short} sold the birds, this paper could find nobody who bought them. It can only be counted as gossip.",
+     "needs": "rumor"
+    },
+    {
+     "t": "Someone sleeping rough behind the railway station suddenly has dressed chickens to sell, and the tavern kitchen asks no questions.",
+     "needs": "kitchen",
+     "occ": [
+      "drifter"
+     ]
+    }
+   ]
+  },
+  "resp": {
+   "denied": [
+    {
+     "t": "{target.short} says the chickens sold to the tavern were bought from a farm north of town.",
+     "needs": "kitchen"
+    },
+    {
+     "t": "{target.short} says the birds plucked by the river that night had been bought at market.",
+     "needs": "feathers"
+    }
+   ]
+  },
+  "close": {
+   "calm": [
+    {
+     "t": "It would do no harm to put a second bolt on the henhouse door at night.",
+     "needs": "coop"
+    }
+   ]
+  },
+  "intro": [
+   "The trail led to {thief.full}.",
+   "This paper followed the stolen chickens to {thief.full}."
+  ]
+ },
+ "relief_flour": {
+  "name": "the relief flour",
+  "headlines": {
+   "calm": [
+    {
+     "t": "Flour Sacks Marked \"Not for Sale\"",
+     "needs": "sacks"
+    },
+    {
+     "t": "Forty Sacks and Twenty-Five",
+     "needs": "ledger"
+    },
+    {
+     "t": "A Wagon at the Town Hall Back Door",
+     "needs": "loading"
+    },
+    {
+     "t": "The Relief Flour",
+     "needs": [
+      "sacks",
+      "ledger"
+     ]
+    }
+   ],
+   "neutral": [
+    {
+     "t": "Relief Flour on the General Store Shelf",
+     "needs": "sacks"
+    },
+    {
+     "t": "State Sent Forty Sacks; Twenty-Five Handed Out",
+     "needs": "ledger"
+    },
+    {
+     "t": "{clerk} Loads Flour onto {buyer}'s Wagon After Dark",
+     "needs": "loading"
+    },
+    {
+     "t": "Where Did Fifteen Sacks of Relief Flour Go?",
+     "needs": "ledger"
+    },
+    {
+     "t": "Flour Marked \"Not for Sale\" Is for Sale",
+     "needs": "sacks"
+    },
+    {
+     "t": "{clerk} Accused of Selling Relief Flour",
+     "needs": [
+      "loading",
+      "ledger"
+     ]
+    }
+   ],
+   "hot": [
+    {
+     "t": "The Poor Man's Flour, Priced on a Store Shelf",
+     "needs": "sacks"
+    },
+    {
+     "t": "Fifteen Sacks: A Month's Bread for Fifteen Families",
+     "needs": "ledger"
+    },
+    {
+     "t": "{clerk} and {buyer}: Business at the Town Hall Back Door",
+     "needs": "loading"
+    }
+   ]
+  },
+  "lead": {
+   "calm": [
+    {
+     "t": "#season_open#, the state's relief flour has come to the town hall.",
+     "needs": "ledger"
+    },
+    {
+     "t": "Some of the flour on the general store's shelves #recent# came in unusual sacks.",
+     "needs": "sacks"
+    }
+   ],
+   "neutral": [
+    {
+     "t": "This paper did some arithmetic on the relief flour the state sent to Greyriver.",
+     "needs": "ledger"
+    },
+    "This paper has been asking about the relief flour for several weeks now.",
+    {
+     "t": "Something printed on a flour sack at the general store caught this paper's eye.",
+     "needs": "sacks"
+    }
+   ],
+   "hot": [
+    {
+     "t": "The flour the state sent for the poor did not all reach the poor.",
+     "needs": "ledger"
+    },
+    {
+     "t": "The flour you bought at the general store was meant to be given free to the needy.",
+     "needs": "sacks"
+    }
+   ],
+   "scene": [
+    {
+     "t": "Since winter set in, there has been a line for relief outside the town hall every Monday.",
+     "needs": "ledger",
+     "season": [
+      "winter"
+     ]
+    },
+    {
+     "t": "Relief flour comes in forty-eight-pound cotton sacks stamped with the seal of the state.",
+     "needs": [
+      "ledger",
+      "sacks"
+     ]
+    },
+    {
+     "t": "The back door of the town hall opens on a narrow alley that, as a rule, sees nothing but the coal wagon.",
+     "needs": "loading"
+    }
+   ]
+  },
+  "facts": {
+   "sacks": {
+    "note": "a few sacks of flour on the general store shelf are printed 'Relief Flour, Not for Sale'",
+    "prose": [
+     "a few sacks of flour on the general store's shelves are printed \"Relief Flour, Not for Sale.\"",
+     "among the flour for sale at the general store are several sacks printed \"Relief Flour, Not for Sale.\""
+    ]
+   },
+   "ledger": {
+    "note": "the state sent forty sacks of relief flour to the town hall, and the books show only twenty-five handed out",
+    "prose": [
+     "the state sent forty sacks of relief flour to the town hall, and the books show only twenty-five handed out.",
+     {
+      "t": "!This paper went through the town hall's relief book page by page: forty sacks of flour came from the state, and there are only twenty-five signatures for flour received.",
+      "src": [
+       "archive"
+      ]
+     },
+     {
+      "t": "!This paper examined the town hall's relief accounts. Forty sacks in, twenty-five out; of the other fifteen the books say nothing.",
+      "src": [
+       "archive"
+      ]
+     }
+    ]
+   },
+   "loading": {
+    "note": "{clerk} loads flour onto {buyer}'s wagon at the town hall back door after dark",
+    "prose": [
+     "after dark, {clerk} carries flour out the back door of the town hall, sack by sack, and loads it onto {buyer}'s wagon.",
+     {
+      "t": "!#night#, this paper's reporter saw {clerk} in the alley behind the town hall, carrying sack after sack of flour out to {buyer}'s wagon.",
+      "src": [
+       "witness"
+      ]
+     },
+     {
+      "t": "!#night#, this paper's reporter kept watch on the back door of the town hall. The door opened, and out came {clerk} with a sack of flour on one shoulder; at the end of the alley stood {buyer}'s wagon.",
+      "src": [
+       "witness"
+      ]
+     },
+     {
+      "t": "!#night#, a lamp was burning at the back door of the town hall. {clerk} and {buyer}, one at each end, were swinging sacks of flour up onto a wagon, and this paper's reporter stood just across the alley.",
+      "src": [
+       "witness"
+      ]
+     }
+    ]
+   },
+   "rumor": {
+    "note": "{buyer} pays {clerk} cash, eighty cents a sack",
+    "prose": [
+     "!It is said that {buyer} pays {clerk} in cash, eighty cents a sack.",
+     "!There is another story, too, that {buyer} paid {clerk} cash for the flour, at eighty cents a sack."
+    ]
+   }
+  },
+  "detail": [
+   {
+    "t": "Flour at the general store ordinarily sells for a dollar twenty a sack.",
+    "needs": "sacks"
+   },
+   {
+    "t": "Each family on relief draws one sack a month.",
+    "needs": "ledger"
+   }
+  ],
+  "comment": {
+   "calm": [
+    {
+     "t": "Relief flour is what the state sends for the families hardest up. One sack is a month of biscuits and gravy for one household.",
+     "needs": "ledger"
+    }
+   ],
+   "neutral": [
+    {
+     "t": "Forty in, twenty-five out: the books are fifteen sacks short. If those fifteen are still in the storeroom, one look will settle it.",
+     "needs": "ledger"
+    },
+    {
+     "t": "The sacks say \"Not for Sale\" in plain print, and both the seller and the buyer can read.",
+     "needs": "sacks"
+    }
+   ],
+   "hot": [
+    {
+     "t": "Flour given free to the poor, sitting on a shelf with a price on it.",
+     "needs": "sacks"
+    }
+   ],
+   "any": [
+    {
+     "t": "The town hall is fifteen sacks of relief flour short, and the general store has flour on its shelves in sacks printed with the same words. The two ends meet.",
+     "needs_all": [
+      "ledger",
+      "sacks"
+     ]
+    },
+    {
+     "t": "Fifteen sacks missing from the books, and the person who keeps the books carrying flour out after dark. This paper need do no more than set the two side by side.",
+     "needs_all": [
+      "loading",
+      "ledger"
+     ]
+    },
+    {
+     "t": "Relief flour can be carried in and out of the town hall in broad daylight. Whoever chose the back door after dark knew this was not town business.",
+     "needs": "loading"
+    },
+    {
+     "t": "As for eighty cents a sack, this paper has heard it from one quarter only and has seen no money change hands. It does not count.",
+     "needs": "rumor"
+    },
+    {
+     "t": "The clerk keeps all the town's accounts, and the relief book is in the hands of {target.short} as well. What is missing from it, only {target.short} can explain.",
+     "needs": "ledger",
+     "occ": [
+      "clerk"
+     ]
+    }
+   ]
+  },
+  "resp": {
+   "denied": [
+    {
+     "t": "{target.short} says the other fifteen sacks are still in the storeroom and were simply never entered in the book.",
+     "needs": "ledger"
+    },
+    {
+     "t": "{target.short} says the flour that night was lent to the general store to tide it over.",
+     "needs": "loading"
+    }
+   ]
+  },
+  "close": {
+   "neutral": [
+    {
+     "t": "A man from the state is due next month to go over the accounts.",
+     "needs": "ledger"
+    }
+   ]
+  },
+  "intro": [
+   "The relief accounts are kept by {clerk.full}.",
+   "The relief flour passed through the hands of {clerk.full}."
+  ]
+ },
+ "bigamy": {
+  "name": "the earlier marriage",
+  "headlines": {
+   "calm": [
+    {
+     "t": "Banns Posted at the Church Door",
+     "needs": "banns"
+    },
+    {
+     "t": "A Letter from Down South Every Month",
+     "needs": "letters"
+    },
+    {
+     "t": "A Marriage Record from a Southern County",
+     "needs": "record"
+    },
+    {
+     "t": "A Coming Marriage",
+     "needs": "banns"
+    }
+   ],
+   "neutral": [
+    {
+     "t": "{groom} and {bride} to Wed",
+     "needs": "banns"
+    },
+    {
+     "t": "Letters to {groom} Signed \"Your Wife\"",
+     "needs": "letters"
+    },
+    {
+     "t": "{groom} Married Once Before, Six Years Ago",
+     "needs": "record"
+    },
+    {
+     "t": "{groom} Has a Wife in the South",
+     "needs": [
+      "record",
+      "letters"
+     ]
+    },
+    {
+     "t": "Letters from the South",
+     "needs": "letters"
+    }
+   ],
+   "hot": [
+    {
+     "t": "{groom} to Marry a Second Time",
+     "needs_all": [
+      "record",
+      "banns"
+     ]
+    },
+    {
+     "t": "Letters from \"Your Wife\"",
+     "needs": "letters"
+    },
+    {
+     "t": "The Family {groom} Kept Hidden",
+     "needs": "record"
+    }
+   ]
+  },
+  "lead": {
+   "calm": [
+    {
+     "t": "Of all the mail that comes up from the south, one envelope arrives like clockwork, once a month.",
+     "needs": "letters"
+    }
+   ],
+   "neutral": [
+    {
+     "t": "The town already knows of the coming marriage of {groom.full} and {bride.full}. In recent weeks this paper has learned something more.",
+     "needs": "banns"
+    },
+    {
+     "t": "A paper from a courthouse down south has a bearing on a wedding planned in this town.",
+     "needs": "record"
+    },
+    "A wedding is planned in this town, and this paper believes there is a thing or two the town should hear before it takes place."
+   ],
+   "hot": [
+    {
+     "t": "A man with a family down south means to start another one in Greyriver.",
+     "needs_all": [
+      "record",
+      "banns"
+     ]
+    }
+   ],
+   "scene": [
+    {
+     "t": "Banns are posted on the board by the church door; if no one objects for three Sundays, the wedding may go ahead.",
+     "needs": "banns"
+    },
+    {
+     "t": "Spring is the marrying season in town, and the church may see two or three weddings in a month.",
+     "needs": "banns",
+     "season": [
+      "spring"
+     ]
+    },
+    {
+     "t": "Mail from the south comes in by train, on Tuesdays and Fridays.",
+     "needs": "letters"
+    }
+   ]
+  },
+  "facts": {
+   "banns": {
+    "note": "the banns of {groom} and {bride} are posted on the church door",
+    "prose": [
+     "the banns of {groom} and {bride} have been posted on the church door.",
+     "the banns for {groom} and {bride} have now been up on the church door for two Sundays."
+    ]
+   },
+   "letters": {
+    "note": "a letter comes from the south for {groom} every month, signed 'Your Wife'",
+    "prose": [
+     "a letter comes from the south for {groom} every month, signed \"Your Wife.\"",
+     {
+      "t": "!This paper has seen the post office register: every month a letter from the south arrives for {groom}, and the postman says the back of the envelope is signed \"Your Wife.\"",
+      "src": [
+       "archive"
+      ]
+     },
+     {
+      "t": "!The post office record shows a letter from the south for {groom} each month, and in the column for the sender is written \"Your Wife.\"",
+      "src": [
+       "archive"
+      ]
+     }
+    ]
+   },
+   "record": {
+    "note": "a marriage record copied from a county court down south shows {groom} married someone there six years ago",
+    "prose": [
+     "a marriage record copied from a county court down south shows that {groom} married someone there six years ago.",
+     {
+      "t": "!This paper wrote to the county court down south, and the copy of the marriage record that came back is now on file at the town hall: six years ago, {groom} was married there.",
+      "src": [
+       "archive"
+      ]
+     },
+     {
+      "t": "!On file at the town hall is a copy of a marriage record from a county court in the south. The groom's name is {groom}; the date is six years ago.",
+      "src": [
+       "archive"
+      ]
+     }
+    ]
+   },
+   "rumor": {
+    "note": "{groom} has two children down south",
+    "prose": [
+     "!Some say {groom} has two children down south.",
+     "!Some also say that {groom} left two children behind in the south."
+    ]
+   }
+  },
+  "detail": [
+   {
+    "t": "The record shows no divorce, and the town hall can find no record that the first wife has died.",
+    "needs": "record"
+   },
+   {
+    "t": "Banns must stay up for three Sundays, and only if no one in town objects may the wedding take place.",
+    "needs": "banns"
+   }
+  ],
+  "comment": {
+   "calm": [
+    {
+     "t": "A wedding is a happy day for two families, and at such a time this paper would rather hold its tongue.",
+     "needs": "banns"
+    }
+   ],
+   "neutral": [
+    {
+     "t": "There is nothing strange in a man having married before; there are widowers and divorced men enough. But the record shows no divorce, and no death either.",
+     "needs": "record"
+    },
+    {
+     "t": "A letter signed \"Your Wife\" could be a joke, or an old flame. Once a month for this long, it does not look like an old flame.",
+     "needs": "letters"
+    }
+   ],
+   "hot": [
+    {
+     "t": "A family down south, and another about to be made in Greyriver: somebody, on one side or the other, is being deceived.",
+     "needs_all": [
+      "record",
+      "banns"
+     ]
+    }
+   ],
+   "any": [
+    {
+     "t": "Banns are posted on the church door so that anyone who knows of an impediment may speak. This paper knows of one, and so speaks here.",
+     "needs_all": [
+      "banns",
+      "record"
+     ]
+    },
+    {
+     "t": "The record says there was a wedding six years ago; the letters say that wife is writing still. Put the two together, and she has not gone anywhere.",
+     "needs_all": [
+      "letters",
+      "record"
+     ]
+    },
+    {
+     "t": "Banns stay up three Sundays precisely so the town has time to speak.",
+     "needs": "banns"
+    },
+    {
+     "t": "As for two children down south, this paper has found no proof, and does not take it seriously.",
+     "needs": "rumor"
+    },
+    {
+     "t": "When a newcomer marries someone from town, the town will naturally ask a few more questions.",
+     "needs": "banns",
+     "occ": [
+      "newcomer"
+     ]
+    }
+   ]
+  },
+  "resp": {
+   "denied": [
+    {
+     "t": "{target.short} says the marriage down south ended long ago, only the papers were never filed.",
+     "needs": "record"
+    },
+    {
+     "t": "{target.short} says the letters are from {target.his} sister.",
+     "needs": "letters"
+    }
+   ],
+   "declined": [
+    {
+     "t": "{target.short} says {target.his} marriage is {target.his} own business.",
+     "needs": "banns"
+    }
+   ]
+  },
+  "close": {
+   "calm": [
+    {
+     "t": "Whether the wedding goes ahead is a matter for the two families. This paper has said what it had to say.",
+     "needs": "banns"
+    }
+   ]
+  },
+  "intro": [
+   "The man in question is {groom.full}.",
+   "The man to be married is {groom.full}."
+  ]
+ },
+ "laudanum": {
+  "name": "the laudanum",
+  "no_charge": true,
+  "headlines": {
+   "calm": [
+    {
+     "t": "Small Brown Bottles",
+     "needs": "vials"
+    },
+    {
+     "t": "A Bottle a Week",
+     "needs": "refills"
+    },
+    {
+     "t": "Asleep in Broad Daylight",
+     "needs": "doze"
+    },
+    {
+     "t": "A Certain Medicine",
+     "needs": [
+      "refills",
+      "vials"
+     ]
+    }
+   ],
+   "neutral": [
+    {
+     "t": "{user} Has a Bottle of Laudanum Filled Every Week",
+     "needs": "refills"
+    },
+    {
+     "t": "Empty Bottles from the House of {user}",
+     "needs": "vials"
+    },
+    {
+     "t": "{user} Falls Asleep Sitting Up in Broad Daylight",
+     "needs": "doze"
+    },
+    {
+     "t": "Laudanum in the Clinic's Records",
+     "needs": "refills"
+    },
+    {
+     "t": "{user} Cannot Do Without Laudanum",
+     "needs_all": [
+      "refills",
+      "doze"
+     ]
+    }
+   ],
+   "hot": [
+    {
+     "t": "{user}'s Laudanum: Not a Week Missed in a Year",
+     "needs": "refills"
+    },
+    {
+     "t": "{user} Could Not Be Woken",
+     "needs": "doze"
+    },
+    {
+     "t": "{user}'s Bottles: Four or Five a Month",
+     "needs": "vials"
+    }
+   ]
+  },
+  "lead": {
+   "calm": [
+    {
+     "t": "Many in town have noticed that {user.full} has been looking poorly #recent#.",
+     "needs": "doze"
+    },
+    {
+     "t": "Some medicines are not meant to be taken every day.",
+     "needs": [
+      "refills",
+      "vials"
+     ]
+    }
+   ],
+   "neutral": [
+    {
+     "t": "There is an entry in the clinic's records that this paper weighed for a long time before deciding to print it.",
+     "needs": "refills"
+    },
+    "This paper has learned something concerning {user.full}, and it has to do with medicine.",
+    {
+     "t": "{user.full} has nodded off in company more than once lately. This paper looked into why.",
+     "needs": "doze"
+    }
+   ],
+   "hot": [
+    {
+     "t": "{user.full} has been keeping a secret, and the clinic's books have been keeping it too.",
+     "needs": "refills"
+    },
+    {
+     "t": "Someone who cannot put down the bottle is still making decisions for this town.",
+     "needs_all": [
+      "doze",
+      "refills"
+     ]
+    }
+   ],
+   "scene": [
+    {
+     "t": "The clinic's medicine cabinet has two shelves, and the laudanum is kept on the top one, under lock.",
+     "needs": "refills"
+    },
+    {
+     "t": "Those who run the town's affairs see a great many people in a day, and a single sitting can take up a whole afternoon.",
+     "needs": "doze"
+    },
+    {
+     "t": "Once a week the hired girls clear out their employers' rubbish, and nobody knows better what a house throws away.",
+     "needs": "vials"
+    }
+   ]
+  },
+  "facts": {
+   "refills": {
+    "note": "{user} has had a bottle of laudanum filled at the clinic every week for a year without a break",
+    "prose": [
+     "{user} has had a bottle of laudanum filled at the clinic every week for a year without a break.",
+     {
+      "t": "!This paper went through the clinic's dispensing book: the name of {user} appears once every week, always for laudanum, from this time last year until now.",
+      "src": [
+       "archive"
+      ]
+     },
+     {
+      "t": "!This paper found at the clinic that {user} has had a bottle of laudanum made up every week for a year, without missing once.",
+      "src": [
+       "archive"
+      ]
+     }
+    ]
+   },
+   "vials": {
+    "note": "{maid} carries four or five empty brown medicine bottles a month out of the house of {user}",
+    "prose": [
+     "{maid} carries four or five empty medicine bottles a month out of the house of {user}, all of them small and brown.",
+     "four or five small brown medicine bottles a month go out with the rubbish from the house of {user}, and it is {maid} who carries them out."
+    ]
+   },
+   "doze": {
+    "note": "{user} has twice this month fallen asleep sitting up in broad daylight, and woke only after being called several times",
+    "prose": [
+     "{user} has twice this month fallen asleep sitting up in broad daylight, and had to be called several times before waking.",
+     "twice this month {user} dozed off sitting up in the middle of the day, and did not wake until those nearby had called out several times."
+    ]
+   },
+   "rumor": {
+    "note": "{user} buys the medicine on the black market in the city",
+    "prose": [
+     "!Some say {user} buys the stuff on the black market in the city.",
+     "!There is another story, too, that {user} gets the medicine from the black market in the city."
+    ]
+   }
+  },
+  "detail": [
+   {
+    "t": "The doctor says a proper dose of laudanum is a few drops in a glass of water.",
+    "needs": "refills"
+   },
+   {
+    "t": "In the bottoms of those little bottles there is still a brown stain of the medicine.",
+    "needs": "vials"
+   }
+  ],
+  "comment": {
+   "calm": [
+    {
+     "t": "Dozing off in the daytime may mean no more than a bad night's sleep, and this paper makes no more of it than that.",
+     "needs": "doze"
+    }
+   ],
+   "neutral": [
+    {
+     "t": "Laudanum is a medicine for pain, and a little goes a long way. Used as the doctor directs, one week's bottle would last a person for months.",
+     "needs": "refills"
+    },
+    {
+     "t": "Small brown bottles like these are used by no one in town but the clinic.",
+     "needs": "vials"
+    }
+   ],
+   "hot": [
+    {
+     "t": "A bottle of laudanum a week, asleep in a chair in broad daylight, and the town's business left in such hands.",
+     "needs_all": [
+      "refills",
+      "doze"
+     ]
+    }
+   ],
+   "any": [
+    {
+     "t": "The clinic fills a bottle every week; the house of {user.short} throws out four or five empties a month. Every bottle that goes in is drunk to the bottom.",
+     "needs_all": [
+      "refills",
+      "vials"
+     ]
+    },
+    {
+     "t": "Dozing off in daylight, taken alone, could be tiredness. But the clinic records a bottle of laudanum for {target.him} every week, and that is more than tiredness.",
+     "needs_all": [
+      "doze",
+      "refills"
+     ]
+    },
+    {
+     "t": "Laudanum prescribed by a doctor is no crime. What this paper asks is this: what illness is it that has not let up for a single week in a year?",
+     "needs": "refills"
+    },
+    {
+     "t": "It is said the medicine comes from the black market, but what this paper found is the clinic's own record, and the medicine there is the genuine article. The black-market story this paper does not credit.",
+     "needs_all": [
+      "refills",
+      "rumor"
+     ]
+    },
+    {
+     "t": "The one who stands in the pulpit each Sunday goes to the clinic each week for a bottle of medicine.",
+     "needs": "refills",
+     "occ": [
+      "priest"
+     ]
+    },
+    {
+     "t": "The mayor sees a great many people in a day. Fall asleep in front of them once, and the whole town knows.",
+     "needs": "doze",
+     "occ": [
+      "mayor"
+     ]
+    },
+    {
+     "t": "The entries in the town register are in the hand of {target.short}. With a bottle of laudanum a week, is that hand still steady?",
+     "needs": "refills",
+     "occ": [
+      "clerk"
+     ]
+    },
+    {
+     "t": "When a teacher dozes off in class, the children are the first to notice.",
+     "needs": "doze",
+     "occ": [
+      "teacher"
+     ]
+    }
+   ]
+  },
+  "resp": {
+   "denied": [
+    {
+     "t": "{target.short} says it is a painkiller the doctor prescribed for an old injury.",
+     "needs": "refills"
+    },
+    {
+     "t": "{target.short} says {target.he} had simply slept badly those nights.",
+     "needs": "doze"
+    }
+   ],
+   "declined": [
+    "{target.short} says what medicine {target.he} takes is {target.his} own affair."
+   ]
+  },
+  "close": {
+   "calm": [
+    {
+     "t": "This paper hopes {target.short} will go and see the doctor about it.",
+     "needs": "refills"
+    }
+   ]
+  },
+  "intro": [
+   "The person in question is {user.full}.",
+   "This matter concerns {user.full}."
+  ]
+ },
+ "raffle": {
+  "name": "the raffle",
+  "headlines": {
+   "calm": [
+    {
+     "t": "Raffle Tickets at Ten Cents Apiece",
+     "needs": "tickets"
+    },
+    {
+     "t": "First Prize: A Radio",
+     "needs": "tickets"
+    },
+    {
+     "t": "The Radio That Never Came",
+     "needs": "noradio"
+    },
+    {
+     "t": "A Number Drawn from a Hat",
+     "needs": "rigged"
+    }
+   ],
+   "neutral": [
+    {
+     "t": "{organizer} Sells Raffle Tickets; First Prize a Radio",
+     "needs": "tickets"
+    },
+    {
+     "t": "No Radio at the Post Office",
+     "needs": "noradio"
+    },
+    {
+     "t": "{organizer} Had the Winning Number Up a Sleeve",
+     "needs": "rigged"
+    },
+    {
+     "t": "The Hat on Drawing Day",
+     "needs": "rigged"
+    },
+    {
+     "t": "{organizer} Accused of Rigging Raffle",
+     "needs_all": [
+      "rigged",
+      "noradio"
+     ]
+    }
+   ],
+   "hot": [
+    {
+     "t": "Ten Cents a Chance at a Radio That Does Not Exist",
+     "needs_all": [
+      "tickets",
+      "noradio"
+     ]
+    },
+    {
+     "t": "The Winning Number Was Up the Sleeve All Along",
+     "needs": "rigged"
+    },
+    {
+     "t": "{organizer}'s Raffle Was a Show Put On for You",
+     "needs": "rigged"
+    }
+   ]
+  },
+  "lead": {
+   "calm": [
+    {
+     "t": "#season_open#, a good many people in town have been carrying a raffle ticket in their pockets.",
+     "needs": "tickets"
+    },
+    {
+     "t": "For weeks now the town has been looking forward to a radio.",
+     "needs": [
+      "tickets",
+      "noradio"
+     ]
+    }
+   ],
+   "neutral": [
+    {
+     "t": "Plenty of people in town bought tickets for the raffle run by {organizer.full}. This paper looked into the first prize.",
+     "needs": "tickets"
+    },
+    {
+     "t": "This paper has a few things to say about what happened on the day of the drawing.",
+     "needs": "rigged"
+    },
+    "This paper has followed a raffle for several weeks.",
+    {
+     "t": "This paper went to ask what became of the radio offered as first prize.",
+     "needs": "noradio"
+    }
+   ],
+   "hot": [
+    {
+     "t": "The ten-cent raffle ticket you bought never had a chance of winning.",
+     "needs": "rigged"
+    },
+    {
+     "t": "First prize was a radio, but no radio ever came to Greyriver.",
+     "needs": "noradio"
+    }
+   ],
+   "scene": [
+    {
+     "t": "In this town only the mayor's house and the tavern have a radio, and on Saturday nights the tavern is packed with people listening to the broadcasts.",
+     "needs": "tickets"
+    },
+    {
+     "t": "The tavern was packed the afternoon the raffle was drawn, with people crowded into the doorway.",
+     "needs": "rigged"
+    },
+    {
+     "t": "Winter nights are long and the town has little to amuse it; a raffle ticket can give a person something to look forward to for weeks.",
+     "needs": "tickets",
+     "season": [
+      "winter"
+     ]
+    }
+   ]
+  },
+  "facts": {
+   "tickets": {
+    "note": "{organizer} is selling raffle tickets at ten cents apiece, with a radio for first prize",
+    "prose": [
+     "{organizer} is selling raffle tickets at ten cents apiece, with a radio for first prize.",
+     "{organizer} has lately been going about town selling raffle tickets, ten cents each, and says first prize is a radio."
+    ]
+   },
+   "noradio": {
+    "note": "the post office parcel book shows no radio delivered to town in months",
+    "prose": [
+     "the post office parcel book shows that no radio has come to town in months.",
+     {
+      "t": "!This paper went through the post office parcel book for the past several months. Every parcel, large and small, is entered there, and not one of them is a radio.",
+      "src": [
+       "archive"
+      ]
+     },
+     {
+      "t": "!This paper read the post office parcel book page by page: from the day the tickets went on sale, not one parcel delivered to town has been a radio.",
+      "src": [
+       "archive"
+      ]
+     }
+    ]
+   },
+   "rigged": {
+    "note": "on drawing day the number {organizer} pulled from the hat had been hidden up a sleeve, and the winner was {winner}",
+    "prose": [
+     "on the day of the drawing, the number {organizer} pulled from the hat had been hidden up a sleeve beforehand, and the winner was {winner}.",
+     {
+      "t": "!When the raffle was drawn, this paper's reporter was standing by the tavern counter. {organizer} reached into the hat, and the number that came out had slipped down from a sleeve. The winner was {winner}.",
+      "src": [
+       "witness"
+      ]
+     },
+     {
+      "t": "!At the drawing, this paper's reporter stood only a few steps from {organizer} and saw it plainly: the number was not drawn from the hat but had been tucked up a sleeve all along. The name read out was {winner}.",
+      "src": [
+       "witness"
+      ]
+     },
+     {
+      "t": "!At the drawing, the hand of {organizer} paused inside the hat. From close by, this paper's reporter saw a slip of card slide from the cuff into the palm. The winner was {winner}.",
+      "src": [
+       "witness"
+      ]
+     }
+    ]
+   },
+   "rumor": {
+    "note": "{winner} is a cousin of {organizer}",
+    "prose": [
+     "!Some say {winner} is a cousin of {organizer}.",
+     "!Some also say that {winner} and {organizer} are cousins."
+    ]
+   }
+  },
+  "detail": [
+   {
+    "t": "A radio sells for thirty dollars at the stores in the city.",
+    "needs": "tickets"
+   },
+   {
+    "t": "The raffle numbers were written on slips of card, all the same size and the same color.",
+    "needs": "rigged"
+   }
+  ],
+  "comment": {
+   "calm": [
+    {
+     "t": "Ten cents a ticket: anyone could afford one, and so nearly everyone bought one.",
+     "needs": "tickets"
+    }
+   ],
+   "neutral": [
+    {
+     "t": "A radio costs thirty dollars and a ticket ten cents, so it takes three hundred tickets to pay for one.",
+     "needs": "tickets"
+    },
+    {
+     "t": "If there were really a first prize, it would have to be shipped from somewhere. The post office parcel book has no record of it.",
+     "needs": "noradio"
+    }
+   ],
+   "hot": [
+    {
+     "t": "A raffle is supposed to be a game of luck. With the number up a sleeve, the only thing being drawn is the ticket buyers' money.",
+     "needs": "rigged"
+    }
+   ],
+   "any": [
+    {
+     "t": "The tickets were sold and the money taken in, but first prize never reached town. Not a cent of the ticket money went on a radio.",
+     "needs_all": [
+      "tickets",
+      "noradio"
+     ]
+    },
+    {
+     "t": "If the winner was settled beforehand, there was never any need for the radio to come at all.",
+     "needs_all": [
+      "rigged",
+      "noradio"
+     ]
+    },
+    {
+     "t": "A raffle is drawn in public precisely so everyone can see there is nothing in the drawer's hand.",
+     "needs": "rigged"
+    },
+    {
+     "t": "As for the winner being a cousin of {organizer.short}, this paper found no tie between the two families. It is set down here only as talk.",
+     "needs": "rumor"
+    },
+    {
+     "t": "The tavern keeper ran the raffle, and most of the ticket buyers are regulars at the tavern.",
+     "needs": "tickets",
+     "occ": [
+      "barkeep"
+     ]
+    },
+    {
+     "t": "Raffle tickets were sold over the general store counter, and people buying flour picked one up while they were at it.",
+     "needs": "tickets",
+     "occ": [
+      "grocer"
+     ]
+    }
+   ]
+  },
+  "resp": {
+   "denied": [
+    {
+     "t": "{target.short} says the radio is being shipped straight from the city and does not go through the post office.",
+     "needs": "noradio"
+    },
+    {
+     "t": "{target.short} says the number was drawn from the hat in front of everyone.",
+     "needs": "rigged"
+    }
+   ]
+  },
+  "close": {
+   "neutral": [
+    {
+     "t": "Anyone still holding a raffle ticket would do well to keep it. It is a receipt for ten cents.",
+     "needs": "tickets"
+    }
+   ]
+  },
+  "intro": [
+   "The raffle was run by {organizer.full}.",
+   "The one behind the raffle is {organizer.full}."
   ]
  }
 }

@@ -1,0 +1,81 @@
+{
+ "id": "chicken_theft",
+ "name": "偷鸡",
+ "severity": 1,
+ "weeks": 8,
+ "cooldown": 20,
+ "target": "thief",
+ "driven_by": [
+  "money"
+ ],
+ "roles": {
+  "thief": {
+   "occupation": [
+    "drifter",
+    "worker",
+    "veteran"
+   ]
+  },
+  "victim": {
+   "occupation": [
+    "farmer",
+    "widow"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "coop",
+   "subject": "thief",
+   "text": "{victim}家的鸡笼这一个月少了十一只鸡",
+   "secrecy": "semi",
+   "known_by": [
+    "victim",
+    "family:victim",
+    "random:2"
+   ]
+  },
+  {
+   "key": "kitchen",
+   "subject": "thief",
+   "text": "{thief}往酒馆后厨卖过几回宰好的鸡，一只两毛",
+   "secrecy": "semi",
+   "known_by": [
+    "thief",
+    "random:3"
+   ]
+  },
+  {
+   "key": "feathers",
+   "subject": "thief",
+   "text": "{thief}天黑以后在河边拔鸡毛，脚边是一只空麻袋",
+   "secrecy": "secret",
+   "witness": "river",
+   "known_by": [
+    "thief"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "victim",
+   "text": "{victim}家的鸡是自己卖了，对外说是丢了",
+   "truth": 0.1,
+   "known_by": [
+    "enemies:victim"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "少了十一只鸡的鸡笼"
+  ],
+  "neutral": [
+   "{thief}被指偷鸡卖给酒馆"
+  ],
+  "hot": [
+   "谁偷了{victim}家的鸡"
+  ]
+ },
+ "detail": "鸡毛"
+}

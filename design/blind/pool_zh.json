@@ -1,95 +1,609 @@
 [
  {
   "body": [
-   "河湾那一带的一件事，本报在河边守了几回。",
-   "天亮前，本报记者在河湾听见一声闷响，水面鼓起一团白浪。随后莫斯·弗德撑着船过去，一网一网捞起翻白的鱼。炸过的那一湾，第二天连小鱼苗都看不见。",
-   "炸药在水里炸开，离得近的人也会伤着。天亮前河湾里没人，是运气，不是规矩。本报写信问过莫斯先生，到付印时还没有回信。报社的门白天都开着。"
+   "锯木厂林子里的一件事，本报追了几个礼拜。",
+   "天黑以后，本报记者在林边看见莫利·米德赶着一辆车从林子里出来，车上码满了圆木，绳子勒得很紧。",
+   "本报写信问过莫利先生，到付印时还没有回信。"
+  ],
+  "event": "偷砍林木",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "莫利·米德半夜赶着车从林子里出来，车上装满了圆木",
+    "verified": true
+   }
+  ],
+  "headline": "莫利·米德半夜运圆木出林子",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "莫利·米德",
+    "occ": "工人",
+    "role": "cutter",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "斯兰·艾克",
+    "occ": "厂主",
+    "role": "landowner",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "秋天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "timber_theft",
+  "tone": "neutral",
+  "week": 38
+ },
+ {
+  "body": [
+   "镇上没有银行，最近的一家在州里，坐火车要半天。",
+   "本报在镇公所看到一张备过案的借据：韦斯·本特借了格曼·艾塔二十块钱，每个月利息三块。记录的抄件存在报社，读者可以来看。",
+   "借据是镇公所备过案的，所以这事不犯法。不犯法的事，也不一定对。",
+   "格曼女士说没有她，那些人家连这二十块也借不到。"
+  ],
+  "event": "高利贷",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "镇公所存着一张借据：韦斯·本特借了格曼·艾塔二十块钱，一个月利息三块",
+    "verified": true
+   }
+  ],
+  "headline": "一笔二十块钱的借款",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": true,
+    "name": "格曼·艾塔",
+    "occ": "店主",
+    "role": "lender",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "韦斯·本特",
+    "occ": "农户",
+    "role": "borrower",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "春天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "usury",
+  "tone": "neutral",
+  "week": 57
+ },
+ {
+  "body": [
+   "杂货店有一笔赊账挂了半年，欠账的是女佣卡斯·菲雅。",
+   "杂货店的赊账簿本报翻过。卡斯女士那一页从半年前记起，一笔接一笔，至今没有销账。赊账簿上最近的一笔，是上个礼拜的两斤盐。",
+   "半年里一笔没还，又一笔一笔接着赊。账记到这个份上，店家已经不是在做买卖，是在借钱给人。付印前，本报没能和卡斯女士说上话。"
+  ],
+  "event": "欠债",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "卡斯·菲雅在杂货店赊的账已经欠了半年",
+    "verified": true
+   }
+  ],
+  "headline": "卡斯·菲雅欠杂货店半年账款",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": true,
+    "name": "卡斯·菲雅",
+    "occ": "女佣",
+    "role": "debtor",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": true,
+    "name": "格曼·艾塔",
+    "occ": "店主",
+    "role": "creditor",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "春天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "debt",
+  "tone": "neutral",
+  "week": 7
+ },
+ {
+  "body": [
+   "河边的一件事，本报去守了几回。",
+   "后半夜，河边有一点马灯的光。本报记者走近，看见瓦尔森·帕比把拔光了毛的鸡一只只码在石头上，空麻袋卷在脚边。河边那块石头上，第二天还粘着几根白鸡毛。",
+   "在自家院子里杀鸡，用不着跑到河边去拔毛。",
+   "瓦尔森先生说那天在河边拔的是自己从集上买的鸡。有知情者，欢迎到报社来。"
+  ],
+  "event": "偷鸡",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "瓦尔森·帕比天黑以后在河边拔鸡毛，脚边是一只空麻袋",
+    "verified": true
+   }
+  ],
+  "headline": "空麻袋和一地鸡毛",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "瓦尔森·帕比",
+    "occ": "退伍兵",
+    "role": "thief",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "马顿·米斯",
+    "occ": "农户",
+    "role": "victim",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "夏天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "chicken_theft",
+  "tone": "neutral",
+  "week": 69
+ },
+ {
+  "body": [
+   "医生卡森·珂丝的一个习惯，镇上知道的人不多。",
+   "本报在诊所查到的记录写得清楚：诊所的记录上写着，卡森医生的手抖是饮酒所致。这一笔是护士记下的。",
+   "酒馆后巷没有灯。本报记者在夜里十点多看见一个人从后门出来，走到街口才认出是卡森·珂丝。这一幕，另有一位镇民也看在眼里。",
+   "手抖的原因是诊所写的，不是本报猜的。医生和卡森医生没有过节。卡森医生说自己滴酒不沾。"
+  ],
+  "event": "暗中酗酒",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "诊所记录写着卡森·珂丝的手抖是酒精所致",
+    "verified": true
+   },
+   {
+    "source": "witness",
+    "text": "卡森·珂丝从酒馆后门进出，不走前门",
+    "verified": true
+   }
+  ],
+  "headline": "卡森·珂丝的手抖，病历上写着原因",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": true,
+    "name": "卡森·珂丝",
+    "occ": "医生",
+    "role": "drunk",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": true,
+    "name": "萨曼·玛塔",
+    "occ": "女佣",
+    "role": "maid",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "秋天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "drinking",
+  "tone": "neutral",
+  "week": 88
+ },
+ {
+  "body": [
+   "锯木厂失窃一事，本报追查到了一个人：学徒塔顿·弗比。",
+   "本报查阅了杂货店的存档：河湾农场新换的锯条，是从塔顿先生手里买的。锯条的柄上刻着锯木厂工具房的编号。",
+   "本报记者在天黑以后亲眼看见塔顿·弗比从锯木厂后门出来，手里没空着。",
+   "厂里一丢东西，每个工人都被怀疑过。现在总算有了下落。本报托人捎了话给塔顿先生，没有回音。"
+  ],
+  "event": "偷窃",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "塔顿·弗比把锯条卖给了河湾农场，杂货店的收货单上有记录",
+    "verified": true
+   },
+   {
+    "source": "witness",
+    "text": "塔顿·弗比夜里从锯木厂后门出来，手里拎着东西",
+    "verified": true
+   }
+  ],
+  "headline": "锯木厂的锯条出现在河湾农场",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "塔顿·弗比",
+    "occ": "学徒",
+    "role": "thief",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "雷尔·达恩",
+    "occ": "工头",
+    "role": "boss",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "夏天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "theft",
+  "tone": "neutral",
+  "week": 17
+ },
+ {
+  "body": [
+   "天热，牛奶放不住，送到学校的奶要赶在上课前喝完。",
+   "本报记者在酒馆打烊之后守在河边，天快亮时，看见贝林·黛妲把奶桶浸进河里，提上来时满满的。",
+   "学校每月付四块钱的牛奶钱。奶里要是兑了一半水，就有两块钱买的是河水。贝林女士说事情另有缘故，但没有细讲。"
+  ],
+  "event": "牛奶掺水",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "贝林·黛妲天亮前在河边往奶桶里灌河水",
+    "verified": true
+   }
+  ],
+  "headline": "学校的牛奶出了问题",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": true,
+    "name": "贝林·黛妲",
+    "occ": "农户",
+    "role": "farmer",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "拉宁·恩恩",
+    "occ": "教师",
+    "role": "teacher",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "夏天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "watered_milk",
+  "tone": "neutral",
+  "week": 15
+ },
+ {
+  "body": [
+   "镇公所的后门对着一条窄巷，平时只有送煤的车进出。",
+   "镇公所的救济账本报一页页看过：州里拨来四十袋面粉，领走的签字只有二十五个。",
+   "查完记录，本报又去守了几夜。天黑以后，镇公所的后门亮着一盏灯。马兰·汉姆和格曼·艾塔一人一头，把面粉袋抬上车，本报记者就在巷子对面。",
+   "救济面粉进出镇公所，白天就可以搬。挑在天黑以后走后门，搬的人自己知道这不是公事。马兰先生说剩下的十五袋还在库房里，只是没有记账。"
+  ],
+  "event": "倒卖救济面粉",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "镇公所的账上，州里拨来四十袋救济面粉，发下去的只有二十五袋",
+    "verified": true
+   },
+   {
+    "source": "witness",
+    "text": "马兰·汉姆天黑以后在镇公所后门，把面粉一袋袋搬上格曼·艾塔的车",
+    "verified": true
+   }
+  ],
+  "headline": "十五袋救济面粉去了哪里",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "马兰·汉姆",
+    "occ": "书记员",
+    "role": "clerk",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": true,
+    "name": "格曼·艾塔",
+    "occ": "店主",
+    "role": "buyer",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "秋天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "relief_flour",
+  "tone": "neutral",
+  "week": 80
+ },
+ {
+  "body": [
+   "开春以后，鱼群往上游走，河湾的水最深。",
+   "天亮前，本报记者在河湾听见一声闷响，水面鼓起一团白浪。随后兰林·拉姆撑着船过去，一网一网捞起翻白的鱼。炸过的那一湾，第二天连小鱼苗都看不见。",
+   "炸药在水里炸开，离得近的人也会伤着。天亮前河湾里没人，是运气，不是规矩。兰林先生家里人说他出门了，本报没有问到。河湾的鱼，要好几年才长得回来。"
   ],
   "event": "炸鱼",
   "evidence": true,
   "facts": [
    {
     "source": "witness",
-    "text": "莫斯·弗德天亮前在河湾把一个纸包点着扔进水里，水面炸开以后，撑船去捞鱼",
+    "text": "兰林·拉姆天亮前在河湾把一个纸包点着扔进水里，水面炸开以后，撑船去捞鱼",
     "verified": true
    }
   ],
-  "headline": "河湾里的那一声闷响",
+  "headline": "兰林·拉姆扔进河湾的纸包",
   "naming": "named",
   "pleaded": false,
   "roles": [
    {
     "female": false,
-    "name": "莫斯·弗德",
-    "occ": "渔夫",
+    "name": "兰林·拉姆",
+    "occ": "流浪汉",
     "role": "fisher",
     "shown_as": "named",
     "target": true
    },
    {
     "female": false,
-    "name": "吉伯·恩斯",
+    "name": "雷尔·达恩",
     "occ": "工头",
     "role": "keeper",
     "shown_as": "named",
     "target": false
    }
   ],
-  "season": "夏天",
-  "seed": 62,
+  "season": "春天",
+  "seed": 141,
   "strategy": "cautious",
   "tid": "dynamite_fish",
   "tone": "neutral",
-  "week": 24
+  "week": 9
  },
  {
   "body": [
-   "牧师诺比·弗比主持教堂多年。本报这一期要说的，是教堂的账。",
-   "本报分头问了两个人，两人都说，教堂的屋顶已经漏了两年，修屋顶的捐款也募了两年。",
-   "募了两年捐，一个屋顶还没修，要么是钱不够，要么是钱没用在屋顶上。教堂说一句是哪一种，就够了。本报想听诺比牧师怎么说，还没有找到机会。下期本报再续。"
+   "镇上很多人信得过牧师艾曼·弗特。本报查到的事，可能会让一些人改变看法。",
+   "诊所的病历本报看过：艾曼牧师的手抖，医生写下的原因是酒。诊所的药柜里，治手抖的药这一年进得特别勤。",
+   "镇上的人找艾曼牧师办事，是信得过他。这份信任里，不该掺着酒。",
+   "艾曼牧师说，本报登的这些，他一个字也不认。"
   ],
-  "event": "挪用捐款",
-  "evidence": false,
+  "event": "暗中酗酒",
+  "evidence": true,
   "facts": [
    {
-    "source": "interview",
-    "text": "教堂说了两年要修屋顶，到现在还在漏雨",
+    "source": "archive",
+    "text": "诊所记录写着艾曼·弗特的手抖是酒精所致",
     "verified": true
    }
   ],
-  "headline": "教堂的捐款去了哪里",
+  "headline": "艾曼·弗特饮酒成习，一直在遮掩",
   "naming": "named",
   "pleaded": false,
   "roles": [
    {
     "female": false,
-    "name": "诺比·弗比",
+    "name": "艾曼·弗特",
     "occ": "牧师",
-    "role": "priest",
+    "role": "drunk",
     "shown_as": "named",
     "target": true
    },
    {
     "female": true,
-    "name": "诺林·安雅",
-    "occ": "家眷",
-    "role": "counter",
+    "name": "卡斯·菲雅",
+    "occ": "女佣",
+    "role": "maid",
     "shown_as": "named",
     "target": false
    }
   ],
   "season": "秋天",
-  "seed": 62,
+  "seed": 141,
   "strategy": "cautious",
-  "tid": "church_funds",
+  "tid": "drinking",
   "tone": "neutral",
   "week": 34
  },
  {
   "body": [
-   "每天早上七点，送奶的马车停在学校门口，孩子们排队领一杯牛奶。",
-   "诊所这个月的看病簿上，有好几个孩子是闹肚子来的，旁边都注着「喝学校牛奶」。闹肚子的孩子里，最小的一个才六岁。",
-   "学校的奶，一直由农户韦曼·吉尔供着。本报去过韦曼先生家两回，都没见到人。"
+   "头奖那台收音机，本报去问了它的下落。",
+   "邮局的包裹簿本报一页页看过：从卖券那天起，寄到镇上的包裹里没有一件是收音机。记录之外，本报记者还亲眼看见了一件事。开奖那天，本报记者就站在酒馆柜台边。托利·弗比把手伸进帽子，摸出来的那张号码，是从袖口里滑出来的。中奖的是吉尔·吉顿。这件事的目击者不止一位。抽奖的号码写在硬纸片上，一样大小，一样颜色。",
+   "托利先生说这是有人存心害他。"
+  ],
+  "event": "抽奖骗局",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "邮局的包裹簿上，这几个月没有一台收音机寄到镇上",
+    "verified": true
+   },
+   {
+    "source": "witness",
+    "text": "开奖那天，托利·弗比从帽子里摸出来的号码，是事先藏在袖口里的，中奖的是吉尔·吉顿",
+    "verified": true
+   }
+  ],
+  "headline": "开奖那天的帽子",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "托利·弗比",
+    "occ": "酒馆老板",
+    "role": "organizer",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "吉尔·吉顿",
+    "occ": "工人",
+    "role": "winner",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "春天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "raffle",
+  "tone": "neutral",
+  "week": 62
+ },
+ {
+  "body": [
+   "镇上人家吃的黄油，本报这一回查了查来路。",
+   "河边那口冷泉，往常是镇上人家冰黄油的地方。天亮前，本报记者看见雷林·安恩在那里，把猪油揉进黄油，压成一块一块。",
+   "黄油里掺猪油，吃不坏人。可买的人付的是黄油的钱。",
+   "雷林先生不承认。知道更多的人，可以来报社坐坐。"
+  ],
+  "event": "黄油掺假",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "雷林·安恩天不亮在河边的冷泉旁，把猪油揉进黄油，再压进模子",
+    "verified": true
+   }
+  ],
+  "headline": "冷泉边揉进去的猪油",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "雷林·安恩",
+    "occ": "农户",
+    "role": "farmer",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": true,
+    "name": "格曼·艾塔",
+    "occ": "店主",
+    "role": "grocer",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "冬天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "butter_lard",
+  "tone": "neutral",
+  "week": 42
+ },
+ {
+  "body": [
+   "河边那几块地，往年不值什么钱，锯木厂的新路修过去以后，就不一样了。",
+   "本报记者后半夜路过镇公所，侧门没锁。里面点着一盏灯，马兰·汉姆和哈尔·吉尔隔着桌子在说话。镇公所留存的记录显示，镇公所的地契登记簿上，雷林·安恩家河边那块地去年改记到了哈尔镇长名下，改动的笔迹是马兰先生的。河边那块地，挨着锯木厂新修的路。",
+   "截至付印，本报未能联系到马兰先生本人。"
+  ],
+  "event": "改地契",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "马兰·汉姆天黑以后还留在镇公所，哈尔·吉尔也在里面",
+    "verified": true
+   },
+   {
+    "source": "archive",
+    "text": "镇公所的地契登记簿上，雷林·安恩家河边那块地去年改记到了哈尔·吉尔名下，改动的是马兰·汉姆的笔迹",
+    "verified": true
+   }
+  ],
+  "headline": "一份说不清的地契",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "马兰·汉姆",
+    "occ": "书记员",
+    "role": "official",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "哈尔·吉尔",
+    "occ": "镇长",
+    "role": "buyer",
+    "shown_as": "named",
+    "target": false
+   },
+   {
+    "female": false,
+    "name": "雷林·安恩",
+    "occ": "农户",
+    "role": "victim",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "春天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "land_fraud",
+  "tone": "neutral",
+  "week": 8
+ },
+ {
+  "body": [
+   "孩子们每天早上喝的东西，本报查了查。",
+   "诊所这个月的看病簿上，有好几个孩子是闹肚子来的，旁边都注着「喝学校牛奶」。本报手里那份记录，谁想看都可以来看。闹肚子的孩子里，最小的一个才六岁。",
+   "给学校送牛奶的是农户雷林·安恩。诊所的记录只说孩子们都喝学校的牛奶，没说是牛奶闹的。本报把记录登在这里，下结论的事留给医生。",
+   "雷林先生对本报否认了这一说法。"
   ],
   "event": "牛奶掺水",
   "evidence": true,
@@ -106,15 +620,15 @@
   "roles": [
    {
     "female": false,
-    "name": "韦曼·吉尔",
+    "name": "雷林·安恩",
     "occ": "农户",
     "role": "farmer",
     "shown_as": "named",
     "target": true
    },
    {
-    "female": true,
-    "name": "吉尔森·安雅",
+    "female": false,
+    "name": "拉宁·恩恩",
     "occ": "教师",
     "role": "teacher",
     "shown_as": "named",
@@ -122,567 +636,35 @@
    }
   ],
   "season": "夏天",
-  "seed": 62,
+  "seed": 141,
   "strategy": "cautious",
   "tid": "watered_milk",
   "tone": "neutral",
-  "week": 75
+  "week": 68
  },
  {
   "body": [
-   "锯木厂林子里的一件事，本报追了几个礼拜。",
-   "下着雪的夜里，本报记者在林边看见萨尔森·佩妲赶着一辆车从林子里出来，车上码满了圆木，绳子勒得很紧。本报事后问过另一个当时在附近的人，对得上。",
-   "萨尔森女士说外头传的都不对。"
-  ],
-  "event": "偷砍林木",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "witness",
-    "text": "萨尔森·佩妲半夜赶着车从林子里出来，车上装满了圆木",
-    "verified": true
-   }
-  ],
-  "headline": "萨尔森·佩妲半夜运圆木出林子",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": true,
-    "name": "萨尔森·佩妲",
-    "occ": "工人",
-    "role": "cutter",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "兰德·瑞尔",
-    "occ": "厂主",
-    "role": "landowner",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "冬天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "timber_theft",
-  "tone": "neutral",
-  "week": 47
- },
- {
-  "body": [
-   "本报不爱登家事。这一件，镇上说的人太多了。",
-   "本报记者后半夜从桥头经过，看见吉森·索恩和塔尔森·米斯站在煤气灯底下说话，说了很久，后来一前一后地走了。本报后来又问到一个看见的人。",
-   "教书的人，镇上向来看得比别人重一些，这对吉森先生也许不公平。",
-   "吉森先生那边，本报还在等回话。等有了新消息，本报再写。"
+   "镇子小，谁家的灯几点熄，隔壁都知道。",
+   "本报记者夜里十点多从桥上经过，迎面碰上韦曼·恩克和萨曼·玛塔。两人看见有人来，便不再说话了。",
+   "夜里说几句话不犯法，瞒着家里人是另一回事。",
+   "韦曼先生说本报听信了一面之词。"
   ],
   "event": "私情",
   "evidence": true,
   "facts": [
    {
     "source": "witness",
-    "text": "吉森·索恩和塔尔森·米斯深夜在桥头同行，不止一个人看见",
+    "text": "韦曼·恩克和萨曼·玛塔深夜在桥头同行，不止一个人看见",
     "verified": true
    }
   ],
-  "headline": "吉森·索恩与塔尔森·米斯深夜桥头同行",
+  "headline": "关于韦曼·恩克的议论",
   "naming": "named",
   "pleaded": false,
   "roles": [
    {
     "female": false,
-    "name": "吉森·索恩",
-    "occ": "教师",
-    "role": "lover",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "塔尔森·米斯",
-    "occ": "家眷",
-    "role": "spouse",
-    "shown_as": "named",
-    "target": false
-   },
-   {
-    "female": true,
-    "name": "塔尔森·伊妲",
-    "occ": "农户",
-    "role": "wife",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "秋天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "affair",
-  "tone": "neutral",
-  "week": 80
- },
- {
-  "body": [
-   "那座仓库在镇子东头，木头墙，铁皮顶，堆着一整年的货。",
-   "邮局里存着一张保险公司的回执：火灾前一个月，霍尔·拉特给这座仓库投了火险。相关记录的影印件附在本版下方。",
-   "保单上写的赔付数目，比那座仓库连货带房的市价还高。",
-   "火险是保意外的。这场火是不是意外，本报还不能下定论。",
-   "霍尔先生对本报否认了这一说法。"
-  ],
-  "event": "仓库失火",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "火灾前一个月，霍尔·拉特通过邮局给仓库投了一份火险",
-    "verified": true
-   }
-  ],
-  "headline": "霍尔·拉特的仓库失火前刚投了火险",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "霍尔·拉特",
-    "occ": "店主",
-    "role": "owner",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "托伯·莉丝",
-    "occ": "农户",
-    "role": "witness",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "秋天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "insurance_fire",
-  "tone": "neutral",
-  "week": 35
- },
- {
-  "body": [
-   "集上的摊子从桥头一直摆到杂货店门口，卖什么的都有。",
-   "本报记者那晚就在货栈附近。天黑以后，韦伯·弗克从货栈后头推出一辆手推车，两只木箱压得车把直往下坠。货栈的后门只用一根木闩闩着，从外面拿铁丝就能拨开。",
-   "木箱没有打开，箱里是不是罐头，要等站长去认。本报只写看见了一辆推车和两只箱子。韦伯先生这一周都不在镇上。货栈的后门，如今换了一把铁锁。"
-  ],
-  "event": "货栈失窃",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "witness",
-    "text": "韦伯·弗克半夜推着一辆手推车从货栈后面出来，车上压着两只木箱",
-    "verified": true
-   }
-  ],
-  "headline": "韦伯·弗克半夜从货栈后面推出两只木箱",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "韦伯·弗克",
-    "occ": "工人",
-    "role": "thief",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "格维·达森",
-    "occ": "站长",
-    "role": "boss",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "秋天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "depot_theft",
-  "tone": "neutral",
-  "week": 32
- },
- {
-  "body": [
-   "锯木厂失窃一事，本报追查到了一个人：工人塔顿·索克。",
-   "本报记者在酒馆打烊之后亲眼看见塔顿先生从锯木厂后门出来，手里没空着。",
-   "夜里从后门出来、手里拎着东西，本报知道的就是这些。手里那样东西是厂里的还是自家的，本报不清楚，所以不在这里替谁下结论。付印前，本报没能和塔顿先生说上话。"
-  ],
-  "event": "偷窃",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "witness",
-    "text": "塔顿·索克夜里从锯木厂后门出来，手里拎着东西",
-    "verified": true
-   }
-  ],
-  "headline": "塔顿·索克深夜离开锯木厂，手里拎着东西",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "塔顿·索克",
-    "occ": "工人",
-    "role": "thief",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "吉伯·恩斯",
-    "occ": "工头",
-    "role": "boss",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "春天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "theft",
-  "tone": "neutral",
-  "week": 65
- },
- {
-  "body": [
-   "冬天天干，镇上的救火队一入冬就把水龙推到了镇公所门口。",
-   "本报查阅了邮局的记录，又请管记录的人对过一遍：那座仓库烧起来之前一个月，诺林·约比刚给它买了火险。记录本报抄了一份，留在报社。",
-   "诺林先生说这是有人存心害他。保险公司的人下周会来镇上。"
-  ],
-  "event": "仓库失火",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "火灾前一个月，诺林·约比通过邮局给仓库投了一份火险",
-    "verified": true
-   }
-  ],
-  "headline": "一份火险单",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "诺林·约比",
-    "occ": "酒馆老板",
-    "role": "owner",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "塔尔森·伊妲",
-    "occ": "农户",
-    "role": "witness",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "冬天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "insurance_fire",
-  "tone": "neutral",
-  "week": 103
- },
- {
-  "body": [
-   "一座仓库烧了，本报查了火灾前后的几件事。",
-   "据本报采访，兰德·瑞尔家的仓库半夜着了火，烧得只剩一堵墙。这件事本报问了不止一个人，说法都一样。",
-   "兰德先生说事情不是这样的。知道更多的人，可以来报社坐坐。"
-  ],
-  "event": "仓库失火",
-  "evidence": false,
-  "facts": [
-   {
-    "source": "interview",
-    "text": "兰德·瑞尔家的仓库半夜着了火，烧得只剩一堵墙",
-    "verified": true
-   }
-  ],
-  "headline": "仓库那场火，本报查了查",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "兰德·瑞尔",
-    "occ": "厂主",
-    "role": "owner",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "艾斯·马姆",
-    "occ": "农户",
-    "role": "witness",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "春天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "insurance_fire",
-  "tone": "neutral",
-  "week": 61
- },
- {
-  "body": [
-   "杂货店的秤挂在柜台中间，称面粉，称糖，称钉子，都是它。",
-   "夜里十点多，杂货店早就上了门板，里面还点着灯。本报记者从门缝里看见霍尔·拉特把秤盘翻过来，往底下按了一块东西。那一幕，在场的另有其人。",
-   "秤是全镇用的。秤盘底下粘过铅，这杆秤从前称出去的每一样东西，都得重新算。霍尔先生说本报弄错了。"
-  ],
-  "event": "缺斤短两",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "witness",
-    "text": "霍尔·拉特打烊以后往秤盘底下粘了一块铅",
-    "verified": true
-   }
-  ],
-  "headline": "杂货店称出来的分量",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "霍尔·拉特",
-    "occ": "店主",
-    "role": "grocer",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "托尔·玛琳",
-    "occ": "家眷",
-    "role": "victim",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "秋天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "short_weight",
-  "tone": "neutral",
-  "week": 86
- },
- {
-  "body": [
-   "杂货店的柜台底下压着一本赊账簿，镇上一半人家的名字都在上面。",
-   "杂货店的赊账簿本报翻过。艾曼·拉恩那一页从半年前记起，一笔接一笔，至今没有销账。这份记录有杂货店的章，本报看得清楚。赊账簿上最近的一笔，是上个礼拜的两斤盐。",
-   "赊账簿是店家自己记的，欠账的人可以不认。可半年来，没有人出来说过这本账记错了。艾曼先生说事情另有缘故，但没有细讲。读者有知道内情的，可以写信来。"
-  ],
-  "event": "欠债",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "艾曼·拉恩在杂货店赊的账已经欠了半年",
-    "verified": true
-   }
-  ],
-  "headline": "艾曼·拉恩赊账半年未还，杂货店难以为继",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "艾曼·拉恩",
-    "occ": "学徒",
-    "role": "debtor",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "霍尔·拉特",
-    "occ": "店主",
-    "role": "creditor",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "夏天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "debt",
-  "tone": "neutral",
-  "week": 21
- },
- {
-  "body": [
-   "林子里少了一些树，本报去林边看了几回。",
-   "酒馆打烊之后，林边的土路上过来一辆车，车上是刚锯下的圆木。赶车的是凯兰·米莉，本报记者就站在路边。同一个时辰，另有路过的人也看见了。",
-   "本报托人捎了话给凯兰女士，没有回音。有知情者，欢迎到报社来。"
-  ],
-  "event": "偷砍林木",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "witness",
-    "text": "凯兰·米莉半夜赶着车从林子里出来，车上装满了圆木",
-    "verified": true
-   }
-  ],
-  "headline": "林边土路上的运木车",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": true,
-    "name": "凯兰·米莉",
-    "occ": "流浪汉",
-    "role": "cutter",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "兰德·瑞尔",
-    "occ": "厂主",
-    "role": "landowner",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "春天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "timber_theft",
-  "tone": "neutral",
-  "week": 9
- },
- {
-  "body": [
-   "每个礼拜二，南来的货车在火车站卸货，货栈的门要开到天黑。",
-   "天黑以后，货栈后面的小路上响起手推车的声音。本报记者跟过去，推车的是萨尔森·佩妲，车上是两只木箱。",
-   "萨尔森女士说，本报登的这些，她一个字也不认。"
-  ],
-  "event": "货栈失窃",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "witness",
-    "text": "萨尔森·佩妲半夜推着一辆手推车从货栈后面出来，车上压着两只木箱",
-    "verified": true
-   }
-  ],
-  "headline": "夜里出货栈的手推车",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": true,
-    "name": "萨尔森·佩妲",
-    "occ": "工人",
-    "role": "thief",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "格维·达森",
-    "occ": "站长",
-    "role": "boss",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "夏天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "depot_theft",
-  "tone": "neutral",
-  "week": 77
- },
- {
-  "body": [
-   "酒馆的窗户正对着主街，谁进谁出，街对面看得一清二楚。",
-   "诊所留存的记录显示，吉森·索恩的手抖是饮酒所致，这是医生写下的。本报抄下这一页时，诊所的人就在旁边。",
-   "事情不止于此。酒馆后巷没有灯。本报记者在天黑以后看见一个人从后门出来，走到街口才认出是吉森先生。",
-   "走后门不犯法，酒馆也不是什么见不得人的地方。要绕着走，是怕被熟人撞见。吉森先生家里人说他出门了，本报没有问到。本报不劝人戒酒，只把看到的写下来。"
-  ],
-  "event": "暗中酗酒",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "诊所记录写着吉森·索恩的手抖是酒精所致",
-    "verified": true
-   },
-   {
-    "source": "witness",
-    "text": "吉森·索恩从酒馆后门进出，不走前门",
-    "verified": true
-   }
-  ],
-  "headline": "吉森·索恩深夜出入酒馆后门",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "吉森·索恩",
-    "occ": "教师",
-    "role": "drunk",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "凯比·薇蒂",
-    "occ": "女佣",
-    "role": "maid",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "春天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "drinking",
-  "tone": "neutral",
-  "week": 1
- },
- {
-  "body": [
-   "镇上有些话，本报听了不止一回，这一期写出来。",
-   "夜里十点多，桥头那盏灯底下站着两个人，本报记者走近了才认出是萨克·卢尔和托尔·玛琳。两人一前一后过了桥。",
-   "两个人夜里同行，本报只能写看见的。说了什么、去了哪里，本报不知道，也不往下猜。萨克先生不承认。"
-  ],
-  "event": "私情",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "witness",
-    "text": "萨克·卢尔和托尔·玛琳深夜在桥头同行，不止一个人看见",
-    "verified": true
-   }
-  ],
-  "headline": "萨克·卢尔卷入一桩家事",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "萨克·卢尔",
+    "name": "韦曼·恩克",
     "occ": "新来的",
     "role": "lover",
     "shown_as": "named",
@@ -690,121 +672,58 @@
    },
    {
     "female": true,
-    "name": "托尔·玛琳",
-    "occ": "家眷",
+    "name": "萨曼·玛塔",
+    "occ": "女佣",
     "role": "spouse",
     "shown_as": "named",
     "target": false
    },
    {
     "female": false,
-    "name": "托尔·拉姆",
-    "occ": "工人",
+    "name": "拉宁·恩恩",
+    "occ": "教师",
     "role": "wife",
     "shown_as": "named",
     "target": false
    }
   ],
-  "season": "春天",
-  "seed": 62,
+  "season": "秋天",
+  "seed": 141,
   "strategy": "cautious",
   "tid": "affair",
   "tone": "neutral",
-  "week": 58
+  "week": 30
  },
  {
   "body": [
-   "河边那几块地，往年不值什么钱，锯木厂的新路修过去以后，就不一样了。",
-   "塔尔森·伊妲说，那块地是上一辈传下来的，从没卖过，可前些天有人拿着尺子来量了。量地的人在那块地的地头钉了两根木桩。",
-   "本报在镇公所查到的记录写得清楚：登记簿上那块地的主人一栏，原来写的是塔尔森女士，后来被人改成了兰德·瑞尔，改的人是罗林·卢恩。",
-   "酒馆打烊之后，镇公所别的窗户都黑了，只有登记处还亮着灯。本报记者在窗外看见罗林先生和兰德先生坐在里面。当时附近另有旁人，所见相同。",
-   "地契是镇公所替全镇人保管的。保管的人自己动了笔，别的本子还靠得住吗？被问及此事时，罗林先生只说了一句「没有的事」。"
-  ],
-  "event": "改地契",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "interview",
-    "text": "塔尔森·伊妲说自家河边那块地从没卖过，却有人来量地了",
-    "verified": true
-   },
-   {
-    "source": "archive",
-    "text": "镇公所的地契登记簿上，塔尔森·伊妲家河边那块地去年改记到了兰德·瑞尔名下，改动的是罗林·卢恩的笔迹",
-    "verified": true
-   },
-   {
-    "source": "witness",
-    "text": "罗林·卢恩天黑以后还留在镇公所，兰德·瑞尔也在里面",
-    "verified": true
-   }
-  ],
-  "headline": "塔尔森·伊妲家的地记到了兰德·瑞尔名下",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "罗林·卢恩",
-    "occ": "书记员",
-    "role": "official",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "兰德·瑞尔",
-    "occ": "厂主",
-    "role": "buyer",
-    "shown_as": "named",
-    "target": false
-   },
-   {
-    "female": true,
-    "name": "塔尔森·伊妲",
-    "occ": "农户",
-    "role": "victim",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "夏天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "land_fraud",
-  "tone": "neutral",
-  "week": 18
- },
- {
-  "body": [
-   "天亮前的河湾最静，只有渔夫撑船出去下网。",
-   "本报记者天亮前守在河湾。兰维·吉森划船到湾心，点着一个纸包扔下去，水底下轰的一声，鱼就浮上来了。",
-   "兰维先生说那天早上是在河湾里放网。"
+   "灰河里的一件事，本报追了几个礼拜。",
+   "天还没亮，河湾里先是一点火星，接着一声响。本报记者看见萨尔森·索克撑船过去捞鱼。",
+   "萨尔森先生那边，本报还在等回话。"
   ],
   "event": "炸鱼",
   "evidence": true,
   "facts": [
    {
     "source": "witness",
-    "text": "兰维·吉森天亮前在河湾把一个纸包点着扔进水里，水面炸开以后，撑船去捞鱼",
+    "text": "萨尔森·索克天亮前在河湾把一个纸包点着扔进水里，水面炸开以后，撑船去捞鱼",
     "verified": true
    }
   ],
-  "headline": "兰维·吉森扔进河湾的纸包",
+  "headline": "河湾里的那一声闷响",
   "naming": "named",
   "pleaded": false,
   "roles": [
    {
     "female": false,
-    "name": "兰维·吉森",
-    "occ": "退伍兵",
+    "name": "萨尔森·索克",
+    "occ": "渔夫",
     "role": "fisher",
     "shown_as": "named",
     "target": true
    },
    {
     "female": false,
-    "name": "吉伯·恩斯",
+    "name": "雷尔·达恩",
     "occ": "工头",
     "role": "keeper",
     "shown_as": "named",
@@ -812,346 +731,156 @@
    }
   ],
   "season": "冬天",
-  "seed": 62,
+  "seed": 141,
   "strategy": "cautious",
   "tid": "dynamite_fish",
-  "tone": "neutral",
-  "week": 46
- },
- {
-  "body": [
-   "镇公所的人说，镇长莫伯·达克最近常常下午才来。",
-   "本报查阅了诊所的存档，莫伯镇长的病历上有四个字：不宜过劳。本报核对过诊所的底册，与此相符。",
-   "镇长的椅子空不得。可坐在上面的人，总该让大家知道还坐不坐得住。莫伯镇长只说了一句：「我没事。」这件事还没完。"
-  ],
-  "event": "隐瞒病情",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "诊所病历上莫伯·达克的病是肺上的，医生写了「不宜过劳」",
-    "verified": true
-   }
-  ],
-  "headline": "医生嘱莫伯·达克不宜过劳",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "莫伯·达克",
-    "occ": "镇长",
-    "role": "sick",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "艾顿·拉姆",
-    "occ": "医生",
-    "role": "nurse",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "春天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "illness",
-  "tone": "neutral",
-  "week": 54
- },
- {
-  "body": [
-   "酒馆的正门开在主街上，后门对着一条没有灯的巷子。",
-   "本报在诊所查到，并且两次核对过：吉尔森·安雅的手抖了有一年多，医生写下的原因是酒。诊所的药柜里，治手抖的药这一年进得特别勤。",
-   "一位教书先生的手抖，学生们比谁都先看见。",
-   "吉尔森女士说手抖是老毛病，和喝酒没有关系。"
-  ],
-  "event": "暗中酗酒",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "诊所记录写着吉尔森·安雅的手抖是酒精所致",
-    "verified": true
-   }
-  ],
-  "headline": "吉尔森·安雅饮酒成习，一直在遮掩",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": true,
-    "name": "吉尔森·安雅",
-    "occ": "教师",
-    "role": "drunk",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "凯比·薇蒂",
-    "occ": "女佣",
-    "role": "maid",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "秋天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "drinking",
-  "tone": "neutral",
-  "week": 87
- },
- {
-  "body": [
-   "灰河镇的人大多是从别处来的，镇上的规矩是不问人家从前的事。",
-   "本报在邮局看到一封寄给塔顿·索克的信，封口盖着法院的火漆，信封上没有写是什么事。",
-   "一个人从哪里来，本来不关别人的事。可一封法院的信寄到了灰河镇，这就不只是一个人的事了。本报曾向塔顿先生求证，对方不愿置评。"
-  ],
-  "event": "来历不明",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "邮局有一封寄给塔顿·索克的信，封口印着法院的章",
-    "verified": true
-   }
-  ],
-  "headline": "法院来信寄给塔顿·索克",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "塔顿·索克",
-    "occ": "流浪汉",
-    "role": "stranger",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "格维·达森",
-    "occ": "站长",
-    "role": "recognizer",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "冬天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "past",
-  "tone": "neutral",
-  "week": 99
- },
- {
-  "body": [
-   "火车站后面是一片堆煤渣的空地，夜里没有灯，常有没处住的人在那里过夜。",
-   "诊所的记录写着：兰宁·贝妲断了两根肋骨，原因一栏只有两个字，「摔伤」。",
-   "另外，本报记者在天黑以后看见霍德·马克把兰宁女士堵在火车站后面的墙角，警棍落下去好几回。火车站后面那堵墙上，还留着几道擦痕。",
-   "警棍落下去之前发生了什么，本报不知道。可不管之前发生了什么，打断别人的肋骨，不在警长的差事里。霍德警长说那天夜里是在追一个小偷。"
-  ],
-  "event": "警长打人",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "兰宁·贝妲被人扶进诊所，肋骨断了两根，诊所记下的原因是「摔伤」",
-    "verified": true
-   },
-   {
-    "source": "witness",
-    "text": "霍德·马克在火车站后面用警棍打兰宁·贝妲",
-    "verified": true
-   }
-  ],
-  "headline": "警长与一个受伤的人",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "霍德·马克",
-    "occ": "警长",
-    "role": "sheriff",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "兰宁·贝妲",
-    "occ": "新来的",
-    "role": "victim",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "秋天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "sheriff_beating",
-  "tone": "neutral",
-  "week": 87
- },
- {
-  "body": [
-   "冬天孩子咳嗽多，夜里一咳，一家人都睡不成。",
-   "本报照着标签上的章写信去问州卫生局，回信寄到了邮局：卫生局从没发过这个章。这份记录，本报影印了一页登在下面。",
-   "诊所的看病簿上，萨尔森·佩妲家的孩子那一回是被抱进去的，喝的正是那种糖浆，医生查出里面有鸦片酊。原件还在诊所，谁去都能看到。鸦片酊在诊所是锁在柜子里的药，医生开一次只开几滴。",
-   "糖浆是新来的法彻·诺妲在卖。诊所查出糖浆里有鸦片酊，州里又说那个章是假的。一瓶药，药不对，章也不对。本报这一期没能见到法彻女士。后面的事，本报会接着问。"
-  ],
-  "event": "止咳糖浆",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "糖浆瓶的标签上印着州卫生局的章，州卫生局给邮局回信说从没发过这个章",
-    "verified": true
-   },
-   {
-    "source": "archive",
-    "text": "萨尔森·佩妲家的孩子喝了那种糖浆，睡了一天一夜叫不醒，诊所的记录说糖浆里有鸦片酊",
-    "verified": true
-   }
-  ],
-  "headline": "州卫生局说没发过这个章",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": true,
-    "name": "法彻·诺妲",
-    "occ": "新来的",
-    "role": "seller",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "萨尔森·佩妲",
-    "occ": "工人",
-    "role": "victim",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "冬天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "cough_syrup",
-  "tone": "neutral",
-  "week": 102
- },
- {
-  "body": [
-   "下过雪的林子里，什么东西走过都留脚印。",
-   "杂货店的收货单上，卖鹿皮的人一栏写着托伯·莉丝，每张三块钱。影印件附后，读者可以自己看。鹿皮挂在杂货店后屋的墙上，还没鞣过。",
-   "托伯女士坚称自己清白。"
-  ],
-  "event": "偷猎",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "杂货店收过托伯·莉丝卖的鹿皮，一张三块钱",
-    "verified": true
-   }
-  ],
-  "headline": "锯木厂的林子出了事",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": true,
-    "name": "托伯·莉丝",
-    "occ": "农户",
-    "role": "poacher",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "兰德·瑞尔",
-    "occ": "厂主",
-    "role": "landowner",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "冬天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "poaching",
-  "tone": "neutral",
-  "week": 94
- },
- {
-  "body": [
-   "镇子小，谁家的灯几点熄，隔壁都知道。",
-   "本报记者结冰的夜里从桥上经过，迎面碰上瓦沃·维比和霍尔·菲娜。两人看见有人来，便不再说话了。当晚另有人在场，和本报看到的一样。",
-   "桥头夜里有灯，谁走过都看得见。真要瞒人，不会挑那里；挑了那里，大概是以为夜里没人。截至付印，本报未能联系到瓦沃先生本人。本报会再去问。"
-  ],
-  "event": "私情",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "witness",
-    "text": "瓦沃·维比和霍尔·菲娜深夜在桥头同行，不止一个人看见",
-    "verified": true
-   }
-  ],
-  "headline": "关于瓦沃·维比的议论",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "瓦沃·维比",
-    "occ": "新来的",
-    "role": "lover",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "霍尔·菲娜",
-    "occ": "家眷",
-    "role": "spouse",
-    "shown_as": "named",
-    "target": false
-   },
-   {
-    "female": false,
-    "name": "霍尔·达德",
-    "occ": "渔夫",
-    "role": "wife",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "冬天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "affair",
   "tone": "neutral",
   "week": 41
  },
  {
   "body": [
-   "镇上有一门不声张的生意，本报追了几个礼拜。",
-   "夜里十点多，林子里有车声。本报记者循着声音过去，看见赶车的是兰维·吉森，车斗上的油布捆得很紧。林间那条小道上，车辙压得比运木头的大道还深。",
-   "本报尚未得到兰维先生的回应。本报下一期再说。"
+   "杂货店的秤挂在柜台中间，称面粉，称糖，称钉子，都是它。",
+   "本报记者在结冰的夜里看见格曼·艾塔一个人在柜台后面摆弄那杆秤，弄完了，把秤盘放回原处。那块铅只有指甲盖大，压在秤盘底下正好看不见。",
+   "秤是全镇用的。秤盘底下粘过铅，这杆秤从前称出去的每一样东西，都得重新算。",
+   "格曼女士说店里的秤每年都请人校过。本报会再去问。"
+  ],
+  "event": "缺斤短两",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "格曼·艾塔打烊以后往秤盘底下粘了一块铅",
+    "verified": true
+   }
+  ],
+  "headline": "杂货店的秤，本报称了称",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": true,
+    "name": "格曼·艾塔",
+    "occ": "店主",
+    "role": "grocer",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": true,
+    "name": "瓦利·艾雅",
+    "occ": "家眷",
+    "role": "victim",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "冬天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "short_weight",
+  "tone": "neutral",
+  "week": 102
+ },
+ {
+  "body": [
+   "天亮前的河湾最静，只有渔夫撑船出去下网。",
+   "本报记者天亮前守在河湾。瓦尔森·帕比划船到湾心，点着一个纸包扔下去，水底下轰的一声，鱼就浮上来了。",
+   "瓦尔森先生说那天早上是在河湾里放网。"
+  ],
+  "event": "炸鱼",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "瓦尔森·帕比天亮前在河湾把一个纸包点着扔进水里，水面炸开以后，撑船去捞鱼",
+    "verified": true
+   }
+  ],
+  "headline": "瓦尔森·帕比天亮前在河湾炸鱼",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "瓦尔森·帕比",
+    "occ": "退伍兵",
+    "role": "fisher",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "雷尔·达恩",
+    "occ": "工头",
+    "role": "keeper",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "冬天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "dynamite_fish",
+  "tone": "neutral",
+  "week": 97
+ },
+ {
+  "body": [
+   "每个礼拜二，南来的货车在火车站卸货，货栈的门要开到天黑。",
+   "下着雪的夜里，本报记者在火车站后面看见莫顿·卡森推着一辆手推车，从货栈的后门出来，车上用绳子捆着两只木箱。货栈的后门只用一根木闩闩着，从外面拿铁丝就能拨开。",
+   "木箱没有打开，箱里是不是罐头，要等站长去认。本报只写看见了一辆推车和两只箱子。",
+   "莫顿先生说外头传的都不对。"
+  ],
+  "event": "货栈失窃",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "莫顿·卡森半夜推着一辆手推车从货栈后面出来，车上压着两只木箱",
+    "verified": true
+   }
+  ],
+  "headline": "莫顿·卡森半夜从货栈后面推出两只木箱",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "莫顿·卡森",
+    "occ": "工人",
+    "role": "thief",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "瓦利·卢恩",
+    "occ": "站长",
+    "role": "boss",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "冬天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "depot_theft",
+  "tone": "neutral",
+  "week": 49
+ },
+ {
+  "body": [
+   "林子那一带的一件事，本报追了一阵。",
+   "后半夜，本报记者在林边小路上等了一个多钟头，等来的是韦斯·本特的马车，车斗上的油布鼓鼓囊囊。林间那条小道上，车辙压得比运木头的大道还深。",
+   "油布盖得严，没人看清底下装着什么。运的要是正经东西，白天走大路就是了。",
+   "本报这一期没能见到韦斯先生。"
   ],
   "event": "私酿",
   "evidence": true,
   "facts": [
    {
     "source": "witness",
-    "text": "兰维·吉森半夜赶车穿过树林，车上盖着油布",
+    "text": "韦斯·本特半夜赶车穿过树林，车上盖着油布",
     "verified": true
    }
   ],
@@ -1161,51 +890,315 @@
   "roles": [
    {
     "female": false,
-    "name": "兰维·吉森",
-    "occ": "退伍兵",
+    "name": "韦斯·本特",
+    "occ": "农户",
     "role": "brewer",
     "shown_as": "named",
     "target": true
    },
    {
     "female": false,
-    "name": "诺林·约比",
+    "name": "托利·弗比",
     "occ": "酒馆老板",
     "role": "buyer",
     "shown_as": "named",
     "target": false
    }
   ],
-  "season": "春天",
-  "seed": 62,
+  "season": "秋天",
+  "seed": 141,
   "strategy": "cautious",
   "tid": "moonshine",
   "tone": "neutral",
-  "week": 9
+  "week": 91
+ },
+ {
+  "body": [
+   "锯木厂北边那片林子，地契上写的是厂里的，镇上的人却一向当它是大家的。",
+   "本报记者天不亮就到了林子边上，等了不到一个钟头，塔彻·艾蒂背着一只沉甸甸的麻袋从林子里钻了出来。",
+   "麻袋没有打开，里头的东西本报不乱写。只是天不亮的林子，除了下套的人，很少有人去。塔彻女士说麻袋里装的是柴火。"
+  ],
+  "event": "偷猎",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "塔彻·艾蒂天不亮从林子里出来，背着一只鼓鼓的麻袋",
+    "verified": true
+   }
+  ],
+  "headline": "天不亮背出林子的麻袋",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": true,
+    "name": "塔彻·艾蒂",
+    "occ": "农户",
+    "role": "poacher",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "斯兰·艾克",
+    "occ": "厂主",
+    "role": "landowner",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "冬天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "poaching",
+  "tone": "neutral",
+  "week": 98
+ },
+ {
+  "body": [
+   "林子里的事，厂里的人说了一些，本报又查了一些。",
+   "天还没亮，本报记者看见瓦尔森·帕比从林子深处走出来，肩上的麻袋往下坠着，看分量不轻。",
+   "瓦尔森先生本人还没有回应。"
+  ],
+  "event": "偷猎",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "瓦尔森·帕比天不亮从林子里出来，背着一只鼓鼓的麻袋",
+    "verified": true
+   }
+  ],
+  "headline": "锯木厂的林子出了事",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "瓦尔森·帕比",
+    "occ": "退伍兵",
+    "role": "poacher",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "斯兰·艾克",
+    "occ": "厂主",
+    "role": "landowner",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "春天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "poaching",
+  "tone": "neutral",
+  "week": 1
+ },
+ {
+  "body": [
+   "酒馆的正门开在主街上，后门对着一条没有灯的巷子。",
+   "本报记者不止一次在结冰的夜里看见凯伯·格琳出入酒馆的后门。临街的正门，她一次也没用过。本报事后问过另一个当时在附近的人，对得上。",
+   "据诊所的记录，凯伯女士的手抖了有一年多，医生写下的原因是酒。",
+   "凯伯女士坚称自己清白。"
+  ],
+  "event": "暗中酗酒",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "凯伯·格琳从酒馆后门进出，不走前门",
+    "verified": true
+   },
+   {
+    "source": "archive",
+    "text": "诊所记录写着凯伯·格琳的手抖是酒精所致",
+    "verified": true
+   }
+  ],
+  "headline": "手抖的原因",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": true,
+    "name": "凯伯·格琳",
+    "occ": "教师",
+    "role": "drunk",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": true,
+    "name": "萨曼·玛塔",
+    "occ": "女佣",
+    "role": "maid",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "冬天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "drinking",
+  "tone": "neutral",
+  "week": 50
+ },
+ {
+  "body": [
+   "邮局只有一间屋子，一个柜台，一名邮差。",
+   "本报在邮局翻到了那张汇款单存根：收款人是艾尔森·伊雅，领款人一栏的签名却不是艾尔森女士的笔迹。记录本报抄了一份，留在报社。",
+   "镇上的邮差是贝森·米特。三块钱不多，可冒领得了一回，就冒领得了第二回。镇上别的人家，也该去邮局查一查自己的存根。贝森先生说在邮局干了这么多年，从没出过差错。等有了新消息，本报再写。"
+  ],
+  "event": "私拆信件",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "汇款单存根上，艾尔森·伊雅收的一笔汇款，领款人签的不是艾尔森·伊雅的名字",
+    "verified": true
+   }
+  ],
+  "headline": "艾尔森·伊雅的汇款被人冒领",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "贝森·米特",
+    "occ": "邮差",
+    "role": "postman",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": true,
+    "name": "艾尔森·伊雅",
+    "occ": "寡妇",
+    "role": "victim",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "春天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "mail_tampering",
+  "tone": "neutral",
+  "week": 60
+ },
+ {
+  "body": [
+   "林子是锯木厂的，林子里的鹿却一年比一年少。本报查了查。",
+   "杂货店的收货单上记着，兰维·菲雅卖过几张鹿皮，一张三块钱。",
+   "一张鹿皮三块钱，杂货店收了不止一张。林子里少的鹿，大致能从后屋墙上数出来。兰维女士说那些鹿皮是从外地收来的。后面的事，本报会接着问。"
+  ],
+  "event": "偷猎",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "杂货店收过兰维·菲雅卖的鹿皮，一张三块钱",
+    "verified": true
+   }
+  ],
+  "headline": "杂货店收的鹿皮从哪来",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": true,
+    "name": "兰维·菲雅",
+    "occ": "渔夫",
+    "role": "poacher",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "斯兰·艾克",
+    "occ": "厂主",
+    "role": "landowner",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "春天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "poaching",
+  "tone": "neutral",
+  "week": 60
+ },
+ {
+  "body": [
+   "孩子们在学校喝的牛奶，本报追了它的来路。",
+   "天亮前，河边还看不清人脸。本报记者看见贝林·黛妲把奶桶一只只拎到水边，灌满了再盖上盖子。",
+   "贝林女士说送去学校的奶一向是好奶。这件事还没完。"
+  ],
+  "event": "牛奶掺水",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "贝林·黛妲天亮前在河边往奶桶里灌河水",
+    "verified": true
+   }
+  ],
+  "headline": "给学校送奶的人",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": true,
+    "name": "贝林·黛妲",
+    "occ": "农户",
+    "role": "farmer",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "拉宁·恩恩",
+    "occ": "教师",
+    "role": "teacher",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "冬天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "watered_milk",
+  "tone": "neutral",
+  "week": 94
  },
  {
   "body": [
    "锯木厂每天早上六点拉汽笛，工人们从后门进厂，在工具房领了家伙再上工。",
-   "后半夜，本报记者在锯木厂外面看见法林·帕森从后门出来，手里提着东西，脚步匆忙。",
-   "厂里的活天黑就收了。后门夜里还有人进出，厂里该先问问是谁开的门。",
-   "本报给法林先生留了话，至今没有回音。"
+   "夜里十点多，锯木厂后门开了一道缝。本报记者看见莫林·马斯侧着身子出来，怀里抱着一个用麻布包着的东西，很快拐进了巷子。",
+   "夜里从后门出来、手里拎着东西，本报知道的就是这些。手里那样东西是厂里的还是自家的，本报不清楚，所以不在这里替谁下结论。",
+   "莫林先生说本报弄错了。"
   ],
   "event": "偷窃",
   "evidence": true,
   "facts": [
    {
     "source": "witness",
-    "text": "法林·帕森夜里从锯木厂后门出来，手里拎着东西",
+    "text": "莫林·马斯夜里从锯木厂后门出来，手里拎着东西",
     "verified": true
    }
   ],
-  "headline": "锯木厂的夜里不太平",
+  "headline": "莫林·马斯深夜离开锯木厂，手里拎着东西",
   "naming": "named",
   "pleaded": false,
   "roles": [
    {
     "female": false,
-    "name": "法林·帕森",
+    "name": "莫林·马斯",
     "occ": "工人",
     "role": "thief",
     "shown_as": "named",
@@ -1213,7 +1206,7 @@
    },
    {
     "female": false,
-    "name": "吉伯·恩斯",
+    "name": "雷尔·达恩",
     "occ": "工头",
     "role": "boss",
     "shown_as": "named",
@@ -1221,159 +1214,140 @@
    }
   ],
   "season": "春天",
-  "seed": 62,
+  "seed": 141,
   "strategy": "cautious",
   "tid": "theft",
   "tone": "neutral",
-  "week": 8
+  "week": 63
  },
  {
   "body": [
-   "镇公所的账本锁在书记员的柜子里，一年只在镇民大会上念一回。",
-   "据镇公所的记录，霍尔·拉特付过一笔钱，记在「修路」名下，此后再没有下文。本报手里那份记录，谁想看都可以来看。",
-   "本报还查到了别的。酒馆后间里，本报记者看见霍尔先生把一个牛皮纸信封递了过去，霍德·马克伸手收下了。事后本报找到另一位在场的人，说法一致。",
-   "一个收信封的警长，抓贼的时候还能理直气壮吗？本报去问时，霍德警长摆了摆手。"
+   "酒馆的后屋没有窗户，门一关，前面的人听不见里面的声音。",
+   "本报记者在酒馆打烊之后进过一回后屋。牌桌边上放着一只铁盒子，托利·弗比每一局都往里面放钱。那只铁盒子上了锁，钥匙挂在托利先生的腰上。",
+   "一局抽一成，一晚上打二十局，桌上的钱等于被抽走了两遍。打得越久，桌上剩下的越少。",
+   "被问及此事时，托利先生只说了一句「没有的事」。"
   ],
-  "event": "受贿",
+  "event": "赌局",
   "evidence": true,
   "facts": [
-   {
-    "source": "archive",
-    "text": "镇公所账上有一笔霍尔·拉特付的「修路款」，可路没修",
-    "verified": true
-   },
    {
     "source": "witness",
-    "text": "霍尔·拉特在酒馆后间递给霍德·马克一个信封",
+    "text": "托利·弗比在后屋收桌钱，每一局抽一成",
     "verified": true
    }
   ],
-  "headline": "酒馆后间递过去的信封",
+  "headline": "后屋里那一桌牌",
   "naming": "named",
   "pleaded": false,
   "roles": [
    {
     "female": false,
-    "name": "霍德·马克",
-    "occ": "警长",
-    "role": "official",
+    "name": "托利·弗比",
+    "occ": "酒馆老板",
+    "role": "barkeep",
     "shown_as": "named",
     "target": true
    },
    {
     "female": false,
-    "name": "霍尔·拉特",
-    "occ": "店主",
-    "role": "payer",
-    "shown_as": "named",
-    "target": false
-   },
-   {
-    "female": false,
-    "name": "罗林·卢恩",
-    "occ": "书记员",
-    "role": "clerk",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "春天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "bribery",
-  "tone": "neutral",
-  "week": 3
- },
- {
-  "body": [
-   "镇上要紧的几个位子，坐的人一病，底下的事就没人拿主意。",
-   "诊所的病历本报查看过：诺比·弗比患的是肺上的病，病历上的医嘱是「不宜过劳」。影印的那一页，登在本版下方。",
-   "礼拜天的讲台上，诺比牧师的声音这几周弱了不少。",
-   "诺比牧师说自己身体好得很，用不着别人操心。本报将继续关注。"
-  ],
-  "event": "隐瞒病情",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "诊所病历上诺比·弗比的病是肺上的，医生写了「不宜过劳」",
-    "verified": true
-   }
-  ],
-  "headline": "诺比·弗比的身体比对外说的差",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "诺比·弗比",
-    "occ": "牧师",
-    "role": "sick",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": true,
-    "name": "拉伯·珂琳",
-    "occ": "护士",
-    "role": "nurse",
-    "shown_as": "named",
-    "target": false
-   }
-  ],
-  "season": "夏天",
-  "seed": 62,
-  "strategy": "cautious",
-  "tid": "illness",
-  "tone": "neutral",
-  "week": 70
- },
- {
-  "body": [
-   "锯木厂那片林子，本报这个月去了几趟。",
-   "杂货店的收货单上记着，法林·帕森卖过几张鹿皮，一张三块钱。这份记录本报请杂货店的人看过，确是原件。此外，天还没亮，本报记者看见法林先生从林子深处走出来，肩上的麻袋往下坠着，看分量不轻。",
-   "林子是锯木厂的，进去不犯法；背着东西出来，就得说清楚背的是什么。法林先生说本报听信了一面之词。"
-  ],
-  "event": "偷猎",
-  "evidence": true,
-  "facts": [
-   {
-    "source": "archive",
-    "text": "杂货店收过法林·帕森卖的鹿皮，一张三块钱",
-    "verified": true
-   },
-   {
-    "source": "witness",
-    "text": "法林·帕森天不亮从林子里出来，背着一只鼓鼓的麻袋",
-    "verified": true
-   }
-  ],
-  "headline": "杂货店后屋墙上的鹿皮",
-  "naming": "named",
-  "pleaded": false,
-  "roles": [
-   {
-    "female": false,
-    "name": "法林·帕森",
-    "occ": "流浪汉",
-    "role": "poacher",
-    "shown_as": "named",
-    "target": true
-   },
-   {
-    "female": false,
-    "name": "兰德·瑞尔",
-    "occ": "厂主",
-    "role": "landowner",
+    "name": "莫林·马斯",
+    "occ": "工人",
+    "role": "loser",
     "shown_as": "named",
     "target": false
    }
   ],
   "season": "秋天",
-  "seed": 62,
+  "seed": 141,
   "strategy": "cautious",
-  "tid": "poaching",
+  "tid": "gambling",
   "tone": "neutral",
   "week": 37
+ },
+ {
+  "body": [
+   "灰河镇的人大多是从别处来的，镇上的规矩是不问人家从前的事。",
+   "本报在邮局看到一封寄给帕特·格蒂的信，封口盖着法院的火漆，信封上没有写是什么事。相关记录的影印件附在本版下方。那封信至今没有人去领。",
+   "帕特女士说那封信是家里的事。"
+  ],
+  "event": "来历不明",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "archive",
+    "text": "邮局有一封寄给帕特·格蒂的信，封口印着法院的章",
+    "verified": true
+   }
+  ],
+  "headline": "邮局里一封没人领的信",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": true,
+    "name": "帕特·格蒂",
+    "occ": "新来的",
+    "role": "stranger",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "瓦利·卢恩",
+    "occ": "站长",
+    "role": "recognizer",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "夏天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "past",
+  "tone": "neutral",
+  "week": 73
+ },
+ {
+  "body": [
+   "灰河边上的几户人家，这一阵为一件事犯愁。本报去问了。",
+   "锯木厂往河里倒东西，本报记者是酒馆打烊之后亲眼看见的：木桶从后门推出来，一直推到河边。锯木厂后门到河边，有一道被木桶轮子压出来的车辙。",
+   "锯木厂的厂主是斯兰·艾克。厂主吩咐人夜里倒，倒的人是拿工钱办事。这件事该问的是吩咐的人。斯兰先生说锯木厂的排水一向合规矩。"
+  ],
+  "event": "排污",
+  "evidence": true,
+  "facts": [
+   {
+    "source": "witness",
+    "text": "斯兰·艾克让人趁夜把厂里的废液倒进灰河",
+    "verified": true
+   }
+  ],
+  "headline": "斯兰·艾克的锯木厂半夜往河里倒东西",
+  "naming": "named",
+  "pleaded": false,
+  "roles": [
+   {
+    "female": false,
+    "name": "斯兰·艾克",
+    "occ": "厂主",
+    "role": "culprit",
+    "shown_as": "named",
+    "target": true
+   },
+   {
+    "female": false,
+    "name": "马顿·米斯",
+    "occ": "农户",
+    "role": "victim",
+    "shown_as": "named",
+    "target": false
+   }
+  ],
+  "season": "秋天",
+  "seed": 141,
+  "strategy": "cautious",
+  "tid": "pollution",
+  "tone": "neutral",
+  "week": 81
  }
 ]

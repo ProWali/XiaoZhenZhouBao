@@ -97,7 +97,7 @@ func _brief() -> void:
 	var tone_zh := {"calm": "克制", "neutral": "中立", "hot": "煽动"}
 	var naming_zh := {"named": "点名", "alias": "化名（写职业，不写名字）", "anon": "完全匿名"}
 	var src_zh := {"witness": "本报亲眼所见", "archive": "查到的档案", "interview": "采访", "informer": "线人", "visitor": "有人登门告知", "eavesdrop": "酒馆里听来的", "letter": "匿名信", "public": "公开消息"}
-	var md := "# 盲测手写稿提要\n\n每条按提要写一篇报道：一个标题，三到四段。只能写提要里的事实，信源说法要和「来源」一致。写完填进 handwritten_zh.json。\n\n"
+	var md := "# 盲测手写稿提要\n\n每条按提要写一篇报道：一个标题，三到四段。只能写提要里的事实，信源说法要和「来源」一致。写完填进 handwritten_zh.json。\n\n本报体例（手写稿和生成稿一样遵守）：第一次提到一个人写全名，可以带职业（「店主霍尔·拉特」）；之后称姓加「先生」「女士」，镇长、警长、牧师、医生用职衔（「霍尔先生」「萨伯警长」）。化名、匿名的照提要里的署名方式写。\n\n"
 	for i in HAND:
 		var r: Dictionary = picked[i]
 		md += "## b%02d · %s（%s，%s）\n\n" % [i + 1, r.event, r.season, "第 %d 周" % r.week]

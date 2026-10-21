@@ -25,3 +25,7 @@
 杂货店的进货单  # 甲：short_weight.books 事实原文「杂货店的进货单上，面粉比卖出去的账多出一成」
 诊所这个月看了好几个闹肚子的孩子  # 甲：watered_milk.sick_kids 事实原文
 赶着车从林子里出来，车上装满了圆木  # 甲：timber_theft.logs 事实原文「{cutter}半夜赶着车从林子里出来，车上装满了圆木」
+锯木厂这个月丢了两把锯条和一箱钉子  # 甲：theft.missing 事实原文「锯木厂这个月丢了两把锯条和一箱钉子，{boss}在查」
+夜里从锯木厂后门出来，手里拎着东西  # 甲：theft.night 事实原文
+卖的鹿皮，一张三块钱  # 甲：poaching.hides 事实原文
+在河边往奶桶里灌河水  # 甲：watered_milk.water 事实原文

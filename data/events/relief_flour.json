@@ -1,0 +1,79 @@
+{
+ "id": "relief_flour",
+ "name": "倒卖救济面粉",
+ "severity": 2,
+ "weeks": 10,
+ "cooldown": 20,
+ "target": "clerk",
+ "driven_by": [
+  "money"
+ ],
+ "roles": {
+  "clerk": {
+   "occupation": [
+    "clerk"
+   ]
+  },
+  "buyer": {
+   "occupation": [
+    "grocer"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "sacks",
+   "subject": "clerk",
+   "text": "杂货店的货架上有几袋面粉，袋子上印着「救济面粉，不得出售」",
+   "secrecy": "semi",
+   "known_by": [
+    "buyer",
+    "random:4"
+   ]
+  },
+  {
+   "key": "ledger",
+   "subject": "clerk",
+   "text": "镇公所的账上，州里拨来四十袋救济面粉，发下去的只有二十五袋",
+   "secrecy": "secret",
+   "archive": "hall",
+   "known_by": [
+    "clerk"
+   ]
+  },
+  {
+   "key": "loading",
+   "subject": "clerk",
+   "text": "{clerk}天黑以后在镇公所后门，把面粉一袋袋搬上{buyer}的车",
+   "secrecy": "secret",
+   "witness": "hall",
+   "known_by": [
+    "clerk",
+    "buyer"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "buyer",
+   "text": "{buyer}给{clerk}的是现钱，一袋八毛",
+   "truth": 0.6,
+   "known_by": [
+    "friends:buyer",
+    "gossip:1"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "救济面粉"
+  ],
+  "neutral": [
+   "{clerk}被指倒卖救济面粉"
+  ],
+  "hot": [
+   "穷人的面粉上了货架"
+  ]
+ },
+ "detail": "面粉袋上的字"
+}

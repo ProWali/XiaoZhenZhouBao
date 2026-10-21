@@ -1,0 +1,76 @@
+{
+ "id": "laudanum",
+ "name": "鸦片酊成瘾",
+ "severity": 2,
+ "weeks": 10,
+ "cooldown": 30,
+ "target": "user",
+ "roles": {
+  "user": {
+   "occupation": [
+    "priest",
+    "teacher",
+    "clerk",
+    "mayor"
+   ]
+  },
+  "maid": {
+   "occupation": [
+    "maid"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "refills",
+   "subject": "user",
+   "text": "诊所的记录上，{user}每个礼拜来配一瓶鸦片酊，一年没断过",
+   "secrecy": "secret",
+   "archive": "clinic",
+   "known_by": [
+    "user"
+   ]
+  },
+  {
+   "key": "vials",
+   "subject": "user",
+   "text": "{maid}从{user}家清出来的空药瓶，一个月有四五只，都是棕色的小瓶",
+   "secrecy": "semi",
+   "known_by": [
+    "maid",
+    "friends:maid"
+   ]
+  },
+  {
+   "key": "doze",
+   "subject": "user",
+   "text": "{user}这个月有两回在大白天坐着睡着了，叫了几声才醒",
+   "secrecy": "semi",
+   "known_by": [
+    "random:4"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "user",
+   "text": "{user}的药是从州里黑市买的",
+   "truth": 0.2,
+   "known_by": [
+    "enemies:user"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "棕色的小药瓶"
+  ],
+  "neutral": [
+   "{user}每周配一瓶鸦片酊"
+  ],
+  "hot": [
+   "{user}离不开鸦片酊"
+  ]
+ },
+ "detail": "棕色药瓶"
+}

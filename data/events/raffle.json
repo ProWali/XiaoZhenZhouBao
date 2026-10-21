@@ -1,0 +1,82 @@
+{
+ "id": "raffle",
+ "name": "抽奖骗局",
+ "severity": 1,
+ "weeks": 8,
+ "cooldown": 20,
+ "target": "organizer",
+ "driven_by": [
+  "money"
+ ],
+ "roles": {
+  "organizer": {
+   "occupation": [
+    "newcomer",
+    "barkeep",
+    "grocer"
+   ]
+  },
+  "winner": {
+   "occupation": [
+    "drifter",
+    "worker",
+    "veteran"
+   ]
+  }
+ },
+ "fragments": [
+  {
+   "key": "tickets",
+   "subject": "organizer",
+   "text": "{organizer}卖抽奖券，一毛钱一张，头奖是一台收音机",
+   "secrecy": "semi",
+   "known_by": [
+    "organizer",
+    "random:6"
+   ]
+  },
+  {
+   "key": "noradio",
+   "subject": "organizer",
+   "text": "邮局的包裹簿上，这几个月没有一台收音机寄到镇上",
+   "secrecy": "secret",
+   "archive": "post",
+   "known_by": [
+    "random:1"
+   ]
+  },
+  {
+   "key": "rigged",
+   "subject": "organizer",
+   "text": "开奖那天，{organizer}从帽子里摸出来的号码，是事先藏在袖口里的，中奖的是{winner}",
+   "secrecy": "secret",
+   "witness": "tavern",
+   "known_by": [
+    "organizer",
+    "winner"
+   ]
+  }
+ ],
+ "rumors": [
+  {
+   "subject": "winner",
+   "text": "{winner}是{organizer}的表亲",
+   "truth": 0.4,
+   "known_by": [
+    "gossip:1"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "一台收音机"
+  ],
+  "neutral": [
+   "{organizer}被指抽奖作假"
+  ],
+  "hot": [
+   "一毛钱一张的空奖"
+  ]
+ },
+ "detail": "抽奖券"
+}

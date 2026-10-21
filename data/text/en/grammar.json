@@ -349,14 +349,14 @@
  "corroborated_witness": [
   "Someone else was nearby at the time, and saw the same.",
   "Afterward this paper found another person who had been there, and the accounts agree.",
-  "There were others about that night. This paper asked them, and they tell the same story.",
+  "There were others about at the time. This paper asked them, and they tell the same story.",
   "There was more than one witness to this.",
   "This paper later found one more person who saw it.",
   "Someone else was there at the time.",
   "Another passer-by saw the same thing at the same hour.",
   "Another resident of the town saw it too.",
   "Afterward this paper asked someone else who had been nearby, and the accounts agree.",
-  "Others were there that night, and saw what this paper saw."
+  "Others were there too, and saw what this paper saw."
  ],
  "_headline_formula": [
   "Accused of"
@@ -386,5 +386,111 @@
   "This paper found something else as well.",
   "The matter does not end there.",
   "The next part came from another quarter."
+ ],
+ "link_witness_archive": [
+  "Seeing it was one thing; this paper also went to the written record.",
+  "What a reporter sees is not proof enough on its own, so this paper turned to the records.",
+  "There is a paper trail as well."
+ ],
+ "link_archive_witness": [
+  "Figures in a book are one thing; this paper wanted to see for itself.",
+  "The records are not the whole of it. There is also what this paper saw.",
+  "Beyond the records, there is something this paper saw firsthand."
+ ],
+ "link_interview_witness": [
+  "This paper did not want to rest on what it had been told.",
+  "What this paper was told, it would not print on that alone."
+ ],
+ "link_witness_interview": [
+  "Beyond what this paper saw, it also asked around.",
+  "This paper then went to people who know the particulars."
+ ],
+ "link_archive_interview": [
+  "Beyond the records, this paper also asked around.",
+  "With the records gone through, this paper went and asked a few people."
+ ],
+ "link_interview_archive": [
+  "There is a written record, too, and it shows something more.",
+  "That much was told to this paper. It went to the records as well."
+ ],
+ "link_informer_witness": [
+  "A tip is only a tip, and this paper wanted more than that.",
+  "This paper would not print the tip on its own."
+ ],
+ "link_witness_informer": [
+  "Beyond what this paper saw, it also asked around.",
+  "This paper's sources had more to add."
+ ],
+ "link_archive_informer": [
+  "The records are not the only thing this paper has.",
+  "Beyond the records, this paper's sources had more to add."
+ ],
+ "link_informer_archive": [
+  "There is a written record, too, and it shows something more.",
+  "A tip is only a tip, so this paper went to the records."
+ ],
+ "link_visitor_witness": [
+  "This paper did not leave it at what was said across the office counter.",
+  "What a caller says, this paper will not print on that alone."
+ ],
+ "link_witness_visitor": [
+  "What this paper saw is not all it has.",
+  "Then someone called at the Gazette office with more."
+ ],
+ "link_archive_visitor": [
+  "The records are not the whole of it.",
+  "Then someone called at this office with more."
+ ],
+ "link_visitor_archive": [
+  "There is a written record, too, and it shows something more.",
+  "This paper did not stop at what a caller said, and went to the records."
+ ],
+ "link_eavesdrop_witness": [
+  "Tavern talk is only talk, and this paper wanted more than that.",
+  "This paper does not print what it overhears on that alone."
+ ],
+ "link_witness_eavesdrop": [
+  "What this paper saw is not all of it; the town has been talking, too.",
+  "There is also talk going around."
+ ],
+ "link_archive_eavesdrop": [
+  "The records tell one part. Talk in town tells another.",
+  "Beyond the records, there is talk going around."
+ ],
+ "link_eavesdrop_archive": [
+  "And it is not only talk: there is paper as well.",
+  "Talk is only talk, so this paper went to the records."
+ ],
+ "link_letter_witness": [
+  "An unsigned letter proves nothing by itself.",
+  "This paper will not print an unsigned letter on its own word."
+ ],
+ "link_witness_letter": [
+  "What this paper saw is not all it has.",
+  "Then a letter arrived at this office."
+ ],
+ "link_archive_letter": [
+  "The records are not the whole of it.",
+  "Then a letter reached this office."
+ ],
+ "link_letter_archive": [
+  "There is a written record, too, and it shows something more.",
+  "A letter without a name proves nothing, so this paper went to the records."
+ ],
+ "link_public_witness": [
+  "That much is known to everyone. What follows is not.",
+  "Everyone knows that much; this paper went further."
+ ],
+ "link_witness_public": [
+  "What this paper saw is not all of it.",
+  "Some of the rest is no secret."
+ ],
+ "link_archive_public": [
+  "The records are not the whole of it.",
+  "Some of the rest is no secret."
+ ],
+ "link_public_archive": [
+  "There is a written record, too, and it shows something more.",
+  "Beyond what everyone knows, this paper went to the records."
  ]
 }

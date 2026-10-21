@@ -245,7 +245,7 @@ static func _person_slot(world, role: String, field: String, ctx: Dictionary, la
 				# 头一回提到，带上身份：「警长拉克·汉尔」
 				if oid in NO_APPOSITION:
 					return person_name(world, rid, lang)
-				return (occ + " " + person_name(world, rid, lang)) if lang == "en" else (occ + person_name(world, rid, lang))
+				return _apposition(occ, oid, person_name(world, rid, lang), lang)
 			if mode == "named":
 				return short_ref(world, rid, lang, occ_id)
 			return _alias_later(occ, oid, fem, mode, lang)
@@ -265,9 +265,19 @@ static func _person_slot(world, role: String, field: String, ctx: Dictionary, la
 	if n == 0:
 		# 家眷、赋闲的人不算职业，同位语里不写
 		if field == "full" and not (oid in NO_APPOSITION):
-			return (occ + " " + person_name(world, rid, lang)) if lang == "en" else (occ + person_name(world, rid, lang))
+			return _apposition(occ, oid, person_name(world, rid, lang), lang)
 		return person_name(world, rid, lang)
 	return short_ref(world, rid, lang, occ_id)
+
+
+## 「工头莫兰·艾德」。英文里名字前的正式职衔要大写（Mayor, Sheriff），普通职业照常小写（grocer, mill hand）
+const EN_TITLES := {"mayor": "Mayor", "sheriff": "Sheriff", "doctor": "Dr.", "priest": "Father"}
+
+
+static func _apposition(occ: String, oid: String, name: String, lang: String) -> String:
+	if lang != "en":
+		return occ + name
+	return str(EN_TITLES.get(oid, occ)) + " " + name
 
 
 const NO_APPOSITION := ["homemaker", "retired"]
@@ -601,6 +611,9 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 	var detail_used := false
 	var hedged := false
 	var corroborated := false
+	# 一篇报道里交代证据可靠（影印、核对过、另有人看见）最多一处，也不是篇篇都交代：人写稿不会每条证据后面都跟一句保证
+	if rng.chance(0.35):
+		corroborated = true
 	for fid in ordered:
 		var f: Dictionary = world.facts[fid]
 		var spec: Dictionary = et.get("facts", {}).get(f.key, {})
@@ -634,7 +647,7 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 			sym += "_who"
 		var verified: bool = world.is_verified(fid)
 		# 核实过的，有一半写进信源说法里（「据两位互不相识的知情人说」），不再在句尾另加一句
-		if verified and not own_voice and not corroborated and g.has_rule("src_" + str(src.kind) + "_two") and rng.chance(0.5):
+		if verified and not own_voice and not corroborated and not evidence_noted and g.has_rule("src_" + str(src.kind) + "_two") and rng.chance(0.5):
 			lead_in = g.expand("#src_" + str(src.kind) + "_two#")
 			corroborated = true
 		elif g.has_rule(sym) and not own_voice:
@@ -642,9 +655,10 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 		var tail := ""
 		var tail_n := 0
 		# 影印件只能是档案，一篇最多说一次，也不是每次都说
-		if a.get("evidence", false) and src.kind == "archive" and not evidence_noted and g.has_rule("evidence_note") and rng.chance(0.4):
+		if a.get("evidence", false) and src.kind == "archive" and not evidence_noted and not corroborated and g.has_rule("evidence_note") and rng.chance(0.4):
 			tail += sep + g.expand("#evidence_note#")
 			evidence_noted = true
+			corroborated = true
 			tail_n += 1
 		# 消息靠不靠得住，人写报道时会交代一句
 		if tail_n == 0 and src.kind == "witness" and not own_voice and g.has_rule("limit_witness") and rng.chance(0.25):
@@ -655,7 +669,7 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 		elif not verified and src.kind in ["interview", "informer", "visitor", "eavesdrop", "letter"] and not hedged and g.has_rule("hedge") and rng.chance(0.5):
 			tail += sep + g.expand("#hedge#")
 			hedged = true
-		elif verified and not corroborated:
+		elif verified and not corroborated and not (own_voice and src.kind == "archive"):
 			var csym := "corroborated"
 			if src.kind == "archive":
 				csym = "corroborated_archive"
@@ -680,9 +694,14 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 		else:
 			if main_sents.is_empty():
 				sentence = _swap_lead(sentence, data(lang).grammar.get("_lead_swap", {}))
-			elif str(main_kinds[-1]) != str(src.kind) and g.has_rule("link") and rng.chance(0.5):
-				# 换了一种证据（看见的 → 查到的），中间交代一句，读起来才不像两张卡片拼在一起
-				sentence = g.expand("#link#") + sep + sentence
+			elif str(main_kinds[-1]) != str(src.kind) and rng.chance(0.5):
+				# 换了一种证据（看见的 → 查到的），中间交代一句，读起来才不像两张卡片拼在一起。
+				# 先找按这一对证据写的承接（link_witness_archive：看见之后去查了记录），没有再用通用的
+				var lsym := "link_%s_%s" % [main_kinds[-1], src.kind]
+				if not g.has_rule(lsym):
+					lsym = "link"
+				if g.has_rule(lsym):
+					sentence = g.expand("#" + lsym + "#") + sep + sentence
 			main_sents.append(sentence)
 			main_kinds.append(src.kind)
 	# 段落：一段放一到两句，长短不齐
@@ -766,7 +785,8 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 		resp = g.pick_expand(resp_pool)
 	var close := ""
 	var ev_close: Array = eligible_strict(et.get("close", {}).get(tone, []), keys)
-	if rng.chance(0.35):
+	# 已经有当事人的回应收尾时，很少再加一句「本报将继续关注」
+	if rng.chance(0.15 if resp != "" else 0.35):
 		if not ev_close.is_empty() and rng.chance(0.5):
 			close = g.pick_expand(ev_close)
 		elif g.has_rule("close"):
