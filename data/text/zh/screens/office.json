@@ -32,5 +32,6 @@
  "ad_line": "{name}（{where}）：{state}",
  "ad_on": "登着",
  "ad_off": "撤了",
- "ads": "广告："
+ "ads": "广告：",
+ "hint_lead_self": "★ 线头：{who}来信说有话讲，这会儿在{where}。"
 }

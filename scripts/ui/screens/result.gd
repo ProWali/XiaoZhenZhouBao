@@ -44,7 +44,8 @@ func _ready() -> void:
 		for fid in gained:
 			var hb := HBoxContainer.new()
 			hb.add_theme_constant_override("separation", 4)
-			hb.add_child(K.stamps(1, 1))
+			# 盖完这一枚后一共几枚（三枚坐实），和选题簿里看到的一样（试玩：这里画一枚、选题簿里是两枚，对不上）
+			hb.add_child(K.stamps(mini(3, int(w.verify_score(fid)))))
 			hb.add_child(K.para(TE.fact_note(w, fid, Game.lang), 420 - x - 44, "hand", 10, P.PENCIL))
 			sl[1].add_child(hb)
 		Game.sfx("stamp")

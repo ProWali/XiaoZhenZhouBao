@@ -32,5 +32,6 @@
  "ad_line": "{name} ({where}): {state}",
  "ad_on": "running",
  "ad_off": "pulled",
- "ads": "Ads: "
+ "ads": "Ads: ",
+ "hint_lead_self": "★ Lead: {who} wrote that they have more to tell, and is at {where} right now."
 }

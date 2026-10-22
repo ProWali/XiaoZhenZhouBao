@@ -19,5 +19,6 @@
  "keeper_bribe": "{name} doesn't know you well. It'll take five dollars.",
  "archive_yes": "Look",
  "archive_no": "Never mind",
- "archive_result": "The records at {place}"
+ "archive_result": "The records at {place}",
+ "ask_done": "{text} (you've asked everyone who'd talk about this)"
 }

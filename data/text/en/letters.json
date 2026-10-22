@@ -1,4 +1,13 @@
 {
+ "rumor_lead": {"sign": false, "items": [
+  "{who} the postman brought word: \"{tip}, the {tip.occ}, seems to know something lately. Go and ask.\"",
+  "Dropping off the mail, {who} the postman mentioned: \"There's talk going round. Have a word with {tip}, the {tip.occ}.\"",
+  "{who} the postman paused at the door: \"{tip} ({tip.occ}) has been hinting at something these past days. That's all I'll say.\""
+ ]},
+ "more_to_tell": {"sign": true, "items": [
+  "You only printed half of what {subject.short} did. If you ever want the other half, come and find me.",
+  "What you printed is true, but it isn't all of it. I know more than the paper does. Come by and I'll tell you."
+ ]},
  "predecessor": {"sign": false, "items": [
   "A letter left by the previous editor: The postman is a friend; when in doubt, ask the postman first. Don't let the sawmill's advertisement lapse, because it pays for two weeks of newsprint. Go to the tavern at night and listen, but don't believe all of it. The front page is empty. Fill it yourself.",
   "A letter left by the previous editor: The roof leaks. The lever on the left side of the press wants a hard pull. The postman can be trusted; take half of what you hear at the tavern. The sawmill's advertisement pays for two weeks of paper, so think twice before you lose it. I've left the front page blank for you."
@@ -97,7 +106,6 @@
   "Well done. {subject.short} has strutted around this town for years. It was time someone stood in the way.",
   "I've waited a long time for this. Thank you.",
   "I take no pleasure in another person's misfortune. But you were right to print this.",
-  "You only printed half of what {subject.short} has done. When you want the other half, come and see me.",
   {"t": "I read this week's front page aloud at the tavern, and not one soul spoke up for {subject.short}.", "if": {"trait": ["drinker", "gossip"]}},
   {"t": "Seeing {subject.short}'s name in the paper, I slept well for the first time in a long while.", "if": {"trait": ["grudge"]}},
   {"t": "I told people long ago that {subject.short} couldn't be trusted, and nobody believed me. They believe me now.", "if": {"trait": ["gossip", "suspicious"]}},

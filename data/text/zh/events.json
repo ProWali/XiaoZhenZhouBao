@@ -445,7 +445,7 @@
     },
     {
      "t": "镇上的买卖靠赊账维持，也最怕赊账。本报查了一笔挂了很久的账。",
-     "needs": "ledger"
+     "needs": "ledger@archive"
     },
     {
      "t": "{debtor.full}家里那座座钟，#recent#出现在了当铺的柜台上。",
@@ -1090,7 +1090,7 @@
     },
     {
      "t": "河湾农场#recent#用上了一批新锯条，本报查了查这批锯条的来路。",
-     "needs": "sold"
+     "needs": "sold@archive"
     },
     "锯木厂里有一件事，厂方没有对外说。本报查到了一些。",
     "厂里的工友这一阵互相提防，原因本报打听了一下。"
@@ -1236,7 +1236,7 @@
     },
     {
      "t": "工头查了一个月没查出来，本报查了一周。",
-     "needs": "sold"
+     "needs": "sold@archive"
     }
    ],
    "any": [
@@ -2067,7 +2067,7 @@
     {
      "t": "#recent#本报查了镇公所的一笔账。",
      "needs": [
-      "ledger",
+      "ledger@archive",
       "contract"
      ]
     },
@@ -5983,7 +5983,7 @@
     {
      "t": "有人说那药水是城里大药房的正经货。可装瓶的地方就在火车站后面，本报看见了，城里的药房不会在煤渣堆旁边装瓶。",
      "needs_all": [
-      "bottling",
+      "bottling@witness",
       "rumor"
      ]
     },
@@ -6431,7 +6431,7 @@
     },
     {
      "t": "{victim.full}的伤，诊所写的是「摔伤」。本报查到的情况不太一样。",
-     "needs": "injury"
+     "needs": "injury@archive"
     },
     {
      "t": "{victim.full}对人说，打{victim.ta}的是警长。",
@@ -6440,7 +6440,7 @@
     {
      "t": "一个人受了重伤，诊所的记录和伤者自己说的不一样。本报查了查。",
      "needs": [
-      "injury",
+      "injury@archive",
       "told"
      ]
     },
@@ -7898,7 +7898,7 @@
    "neutral": [
     {
      "t": "杂货店的收货簿上，{farmer.full}卖来的黄油多得出奇。本报查了查。",
-     "needs": "tally"
+     "needs": "tally@archive"
     },
     "镇上人家吃的黄油，本报这一回查了查来路。",
     "杂货店柜台上的一样东西，本报替买的人看了看。"
@@ -8041,15 +8041,15 @@
     {
      "t": "揉猪油是本报看见的，收货簿上的数目是本报查到的。一样说明怎么掺，一样说明掺了多少。",
      "needs_all": [
-      "mixing",
-      "tally"
+      "mixing@witness",
+      "tally@archive"
      ]
     },
     {
      "t": "化开有猪油味，是买的人尝出来的；冷泉边揉猪油，是本报看见的。舌头和眼睛说的是同一件事。",
      "needs_all": [
       "lardy",
-      "mixing"
+      "mixing@witness"
      ]
     },
     {
@@ -9379,7 +9379,7 @@
     {
      "t": "说药是从黑市买的，可本报查到的是诊所的记录，配的是正经药。黑市一说，本报不采信。",
      "needs_all": [
-      "refills",
+      "refills@archive",
       "rumor"
      ]
     },

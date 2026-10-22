@@ -138,6 +138,11 @@ func instantiate(tpl: Dictionary, roles: Dictionary, world, extras: Dictionary =
 		inst.facts.append(fid)
 		if frag.has("witness"):
 			inst.witness[frag.witness] = fid
+			var days: Array = world.rng.sample([1, 2, 3, 4, 5, 6], 2)
+			days.sort()
+			if not inst.has("witness_days"):
+				inst["witness_days"] = {}
+			inst.witness_days[frag.witness] = days
 	for rum in tpl.get("rumors", []):
 		var fid := _make_fact(inst, rum, roles, world, float(rum.truth))
 		inst.rumor_facts.append(fid)
@@ -184,6 +189,11 @@ func _make_fact(inst: Dictionary, frag: Dictionary, roles: Dictionary, world, tr
 	for spec in frag.get("known_by", []):
 		for rid in _resolve_known(spec, roles, world):
 			world.residents[rid].knows[fid] = true
+	# 事情出在哪儿，那儿的人就会知道（M4.2：推理型试玩者问「谁会知道」全靠运气，牧师不知道贴在自己教堂门口的预告）。
+	# 碎片里提到的地方、要去蹲守的地方、档案所在的地方：在那儿做事的人各知道一个，管档案的人知道档案上那条
+	for loc in _places_in(fact, frag, world):
+		for rid in _people_working_at(loc, world, 1 if loc == str(frag.get("witness", "")) else 2):
+			world.residents[rid].knows[fid] = true
 	# 半公开的事，当事人身边总有几个人听说过：三个同事、一个朋友
 	if fact.secrecy == "semi":
 		var extra: Array = _resolve_known("work:" + str(frag.subject) + ":3", roles, world)
@@ -192,6 +202,33 @@ func _make_fact(inst: Dictionary, frag: Dictionary, roles: Dictionary, world, tr
 			if world.residents.has(rid):
 				world.residents[rid].knows[fid] = true
 	return fid
+
+
+## 碎片牵涉的地方：正文里写到的地名、蹲守点、档案所在地。只算有人上班的地方
+func _places_in(fact: Dictionary, frag: Dictionary, world) -> Array:
+	var out: Array = []
+	for loc in T.LOCATIONS:
+		var id: String = loc.id
+		if id == "office":
+			continue
+		if str(fact.text).contains(str(loc.name)) or str(frag.get("witness", "")) == id or str(frag.get("archive", "")) == id:
+			out.append(id)
+	return out
+
+
+## 在某处上班的人，管事的（档案保管人、权力大的）排前面；没有随机，玩家推得出来
+func _people_working_at(loc: String, world, n: int) -> Array:
+	var staff: Array = []
+	for rid in world.living_ids():
+		if world.residents[rid].work == loc:
+			staff.append(rid)
+	staff.sort_custom(func(a, b):
+		var ra: Dictionary = world.residents[a]
+		var rb: Dictionary = world.residents[b]
+		var ka := int(T.occupation_by_id(ra.occ).get("keeper", "") == loc) * 10 + int(T.occupation_by_id(ra.occ).get("power", 0))
+		var kb := int(T.occupation_by_id(rb.occ).get("keeper", "") == loc) * 10 + int(T.occupation_by_id(rb.occ).get("power", 0))
+		return ka > kb if ka != kb else a < b)
+	return staff.slice(0, n)
 
 
 ## known_by 语法：role | friends:role | family:role | enemies:role | work:role:n | random:n | gossip:n | all

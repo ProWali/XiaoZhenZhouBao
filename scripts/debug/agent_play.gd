@@ -158,10 +158,9 @@ func _walk(n: Node, out: Array) -> void:
 			s += "（名牌：%s）" % n.plate
 		if str(n.badge) != "":
 			s += "（角标：%s）" % n.badge
-		if n.enabled and n.cb.is_valid():
-			out.append({"kind": "click", "label": s, "node": n})
-		else:
-			out.append({"kind": "text", "text": s + "（点不了）"})
+		# 点不了的也编号，免得编号跟着挪（第 1 轮里子 Agent 因此点错过好几次）
+		var on: bool = n.enabled and n.cb.is_valid()
+		out.append({"kind": "click", "label": s if on else s + "（点不了）", "node": n, "off": not on})
 	elif n is Button:
 		var s := str(n.text).replace("\n", " / ")
 		if s == "≡":
@@ -172,10 +171,7 @@ func _walk(n: Node, out: Array) -> void:
 			s = "【选中】" + s
 		if n.tooltip_text != "" and n.tooltip_text != "Tab":
 			s += "（提示：%s）" % n.tooltip_text
-		if n.disabled:
-			out.append({"kind": "text", "text": s + "（点不了）"})
-		else:
-			out.append({"kind": "click", "label": s, "node": n})
+		out.append({"kind": "click", "label": s + "（点不了）" if n.disabled else s, "node": n, "off": n.disabled})
 	elif n is RichTextLabel:
 		if n.get_parsed_text().strip_edges() != "":
 			out.append({"kind": "text", "text": n.get_parsed_text().strip_edges()})
@@ -204,6 +200,8 @@ func _find(items: Array, label: String, nth: int) -> Dictionary:
 
 
 func _click(it: Dictionary) -> void:
+	if it.get("off", false):
+		return
 	var n: Control = it.node
 	if n is Hotspot:
 		n.cb.call()

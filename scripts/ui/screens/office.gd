@@ -95,7 +95,8 @@ func _hint() -> String:
 	for l in w.leads:
 		var where: String = w.where_is(l.who)
 		if where != "" and not where.begins_with("home:"):
-			return Game.t("office.hint_lead", {"from": Game.name_of(l.from), "who": Game.name_of(l.who), "where": Game.place(where)})
+			var key := "office.hint_lead_self" if str(l.from) == str(l.who) else "office.hint_lead"
+			return Game.t(key, {"from": Game.name_of(l.from), "who": Game.name_of(l.who), "where": Game.place(where)})
 	var groups: Array = w.notebook()
 	if groups.is_empty():
 		return Game.t("office.hint_empty")

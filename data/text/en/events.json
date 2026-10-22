@@ -453,7 +453,7 @@
     },
     {
      "t": "Trade in this town lives on credit, and dreads it too. This paper looked into one account that has stood open a long time.",
-     "needs": "ledger"
+     "needs": "ledger@archive"
     },
     {
      "t": "#recent#, the mantel clock from the home of {debtor.full} turned up on the pawnshop counter.",
@@ -1119,7 +1119,7 @@
     },
     {
      "t": "#recent#, the river-bend farm put a batch of new saw blades to work. This paper looked into where they came from.",
-     "needs": "sold"
+     "needs": "sold@archive"
     },
     "There is a matter at the sawmill the mill has not spoken of publicly. This paper has learned some of it.",
     "The men at the mill have been wary of one another lately, and this paper inquired why."
@@ -1269,7 +1269,7 @@
     },
     {
      "t": "The foreman looked for a month and found nothing. This paper looked for a week.",
-     "needs": "sold"
+     "needs": "sold@archive"
     }
    ],
    "any": [
@@ -2138,7 +2138,7 @@
     {
      "t": "#recent#, this paper looked into an entry in the town hall's books.",
      "needs": [
-      "ledger",
+      "ledger@archive",
       "contract"
      ]
     },
@@ -6218,7 +6218,7 @@
     {
      "t": "As for the claim that the tonic comes from a big drugstore in the city: the bottling is done behind the railway station, and no city drugstore fills its bottles beside a cinder heap.",
      "needs_all": [
-      "bottling",
+      "bottling@witness",
       "rumor"
      ]
     },
@@ -6670,7 +6670,7 @@
     },
     {
      "t": "The clinic recorded the injuries of {victim.full} as a fall. What this paper found is rather different.",
-     "needs": "injury"
+     "needs": "injury@archive"
     },
     {
      "t": "{victim.full} has a name to give for the beating, and has been giving it to anyone who will listen.",
@@ -6679,7 +6679,7 @@
     {
      "t": "Someone was badly hurt, and the clinic's record does not agree with what the injured person says. This paper looked into it.",
      "needs": [
-      "injury",
+      "injury@archive",
       "told"
      ]
     },
@@ -8157,7 +8157,7 @@
    "neutral": [
     {
      "t": "To judge by the general store's books, the cows of {farmer.full} are remarkable animals. This paper looked into it.",
-     "needs": "tally"
+     "needs": "tally@archive"
     },
     "This time, this paper looked into where the town's butter comes from.",
     "On behalf of the customers, this paper took a closer look at one of the things on the general store counter."
@@ -8304,15 +8304,15 @@
     {
      "t": "The lard being worked in is what this paper saw; the figures in the receiving book are what this paper found. One shows how it was done, the other how much.",
      "needs_all": [
-      "mixing",
-      "tally"
+      "mixing@witness",
+      "tally@archive"
      ]
     },
     {
      "t": "The smell of lard on melting is what the buyers noticed; the lard worked in by the cold spring is what this paper saw. The nose and the eye tell the same story.",
      "needs_all": [
       "lardy",
-      "mixing"
+      "mixing@witness"
      ]
     },
     {
@@ -9662,7 +9662,7 @@
     {
      "t": "It is said the medicine comes from the black market, but what this paper found is the clinic's own record, and the medicine there is the genuine article. The black-market story this paper does not credit.",
      "needs_all": [
-      "refills",
+      "refills@archive",
       "rumor"
      ]
     },

@@ -26,8 +26,6 @@
  "leads_empty": "还没有。找人聊天问不出东西时，对方有时会给你指个人，记在这里。",
  "lead_at": "这会儿在{where}",
  "lead_not_out": "这会儿不在外面",
- "lead_row": "★ {who}（{occ}）\n{from}指的，第 {week} 周。{at}",
- "leads_help": "有人说「你去问问某某」，就记在左边。\n\n去找那个人，随便聊聊就行：说是谁让你来的，对方多半肯开口，说的也多半是同一件事。\n\n地图名牌和地点里有 ★ 的地方，就是线头上的人这会儿在的地方。\n\n线头放三周就凉了。",
  "people_empty": "还没跟谁打过交道。",
  "person_row": "{name}（{occ}）",
  "occ_age": "{occ}，{age} 岁",
@@ -40,5 +38,10 @@
  "family_none": "没听说",
  "about_him": "关于他的事：",
  "about_her": "关于她的事：",
- "told_by": "从这里听来的："
+ "told_by": "从这里听来的：",
+ "lead_row": "★ {who}（{occ}）{about}\n{from}指的，第 {week} 周。{at}",
+ "lead_row_self": "★ {who}（{occ}）{about}\n{who}自己来信说有话讲，第 {week} 周。{at}",
+ "lead_about": "，知道「{event}」的事",
+ "lead_about_new": "，知道一件你还不知道的事",
+ "leads_help": "有人说「你去问问某某」，就记在左边。\n\n去找那个人，随便聊聊就行：说是谁让你来的，对方多半肯开口。他说的是他知道、你还不知道的那件事，不一定是你正在查的。\n\n地图名牌和地点里有 ★ 的地方，就是线头上的人这会儿在的地方。\n\n线头放三周就凉了。"
 }

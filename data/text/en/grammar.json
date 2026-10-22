@@ -78,16 +78,9 @@
  "resp_unreached": [
   "{target.short} could not be reached before this paper went to press.",
   "{target.short} has not answered this paper's inquiries.",
-  "{target.short} was away from home this week and could not be asked in person.",
-  "This paper called twice at the home of {target.short} and found no one in.",
-  "This paper left word for {target.short}, and has had no answer.",
-  "{target.short} has been out of town all week.",
   "{target.short} has not yet responded.",
-  "This paper wrote to {target.short}, and no reply had come by the time the paper went to press.",
-  "This paper sent word to {target.short} through a friend, and heard nothing back.",
   "Before the paper went to press, this paper could not get a word with {target.short}.",
   "This paper would like to hear from {target.short}, and has not yet had the chance.",
-  "The family of {target.short} said {target.ta} was out, and this paper could not put the question.",
   "This paper did not manage to see {target.short} this week.",
   "This paper is still waiting to hear back from {target.short}."
  ],

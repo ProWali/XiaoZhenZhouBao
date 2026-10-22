@@ -74,6 +74,8 @@ var campaign := {}              # 选举期间的状态，见 election.gd
 var needy: Array = []           # 本周需求长期不满的人，见 needs.gd
 var slept_in := 0              # 哪天上午睡过去了（周 × 10 + 天），给画面层提示用
 var leads: Array = []           # 线头：交谈落空时对方指给你的人 {who, event, from, week}，见 _maybe_lead
+var reluctant := {}             # 知道点什么、但不肯说的人：rid -> {event, why, who, week}，选题簿「按人」里显示
+var greeted := {}               # rid -> 哪一周说过见面头一句（_personal_line）
 var actions: Array = []         # 玩家操作日志，存档就是它
 var recording := true
 var replay_error := ""
@@ -256,11 +258,26 @@ func notebook() -> Array:
 		var active: bool = e.week_end > week
 		for loc in e.witness:
 			if not known.has(e.witness[loc]) and active:
-				g.hints.append(_ui("hint_stakeout", {"place": TE.loc_label(self, loc, lang)}))
+				g.hints.append(_ui("hint_stakeout", {"place": TE.loc_label(self, loc, lang), "days": _nights_text(e, loc)}))
 		for fid in e.facts:
 			var f: Dictionary = facts[fid]
 			if f.archive != "" and not known.get(fid, {"evidence": false}).evidence:
 				g.hints.append(_ui("hint_archive", {"place": TE.loc_label(self, f.archive, lang)}))
+		# 还有没有人能问：有人知道、肯拿出来说的碎片还剩几条（试玩：玩家拿登完的事问了十几个人，游戏没说「问完了」）
+		g["more"] = 0
+		if active and not e.soft:
+			for fid in e.facts:
+				if known.has(fid):
+					continue
+				for rid in living_ids():
+					if residents[rid].in_town and residents[rid].knows.has(fid) and _can_tell(rid, fid):
+						g.more += 1
+						break
+			g.hints.push_front(_ui("hint_more") if g.more > 0 else _ui("hint_done"))
+		for rid in reluctant:
+			var rl: Dictionary = reluctant[rid]
+			if rl.event == e.id and week - int(rl.week) <= 3 and residents[rid].alive and residents[rid].in_town:
+				g.hints.append(_ui("hint_reluctant", {"name": _nm(rid), "why": _ui("why_" + str(rl.why), {"who": _nm(str(rl.who)) if str(rl.who) != "" else ""})}))
 		out.append(g)
 	return out
 
@@ -292,7 +309,46 @@ func _start_week(first: bool) -> void:
 	if first:
 		letters.push_front({"kind": "predecessor", "roles": {}, "vars": {}, "id": -1, "week": week})
 	_anonymous_letters()
+	if not first:
+		_rumor_hook()
 	_start_day()
+
+
+## 周一邮差捎一句风声：镇上有件还没登、你一条都不知道的事，就指给你一个知道它的人（附一个线头）。
+## 一周最多一条，不说是什么事。M4.2：试玩里没有 ★ 的时候，玩家整天不知道干什么。
+func _rumor_hook() -> void:
+	var postman := ""
+	for rid in living_ids():
+		if residents[rid].occ == "postman" and residents[rid].in_town:
+			postman = rid
+	if postman == "":
+		return
+	var led := {}
+	for l in leads:
+		led[l.event] = true
+	for e in events:
+		if e.soft or e.printed or e.week_end <= week + 1 or led.has(e.id):
+			continue
+		var seen := false
+		for fid in e.facts:
+			if known.has(fid):
+				seen = true
+		if seen:
+			continue
+		var cands: Array = []
+		for rid in living_ids():
+			if rid == postman or not residents[rid].in_town or residents[rid].work == "home" or not _role_of(e, rid).is_empty():
+				continue
+			for fid in e.facts:
+				if residents[rid].knows.has(fid) and _can_tell(rid, fid):
+					cands.append(rid)
+					break
+		if cands.is_empty():
+			continue
+		var who: String = rng.pick(cands)
+		leads.append({"who": who, "event": e.id, "from": postman, "week": week})
+		_letter("rumor_lead", {"who": postman, "tip": who})
+		return
 
 
 func _start_day() -> void:
@@ -377,12 +433,23 @@ func people_at_night(loc: String) -> Array:
 
 
 ## 每天决定有目击碎片的事件今晚在不在现场发生。
+## M4.2：每处一周固定两个晚上（事件生成时定好），不再每晚掷骰；选题簿的蹲守提示写明是哪两晚，蹲守成了推得出来的事
 func _roll_witness_nights() -> void:
 	for e in events:
 		e["tonight"] = {}
 		for loc in e.witness:
-			if rng.chance(0.45):
+			if day in e.get("witness_days", {}).get(loc, []):
 				e.tonight[loc] = e.witness[loc]
+
+
+## 「周三、周五」
+func _nights_text(e: Dictionary, loc: String) -> String:
+	# 直接查表，不走 _ui：_ui 会给每一段补句号
+	var ui: Dictionary = TE.data(lang).ui
+	var names: Array = []
+	for d in e.get("witness_days", {}).get(loc, []):
+		names.append(str(ui.get("night_%d" % int(d), str(d))))
+	return str(ui.get("nights_join", "、")).join(names)
 
 
 func _spawn_events(first: bool) -> void:
@@ -616,6 +683,8 @@ func where_is(rid: String) -> String:
 
 
 ## 采访。topic 为空表示泛泛打听。返回 {ok, lines, gained}
+## 先看对方手上有没有你要的，再看他肯不肯说（M4.2：原来先掷「肯不肯」，玩家分不清「不知道」和「不肯说」，推理推不起来）。
+## 不知道的人明说不知道；知道不肯说的，说出为什么（是当事人、跟当事人沾亲带故、嘴紧、还在生报社的气），选题簿记下「这人知道点什么」。
 func act_interview(rid: String, topic: String = "") -> Dictionary:
 	var res := {"ok": false, "lines": [], "gained": []}
 	if not can_act_day():
@@ -626,76 +695,68 @@ func act_interview(rid: String, topic: String = "") -> Dictionary:
 		res.lines.append(_ui("not_found"))
 		return res
 	_record({"kind": "interview", "rid": rid, "topic": topic})
+	var loc := where_is(rid)
 	_spend_day_action()
 	res.ok = true
-	var loc := where_is(rid)
 	res.lines.append(_ui("found_at", {"loc": TE.loc_label(self, loc, lang), "name": _nm(rid), "occ": TE.occ_label(self, rid, lang)}))
 	if r.avoid_until > week:
 		res.lines.append(_ui("avoids", {"name": _nm(rid)}))
 		return res
-	var w := 0.3 + 0.45 * float(r.player_rel.like) + 0.25 * float(r.player_rel.trust)
+	var greet := _personal_line(rid)
+	if greet != "":
+		res.lines.append(greet)
 	# 顺着线头找来的：「是某某让我来问你的」，对方多半肯说
 	var lead_event := ""
 	for i in range(leads.size() - 1, -1, -1):
 		if leads[i].who == rid:
 			lead_event = leads[i].event
-			w += 0.4
 			leads.remove_at(i)
-	if "honest" in r.traits: w += 0.1
-	if "tight" in r.traits: w -= 0.2
-	if "gossip" in r.traits: w += 0.15
-	var involved := false
 	var tfact: Dictionary = facts.get(topic, {})
 	if not tfact.is_empty():
 		var e := event_of(topic)
-		for role in e.roles:
-			if rid in e.roles[role]:
-				involved = true
 		if tfact.subject == rid and tfact.secrecy == "secret":
-			w -= 0.6
 			r.aware = true
-			_queue_plea_or_threat(rid, e)
-		elif involved:
-			w -= 0.25
+			if rid in e.roles.get(e.target, []):
+				_queue_plea_or_threat(rid, e)
+		elif not _role_of(e, rid).is_empty():
 			r.aware = true
-	if stats.credibility < 30: w -= 0.15
-	if stats.credibility > 70: w += 0.1
-	if not rng.chance(clampf(w, 0.05, 0.95)):
-		var culprit := false
-		if not tfact.is_empty():
-			var te := event_of(topic)
-			var tgt: Array = te.roles.get(te.target, [])
-			culprit = rid in tgt
-			for t_rid in tgt:
-				if rid in residents[t_rid].family:
-					culprit = true
-		if culprit and ("sly" in r.traits or not ("honest" in r.traits)) and rng.chance(0.5):
-			var e := event_of(topic)
-			var lie: Array = []
-			for rf in e.rumor_facts:
-				if not known.has(rf) and facts[rf].subject != rid:
-					lie.append(rf)
-			if not lie.is_empty():
-				var fid: String = rng.pick(lie)
-				_learn(fid, "interview", rid)
-				res.gained.append(fid)
-				res.lines.append(_ui("lie", {"name": _nm(rid), "fact": _note(fid)}))
-				return res
-		res.lines.append(_ui("evasive", {"name": _nm(rid)}))
-		if not involved:
-			_maybe_lead(rid, topic, res)
-		return res
-	if tfact.is_empty():
-		# 泛泛打听：给一条玩家不知道的、不是自己秘密的事实
+	# 一、他手上有什么
+	var offer := ""          # 要说出来的那条
+	var key := ""            # 用哪种说法
+	var more: Array = []     # 话头对上了，可能顺嘴补的同一件事
+	if not tfact.is_empty():
+		if r.knows.has(topic):
+			offer = topic
+			key = "confirms"
+			for fid in event_of(topic).facts:
+				if fid != topic and _can_tell(rid, fid):
+					more.append(fid)
+		else:
+			# 话头这一句他没听过，可同一件事（或线头上那件事）他知道别的
+			var want := lead_event if lead_event != "" else str(tfact.event)
+			var pool: Array = []
+			for fid in r.knows:
+				if facts[fid].event == want and _can_tell(rid, fid):
+					pool.append(fid)
+			if not pool.is_empty():
+				offer = rng.pick(pool)
+				key = "lead_redirect" if want != str(tfact.event) else "same_event"
+	else:
 		var pool: Array = []
 		for fid in r.knows:
-			if known.has(fid):
-				continue
-			var f: Dictionary = facts[fid]
-			if f.subject == rid and f.secrecy != "public":
-				continue
-			pool.append(fid)
-		if pool.is_empty():
+			if _can_tell(rid, fid):
+				pool.append(fid)
+		if lead_event != "":
+			var on_lead: Array = []
+			for fid in pool:
+				if facts[fid].event == lead_event:
+					on_lead.append(fid)
+			if not on_lead.is_empty():
+				pool = on_lead
+		if not pool.is_empty():
+			offer = rng.pick(pool)
+			key = "tells"
+		else:
 			# 没有新料，但对方说起一件你听过的事：多一个来源，选题簿上多盖一枚章
 			var echo: Array = []
 			for fid in r.knows:
@@ -710,61 +771,128 @@ func act_interview(rid: String, topic: String = "") -> Dictionary:
 				if not heard and event_of(fid).week_end > week:
 					echo.append(fid)
 			if not echo.is_empty():
-				var efid: String = rng.pick(echo)
-				_learn(efid, "interview", rid)
-				res.gained.append(efid)
-				res.lines.append(_ui("echo", {"name": _nm(rid), "fact": _note(efid)}))
-				return res
+				offer = rng.pick(echo)
+				key = "echo"
+	# 手上什么都没有：明说不知道
+	if offer == "":
+		if not tfact.is_empty():
+			res.lines.append(_ui("denies_knowing", {"name": _nm(rid)}))
+			# 对方把话头记住了，可能传开
+			if rng.chance(0.4):
+				r.knows[topic] = true
+		elif greet == "":
 			res.lines.append(_ui("small_talk", {"name": _nm(rid)}))
-			r.player_rel.like = minf(1.0, r.player_rel.like + 0.03)
-			_maybe_lead(rid, topic, res)
-			return res
-		if lead_event != "":
-			var on_lead: Array = []
-			for fid in pool:
-				if facts[fid].event == lead_event:
-					on_lead.append(fid)
-			if not on_lead.is_empty():
-				pool = on_lead
-		var fid: String = rng.pick(pool)
-		_learn(fid, "interview", rid)
-		res.gained.append(fid)
-		res.lines.append(_ui("tells", {"name": _nm(rid), "fact": _note(fid)}))
-		return res
-	# 有话头
-	if r.knows.has(topic):
-		_learn(topic, "interview", rid)
-		res.gained.append(topic)
-		res.lines.append(_ui("confirms", {"name": _nm(rid), "fact": _note(topic)}))
-		var e := event_of(topic)
-		var more: Array = []
-		for fid in e.facts:
-			if fid != topic and r.knows.has(fid) and not known.has(fid):
-				more.append(fid)
-		if not more.is_empty() and rng.chance(0.6):
-			var fid2: String = rng.pick(more)
-			_learn(fid2, "interview", rid)
-			res.gained.append(fid2)
-			res.lines.append(_ui("adds", {"name": _nm(rid), "fact": _note(fid2)}))
-	else:
-		var lead_pool: Array = []
-		if lead_event != "":
-			for fid in r.knows:
-				var lf: Dictionary = facts[fid]
-				if not known.has(fid) and lf.event == lead_event and not (lf.subject == rid and lf.secrecy != "public"):
-					lead_pool.append(fid)
-		if not lead_pool.is_empty():
-			var lfid: String = rng.pick(lead_pool)
-			_learn(lfid, "interview", rid)
-			res.gained.append(lfid)
-			res.lines.append(_ui("lead_redirect", {"name": _nm(rid), "fact": _note(lfid)}))
-			return res
-		res.lines.append(_ui("denies_knowing", {"name": _nm(rid)}))
-		# 对方把话头记住了，可能传开
-		if rng.chance(0.4):
-			r.knows[topic] = true
+		r.player_rel.like = minf(1.0, r.player_rel.like + 0.03)
 		_maybe_lead(rid, topic, res)
+		return res
+	# 二、肯不肯说
+	var e: Dictionary = event_of(offer)
+	var guard := _guard(rid, e)
+	var w := 0.55 + 0.3 * float(r.player_rel.like) + 0.2 * float(r.player_rel.trust) - float(guard.p)
+	if lead_event != "": w += 0.3
+	if "honest" in r.traits: w += 0.1
+	if "gossip" in r.traits: w += 0.15
+	if "tight" in r.traits: w -= 0.25
+	if stats.credibility < 30: w -= 0.15
+	if stats.credibility > 70: w += 0.1
+	if key == "echo":
+		w += 0.2
+	# 第一周的邮差：前任主编的信里说他可靠，开局的提示也让你先找他，不能让他把门关上
+	if week == 1 and r.occ == "postman":
+		w += 0.5
+	if not rng.chance(clampf(w, 0.05, 0.95)):
+		# 犯事的一方可能撒谎，把你往别处引
+		if guard.why == "self" or guard.why == "kin":
+			if ("sly" in r.traits or not ("honest" in r.traits)) and rng.chance(0.5):
+				var lie: Array = []
+				for rf in e.rumor_facts:
+					if not known.has(rf) and facts[rf].subject != rid:
+						lie.append(rf)
+				if not lie.is_empty():
+					var lf: String = rng.pick(lie)
+					_learn(lf, "interview", rid)
+					res.gained.append(lf)
+					res.lines.append(_ui("lie", {"name": _nm(rid), "fact": TE.fact_note_by(self, lf, rid, lang)}))
+					return res
+		var why: String = guard.why
+		if why == "" and float(r.player_rel.like) < 0.3:
+			why = "grudge"
+		if why == "" and "tight" in r.traits:
+			why = "tight"
+		if why == "involved" or why == "":
+			why = "plain"
+		res.lines.append(_ui("refuse_" + why, {"name": _nm(rid), "who": _nm(str(guard.who)) if str(guard.who) != "" else ""}))
+		if key != "echo":
+			reluctant[rid] = {"event": e.id, "why": why, "who": str(guard.who), "week": week}
+		return res
+	reluctant.erase(rid)
+	_learn(offer, "interview", rid)
+	res.gained.append(offer)
+	res.lines.append(_ui(key, {"name": _nm(rid), "fact": TE.fact_note_by(self, offer, rid, lang)}))
+	if not more.is_empty() and rng.chance(0.6):
+		var fid2: String = rng.pick(more)
+		_learn(fid2, "interview", rid)
+		res.gained.append(fid2)
+		res.lines.append(_ui("adds", {"name": _nm(rid), "fact": TE.fact_note_by(self, fid2, rid, lang)}))
 	return res
+
+
+## 这条碎片他会不会拿出来说：玩家还不知道；不是他自己的秘密；犯事的一方不会自己招认
+func _can_tell(rid: String, fid: String) -> bool:
+	if known.has(fid):
+		return false
+	var f: Dictionary = facts[fid]
+	if f.subject == rid and f.secrecy != "public":
+		return false
+	var e := event_of(fid)
+	if not e.is_empty() and f.secrecy != "public" and rid in e.roles.get(e.target, []):
+		return false
+	return true
+
+
+## 他跟这件事是什么关系：是当事人、当事人的家里人或朋友、牵扯其中。p 是不肯说的程度
+func _guard(rid: String, e: Dictionary) -> Dictionary:
+	var tgt: Array = e.roles.get(e.target, [])
+	if rid in tgt:
+		return {"p": 0.7, "why": "self", "who": rid}
+	for t in tgt:
+		if rid in residents[t].family:
+			return {"p": 0.4, "why": "kin", "who": t}
+	for t in tgt:
+		if rid in residents[t].friends:
+			return {"p": 0.3, "why": "friend", "who": t}
+	if not _role_of(e, rid).is_empty():
+		return {"p": 0.2, "why": "involved", "who": ""}
+	return {"p": 0.0, "why": "", "who": ""}
+
+
+## 见面头一句：这个人最近跟报社、跟报上登的事有什么瓜葛（试玩：写信道谢的新郎，当面只问报纸什么时候涨价）。
+## 一个人一周只说一次。不碰随机数。
+func _personal_line(rid: String) -> String:
+	if int(greeted.get(rid, 0)) == week:
+		return ""
+	var r: Dictionary = residents[rid]
+	var line := ""
+	for e in events + archive_events:
+		var role := _role_of(e, rid)
+		if role == "":
+			continue
+		if e.printed and week - int(e.printed_week) <= 4:
+			if e.soft:
+				line = _ui("mem_soft_printed", {"name": _nm(rid)})
+			elif role == e.target:
+				line = _ui("mem_target_cold", {"name": _nm(rid)}) if float(r.player_rel.like) < 0.4 else _ui("mem_target_polite", {"name": _nm(rid)})
+			else:
+				line = _ui("mem_side_printed", {"name": _nm(rid)})
+			break
+		if e.soft and not e.printed and e.week_end > week and e.get("positive", false):
+			line = _ui("mem_soft_soon", {"name": _nm(rid)})
+			break
+	if line == "" and float(r.player_rel.like) < 0.3:
+		line = _ui("mem_grudge", {"name": _nm(rid)})
+	if line != "":
+		greeted[rid] = week
+	return line
 
 
 ## 交谈落空时，对方可能给你指个人：一个知道某件你还不知道的事的人。
@@ -813,7 +941,7 @@ func _maybe_lead(rid: String, topic: String, res: Dictionary) -> void:
 			if place != "" and not place.begins_with("home:"):
 				out_today = true
 		if not out_today:
-			best_w *= 0.15
+			continue
 		who_list.append(oid)
 		ev_list.append(best_ev)
 		weights.append(best_w)
@@ -953,10 +1081,15 @@ func act_informer(target: String) -> Dictionary:
 	var inf: Dictionary = residents[informer]
 	var pool: Array = []
 	var rumor_pool: Array = []
+	# 这人身上的事：碎片说的是他，或者他就是犯事的一方（试玩：偷猎的人被说成「干净得很」，因为碎片的主语是收鹿皮的店）
+	var involved := false
 	for e in events:
+		var his: bool = not e.soft and target in e.roles.get(e.target, [])
 		for fid in e.facts:
-			if facts[fid].subject == target and not known.has(fid):
-				pool.append(fid)
+			if facts[fid].subject == target or his:
+				involved = true
+				if not known.has(fid):
+					pool.append(fid)
 		for fid in e.rumor_facts:
 			if facts[fid].subject == target and not known.has(fid):
 				rumor_pool.append(fid)
@@ -971,6 +1104,8 @@ func act_informer(target: String) -> Dictionary:
 		_learn(fid, "informer", informer)
 		res.gained.append(fid)
 		res.lines.append(_ui("informer_says", {"name": _nm(informer), "fact": _note(fid)}))
+	elif involved:
+		res.lines.append(_ui("informer_known", {"name": _nm(informer)}))
 	else:
 		res.lines.append(_ui("informer_nothing", {"name": _nm(informer)}))
 	return res
@@ -1000,7 +1135,16 @@ func act_stakeout(loc: String) -> Dictionary:
 			res.gained.append(fid)
 			res.lines.append(_ui("witnessed", {"fact": _note(fid)}))
 	if res.gained.is_empty():
-		res.lines.append(_ui("stakeout_nothing", {"place": TE.loc_label(self, loc, lang)}))
+		var hinted := ""
+		for e in events:
+			if e.witness.has(loc) and not e.tonight.has(loc) and not known.has(e.witness[loc]):
+				for fid in e.facts:
+					if known.has(fid):
+						hinted = _nights_text(e, loc)
+		if hinted != "":
+			res.lines.append(_ui("stakeout_wrong_night", {"place": TE.loc_label(self, loc, lang), "days": hinted}))
+		elif res.lines.is_empty():
+			res.lines.append(_ui("stakeout_nothing", {"place": TE.loc_label(self, loc, lang)}))
 	_spend_night()
 	return res
 
@@ -1345,6 +1489,8 @@ func _react_to_article(a: Dictionary, e: Dictionary, rec: Dictionary, exposure: 
 			s *= FOLLOWUP_SEVERITY
 		# 读到了吗？点名的人几乎一定会被告知
 		var p_read := 0.95 if a.naming == "named" else (0.7 if a.naming == "alias" else 0.4)
+		if r.get("aware", false):
+			p_read = 1.0
 		if not rng.chance(p_read):
 			_cons(issue, "cons_unread", {"name": subj})
 			continue
@@ -1458,7 +1604,7 @@ func _schedule_reaction(kind: String, rid: String, e: Dictionary, issue: Diction
 					ads[fr].paused_until = week + 6
 			_cons(issue, "cons_pressure", {"name": rid, "n": n})
 		"sue":
-			lawsuits.append({"week": week + 3, "who": rid, "event": e.id, "truth": rec.avg_truth, "evidence": rec.evidence})
+			lawsuits.append({"week": week + 2, "who": rid, "event": e.id, "truth": rec.avg_truth, "evidence": rec.evidence})
 			_cons(issue, "cons_sue", {"name": rid})
 		"suicide":
 			pending.append({"week": week + 2, "kind": "suicide", "who": rid, "event": e.id})
@@ -1577,7 +1723,16 @@ func _reader_letters() -> void:
 				if residents.has(oid) and residents[oid].in_town and residents[oid].alive:
 					foes.append(oid)
 			if not foes.is_empty() and rng.chance(0.5 * mult):
-				cands.append({"kind": "praise_exposure", "roles": {"who": rng.pick(foes), "subject": subj}, "w": 1.5})
+				var foe: String = rng.pick(foes)
+				# 仇人手上还有你不知道的料：信里叫你去找他，线头页记一笔（原来「来找我」的信找上门什么都不说）
+				var more := false
+				for tf in e.facts:
+					if residents[foe].knows.has(tf) and _can_tell(foe, tf):
+						more = true
+				if more:
+					cands.append({"kind": "more_to_tell", "roles": {"who": foe, "subject": subj}, "w": 1.5, "lead": e.id})
+				else:
+					cands.append({"kind": "praise_exposure", "roles": {"who": foe, "subject": subj}, "w": 1.5})
 			# 受害者道谢
 			for role in ["victim", "creditor", "wife", "boss"]:
 				if e.roles.has(role):
@@ -1629,7 +1784,7 @@ func _reader_letters() -> void:
 			cands.append({"kind": "fan", "roles": {"who": rid}, "vars": {"headline": head}, "w": 1.0})
 			flags.last_fan = rid
 			n += 1
-		elif r.player_rel.like < 0.25:
+		elif r.player_rel.like < 0.25 and int(r.get("praised_week", -9)) < week - 1:
 			cands.append({"kind": "unsubscribe", "roles": {"who": rid}, "w": 2.0, "unsub": rid})
 			n += 1
 	# 挑 2 到 4 封：权重高的优先，同一个人只写一封
@@ -1645,6 +1800,8 @@ func _reader_letters() -> void:
 			continue
 		used[who] = true
 		_letter(c.kind, c.roles, c.get("vars", {}))
+		if c.has("lead"):
+			leads.append({"who": who, "event": c.lead, "from": who, "week": week})
 		if c.has("unsub"):
 			residents[c.unsub].subscribed = false
 		taken += 1

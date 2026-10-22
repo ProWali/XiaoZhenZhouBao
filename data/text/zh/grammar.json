@@ -78,16 +78,9 @@
  "resp_unreached": [
   "截至付印，本报未能联系到{target.short}本人。",
   "本报尚未得到{target.short}的回应。",
-  "{target.short}本周不在家，本报没能当面问到。",
-  "本报去过{target.short}家两回，都没见到人。",
-  "本报给{target.short}留了话，至今没有回音。",
-  "{target.short}这一周都不在镇上。",
   "{target.short}本人还没有回应。",
-  "本报写信问过{target.short}，到付印时还没有回信。",
-  "本报托人捎了话给{target.short}，没有回音。",
   "付印前，本报没能和{target.short}说上话。",
   "本报想听{target.short}怎么说，还没有找到机会。",
-  "{target.short}家里人说{target.ta}出门了，本报没有问到。",
   "本报这一期没能见到{target.short}。",
   "{target.short}那边，本报还在等回话。"
  ],

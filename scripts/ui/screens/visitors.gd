@@ -56,7 +56,9 @@ func _show() -> void:
 		var fig := K.image(Portrait.figure(w, who), Vector2(546, 196))
 		fig.scale = Vector2(3, 3)
 		_holder.add_child(fig)
-	var kind_s := Game.t("visitors.kind_" + str(v.kind))
+	# 来送料却没料可送的，就是来道谢的（试玩：标题写「来送料」，内容里没有料）
+	var kind_key := "thanks" if str(v.kind) == "tip" and str(v.get("fact", "")) == "" else str(v.kind)
+	var kind_s := Game.t("visitors.kind_" + kind_key)
 	if kind_s.begins_with("〔"):
 		kind_s = Game.t("visitors.kind_other")
 	var title := Game.t("visitors.title", {"name": Game.name_of(who), "occ": Game.occ(who) if w.residents.has(who) else "?", "kind": kind_s})

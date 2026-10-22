@@ -24,7 +24,8 @@ const SPOTS := {
 	"farm_b": Rect2(60, 262, 90, 62),
 	"farm_a": Rect2(495, 272, 80, 62),
 }
-const NIGHT_SPOTS := ["tavern", "river", "bridge", "woods", "mill"]
+## 晚上能去蹲守的地方：选题簿会提示去蹲的地方都得在这里（试玩：提示「晚上蹲守镇公所」，镇公所晚上却点不了）
+const NIGHT_SPOTS := ["tavern", "river", "bridge", "woods", "mill", "station", "hall", "post", "store"]
 
 var params := {}
 var _note: Label

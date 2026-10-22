@@ -121,7 +121,7 @@ func _event_page(g: Dictionary) -> void:
 		v.add_child(K.para(meta, 230, "pixel", 12, P.WARM_GREY, 0))
 		hb.add_child(v)
 		sl[1].add_child(hb)
-	if not g.hints.is_empty() and not e.printed:
+	if not g.hints.is_empty() and (not e.printed or int(g.get("more", 0)) > 0):
 		sl[1].add_child(K.label(Game.t("notebook.where_else"), "pixel", 12, P.STAMP_RED))
 		var seen := {}
 		for h in g.hints:
@@ -147,7 +147,14 @@ func _leads() -> void:
 		hb.add_child(K.image(Portrait.face(w, who)))
 		var where: String = w.where_is(who)
 		var at: String = Game.t("notebook.lead_at", {"where": Game.place(where)}) if where != "" and not where.begins_with("home:") and w.slot <= 1 else Game.t("notebook.lead_not_out")
-		var txt := Game.t("notebook.lead_row", {"who": Game.name_of(who), "occ": Game.occ(who), "from": Game.name_of(str(l.from)), "week": int(l.week), "at": at})
+		# 关于哪件事：你已经知道这件事，就写出来；不知道就说是另一件事（试玩：以为线头上的人一定说你在查的那件）
+		var about := Game.t("notebook.lead_about_new")
+		var le: Dictionary = w.event_by_id(str(l.event))
+		for fid in le.get("facts", []):
+			if w.known.has(fid):
+				about = Game.t("notebook.lead_about", {"event": TE.event_name(w, le, Game.lang)})
+		var row_key := "notebook.lead_row_self" if str(l.from) == who else "notebook.lead_row"
+		var txt := Game.t(row_key, {"who": Game.name_of(who), "occ": Game.occ(who), "from": Game.name_of(str(l.from)), "week": int(l.week), "at": at, "about": about})
 		hb.add_child(K.para(txt, 236, "hand", 11, P.PENCIL, 1))
 		sl[1].add_child(hb)
 	var t := K.para(Game.t("notebook.tab_leads"), 270, "hand", 14, P.PRINT_INK)

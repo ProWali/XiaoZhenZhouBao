@@ -98,12 +98,21 @@ func _talk(rid: String) -> void:
 		return
 	var r: Dictionary = w.residents[rid]
 	var items: Array = [{"text": Game.t("location.small_talk", {"name": Game.name_of(rid)}), "cb": _interview.bind(rid, "")}]
+	# 还有人能问的事排前面；问完了的放到最后，标出来（试玩：玩家拿登完的事问了两周）
+	var open_items: Array = []
+	var done_items: Array = []
 	for g in w.notebook():
 		if g.event.soft:
 			continue  # 软新闻人人都知道，拿来当话头问不出东西
 		var ename: String = TE.event_name(w, g.event, Game.lang)
+		var done: bool = int(g.get("more", 0)) == 0
 		for fid in g.facts:
-			items.append({"text": Game.t("location.ask_about", {"event": ename, "fact": TE.fact_note(w, fid, Game.lang)}), "cb": _interview.bind(rid, fid), "font": "hand", "size": 10})
+			var text := Game.t("location.ask_about", {"event": ename, "fact": TE.fact_note(w, fid, Game.lang)})
+			if done:
+				text = Game.t("location.ask_done", {"text": text})
+			(done_items if done else open_items).append({"text": text, "cb": _interview.bind(rid, fid), "font": "hand", "size": 10})
+	items.append_array(open_items)
+	items.append_array(done_items)
 	var note := Game.t("location.talk_note")
 	if Game.lead_from(rid) != "":
 		note = Game.t("location.talk_note_lead", {"from": Game.name_of(Game.lead_from(rid)), "name": Game.name_of(rid)})

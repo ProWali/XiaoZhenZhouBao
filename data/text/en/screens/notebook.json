@@ -26,8 +26,6 @@
  "leads_empty": "None yet. When a talk turns up nothing, people sometimes point you to someone else. They go here.",
  "lead_at": "Now at {where}",
  "lead_not_out": "Not out and about right now",
- "lead_row": "★ {who} ({occ})\nFrom {from}, week {week}. {at}",
- "leads_help": "When someone says \"go ask so-and-so,\" it goes on the left.\n\nFind that person and just chat. Say who sent you: they will usually open up, and usually about the same matter.\n\nA ★ on the map labels and in places marks where a lead is right now.\n\nLeads go cold after three weeks.",
  "people_empty": "You haven't dealt with anyone yet.",
  "person_row": "{name} ({occ})",
  "occ_age": "{occ}, {age}",
@@ -40,5 +38,10 @@
  "family_none": "none known",
  "about_him": "About him:",
  "about_her": "About her:",
- "told_by": "Heard from this person:"
+ "told_by": "Heard from this person:",
+ "lead_row": "★ {who} ({occ}){about}\nFrom {from}, week {week}. {at}",
+ "lead_row_self": "★ {who} ({occ}){about}\n{who} wrote saying they have more to tell, week {week}. {at}",
+ "lead_about": ", knows about \"{event}\"",
+ "lead_about_new": ", knows something you haven't heard yet",
+ "leads_help": "When someone says \"go ask so-and-so,\" it goes on the left.\n\nFind that person and just chat. Say who sent you: they will usually open up. What they tell you is what they know and you don't, which may not be the story you are working on.\n\nA ★ on the map labels and in places marks where a lead is right now.\n\nLeads go cold after three weeks."
 }

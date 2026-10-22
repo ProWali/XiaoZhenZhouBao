@@ -19,5 +19,6 @@
  "keeper_bribe": "{name}跟你不熟，得塞五块钱。",
  "archive_yes": "查",
  "archive_no": "算了",
- "archive_result": "{place}的档案"
+ "archive_result": "{place}的档案",
+ "ask_done": "{text}（这件事能问的都问过了）"
 }

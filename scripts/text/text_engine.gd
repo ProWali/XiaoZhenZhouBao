@@ -367,6 +367,20 @@ static func _ctx_for_event(e: Dictionary, naming: String) -> Dictionary:
 
 
 ## 选题簿里的一句话：玩家知道的事实，用真名写。
+## 某人亲口说出这条碎片：碎片里出现说话人自己的名字时改成「我」（试玩里「哈利·本比认得……」从哈利嘴里说出来，一看就是程序拼的）
+static func fact_note_by(world, fid: String, speaker: String, lang: String) -> String:
+	var s := fact_note(world, fid, lang)
+	if speaker == "" or not world.residents.has(speaker):
+		return s
+	var nm := person_name(world, speaker, lang)
+	if lang != "en":
+		return s.replace(nm, "我")
+	s = s.replace(nm + "'s", "my")
+	if s.begins_with(nm):
+		s = "I" + s.substr(nm.length())
+	return s.replace(nm, "me")
+
+
 static func fact_note(world, fid: String, lang: String) -> String:
 	var f: Dictionary = world.facts[fid]
 	var e: Dictionary = world.event_of(fid)
@@ -462,6 +476,9 @@ static func _fact_keys(world, facts_list: Array) -> Dictionary:
 	for fid in facts_list:
 		if world.facts.has(fid):
 			keys[str(world.facts[fid].key)] = true
+			# 「键@来源」：写「本报看见的」「本报查到的」的句子要这条真是亲眼看见、真是档案上查到的（试玩：线人说的被写成本报看见）
+			for s in world.known.get(fid, {}).get("sources", []):
+				keys["%s@%s" % [world.facts[fid].key, s.kind]] = true
 	return keys
 
 
@@ -993,7 +1010,25 @@ static func letter(world, L: Dictionary, lang: String) -> Dictionary:
 	var items: Array = spec.get("items", [])
 	var who: String = L.get("roles", {}).get("who", "")
 	var rng := text_rng(world, ["letter", L.get("week", world.week), L.kind, L.get("id", 0)])
-	var picked := _pick_conditional(world, items, who, rng)
+	# 同一封信再读一遍还是那几句；八周内别人写过的句子不再用（试玩：两个人寄来一字不差的同一封信）
+	var mem: Dictionary = world.text_memory.get(lang + ":letters", {})
+	world.text_memory[lang + ":letters"] = mem
+	var uid := "%d:%s:%d" % [int(L.get("week", world.week)), str(L.kind), int(L.get("id", 0))]
+	var picked: String = str(mem.get(uid, ""))
+	if picked == "":
+		var used: Dictionary = mem.get("_used", {})
+		mem["_used"] = used
+		var fresh: Array = []
+		for it in items:
+			var t: String = it if it is String else str(it.get("t", ""))
+			if int(world.week) - int(used.get(t, -99)) > 8:
+				fresh.append(it)
+		picked = _pick_conditional(world, fresh, who, rng)
+		if picked == "":
+			picked = _pick_conditional(world, items, who, rng)
+		if picked != "":
+			mem[uid] = picked
+			used[picked] = int(world.week)
 	if picked == "":
 		return {"text": "(%s)" % L.kind, "from": ""}
 	var ctx := {"roles": L.get("roles", {}), "naming": {}, "extras": L.get("extras", {}), "vars": L.get("vars", {}), "mentions": {}}
