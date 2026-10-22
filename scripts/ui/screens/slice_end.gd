@@ -11,6 +11,7 @@ var params := {}
 func _ready() -> void:
 	var w = Game.world
 	Game.track("slice_end", {"game_over": w.game_over if w != null else "", "cash": w.stats.cash if w != null else 0, "cred": w.stats.credibility if w != null else 0})
+	Game.copy_save_to_log()
 	Game.ambience("night_ambience")
 	Game.music("piano_1")
 	add_child(K.image("res://assets/sprites/bg/menu_town.png"))
@@ -44,7 +45,7 @@ func _ready() -> void:
 		y += 20
 	sheet.add_child(K.rect(Color(P.PRINT_INK, 0.5), Vector2(16, 196), Vector2(468, 1)))
 	var thanks := "试玩版到这里为止。谢谢你替灰河镇办了一个月的报。\n\n" + \
-		"请把下面这个文件连同问卷一起发回来，它记着你每一步看了什么、做了什么，不含任何个人信息：\n" + Game.log_path_global()
+		"请把下面这个文件夹里 session 开头的两个文件（.jsonl 和 -save.json）连同问卷一起发回来。它们记着你每一步看了什么、做了什么，不含任何个人信息：\n" + ProjectSettings.globalize_path("user://playtest")
 	var t := K.para(thanks, 460, "hand", 10, P.PENCIL, 2)
 	t.position = Vector2(20, 202)
 	sheet.add_child(t)

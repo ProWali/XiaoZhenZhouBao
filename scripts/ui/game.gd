@@ -333,6 +333,15 @@ func track(kind: String, data := {}) -> void:
 	f.close()
 
 
+## 试玩结束时把存档复制到试玩记录旁边：存档能逐步重放（replay_report.gd），比记录有用
+func copy_save_to_log() -> void:
+	if _log_path == "" or not FileAccess.file_exists(save_path):
+		return
+	autosave()
+	var dst := _log_path.replace(".jsonl", "-save.json")
+	DirAccess.copy_absolute(ProjectSettings.globalize_path(save_path), ProjectSettings.globalize_path(dst))
+
+
 func log_path_global() -> String:
 	return ProjectSettings.globalize_path(_log_path)
 
