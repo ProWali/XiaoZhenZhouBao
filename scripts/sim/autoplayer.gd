@@ -1,6 +1,7 @@
 ## 自动玩家：四种策略，用来跑批量测试和读故事日志。
 ## cautious 谨慎：只印交叉验证过的；sensational 煽动：什么都印，点名煽动；
-## soft 软新闻：只印公开事件；random 随机。
+## soft 软新闻：只印公开事件；random 随机；
+## bold 敢说：取料和谨慎一样，登两枚章以上的，一律点名、煽动（看煽动语气本身站不站得住）。
 extends RefCounted
 
 const T = preload("res://scripts/sim/tables.gd")
@@ -72,10 +73,11 @@ func _day_action(world) -> void:
 		"soft":
 			_interview_random(world, "")
 		"random":
+			# 随手乱来，但抽屉快空了还是看得见的：钱少于 15 块不花钱查档案、找线人
 			var roll := rng.randi_range(0, 3)
-			if roll == 0:
+			if roll == 0 and world.stats.cash > 15:
 				_archive_any(world)
-			elif roll == 1 and world.stats.cash > 8:
+			elif roll == 1 and world.stats.cash > 15:
 				_informer_random(world)
 			else:
 				_interview_random(world, _random_known_fact(world))
@@ -216,6 +218,9 @@ func _compose(world) -> Array:
 		# 登过的事有了新料可以登续报（M4.1 起玩家能这么做），只登新料
 		if e.printed and (e.soft or g.fresh.is_empty()):
 			continue
+		# 收了钱的事，煽动派和软新闻派就不登了（收钱照登是两头得罪，真人不会这么干）；随机派照样乱来
+		if e.get("bribed_by", "") != "" and strategy in ["sensational", "soft"]:
+			continue
 		var fids: Array = []
 		var all_verified := true
 		var any_evidence := false
@@ -248,6 +253,19 @@ func _compose(world) -> Array:
 			for c in candidates:
 				if c.event.soft:
 					picked.append(_article(c, "calm", "named", false))
+		"bold":
+			for c in candidates:
+				if c.event.soft:
+					picked.append(_article(c, "neutral", "named", false))
+					continue
+				var two: Array = []
+				for fid in c.facts:
+					if world.known[fid].sources.size() >= 2:
+						two.append(fid)
+				if two.is_empty():
+					continue
+				c.facts = two
+				picked.append(_article(c, "hot", "named", c.evidence))
 		_:
 			for c in candidates:
 				if rng.chance(0.6):

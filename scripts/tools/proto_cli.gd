@@ -118,7 +118,7 @@ func _count_dead(world) -> int:
 
 
 func _run_batch() -> void:
-	var strategies := ["cautious", "sensational", "soft", "random"]
+	var strategies := ["cautious", "bold", "sensational", "soft", "random"]
 	print("策略        局数  平均周数  破产  停刊  被毁  任期满  公信力  发行量   现金  报道  假报道")
 	for st in strategies:
 		var rows: Array = []

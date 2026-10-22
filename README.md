@@ -5,7 +5,7 @@
 - 引擎：Godot 4.7.2（可执行文件在 `E:\Godot\`），全部 GDScript
 - 原生分辨率 640×360，整数倍放大，16 色调色板
 - 策划案：[design/策划案-v0.2.html](design/策划案-v0.2.html)（第二稿，决策已定）；第一稿保留在 v0.1
-- 阶段记录：[M1 原型](design/notes/M1-原型记录.md) · [M2 模拟核心](design/notes/M2-模拟核心记录.md) · [M3 文本引擎](design/notes/M3-文本引擎记录.md) · [M4 垂直切片](design/notes/M4-垂直切片记录.md)
+- 阶段记录：[M1 原型](design/notes/M1-原型记录.md) · [M2 模拟核心](design/notes/M2-模拟核心记录.md) · [M3 文本引擎](design/notes/M3-文本引擎记录.md) · [M4 垂直切片](design/notes/M4-垂直切片记录.md) · [M5 内容填充](design/notes/M5-内容填充记录.md)
 - 试玩包：[试玩说明](design/playtest/试玩说明.txt) · [问卷](design/playtest/问卷.md) · Steam 商店页草稿见 [design/steam/](design/steam/商店页.md)
 
 ## 目录
@@ -74,7 +74,7 @@ Godot_v4.7.2-stable_win64_console.exe --headless --path . -s res://scripts/tools
 
 ```
 Godot_v4.7.2-stable_win64_console.exe --headless --path . -s res://scripts/tools/proto_cli.gd -- --auto cautious --seed 1 --weeks 12 --verbose
-Godot_v4.7.2-stable_win64_console.exe --headless --path . -s res://scripts/tools/proto_cli.gd -- --batch 10 --weeks 52
+Godot_v4.7.2-stable_win64_console.exe --headless --path . -s res://scripts/tools/proto_cli.gd -- --batch 10 --weeks 52     （五种策略：谨慎、敢说、煽动、软新闻、随机；完整一局用 --weeks 104）
 Godot_v4.7.2-stable_win64_console.exe --headless --path . -s res://scripts/tools/proto_cli.gd -- --play --seed 3
 Godot_v4.7.2-stable_win64_console.exe --headless --path . -s res://scripts/tools/proto_cli.gd -- --auto random --seed 9 --weeks 104 --save out.json
 Godot_v4.7.2-stable_win64_console.exe --headless --path . -s res://scripts/tools/proto_cli.gd -- --load out.json

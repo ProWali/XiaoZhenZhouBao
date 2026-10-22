@@ -16,6 +16,17 @@ const TE = preload("res://scripts/text/text_engine.gd")
 ## 续报：旧闻带来的发行量涨幅、对当事人的冲击，按首报的这个比例算
 const FOLLOWUP_CIRC := 0.6
 const FOLLOWUP_SEVERITY := 0.6
+## 公信力：登错一条按 (1 - 真实度) × 这个数扣；没登错的一期往 CRED_RECOVER_TO 回差距的 CRED_RECOVER_RATE
+const FALSE_PENALTY := 10.0
+## 经济：每份纸墨钱；广告费随发行量涨，最多涨到起始的这么多倍（发行量大了钱不再白来）
+const PRINT_COST := 0.02
+const AD_CIRC_CAP := 2.0
+## 好感回落：低于 GRUDGE_BASE 的每周回差距的这个比例
+const GRUDGE_BASE := 0.45
+const GRUDGE_FADE := 0.02
+const GRUDGE_FADE_AD := 0.06
+const CRED_RECOVER_TO := 40.0
+const CRED_RECOVER_RATE := 0.04
 const SLOT_NAMES := ["上午", "下午", "晚上"]
 const DAY_NAMES := ["", "周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 const MAX_NIGHTS := 2  # 一周最多熬夜次数，超过就吃次日上午
@@ -255,12 +266,22 @@ func notebook() -> Array:
 
 
 # ---------------------------------------------------------------- 一周的推进
+## 气会慢慢消：对报社的好感低于 GRUDGE_BASE 的人，每周回一点。广告主是生意人，回得快些（几个月后多半会回来登广告）
+func _fade_grudges() -> void:
+	for rid in residents:
+		var r: Dictionary = residents[rid]
+		var like := float(r.player_rel.like)
+		if like < GRUDGE_BASE:
+			r.player_rel.like = like + (GRUDGE_BASE - like) * (GRUDGE_FADE_AD if r.get("advertiser", false) else GRUDGE_FADE)
+
+
 func _start_week(first: bool) -> void:
 	day = 1
 	nights_used = 0
 	letters.clear()
 	_apply_pending()
 	if not first:
+		_fade_grudges()
 		Population.tick_week(self)
 		needy = Needs.tick_week(self)
 		Relations.refresh_lists(self)
@@ -1142,6 +1163,9 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 	var circ_change := 0.0
 	var cred_change := 0.0
 	var had_news := false
+	var soft_n := 0
+	var circ_hot := 0.0
+	var printed_false := false
 	for a in articles:
 		var err := validate_article(a)
 		assert(err == "", err)
@@ -1176,7 +1200,14 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 			elif f.truth >= 0.5:
 				cred_change += (1.0 if with_ev else 0.0) * gain_scale
 			else:
-				cred_change -= (1.0 - f.truth) * 10.0
+				# 登错了，镇上会记住。没坐实、语气也不煽动的，报上等于标了「尚待查证」，记得轻一半；煽动着登错的记得最重
+				var miss: float = (1.0 - f.truth) * FALSE_PENALTY
+				if a.tone == "hot":
+					miss *= 1.2
+				elif not is_verified(fid):
+					miss *= 0.5
+				cred_change -= miss
+				printed_false = true
 		avg_truth /= a.facts.size()
 		if a.tone == "hot" and not e.soft:
 			cred_change -= 1.0
@@ -1185,7 +1216,13 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 					cred_change -= 0.5
 		if not e.soft:
 			had_news = true
-		circ_change += T.SLOT_MULT[a.slot] / 3.0 * T.TONE_CIRC[a.tone] * (1.0 + 0.4 * e.severity) * {"named": 1.0, "alias": 0.7, "anon": 0.4}[a.naming] * (FOLLOWUP_CIRC if is_fu else 1.0)
+		else:
+			soft_n += 1
+		var gain: float = T.SLOT_MULT[a.slot] / 3.0 * T.TONE_CIRC[a.tone] * (1.0 + 0.4 * e.severity) * {"named": 1.0, "alias": 0.7, "anon": 0.4}[a.naming] * (FOLLOWUP_CIRC if is_fu else 1.0)
+		if a.tone == "hot":
+			circ_hot += gain
+		else:
+			circ_change += gain
 		if not e.printed:
 			e["first_printed_week"] = week
 		# 后续事件（检查员上门之类）首报和续报都能引出：首报没附证据、续报附上了，也该有下文。
@@ -1222,12 +1259,14 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 			if not e.soft:
 				log.append("    → " + issue.cons_log[i])
 	# 发行量：涨幅受公信力和镇子规模约束，跌幅不受
-	circ_change *= (0.25 + stats.credibility / 100.0)
+	# 克制、中立的报道靠公信力卖；煽动的报道公信力低也卖得动（爱看热闹的人不管真假），代价在官司、砸窗和退订上
+	circ_change = circ_change * (0.25 + stats.credibility / 100.0) + circ_hot * (0.6 + stats.credibility / 250.0)
 	circ_change *= clampf(1.0 - stats.circulation / 600.0, 0.1, 1.0)
 	if not had_news:
 		flags.weeks_no_news += 1
+		# 只登软新闻也比没报纸强：满满一版婚丧集市的（两条以上），读者掉得最慢；镇上这类事多不多，各局不一样
 		if flags.weeks_no_news >= 2:
-			circ_change -= 0.03
+			circ_change -= 0.03 - 0.01 * mini(2, soft_n)
 	else:
 		flags.weeks_no_news = 0
 	if stats.credibility < 20: circ_change -= 0.02
@@ -1235,6 +1274,9 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 	if stats.credibility > 70: circ_change += 0.01
 	if burned: circ_change -= 0.3
 	stats.circulation = maxf(40.0, stats.circulation * (1.0 + circ_change))
+	# 镇上会慢慢忘：这一期没登错东西，公信力往 CRED_RECOVER_TO 回一点
+	if not printed_false and stats.credibility + cred_change < CRED_RECOVER_TO:
+		cred_change += (CRED_RECOVER_TO - stats.credibility - cred_change) * CRED_RECOVER_RATE
 	stats.credibility = clampf(stats.credibility + cred_change, 0.0, 100.0)
 	# 现金
 	var income: float = stats.circulation * 0.05
@@ -1242,8 +1284,8 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 	for rid in ads:
 		var r: Dictionary = residents[rid]
 		if ads[rid].paused_until <= week and r.in_town and r.player_rel.like >= 0.3:
-			ad_income += (2.0 + r.wealth * 1.0 + r.player_rel.like * 2.0) * clampf(stats.circulation / 180.0, 0.3, 2.0)
-	var cost: float = 10.0 + stats.circulation * 0.02
+			ad_income += (2.0 + r.wealth * 1.0 + r.player_rel.like * 2.0) * clampf(stats.circulation / 180.0, 0.3, AD_CIRC_CAP)
+	var cost: float = 10.0 + stats.circulation * PRINT_COST
 	var cash_delta := (0.0 if burned else income + ad_income) - cost
 	stats.cash += cash_delta
 	issue.cred_delta = cred_change
@@ -1327,7 +1369,13 @@ func _react_to_article(a: Dictionary, e: Dictionary, rec: Dictionary, exposure: 
 		if kind == "suicide" and not config.suicide:
 			kind = "leave"
 		# 印了假话且对方有点地位：起诉概率
-		if rec.avg_truth < 0.5 and a.naming == "named" and r.power >= 1 and rng.chance(0.7):
+		# 小小提了一句的，多半不值得打官司；登了重话的才常去请律师
+		var suing := false
+		for l in lawsuits:
+			if l.who == subj:
+				suing = true
+		# 一个人同时只打一场官司
+		if not suing and rec.avg_truth < 0.5 and a.naming == "named" and r.power >= 1 and rng.chance({"light": 0.1, "medium": 0.3, "heavy": 0.5}[level]):
 			kind = "sue"
 		_schedule_reaction(kind, subj, e, issue, s, rec)
 
@@ -1467,9 +1515,10 @@ func _apply_pending() -> void:
 			continue
 		var r: Dictionary = residents[l.who]
 		var win: bool
-		if l.evidence and l.truth >= 0.8: win = true
+		# 登的是真事：附了档案稳赢，没附也多半赢；半真半假看报纸平日的名声；假的必输
+		if l.truth >= 0.8: win = true if l.evidence else rng.chance(0.75)
 		elif l.truth < 0.5: win = false
-		else: win = rng.chance(stats.credibility / 100.0)
+		else: win = rng.chance(0.4 + stats.credibility / 250.0)
 		if win:
 			stats.credibility = minf(100.0, stats.credibility + 10)
 			_letter("lawsuit_won", {"who": l.who})
@@ -1478,6 +1527,9 @@ func _apply_pending() -> void:
 			stats.credibility = maxf(0.0, stats.credibility - 10)
 			stats.cash -= 25
 			flags.lawsuits_lost += 1
+			var lost: Array = flags.get("lawsuit_weeks", [])
+			lost.append(week)
+			flags["lawsuit_weeks"] = lost
 			_letter("lawsuit_lost", {"who": l.who})
 		log.append("第 %d 周：官司%s。" % [week, "赢了" if win else "输了"])
 	lawsuits = keep_l
@@ -1602,12 +1654,21 @@ func _check_game_over() -> void:
 	if flags.negative_weeks >= 4:
 		game_over = "破产"
 		log.append("第 %d 周：连续四周亏空，报纸停了。" % week)
-	elif flags.lawsuits_lost >= 3:
+	elif _recent_losses() >= 3:
 		game_over = "停刊"
-		log.append("第 %d 周：第三场官司输了，报纸被勒令停刊。" % week)
+		log.append("第 %d 周：一年里输了三场官司，报纸被勒令停刊。" % week)
 	elif flags.burned_until > week and stats.cash < 0 and flags.negative_weeks >= 2:
 		game_over = "报社被毁"
 		log.append("第 %d 周：报社烧了，没钱重建。" % week)
+
+
+## 一年内输掉的官司。一年里输三场才勒令停刊；早年的败诉不一直记着
+func _recent_losses() -> int:
+	var n := 0
+	for w in flags.get("lawsuit_weeks", []):
+		if int(w) > week - 52:
+			n += 1
+	return n
 
 
 ## 玩家主动离开。
