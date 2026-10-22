@@ -269,6 +269,11 @@ func _editor(slot: String) -> void:
 	box.add_child(_choice_row("naming", NAMINGS, a.naming, func(v): a.naming = v; _choice[slot] = 0; _refresh(), e.soft))
 	if e.soft:
 		box.add_child(K.para(Game.t("layout.soft_note"), 280, "pixel", 12, P.WARM_GREY, 0))
+	box.add_child(K.para(Game.t("layout.retail_est", {"n": w.estimate_retail(a)}), 280, "pixel", 12, P.PRINT_INK, 0))
+	# 周六夜答应过的事，排版时提醒一句
+	if e.has("promise"):
+		var pr: Dictionary = e.promise
+		box.add_child(K.para(Game.t("layout.promise_" + str(pr.kind), {"name": Game.name_of(str(pr.who))}), 280, "pixel", 12, P.STAMP_RED, 0))
 	# 证据
 	var has_ev := false
 	for fid in a.facts:

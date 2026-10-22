@@ -79,6 +79,9 @@ const SLOT_NAME_EN := {"head": "Front page", "second": "Second story", "third": 
 const TONE_MULT := {"calm": 0.8, "neutral": 1.0, "hot": 1.4}
 const TONE_NAME := {"calm": "克制", "neutral": "中立", "hot": "煽动"}
 const TONE_CIRC := {"calm": 0.02, "neutral": 0.04, "hot": 0.09}
+## 街头零售的倍数：煽动的标题在柜台边最好卖，点名的比化名、匿名的好卖
+const TONE_RETAIL := {"calm": 0.6, "neutral": 1.0, "hot": 1.7}
+const NAMING_RETAIL := {"named": 1.0, "alias": 0.7, "anon": 0.45}
 ## 署名方式
 const NAMING_MULT := {"named": 1.0, "alias": 0.6, "anon": 0.3}
 const NAMING_NAME := {"named": "点名", "alias": "化名", "anon": "匿名"}

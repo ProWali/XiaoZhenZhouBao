@@ -16,6 +16,8 @@ const TE = preload("res://scripts/text/text_engine.gd")
 ## 续报：旧闻带来的发行量涨幅、对当事人的冲击，按首报的这个比例算
 const FOLLOWUP_CIRC := 0.6
 const FOLLOWUP_SEVERITY := 0.6
+## 街头零售：头条中立、点名、严重度 0 的一篇卖这么多份；乘版位、语气、署名、严重度（见 tables.gd 的 TONE_RETAIL、NAMING_RETAIL）
+const RETAIL_BASE := 10.0
 ## 公信力：登错一条按 (1 - 真实度) × 这个数扣；没登错的一期往 CRED_RECOVER_TO 回差距的 CRED_RECOVER_RATE
 const FALSE_PENALTY := 10.0
 ## 经济：每份纸墨钱；广告费随发行量涨，最多涨到起始的这么多倍（发行量大了钱不再白来）
@@ -516,6 +518,16 @@ func _roll_witness_nights() -> void:
 				e.tonight[loc] = e.witness[loc]
 
 
+## 玩家知道这处有事（知道这件事的一条碎片、还没亲眼看见）时，返回哪两晚；否则空
+func stakeout_days(loc: String) -> String:
+	for e in events:
+		if e.witness.has(loc) and not known.has(e.witness[loc]) and e.week_end > week:
+			for fid in e.facts:
+				if known.has(fid):
+					return _nights_text(e, loc)
+	return ""
+
+
 ## 「周三、周五」
 func _nights_text(e: Dictionary, loc: String) -> String:
 	# 直接查表，不走 _ui：_ui 会给每一段补句号
@@ -733,6 +745,9 @@ func apply_action(act: Dictionary) -> bool:
 		"deal":
 			accept_deal({"who": str(act.who), "event": str(act.event), "offer": int(act.offer)})
 			return true
+		"promise":
+			make_promise({"who": str(act.who), "event": str(act.event)}, str(act.promise))
+			return true
 		"print":
 			var choice := {}
 			for k in act.get("choice", {}):
@@ -852,6 +867,7 @@ func act_interview(rid: String, topic: String = "") -> Dictionary:
 	if offer == "":
 		if not tfact.is_empty():
 			res.lines.append(_ui("denies_knowing", {"name": _nm(rid)}))
+			res.lines.append(_ui("tag_unknown"))
 			# 对方把话头记住了，可能传开
 			if rng.chance(0.4):
 				r.knows[topic] = true
@@ -897,6 +913,8 @@ func act_interview(rid: String, topic: String = "") -> Dictionary:
 		if why == "involved" or why == "":
 			why = "plain"
 		res.lines.append(_ui("refuse_" + why, {"name": _nm(rid), "who": _nm(str(guard.who)) if str(guard.who) != "" else ""}))
+		# 推理型试玩：「不知道」和「知道不肯说」要一眼分得清
+		res.lines.append(_ui("tag_refused_" + ("later" if why == "plain" or why == "grudge" else "firm")))
 		if key != "echo":
 			reluctant[rid] = {"event": e.id, "why": why, "who": str(guard.who), "week": week}
 		return res
@@ -994,7 +1012,7 @@ func _maybe_lead(rid: String, topic: String, res: Dictionary) -> void:
 	var ev_list: Array = []
 	var weights: Array = []
 	for oid in living_ids():
-		if oid == rid or led.has(oid):
+		if oid == rid or led.has(oid) or reluctant.has(oid):
 			continue
 		var o: Dictionary = residents[oid]
 		var best_ev := ""
@@ -1354,6 +1372,58 @@ func accept_deal(item: Dictionary) -> void:
 	log.append("第 %d 周：你收了%s的 %d 块钱。" % [week, res_name(item.who), item.offer])
 
 
+## 街头零售：这一篇能让杂货店和火车站多卖多少份（M4.3：原来钱几乎全靠广告，登什么都一样）。
+## 排版台预估和付印结算用的是同一个数。
+func estimate_retail(a: Dictionary) -> int:
+	if a.get("facts", []).is_empty():
+		return 0
+	var e := event_of(a.facts[0])
+	var naming: String = "named" if e.soft else str(a.naming)
+	var is_fu: bool = e.printed and int(e.get("printed_week", week)) < week
+	var copies: float = T.SLOT_MULT[a.slot] * float(T.TONE_RETAIL[a.tone]) * (1.0 + 0.4 * e.severity) * float(T.NAMING_RETAIL[naming]) * (FOLLOWUP_CIRC if is_fu else 1.0) * RETAIL_BASE
+	if a.tone != "hot":
+		copies *= 0.5 + stats.credibility / 100.0
+	return int(round(copies))
+
+
+## 周六夜来访时答应对方一件事（M4.3：原来来访只能「送客」，玩家接不住后果）。
+## alias：求情的人，答应不点他的名（化名、匿名都算守约）；hold：上门威胁的人，答应这一期不登这件事。
+## 守约、食言都在付印时结算，见 _settle_promise。
+func make_promise(item: Dictionary, kind: String) -> void:
+	_record({"kind": "promise", "who": item.who, "event": item.event, "promise": kind})
+	var e := event_by_id(str(item.event))
+	if e.is_empty() or not residents.has(item.who):
+		return
+	e["promise"] = {"who": item.who, "kind": kind, "week": week}
+	var r: Dictionary = residents[item.who]
+	r.player_rel.like = minf(1.0, r.player_rel.like + 0.1)
+	log.append("第 %d 周：你答应了%s（%s）。" % [week, res_name(item.who), "不点名" if kind == "alias" else "这期不登"])
+
+
+## 付印时看答应过的事：这一篇登了，守没守约
+func _settle_promise(e: Dictionary, a: Dictionary, issue: Dictionary) -> void:
+	if not e.has("promise"):
+		return
+	var pr: Dictionary = e.promise
+	var who: String = pr.who
+	if not residents.has(who) or not residents[who].alive:
+		e.erase("promise")
+		return
+	var r: Dictionary = residents[who]
+	var broke: bool = (pr.kind == "alias" and a.naming == "named") or (pr.kind == "hold" and int(pr.week) == week)
+	if broke:
+		r.player_rel.like = maxf(0.0, r.player_rel.like - 0.4)
+		r.player_rel.trust = maxf(0.0, r.player_rel.trust - 0.3)
+		_cons(issue, "cons_broke_" + str(pr.kind), {"name": who})
+		if pr.kind == "hold":
+			pending.append({"week": week + 1, "kind": "window", "who": who, "event": e.id})
+	else:
+		r.player_rel.like = minf(1.0, r.player_rel.like + 0.1)
+		r.player_rel.trust = minf(1.0, r.player_rel.trust + 0.15)
+		_cons(issue, "cons_kept_" + str(pr.kind), {"name": who})
+	e.erase("promise")
+
+
 # ---------------------------------------------------------------- 排版与结算
 ## articles: [{slot, facts:[fid], tone, naming, evidence}]
 func validate_article(a: Dictionary) -> String:
@@ -1418,6 +1488,7 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 	var soft_n := 0
 	var circ_hot := 0.0
 	var printed_false := false
+	var retail := 0
 	for a in articles:
 		var err := validate_article(a)
 		assert(err == "", err)
@@ -1439,6 +1510,7 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 		var log_cands: Array = TE.headline_candidates(self, e, rl, "zh")
 		var hl_log: String = str(log_cands[clampi(int(ra.choice), 0, log_cands.size() - 1)]) if not log_cands.is_empty() else hl
 		var exposure: float = T.SLOT_MULT[a.slot] * T.TONE_MULT[a.tone]
+		var cred_before := cred_change
 		var avg_truth := 0.0
 		var gain_scale: float = (1.0 - stats.credibility / 150.0) * {"named": 1.0, "alias": 0.7, "anon": 0.4}[a.naming]
 		for fid in a.facts:
@@ -1470,6 +1542,8 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 			had_news = true
 		else:
 			soft_n += 1
+		var copies := 0 if burned else estimate_retail(a)
+		retail += copies
 		var gain: float = T.SLOT_MULT[a.slot] / 3.0 * T.TONE_CIRC[a.tone] * (1.0 + 0.4 * e.severity) * {"named": 1.0, "alias": 0.7, "anon": 0.4}[a.naming] * (FOLLOWUP_CIRC if is_fu else 1.0)
 		if a.tone == "hot":
 			circ_hot += gain
@@ -1501,12 +1575,15 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 			if not (fid in pf):
 				pf.append(fid)
 		e["printed_facts"] = pf
-		var rec := {"slot": a.slot, "headline": hl, "body": body, "tone": a.tone, "naming": a.naming, "evidence": a.get("evidence", false), "event": e.id, "avg_truth": avg_truth, "facts": a.facts.duplicate(), "choice": ra.choice, "reroll": int(a.get("reroll", 0)), "followup": is_fu}
+		var rec := {"slot": a.slot, "headline": hl, "body": body, "tone": a.tone, "naming": a.naming, "evidence": a.get("evidence", false), "event": e.id, "avg_truth": avg_truth, "facts": a.facts.duplicate(), "choice": ra.choice, "reroll": int(a.get("reroll", 0)), "followup": is_fu,
+			"retail": copies, "cred": cred_change - cred_before, "false": avg_truth < 0.5, "cons": []}
 		issue.articles.append(rec)
 		if not e.soft or a.slot == "head":
 			log.append("第 %d 周 %s：%s" % [week, T.SLOT_NAME[a.slot], hl_log])
 		var before: int = issue.consequences.size()
+		_settle_promise(e, a, issue)
 		_react_to_article(a, e, rec, exposure, issue)
+		rec.cons = issue.consequences.slice(before)
 		for i in range(before, issue.consequences.size()):
 			if not e.soft:
 				log.append("    → " + issue.cons_log[i])
@@ -1531,7 +1608,8 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 		cred_change += (CRED_RECOVER_TO - stats.credibility - cred_change) * CRED_RECOVER_RATE
 	stats.credibility = clampf(stats.credibility + cred_change, 0.0, 100.0)
 	# 现金
-	var income: float = stats.circulation * 0.05
+	var income: float = stats.circulation * 0.05 + retail * 0.05
+	issue["retail"] = retail
 	var ad_income := 0.0
 	for rid in ads:
 		var r: Dictionary = residents[rid]

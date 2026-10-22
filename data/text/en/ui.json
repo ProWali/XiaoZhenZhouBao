@@ -89,5 +89,12 @@
  "hint_all_known": "You've heard everything the town knows about this",
  "denies_knowing": ["{name} shook their head: \"That I really couldn't tell you.\"", "{name} said: \"First I've heard of it.\"", "{name} thought it over: \"Nobody's said a word about that to me.\"", "{name} was quite plain about it: \"I know nothing about that.\"", "{name} frowned and thought: \"No one's told me anything like that.\""],
  "refuse_friend": ["{name} and {who} go back a long way. {name} shook their head and would say no more.", "\"{who} is a friend of mine,\" said {name}. \"I don't talk about people behind their backs.\"", "{name} said: \"{who} has been good to me. I won't talk about this.\"", "{name} thought a moment: \"Anything to do with {who}, ask someone else.\""],
- "refuse_grudge": ["{name} said coldly: \"I don't trust anyone from that paper.\"", "{name} turned away: \"Don't bring the paper's business to me.\"", "{name} said: \"Whose family hasn't been talked about in that paper? I'll have nothing to do with it.\""]
+ "refuse_grudge": ["{name} said coldly: \"I don't trust anyone from that paper.\"", "{name} turned away: \"Don't bring the paper's business to me.\"", "{name} said: \"Whose family hasn't been talked about in that paper? I'll have nothing to do with it.\""],
+ "cons_broke_alias": "You promised {name} their name would stay out, and printed it anyway. {name} says your word means nothing.",
+ "cons_kept_alias": "The paper left {name}'s name out. {name} sent a \"thank you\" with the postman.",
+ "cons_broke_hold": "You told {name} it would not run this week, and ran it. {name} said nothing, only stood outside the office a long time.",
+ "cons_kept_hold": "{name} saw you kept your word, and has not come round again.",
+ "tag_unknown": "(They genuinely know nothing about this.)",
+ "tag_refused_later": "(They know, but won't say yet. Come back later, or once the paper's name is better, and they may talk. Noted in your notebook.)",
+ "tag_refused_firm": "(They know, but they're tied up in this and won't tell you. Noted in your notebook.)"
 }

@@ -58,5 +58,8 @@
  "confirm_empty": "Not one story this issue, only ads and notices. Two weeks running without hard news and subscribers will leave. Print it like this?",
  "confirm_no_head": "The front page is empty. Print it like this?",
  "confirm_yes": "Print",
- "confirm_no": "Keep working"
+ "confirm_no": "Keep working",
+ "promise_alias": "You promised {name}: no name.",
+ "promise_hold": "You promised {name}: not in this issue.",
+ "retail_est": "Run like this, it should sell about {n} extra copies on the street (5 cents each)."
 }

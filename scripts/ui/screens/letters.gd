@@ -83,6 +83,7 @@ func _ledger() -> void:
 	var y := 40
 	var rows := [
 		[Game.t("letters.row_sales", {"n": int(round(float(iss.sales) / 0.05))}), "%+.1f" % float(iss.sales)],
+		[Game.t("letters.row_retail", {"n": int(iss.get("retail", 0))}), "%+.1f" % (int(iss.get("retail", 0)) * 0.05)],
 		[Game.t("letters.row_ads"), "%+.1f" % float(iss.ad_income)],
 		[Game.t("letters.row_cost"), "%+.1f" % -float(iss.cost)],
 	]
@@ -112,16 +113,41 @@ func _ledger() -> void:
 	cr.position = Vector2(20, y)
 	sheet.add_child(cr)
 	y += maxi(22, int(cr.get_minimum_size().y) + 8)
+	# 一篇一篇：卖了多少份、怎么登的、镇上信不信、谁有什么反应
+	var arts: Array = iss.get("articles", [])
 	var cons: Array = iss.get("consequences", [])
-	if not cons.is_empty():
+	if not arts.is_empty() or not cons.is_empty():
 		var h := K.label(Game.t("letters.postman"), "serif_black", 10, P.PRINT_INK)
 		h.position = Vector2(20, y)
 		sheet.add_child(h)
 		y += 16
 		var sl: Array = K.scroll_list(Vector2(24, y), Vector2(344, 282 - y), 2)
 		sheet.add_child(sl[0])
+		var shown := {}
+		for a in arts:
+			sl[1].add_child(K.para(Game.t("letters.art_head", {"headline": str(a.headline)}), 326, "serif", 10, P.PRINT_INK, 0))
+			var how := Game.t("layout.tone_" + str(a.tone)) + "·" + Game.t("layout.naming_" + str(a.naming))
+			if bool(a.evidence):
+				how += "·" + Game.t("letters.art_evidence")
+			sl[1].add_child(K.para(Game.t("letters.art_line", {"n": int(a.retail), "how": how, "cred": _art_cred(a)}), 326, "hand", 11, P.PENCIL, 0))
+			for line in a.get("cons", []):
+				shown[str(line)] = true
+				sl[1].add_child(K.para("· " + str(line), 326, "hand", 11, P.PENCIL, 0))
 		for line in cons:
-			sl[1].add_child(K.para("· " + str(line), 326, "hand", 11, P.PENCIL, 0))
+			if not shown.has(str(line)):
+				sl[1].add_child(K.para("· " + str(line), 326, "hand", 11, P.PENCIL, 0))
+
+
+## 这一篇镇上信不信
+static func _art_cred(a: Dictionary) -> String:
+	if bool(a.get("false", false)):
+		return Game.t("letters.art_false")
+	var c := float(a.get("cred", 0.0))
+	if c > 0.5:
+		return Game.t("letters.art_trusted")
+	if c < -0.5:
+		return Game.t("letters.art_doubted")
+	return Game.t("letters.art_flat")
 
 
 static func _cred_word(c: float) -> String:

@@ -58,5 +58,8 @@
  "confirm_empty": "这期一条报道都没有，只印广告和告示。连着两周没有硬新闻，订户会走。真的就这样印？",
  "confirm_no_head": "头条空着。确定这样印？",
  "confirm_yes": "去印",
- "confirm_no": "再改改"
+ "confirm_no": "再改改",
+ "promise_alias": "你答应过{name}：不点名。",
+ "promise_hold": "你答应过{name}：这一期不登。",
+ "retail_est": "这样登，街头大约多卖 {n} 份（每份五分）。"
 }

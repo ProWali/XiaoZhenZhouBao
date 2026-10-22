@@ -17,5 +17,6 @@
  "watch_confirm": "在{place}蹲一夜？亲眼看见的事最可信，但不一定有事。",
  "watch_yes": "蹲守",
  "tavern_result": "酒馆里",
- "watch_result": "在{place}守了一夜"
+ "watch_result": "在{place}守了一夜",
+ "watch_days": "选题簿里记着：这儿多在{days}夜里有事。"
 }

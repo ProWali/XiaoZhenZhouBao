@@ -90,6 +90,22 @@ func _show() -> void:
 			_next(), 0)
 		bar.add_child(refuse)
 		refuse.call_deferred("grab_focus")
+	elif (v.kind == "plea" or v.kind == "threat") and str(v.get("event", "")) != "" and not decided:
+		# 求情的可以答应不点名，威胁的可以答应这期不登；不答应就送客（M4.3：原来只能送客）
+		var pk := "alias" if v.kind == "plea" else "hold"
+		var yes := K.button(Game.t("visitors.promise_" + pk), func():
+			w.make_promise(v, pk)
+			Game.ui.deals[str(_i)] = true
+			Game.track("promise", {"who": who, "kind": pk})
+			Game.autosave()
+			_next(), 0)
+		yes.tooltip_text = Game.t("visitors.promise_" + pk + "_tip")
+		bar.add_child(yes)
+		var no := K.button(Game.t("visitors.promise_no_" + pk), func():
+			Game.ui.deals[str(_i)] = false
+			_next(), 0)
+		bar.add_child(no)
+		no.call_deferred("grab_focus")
 	else:
 		var last: bool = _i >= vs.size() - 1
 		var b := K.button(Game.t("visitors.see_out_last") if last else Game.t("visitors.see_out"), _next, 0)

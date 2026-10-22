@@ -49,12 +49,15 @@ func _pull() -> void:
 	# 记账本：下周一读
 	var circ_after: float = float(w.history[-1].circ) if not w.history.is_empty() else w.stats.circulation
 	var sales := 0.0 if burned else circ_after * 0.05
+	var retail: int = int(issue.get("retail", 0))
 	var cost := 10.0 + circ_after * 0.02
 	Game.ui.last_issue = {
-		"week": week, "circ_before": circ_before, "sales": sales, "ad_income": float(issue.get("ad_income", 0.0)),
+		"week": week, "circ_before": circ_before, "sales": sales, "retail": retail, "ad_income": float(issue.get("ad_income", 0.0)),
 		"cost": cost, "other": w.stats.cash - cash_start - float(issue.cash_delta), "cred_delta": float(issue.cred_delta),
 		"consequences": issue.consequences.slice(0, 6),
 		"headlines": issue.articles.map(func(a): return {"slot": a.slot, "headline": a.headline}),
+		# 账本上一篇一篇写：卖了多少份、镇上信不信、谁有什么反应（M4.3：玩家看不出自己的选择带来了什么）
+		"articles": issue.articles.map(func(a): return {"slot": a.slot, "headline": a.headline, "tone": a.tone, "naming": a.naming, "evidence": a.evidence, "retail": int(a.get("retail", 0)), "cred": float(a.get("cred", 0.0)), "false": bool(a.get("false", false)), "cons": a.get("cons", [])}),
 	}
 	Game.ui.cash_week_start = w.stats.cash
 	var fronts: Array = Game.ui.get("fronts", [])

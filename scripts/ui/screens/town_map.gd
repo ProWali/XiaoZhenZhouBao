@@ -104,7 +104,10 @@ func _night_action(loc: String) -> void:
 			{"text": Game.t("town_map.tavern_watch"), "cb": func(): _do_night("stakeout", loc)},
 		]})
 	else:
-		Game.open_overlay("confirm", {"text": warn + Game.t("town_map.watch_confirm", {"place": Game.place(loc)}), "yes": Game.t("town_map.watch_yes"), "no": Game.t("location.archive_no"), "on_yes": func(): _do_night("stakeout", loc)})
+		# 选题簿里记着这儿哪两晚有事，就在确认框里再说一遍（第 3 轮：玩家照线人说的「天不亮」去蹲，没看选题簿写的日子）
+		var days: String = w.stakeout_days(loc)
+		var tip := Game.t("town_map.watch_days", {"days": days}) + "\n" if days != "" else ""
+		Game.open_overlay("confirm", {"text": warn + tip + Game.t("town_map.watch_confirm", {"place": Game.place(loc)}), "yes": Game.t("town_map.watch_yes"), "no": Game.t("location.archive_no"), "on_yes": func(): _do_night("stakeout", loc)})
 
 
 func _do_night(kind: String, loc: String) -> void:

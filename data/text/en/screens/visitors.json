@@ -19,5 +19,11 @@
  "refuse": "Refuse, show them out",
  "see_out_last": "Show them out, then bed",
  "see_out": "Show them out",
- "noted": "Into the notebook:"
+ "noted": "Into the notebook:",
+ "promise_alias": "Promise: their name stays out",
+ "promise_alias_tip": "A false name or no name keeps the promise. Print their name and they will remember you broke your word.",
+ "promise_no_alias": "Refuse, and see them out",
+ "promise_hold": "Back down: not in this issue",
+ "promise_hold_tip": "Leave it out this Sunday and the promise is kept. Print it, and you are defying them to their face.",
+ "promise_no_hold": "Ignore it, and see them out"
 }

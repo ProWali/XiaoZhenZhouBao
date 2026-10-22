@@ -471,13 +471,16 @@ static func _has_needs(it) -> bool:
 	return it is Dictionary and (it.has("needs") or it.has("needs_all"))
 
 
-static func _fact_keys(world, facts_list: Array) -> Dictionary:
+## hide_archive：不附档案时，「本报查到的记录」这类句子也不用
+static func _fact_keys(world, facts_list: Array, hide_archive := false) -> Dictionary:
 	var keys := {}
 	for fid in facts_list:
 		if world.facts.has(fid):
 			keys[str(world.facts[fid].key)] = true
 			# 「键@来源」：写「本报看见的」「本报查到的」的句子要这条真是亲眼看见、真是档案上查到的（试玩：线人说的被写成本报看见）
 			for s in world.known.get(fid, {}).get("sources", []):
+				if hide_archive and s.kind == "archive":
+					continue
 				keys["%s@%s" % [world.facts[fid].key, s.kind]] = true
 	return keys
 
@@ -583,7 +586,7 @@ static func _headline_candidates(world, e: Dictionary, a: Dictionary, lang: Stri
 	var et := event_text(lang, e.tid)
 	var tone: String = a.get("tone", "neutral")
 	var naming: String = "named" if e.soft else a.get("naming", "named")
-	var pool: Array = _roles_ok(tone_pool(et.get("headlines", {}), [tone], _fact_keys(world, a.get("facts", []))), _roles_in_facts(world, e, a.get("facts", [])))
+	var pool: Array = _roles_ok(tone_pool(et.get("headlines", {}), [tone], _fact_keys(world, a.get("facts", []), not a.get("evidence", false))), _roles_in_facts(world, e, a.get("facts", [])))
 	var out: Array = []
 	if pool.is_empty():
 		# 没写文本的事件退回模拟层自带的标题
@@ -665,7 +668,7 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 		return {"headline": headline, "paragraphs": paras}
 	var small: bool = a.get("slot", "") == "small"
 	# 导语
-	var keys := _fact_keys(world, a.get("facts", []))
+	var keys := _fact_keys(world, a.get("facts", []), not a.get("evidence", false))
 	keys["@" + season_key(world)] = true
 	var leads: Dictionary = et.get("lead", {})
 	# 人写的导语多从一个具体的场面起头（季节、地方、人在做什么），「本报查了什么」只是备用
@@ -727,7 +730,11 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 	for fid in ordered:
 		var f: Dictionary = world.facts[fid]
 		var spec: Dictionary = et.get("facts", {}).get(f.key, {})
-		var src := best_source(world, fid)
+		# 不附档案影印：档案是谁给你看的要藏住，正文不写「据某处的记录」；只有档案这一个来源的，写成「有消息人士称」
+		# （第 3 轮：取消附档案，正文照样写「邮局留存的记录显示」，保护来源的选择等于白选）
+		var src := best_source(world, fid) if a.get("evidence", false) else best_source(world, fid, ["archive"])
+		if not a.get("evidence", false) and src.kind == "letter" and best_source(world, fid).kind == "archive":
+			src = {"kind": "informer", "who": ""}
 		var prose: Array = _prose_for(spec.get("prose", []), str(src.kind), str(e.get("occ_at", {}).get(target, world.residents[target].occ)))
 		var body_tpl: String = g.pick_fresh(prose) if not prose.is_empty() else str(spec.get("note", ""))
 		if body_tpl == "":
@@ -993,10 +1000,13 @@ static func _interviewed(world, rid: String) -> bool:
 	return false
 
 
-static func best_source(world, fid: String) -> Dictionary:
+## skip：不拿来当信源的种类（不附档案时不写「据某处的记录」，见 article）
+static func best_source(world, fid: String, skip: Array = []) -> Dictionary:
 	var best := {"kind": "letter", "who": ""}
 	var best_rank := 999
 	for s in world.known.get(fid, {"sources": []}).sources:
+		if s.kind in skip:
+			continue
 		var rank := SOURCE_PRIORITY.find(s.kind)
 		if rank >= 0 and rank < best_rank:
 			best_rank = rank

@@ -12,7 +12,6 @@
  "cash": "${n}",
  "circ_line": "Next print run: {n} copies (last time {before}).",
  "cred_line": "The town's view of the paper: {word}, {trend}.",
- "postman": "What the postman let slip with the mail:",
  "cred_0": "nobody believes it",
  "cred_1": "a joke to some",
  "cred_2": "half believed",
@@ -23,5 +22,14 @@
  "trend_up1": "a little better than last week",
  "trend_down2": "a good deal worse than last week",
  "trend_down1": "a little worse than last week",
- "trend_same": "about the same as last week"
+ "trend_same": "about the same as last week",
+ "row_retail": "Street sales ({n} copies, depending on what ran)",
+ "postman": "What ran this issue, and what the postman let slip:",
+ "art_head": "\"{headline}\"",
+ "art_line": "{n} sold on the street · {how} · {cred}",
+ "art_evidence": "with records",
+ "art_trusted": "the town believed it",
+ "art_doubted": "the town had its doubts",
+ "art_flat": "the town said little",
+ "art_false": "it was wrong, and the town noticed"
 }

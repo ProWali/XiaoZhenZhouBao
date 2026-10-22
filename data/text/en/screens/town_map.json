@@ -17,5 +17,6 @@
  "watch_confirm": "Keep watch at {place} all night? What you see yourself is the surest thing there is, but there may be nothing to see.",
  "watch_yes": "Keep watch",
  "tavern_result": "At the tavern",
- "watch_result": "A night watching {place}"
+ "watch_result": "A night watching {place}",
+ "watch_days": "Your notebook says: things happen here mostly on {days} nights."
 }

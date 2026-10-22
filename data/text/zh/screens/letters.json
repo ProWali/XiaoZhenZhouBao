@@ -12,7 +12,6 @@
  "cash": "{n} 元",
  "circ_line": "下一期印 {n} 份（上期 {before}）。",
  "cred_line": "镇上怎么看这份报纸：{word}，{trend}。",
- "postman": "邮差送信时顺嘴说了几句：",
  "cred_0": "没人信了",
  "cred_1": "有人拿它当笑话",
  "cred_2": "将信将疑",
@@ -23,5 +22,14 @@
  "trend_up1": "比上周好些",
  "trend_down2": "比上周差了一截",
  "trend_down1": "比上周差了些",
- "trend_same": "跟上周差不多"
+ "trend_same": "跟上周差不多",
+ "row_retail": "街头零售（{n} 份，看这一期登了什么）",
+ "postman": "这一期登的，邮差送信时顺嘴说了：",
+ "art_head": "《{headline}》",
+ "art_line": "零售 {n} 份 · {how} · {cred}",
+ "art_evidence": "附档案",
+ "art_trusted": "镇上信了",
+ "art_doubted": "镇上半信半疑",
+ "art_flat": "镇上没什么说法",
+ "art_false": "登错了，镇上记下了"
 }

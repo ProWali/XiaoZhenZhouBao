@@ -19,5 +19,11 @@
  "refuse": "不收，请回",
  "see_out_last": "送客，去睡觉",
  "see_out": "送客",
- "noted": "记进选题簿："
+ "noted": "记进选题簿：",
+ "promise_alias": "答应他：不点他的名",
+ "promise_alias_tip": "化名或匿名就算守约。点了名，他会记住你说话不算数。",
+ "promise_no_alias": "不答应，请回",
+ "promise_hold": "服软：这一期不登这件事",
+ "promise_hold_tip": "这周日不登就算守约。登了，就是当面跟他对着干。",
+ "promise_no_hold": "不理他，请回"
 }
