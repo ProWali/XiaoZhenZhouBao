@@ -185,7 +185,11 @@ func _make_fact(inst: Dictionary, frag: Dictionary, roles: Dictionary, world, tr
 	}
 	fact["text"] = fill_text(frag.text, roles, world, "named", "", "named", inst.extras)
 	world.facts[fid] = fact
-	# 分发知情者
+	# 分发知情者。碎片说的是谁，谁就知道（第 5 轮：问汇款被冒领的本人，她「真没听说过」）
+	world.residents[subj].knows[fid] = true
+	if truth >= 0.5:
+		for rid in roles.get(inst.target, []):
+			world.residents[rid].knows[fid] = true
 	for spec in frag.get("known_by", []):
 		for rid in _resolve_known(spec, roles, world):
 			world.residents[rid].knows[fid] = true
@@ -204,6 +208,18 @@ func _make_fact(inst: Dictionary, frag: Dictionary, roles: Dictionary, world, tr
 	return fid
 
 
+## 事情的性质对应的地方：碎片里有这些字，在那儿做事的人会听说。玩家照职业推得出来
+const TOPIC_PLACES := {
+	"病": "clinic", "伤": "clinic", "瞎": "clinic", "药": "clinic", "吐": "clinic", "晕": "clinic", "孩子": "school",
+	"账": "hall", "款": "hall", "合同": "hall", "地契": "hall", "税": "hall",
+	"信": "post", "汇款": "post", "包裹": "post",
+	"酒": "tavern", "牌": "tavern",
+	"面粉": "store", "黄油": "store", "货": "store",
+	"火车": "station", "车票": "station",
+	"木料": "mill", "工钱": "mill", "锯": "mill",
+}
+
+
 ## 碎片牵涉的地方：正文里写到的地名、蹲守点、档案所在地。只算有人上班的地方
 func _places_in(fact: Dictionary, frag: Dictionary, world) -> Array:
 	var out: Array = []
@@ -213,6 +229,9 @@ func _places_in(fact: Dictionary, frag: Dictionary, world) -> Array:
 			continue
 		if str(fact.text).contains(str(loc.name)) or str(frag.get("witness", "")) == id or str(frag.get("archive", "")) == id:
 			out.append(id)
+	for word in TOPIC_PLACES:
+		if str(fact.text).contains(word) and not (TOPIC_PLACES[word] in out):
+			out.append(TOPIC_PLACES[word])
 	return out
 
 

@@ -98,5 +98,6 @@
  "cons_kept_alias": "报上没点{name}的名。{name}托人带了句「谢谢」。",
  "informer_known": ["{name}收了钱，笑了：「这人那点事，你不是都知道了吗？」", "{name}说：「这人的事镇上就传了那么些，你手上的不比我少。」"],
  "cons_side_glad": "{name}说，总算有人把这事登出来了。",
- "cons_ad_sulk": "{name}还在生报社的气，这期没给广告钱。"
+ "cons_ad_sulk": "{name}还在生报社的气，这期没给广告钱。",
+ "cons_ad_sulk_why": "{name}还在为《{headline}》生报社的气，这期没给广告钱。"
 }

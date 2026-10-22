@@ -269,7 +269,15 @@ func _editor(slot: String) -> void:
 	box.add_child(_choice_row("naming", NAMINGS, a.naming, func(v): a.naming = v; _choice[slot] = 0; _refresh(), e.soft))
 	if e.soft:
 		box.add_child(K.para(Game.t("layout.soft_note"), 280, "pixel", 12, P.WARM_GREY, 0))
-	box.add_child(K.para(Game.t("layout.retail_est", {"n": w.estimate_retail(a)}), 280, "pixel", 12, P.PRINT_INK, 0))
+	var est := Game.t("layout.retail_est", {"n": w.estimate_retail(a)})
+	# 不煽动的报道靠人信：有没坐实的，正经读者少买（第 5 轮：多勾一条，「多卖」反而少了，看不懂）
+	var shaky_n := 0
+	for fid in a.facts:
+		if not w.is_verified(fid):
+			shaky_n += 1
+	if shaky_n > 0 and a.tone != "hot":
+		est += Game.t("layout.retail_shaky", {"n": shaky_n})
+	box.add_child(K.para(est, 280, "pixel", 12, P.PRINT_INK, 0))
 	# 收过钱的事，登了就是两头得罪（第 4 轮：这条只写在按钮的提示里，玩家没看见）
 	if str(e.get("bribed_by", "")) != "":
 		box.add_child(K.para(Game.t("layout.bribed", {"name": Game.name_of(str(e.bribed_by))}), 280, "pixel", 12, P.STAMP_RED, 0))

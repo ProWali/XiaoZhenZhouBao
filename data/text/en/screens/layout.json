@@ -24,7 +24,6 @@
  "title": "Sunday · Layout",
  "hint": "Pick a matter from the notebook. One story per matter, 1 to 4 items.",
  "nothing": "Nothing in the notebook is fit to print. Run the issue empty, or wait for next week.",
- "tag_followup": " (follow-up: {n} new)",
  "tag_soft": " (light news)",
  "story_line": "{name}{tag}\n{n} item(s), {ok} confirmed{at}",
  "placed_at": "  → {slot}",
@@ -62,5 +61,7 @@
  "promise_alias": "You promised {name}: no name.",
  "promise_hold": "You promised {name}: not in this issue.",
  "retail_est": "Run like this, it should sell about {n} extra copies on the street (5 cents each).",
- "bribed": "You took {name}'s money. Run this and you lose both ways."
+ "bribed": "You took {name}'s money. Run this and you lose both ways.",
+ "tag_followup": " (follow-up: {n} new or newly confirmed)",
+ "retail_shaky": " {n} of these aren't confirmed yet; careful readers buy fewer copies."
 }

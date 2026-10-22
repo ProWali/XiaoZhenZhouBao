@@ -98,5 +98,6 @@
  "cons_kept_alias": "The paper left {name}'s name out. {name} sent word: \"Thank you.\"",
  "informer_known": ["{name} took the money and smiled: \"Whatever that one's mixed up in, you know it already.\"", "{name} said: \"The town only knows so much about that one, and you've got as much as I do.\""],
  "cons_side_glad": "{name} said it was about time someone printed it.",
- "cons_ad_sulk": "{name} is still sore at the paper and paid nothing for advertising this issue."
+ "cons_ad_sulk": "{name} is still sore at the paper and paid nothing for advertising this issue.",
+ "cons_ad_sulk_why": "{name} is still sore over \"{headline}\" and paid nothing for advertising this issue."
 }

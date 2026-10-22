@@ -267,6 +267,9 @@ func notebook() -> Array:
 		groups[e.id].facts.append(fid)
 		if not (fid in e.get("printed_facts", [])):
 			groups[e.id].fresh.append(fid)
+		elif fid in e.get("printed_shaky", []) and is_verified(fid):
+			# 登的时候还没坐实、后来坐实了：可以登一篇「坐实」的续报（第 5 轮：补满三枚章，排版台却没这件事）
+			groups[e.id].fresh.append(fid)
 	var out: Array = []
 	for eid in groups:
 		var g: Dictionary = groups[eid]
@@ -352,7 +355,7 @@ func _bribe_leak() -> void:
 func _rumor_hook(with_letter := true) -> void:
 	var postman := ""
 	for rid in living_ids():
-		if residents[rid].occ == "postman" and residents[rid].in_town:
+		if residents[rid].occ == "postman" and residents[rid].in_town and residents[rid].avoid_until <= week:
 			postman = rid
 	if postman == "":
 		return
@@ -949,7 +952,11 @@ func act_interview(rid: String, topic: String = "") -> Dictionary:
 
 ## 碎片里说的就是说话人自己（他的车、他诊所的记录）：不用「我听说」的口气，换亲口说的说法（第 2 轮：「我只听说，面粉搬上了我的车」）
 func _own_key(key: String, fid: String, rid: String) -> String:
-	if TE.fact_note(self, fid, lang).contains(_nm(rid)) and TE.data(lang).ui.has(key + "_own"):
+	var own: bool = TE.fact_note(self, fid, lang).contains(_nm(rid))
+	var occ_word: String = TE.occ_label(self, rid, lang)
+	if occ_word != "" and str(facts[fid].text).contains(occ_word) and _role_of(event_of(fid), rid) != "":
+		own = true
+	if own and TE.data(lang).ui.has(key + "_own"):
 		return key + "_own"
 	return key
 
@@ -1029,7 +1036,7 @@ func _maybe_lead(rid: String, topic: String, res: Dictionary) -> void:
 	var ev_list: Array = []
 	var weights: Array = []
 	for oid in living_ids():
-		if oid == rid or led.has(oid) or reluctant.has(oid):
+		if oid == rid or led.has(oid) or reluctant.has(oid) or float(residents[oid].player_rel.like) < 0.3:
 			continue
 		var o: Dictionary = residents[oid]
 		var best_ev := ""
@@ -1560,7 +1567,7 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 				printed_false = true
 		avg_truth /= a.facts.size()
 		if a.tone == "hot" and not e.soft:
-			cred_change -= 1.0
+			cred_change -= 2.0
 			for fid in a.facts:
 				if not is_verified(fid):
 					cred_change -= 0.5
@@ -1597,10 +1604,16 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 		e.printed = true
 		e.printed_week = week
 		var pf: Array = e.get("printed_facts", [])
+		var shaky: Array = e.get("printed_shaky", [])
 		for fid in a.facts:
 			if not (fid in pf):
 				pf.append(fid)
+			if is_verified(fid):
+				shaky.erase(fid)
+			elif not (fid in shaky):
+				shaky.append(fid)
 		e["printed_facts"] = pf
+		e["printed_shaky"] = shaky
 		var rec := {"slot": a.slot, "headline": hl, "body": body, "tone": a.tone, "naming": a.naming, "evidence": a.get("evidence", false), "event": e.id, "avg_truth": avg_truth, "facts": a.facts.duplicate(), "choice": ra.choice, "reroll": int(a.get("reroll", 0)), "followup": is_fu,
 			"retail": copies, "cred": cred_change - cred_before, "false": avg_truth < 0.5, "cons": []}
 		issue.articles.append(rec)
@@ -1640,7 +1653,10 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 	for rid in ads:
 		var r: Dictionary = residents[rid]
 		if ads[rid].paused_until <= week and r.in_town and r.player_rel.like < 0.3:
-			_cons(issue, "cons_ad_sulk", {"name": rid})
+			if str(r.get("sore_at", "")) != "":
+				_cons(issue, "cons_ad_sulk_why", {"name": rid, "headline": str(r.sore_at)})
+			else:
+				_cons(issue, "cons_ad_sulk", {"name": rid})
 		if ads[rid].paused_until <= week and r.in_town and r.player_rel.like >= 0.3:
 			ad_income += (2.0 + r.wealth * 1.0 + r.player_rel.like * 2.0) * clampf(stats.circulation / 180.0, 0.3, AD_CIRC_CAP)
 	var cost: float = 10.0 + stats.circulation * PRINT_COST
@@ -1722,9 +1738,14 @@ func _react_to_article(a: Dictionary, e: Dictionary, rec: Dictionary, exposure: 
 			_cons(issue, "cons_bribe_printed", {"name": subj})
 		r.player_rel.like = maxf(0.0, r.player_rel.like - 0.3 * s)
 		r.player_rel.trust = maxf(0.0, r.player_rel.trust - 0.2 * s)
+		r["sore_at"] = rec.headline
 		r.player_rel.fear = minf(1.0, r.player_rel.fear + 0.1 * s)
 		r.exposed_week = week
 		Relations.on_exposed(self, subj, s, e)
+		# 当事人的家里人、朋友也为这篇生气，记下是哪篇
+		for oid in r.family + r.friends:
+			if residents.has(oid):
+				residents[oid]["sore_at"] = rec.headline
 		Election.on_article(self, subj, s, false)
 		var kind := _reaction(r.bucket, level)
 		if level != "light":

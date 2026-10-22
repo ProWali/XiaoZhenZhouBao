@@ -94,7 +94,7 @@
   "{subject.short} hasn't left the house in days. Are you satisfied?",
   "A newspaper can write about a person, or it can ruin one. This week you chose the second.",
   "When you wrote about {subject.short}, did you ask {subject.him} even one question?",
-  "When I saw {subject.short}'s name in the paper, my hands shook.",
+  "When I saw what the paper printed about {subject.short}, my hands shook.",
   "I can't write, so I've had someone write this for me. I only want to say that {subject.short} is not a bad person.",
   {"t": "If {subject.short} did wrong, there are people whose job it is to deal with it. It is no business of a newspaper.", "if": {"bucket": ["powerful"]}},
   {"t": "I sat a whole afternoon at {subject.short}'s house. {subject.ta} said nothing at all, just sat.", "if": {"trait": ["kind"]}},
@@ -111,7 +111,7 @@
   "I've waited a long time for this. Thank you.",
   "I take no pleasure in another person's misfortune. But you were right to print this.",
   {"t": "I read this week's front page aloud at the tavern, and not one soul spoke up for {subject.short}.", "if": {"trait": ["drinker", "gossip"]}},
-  {"t": "Seeing {subject.short}'s name in the paper, I slept well for the first time in a long while.", "if": {"trait": ["grudge"]}},
+  {"t": "Seeing the paper print what {subject.short} did, I slept well for the first time in a long while.", "if": {"trait": ["grudge"]}},
   {"t": "I told people long ago that {subject.short} couldn't be trusted, and nobody believed me. They believe me now.", "if": {"trait": ["gossip", "suspicious"]}},
   {"t": "Good work. But be careful; {subject.short} is not one to take this lying down.", "if": {"bucket": ["practical"]}}
  ]},

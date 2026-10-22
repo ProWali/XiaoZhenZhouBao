@@ -522,6 +522,16 @@ static func _roles_ok(items: Array, allowed: Dictionary) -> Array:
 				ok = false
 		if ok:
 			out.append(t)
+	if not out.is_empty():
+		return out
+	# 一条都对不上：至少别点出碎片里没出现过的当事人（第 5 轮：碎片里没有卖家，标题却写「某某的糖浆」）
+	for t in items:
+		var named := false
+		for m in _re_role.search_all(str(t)):
+			if m.get_string(1) == "target" or not allowed.has(m.get_string(1)):
+				named = true
+		if not named:
+			out.append(t)
 	return out if not out.is_empty() else items
 
 
@@ -794,7 +804,7 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 			if src.kind == "archive":
 				csym = "corroborated_archive"
 			elif src.kind == "witness":
-				csym = "corroborated_witness"
+				csym = "corroborated"
 			elif not (src.kind in ["interview", "informer", "visitor"]):
 				csym = ""
 			if csym != "" and g.has_rule(csym) and rng.chance(0.25):
@@ -888,10 +898,8 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 		resp_kind = "pleaded"
 	elif world.reluctant.has(target) and str(world.reluctant[target].event) == str(e.id):
 		resp_kind = "declined"
-	elif _interviewed(world, target):
+	elif _interviewed(world, target, e):
 		resp_kind = "denied"
-	elif world.residents[target].get("aware", false) or int(world.talked.get(target, -99)) >= int(e.get("week_start", 0)):
-		resp_kind = "declined"
 	# 这类事件自己的说法和通用说法放在一起挑，挑用得最少的；自己的说法只对得上登出的事实才能用
 	var resp := ""
 	var resp_pool: Array = eligible_strict(et.get("resp", {}).get(resp_kind, []), keys)
@@ -996,8 +1004,11 @@ static func _role_of(e: Dictionary, rid: String) -> String:
 	return ""
 
 
-static func _interviewed(world, rid: String) -> bool:
+## 玩家就这件事从他嘴里问出过东西（第 5 轮：只聊过别的事，稿子就写他「否认」「拒绝回答」）
+static func _interviewed(world, rid: String, e: Dictionary = {}) -> bool:
 	for fid in world.known:
+		if not e.is_empty() and str(world.facts[fid].event) != str(e.id):
+			continue
 		for s in world.known[fid].sources:
 			if s.kind == "interview" and s.who == rid:
 				return true

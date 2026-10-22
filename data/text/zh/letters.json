@@ -94,7 +94,7 @@
   "{subject.short}这几天没出门。你们满意了？",
   "报纸可以写人，也可以毁人。你们这周选了后一种。",
   "你们写{subject.short}的时候，问过{subject.ta}一句吗？",
-  "我在报上看到{subject.short}的名字，手都在抖。",
+  "我在报上读到{subject.short}的事，手都在抖。",
   "我不会写字，这封信是请人代写的。我只想说：{subject.short}不是坏人。",
   {"t": "{subject.short}做错了事，自有该管的人管。轮不到一张报纸。", "if": {"bucket": ["powerful"]}},
   {"t": "我去{subject.short}家坐了一下午。{subject.ta}什么都没说，就是坐着。", "if": {"trait": ["kind"]}},
@@ -111,7 +111,7 @@
   "我等这一天等了很久。谢谢。",
   "我不是落井下石的人。可这件事，你们登得对。",
   {"t": "这周的头条我念给酒馆里的人听了，没有一个人替{subject.short}说话。", "if": {"trait": ["drinker", "gossip"]}},
-  {"t": "看见{subject.short}的名字登在报上，我睡了一个好觉。", "if": {"trait": ["grudge"]}},
+  {"t": "看见报上登了{subject.short}的事，我睡了一个好觉。", "if": {"trait": ["grudge"]}},
   {"t": "我早就跟人说过{subject.short}靠不住，没人信。现在信了吧。", "if": {"trait": ["gossip", "suspicious"]}},
   {"t": "做得对。不过当心点，{subject.short}不是吃素的。", "if": {"bucket": ["practical"]}}
  ]},
