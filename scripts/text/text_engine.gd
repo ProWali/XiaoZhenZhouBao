@@ -880,7 +880,7 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 		resp_kind = "declined"
 	elif _interviewed(world, target):
 		resp_kind = "denied"
-	elif world.residents[target].get("aware", false):
+	elif world.residents[target].get("aware", false) or int(world.talked.get(target, -99)) >= int(e.get("week_start", 0)):
 		resp_kind = "declined"
 	# 这类事件自己的说法和通用说法放在一起挑，挑用得最少的；自己的说法只对得上登出的事实才能用
 	var resp := ""
@@ -1168,7 +1168,7 @@ static func ui(world, key: String, args: Dictionary, lang: String) -> String:
 				rest = [str(spec[(spec.find(tpl) + 1) % spec.size()])]
 			tpl = str(rng.pick(rest))
 		recent.append(tpl)
-		while recent.size() > maxi(1, spec.size() / 2):
+		while recent.size() > maxi(1, spec.size() - 1):
 			recent.pop_front()
 		mem[key] = recent
 	for k in args:

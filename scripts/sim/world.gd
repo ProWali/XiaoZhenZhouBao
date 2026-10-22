@@ -76,6 +76,7 @@ var slept_in := 0              # 哪天上午睡过去了（周 × 10 + 天）�
 var leads: Array = []           # 线头：交谈落空时对方指给你的人 {who, event, from, week}，见 _maybe_lead
 var reluctant := {}             # 知道点什么、但不肯说的人：rid -> {event, why, who, week}，选题簿「按人」里显示
 var greeted := {}               # rid -> 哪一周说过见面头一句（_personal_line）
+var talked := {}                # rid -> 最近一次当面谈话的周（报道里的回应据此写，见 TE 的 resp_kind）
 var actions: Array = []         # 玩家操作日志，存档就是它
 var recording := true
 var replay_error := ""
@@ -273,7 +274,8 @@ func notebook() -> Array:
 				if known.has(fid):
 					continue
 				for rid in living_ids():
-					if residents[rid].in_town and residents[rid].knows.has(fid) and _can_tell(rid, fid):
+					var refused: bool = reluctant.has(rid) and str(reluctant[rid].event) == str(e.id) and week - int(reluctant[rid].week) <= 1
+					if residents[rid].in_town and residents[rid].knows.has(fid) and _can_tell(rid, fid) and not refused:
 						g.more += 1
 						break
 			if g.more > 0:
@@ -767,6 +769,7 @@ func act_interview(rid: String, topic: String = "") -> Dictionary:
 		res.lines.append(_ui("not_found"))
 		return res
 	_record({"kind": "interview", "rid": rid, "topic": topic})
+	talked[rid] = week
 	var loc := where_is(rid)
 	_spend_day_action()
 	res.ok = true
