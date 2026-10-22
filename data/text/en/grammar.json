@@ -40,7 +40,7 @@
   "A {src_who} has let this paper know that "
  ],
  "src_visitor": [
-  "A caller at the Gazette office told this paper that ",
+  "A caller at the newspaper office told this paper that ",
   "A visitor to this office said that "
  ],
  "src_visitor_who": [
@@ -68,7 +68,7 @@
   "A copy of the record is reproduced on this page.",
   "A copy of the record in question appears below.",
   "The copy is printed alongside, and readers may judge it for themselves.",
-  "A transcript of the record is kept at the Gazette office, where readers may see it.",
+  "A transcript of the record is kept at the newspaper office, where readers may see it.",
   "Anyone who wishes to see the record this paper holds may come and see it.",
   "This paper made a copy of the record, and keeps it at the office.",
   "This paper holds a copy of that page.",
@@ -102,7 +102,7 @@
  "resp_pleaded": [
   "{target.short} sent word asking this paper not to print the story. This paper weighed the request, and printed it.",
   "This paper is aware that some would rather this story had not appeared.",
-  "{target.short} called at the Gazette office. What was said there has been noted, but is not repeated here."
+  "{target.short} called at the newspaper office. What was said there has been noted, but is not repeated here."
  ],
  "resp_denied": [
   "{target.short} denied the account to this paper.",
@@ -121,8 +121,8 @@
  ],
  "close": [
   "This paper will follow the matter.",
-  "The Gazette will report further as it learns more.",
-  "Anyone with knowledge of the matter is welcome at the Gazette office.",
+  "This paper will report further as it learns more.",
+  "Anyone with knowledge of the matter is welcome at the newspaper office.",
   "This paper will ask again.",
   "This paper has not finished asking about this."
  ],
@@ -140,12 +140,12 @@
  ],
  "close@neutral": [
   "This paper will follow the matter.",
-  "Anyone with knowledge of the matter is welcome at the Gazette office.",
+  "Anyone with knowledge of the matter is welcome at the newspaper office.",
   "More in the next issue.",
   "This is not the end of it.",
-  "The door of the Gazette office stands open all day.",
+  "The door of the newspaper office stands open all day.",
   "This paper will go on asking.",
-  "Anyone who knows more is welcome to sit down at the Gazette office.",
+  "Anyone who knows more is welcome to sit down at the newspaper office.",
   "This paper will ask again.",
   "When there is news, this paper will print it.",
   "This paper has not finished asking about this.",
@@ -167,7 +167,7 @@
  ],
  "close_soft": [
   "",
-  " The Gazette passes this along for its readers.",
+  " This paper passes this along for its readers.",
   ""
  ],
  "recent": [
@@ -245,7 +245,7 @@
   "The family asks that no flowers be sent."
  ],
  "wedding_tail": [
-  "The Gazette offers its congratulations.",
+  "This paper offers its congratulations.",
   "",
   "The couple will make their home on the east side of town."
  ],
@@ -376,7 +376,7 @@
   "The same word has reached this paper from two quarters: "
  ],
  "src_visitor_two": [
-  "Two callers came to the Gazette office, one after the other, to tell this paper that ",
+  "Two callers came to the newspaper office, one after the other, to tell this paper that ",
   "Two visitors to this office, on separate days, told this paper the same thing: "
  ],
  "link": [
@@ -435,7 +435,7 @@
  ],
  "link_witness_visitor": [
   "What this paper saw is not all it has.",
-  "Then someone called at the Gazette office with more."
+  "Then someone called at the newspaper office with more."
  ],
  "link_archive_visitor": [
   "The records are not the whole of it.",

@@ -1,0 +1,23 @@
+{
+ "archive": "查档案",
+ "back": "回到街上",
+ "nobody": "这会儿没人。",
+ "no_actions": "今天的行动点用完了。",
+ "click_person": "点一个人和他谈谈（花一个行动点）。",
+ "person_occ": "{name}（{occ}）",
+ "tip_lead": "★ {tip} · {from}让你来找的",
+ "small_talk": "随便聊聊，看{name}愿意说什么",
+ "ask_about": "问「{event}」：{fact}",
+ "talk_note": "话头从选题簿里挑。问当事人自己的事，对方多半不认，还会记住你在查。问不出来时，对方有时会给你指个人。",
+ "talk_note_lead": "★ {from}让你来找{name}。说是谁让你来的，对方多半肯开口；随便聊聊就行。",
+ "avoiding": "{name}最近躲着你。",
+ "talk_title": "和{name}（{occ}）谈什么？",
+ "talk_result": "和{name}谈",
+ "archive_cost": "翻{place}的档案要花一个行动点。",
+ "archive_unpointed": "选题簿里没有线索指向这里的档案，翻了很可能白翻。",
+ "keeper_trusts": "{name}信得过你，会让你看。",
+ "keeper_bribe": "{name}跟你不熟，得塞五块钱。",
+ "archive_yes": "查",
+ "archive_no": "算了",
+ "archive_result": "{place}的档案"
+}

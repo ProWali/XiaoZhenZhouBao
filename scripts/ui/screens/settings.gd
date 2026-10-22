@@ -1,4 +1,4 @@
-## 设置（叠层）：音量、全屏。语言和字号放大留到 M5。
+## 设置（叠层）：音量、全屏、语言。换语言当场生效：当前这一屏按新语言重建，设置页重新叠上来。
 extends Control
 
 const K = preload("res://scripts/ui/kit.gd")
@@ -12,11 +12,11 @@ func _ready() -> void:
 	add_child(K.rect(Color(P.INK, 0.7), Vector2.ZERO, Vector2(640, 360)))
 	var sheet := K.paper(Vector2(180, 60), Vector2(280, 240), P.NEWSPRINT)
 	add_child(sheet)
-	var head := K.label("设置", "serif_black", 18, P.PRINT_INK)
+	var head := K.label(Game.t("settings.title"), "serif_black", 18, P.PRINT_INK)
 	head.position = Vector2(16, 10)
 	sheet.add_child(head)
 	var y := 50
-	for item in [["master", "总音量"], ["music", "钢琴"], ["sfx", "声音"]]:
+	for item in [["master", Game.t("settings.master")], ["music", Game.t("settings.music")], ["sfx", Game.t("settings.sfx")]]:
 		var l := K.label(item[1], "pixel", 12, P.PRINT_INK)
 		l.position = Vector2(16, y)
 		sheet.add_child(l)
@@ -33,26 +33,42 @@ func _ready() -> void:
 		sheet.add_child(s)
 		y += 26
 	var fs := CheckBox.new()
-	fs.text = "全屏（F11）"
+	fs.text = Game.t("settings.fullscreen")
 	fs.button_pressed = bool(Game.settings.fullscreen)
 	fs.position = Vector2(12, y)
 	fs.toggled.connect(func(v): Game.settings.fullscreen = v; Game.save_settings())
 	sheet.add_child(fs)
 	y += 26
-	var lang := K.label("语言：简体中文（英文版在做）", "pixel", 12, P.WARM_GREY)
-	lang.position = Vector2(16, y)
+	var lang := K.label(Game.t("settings.language"), "pixel", 12, P.PRINT_INK)
+	lang.position = Vector2(16, y + 3)
 	sheet.add_child(lang)
-	var ok := K.button("好", func(): Game.close_overlay(), 60)
+	var lang_box := HBoxContainer.new()
+	lang_box.add_theme_constant_override("separation", 4)
+	lang_box.position = Vector2(80, y)
+	sheet.add_child(lang_box)
+	# 语言名各用各的文字写，不翻译
+	for lg in [["zh", "简体中文"], ["en", "English"]]:
+		var code: String = lg[0]
+		var b := K.button(lg[1], func(): _set_lang(code), 0)
+		b.disabled = Game.lang == code
+		lang_box.add_child(b)
+	var ok := K.button(Game.t("settings.ok"), func(): Game.close_overlay(), 60)
 	ok.position = Vector2(204, 200)
 	sheet.add_child(ok)
 	if Game.world != null:
-		var quit := K.button("存档并回主菜单", func():
+		var quit := K.button(Game.t("settings.save_quit"), func():
 			Game.autosave()
 			Game.world = null
 			Game.fade_to("menu"), 0)
 		quit.position = Vector2(16, 200)
 		sheet.add_child(quit)
 	ok.call_deferred("grab_focus")
+
+
+func _set_lang(code: String) -> void:
+	Game.set_lang(code)
+	Game.reload_screen()
+	Game.open_overlay("settings")
 
 
 func _unhandled_input(event: InputEvent) -> void:

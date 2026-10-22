@@ -43,21 +43,21 @@ func _ready() -> void:
 		add_child(K.rect(Color(P.OCHRE, 0.13), Vector2.ZERO, Vector2(640, 360)))
 	Game.ambience("night_ambience" if night else "day_ambience")
 	for loc in SPOTS:
-		var name: String = w.loc_name(loc)
+		var name: String = Game.place_title(loc)
 		var cb: Callable
 		var tip := name
 		var enabled := true
 		var badge := ""
 		if loc == "office":
-			tip = "报社 · 回去"
+			tip = Game.t("town_map.office_tip")
 			cb = func(): Game.sfx("door_open"); Game.route()
 		elif night:
 			enabled = loc in NIGHT_SPOTS and w.can_act_night()
-			tip = name + (" · 熬夜" if enabled else " · 晚上没人")
+			tip = Game.t("town_map.night_tip", {"place": name}) if enabled else Game.t("town_map.night_closed", {"place": name})
 			cb = _night_action.bind(loc)
 		else:
 			var n: int = w.people_at(loc).size()
-			tip = "%s · %s" % [name, ("%d 人" % n) if n > 0 else "没人"]
+			tip = Game.t("town_map.day_tip", {"place": name, "n": n}) if n > 0 else Game.t("town_map.day_tip_empty", {"place": name})
 			badge = ""
 			enabled = n > 0 or T.location_by_id(loc).get("archive", false)
 			cb = func(): Game.fade_to("location", {"loc": loc}, 0.2)
@@ -65,7 +65,7 @@ func _ready() -> void:
 		h.enabled = enabled
 		h.badge = badge
 		if loc == "office":
-			h.plate = "报社"
+			h.plate = Game.t("town_map.office_plate")
 		elif night:
 			h.plate = name if enabled else ""
 		else:
@@ -74,44 +74,41 @@ func _ready() -> void:
 			for rid in w.people_at(loc):
 				if Game.lead_from(rid) != "":
 					h.plate += " ★"
-					h.tip += " · 线头上的人在这儿"
+					h.tip += Game.t("town_map.lead_here")
 					break
 		add_child(h)
 	var hud := Hud.new()
 	hud.end_day_requested.connect(Game.request_end_day)
 	add_child(hud)
-	add_child(K.rect(Color(P.INK, 0.85), Vector2(0, 342), Vector2(640, 18)))
-	_note = K.label("", "pixel", 12, P.PAPER)
-	_note.position = Vector2(6, 344)
-	add_child(_note)
+	_note = K.note_bar(self, 342, 18, 0.85)
 	if night:
 		if w.can_act_night():
-			_note.text = "晚上。酒馆里能听到醉话；河边、桥头、树林、锯木厂可以蹲守。熬夜一周最多两次。"
+			_note.text = Game.t("town_map.night_note")
 		else:
-			_note.text = "今晚出不去了。回报社睡觉。"
+			_note.text = Game.t("town_map.night_done")
 	elif not w.can_act_day():
-		_note.text = "今天的行动点用完了。"
+		_note.text = Game.t("location.no_actions")
 	else:
-		_note.text = "名牌上的数字是这会儿在那儿的人，★是有人指给你的线头。进门不花行动点，找人谈、查档案才花。"
+		_note.text = Game.t("town_map.day_note")
 
 
 func _night_action(loc: String) -> void:
 	var w = Game.world
 	var warn := ""
 	if w.nights_used >= w.MAX_NIGHTS:
-		warn = "这周已经熬了两夜。再熬，明天上午就起不来了。\n"
+		warn = Game.t("town_map.warn_nights") + "\n"
 	if loc == "tavern":
-		Game.open_overlay("pick", {"title": "酒馆，晚上", "note": warn + "熬一夜，明天照常。", "items": [
-			{"text": "坐进去听酒客说话（量大，可信度低，可能听到假的）", "cb": func(): _do_night("eavesdrop", loc)},
-			{"text": "在外面守着，看谁进出", "cb": func(): _do_night("stakeout", loc)},
+		Game.open_overlay("pick", {"title": Game.t("town_map.tavern_title"), "note": warn + Game.t("town_map.tavern_note"), "items": [
+			{"text": Game.t("town_map.tavern_listen"), "cb": func(): _do_night("eavesdrop", loc)},
+			{"text": Game.t("town_map.tavern_watch"), "cb": func(): _do_night("stakeout", loc)},
 		]})
 	else:
-		Game.open_overlay("confirm", {"text": warn + "在%s蹲一夜？亲眼看见的事最可信，但不一定有事。" % w.loc_name(loc), "yes": "蹲守", "no": "算了", "on_yes": func(): _do_night("stakeout", loc)})
+		Game.open_overlay("confirm", {"text": warn + Game.t("town_map.watch_confirm", {"place": Game.place(loc)}), "yes": Game.t("town_map.watch_yes"), "no": Game.t("location.archive_no"), "on_yes": func(): _do_night("stakeout", loc)})
 
 
 func _do_night(kind: String, loc: String) -> void:
 	var w = Game.world
 	var res: Dictionary = w.act_eavesdrop() if kind == "eavesdrop" else w.act_stakeout(loc)
 	Game.sfx("footsteps_wood")
-	var title := "酒馆里" if kind == "eavesdrop" else "在%s守了一夜" % w.loc_name(loc)
+	var title := Game.t("town_map.tavern_result") if kind == "eavesdrop" else Game.t("town_map.watch_result", {"place": Game.place(loc)})
 	Game.show_result(title, res, "", func(): Game.route())

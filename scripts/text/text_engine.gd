@@ -148,6 +148,19 @@ static func occ_label(world, rid: String, lang: String, occ_id: String = "") -> 
 	return {"homemaker": "家眷", "retired": "赋闲的人"}.get(oid, str(r.occ_name))
 
 
+## 报名、主编名。玩家没改默认名时按语言显示默认名；改过就照玩家写的印
+static func paper_title(world, lang: String) -> String:
+	if str(world.paper_name) in ["灰河周报", "The Greyriver Weekly", ""]:
+		return "The Greyriver Weekly" if lang == "en" else "灰河周报"
+	return str(world.paper_name)
+
+
+static func editor_title(world, lang: String) -> String:
+	if str(world.player_name) in ["主编", "Editor", ""]:
+		return "Editor" if lang == "en" else "主编"
+	return str(world.player_name)
+
+
 static func pronoun(world, rid: String, lang: String, form: String) -> String:
 	var female: bool = world.residents[rid].female if world.residents.has(rid) else false
 	if lang != "en":
@@ -197,7 +210,7 @@ static func fill(world, text: String, ctx: Dictionary, lang: String) -> String:
 			out += str(vars[key])
 		else:
 			match key:
-				"paper": out += world.paper_name if lang != "en" else world.paper_name_en
+				"paper": out += paper_title(world, lang)
 				"season": out += (SEASON_EN if lang == "en" else SEASON_ZH)[world.is_season(world.week)]
 				_: out += m.get_string()  # 留给 lint 抓
 	out += text.substr(pos)

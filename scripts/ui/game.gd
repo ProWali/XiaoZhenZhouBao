@@ -6,10 +6,12 @@ const World = preload("res://scripts/sim/world.gd")
 const Save = preload("res://scripts/sim/save.gd")
 const P = preload("res://scripts/ui/palette.gd")
 const Portrait = preload("res://scripts/ui/portrait.gd")
+const TE = preload("res://scripts/text/text_engine.gd")
+const T = preload("res://scripts/sim/tables.gd")
 
 const SLICE_WEEKS := 4          # 垂直切片只开放前四周；第五周周一读完信就结束
 const SAVE_PATH := "user://saves/slot1.json"
-const VERSION := "M4.1 试玩版"
+const VERSION := "M4.1"
 
 var world = null
 ## 自动走查用自己的存档位、不写试玩记录，免得覆盖真人玩家的存档（M4.1 踩过一次）
@@ -17,13 +19,20 @@ var save_path := SAVE_PATH
 var log_enabled := true
 ## 画面层自己的进度，和模拟存档一起存。模拟状态都在 world 里，这里只记「玩家看过了没有」。
 var ui := {}
-var settings := {"master": 0.8, "music": 0.6, "sfx": 0.8, "fullscreen": false}
+var settings := {"master": 0.8, "music": 0.6, "sfx": 0.8, "fullscreen": false, "lang": ""}
 var fonts := {}
+## 界面语言。模拟不分语言（存档是种子加操作日志），换语言只换文字，随时可换。
+var lang := "zh"
+## 命令行 --lang 指定的语言，优先于设置文件，也不写回去
+var force_lang := ""
+var _tables := {}
 var theme: Theme
 
 var _layer: CanvasLayer
 var _root: Control
 var _current: Control
+var _current_name := "menu"
+var _current_params := {}
 var _fade: ColorRect
 var _overlay: Control
 var _sfx_players: Array = []
@@ -138,6 +147,88 @@ func _build_theme() -> void:
 	theme.set_color("font_color", "TooltipLabel", P.PAPER)
 
 
+# ------------------------------------------------------------ 界面文字
+## 界面文字表：data/text/<语言>/screens/<表名>.json。key 写成「表名.条目」，{参数} 按 args 替换。
+## 当前语言缺的条目退回中文，中文也没有就显示〔key〕，走查截图一眼能看出来。
+func t(key: String, args := {}) -> String:
+	var ns := key.get_slice(".", 0)
+	var k := key.substr(ns.length() + 1)
+	var s = _table(lang, ns).get(k, null)
+	if s == null:
+		s = _table("zh", ns).get(k, null)
+	if s == null:
+		return "〔%s〕" % key
+	var out := str(s)
+	for a in args:
+		out = out.replace("{" + str(a) + "}", str(args[a]))
+	return out
+
+
+func _table(lg: String, ns: String) -> Dictionary:
+	var id := lg + "/" + ns
+	if not _tables.has(id):
+		var path := "res://data/text/%s/screens/%s.json" % [lg, ns]
+		var d = JSON.parse_string(FileAccess.get_file_as_string(path)) if FileAccess.file_exists(path) else null
+		_tables[id] = d if d is Dictionary else {}
+	return _tables[id]
+
+
+func set_lang(lg: String) -> void:
+	lang = lg
+	settings.lang = lg
+	save_settings()
+	if world != null:
+		world.lang = lg
+	track("lang", {"lang": lg})
+
+
+## 换语言后把当前这一屏按新语言重建一遍（模拟状态都在 world 里，重建不丢东西）
+func reload_screen() -> void:
+	goto(_current_name, _current_params)
+
+
+## 给画面层用的名字：人名、地名、职业、星期、时段、季节，都按界面语言
+func name_of(rid: String) -> String:
+	return TE.person_name(world, rid, lang)
+
+
+func place(loc: String) -> String:
+	return TE.loc_label(world, loc, lang)
+
+
+## 地图名牌、地点标题：英文用首字母大写的短名（General Store 太长，写 Store）
+func place_title(loc: String) -> String:
+	if lang != "en":
+		return place(loc)
+	if loc.begins_with("home:"):
+		return TE.surname(world, loc.substr(5), lang) + " House"
+	return str(T.location_by_id(loc).get("plate_en", place(loc)))
+
+
+func paper_title() -> String:
+	return TE.paper_title(world, lang)
+
+
+func editor_title() -> String:
+	return TE.editor_title(world, lang)
+
+
+func occ(rid: String) -> String:
+	return TE.occ_label(world, rid, lang)
+
+
+func day_name(d: int) -> String:
+	return t("common.day_%d" % clampi(d, 1, 7))
+
+
+func slot_name(s: int) -> String:
+	return t("common.slot_%d" % clampi(s, 0, 2))
+
+
+func season_name() -> String:
+	return t("common.season_%d" % world.is_season(world.week))
+
+
 # ------------------------------------------------------------ 界面切换
 func goto(screen: String, params := {}) -> void:
 	close_overlay()
@@ -149,6 +240,8 @@ func goto(screen: String, params := {}) -> void:
 	if _current != null:
 		_current.queue_free()
 	_current = node
+	_current_name = screen
+	_current_params = params
 	_root.add_child(node)
 	track("screen", {"screen": screen, "mode": str(params.get("mode", "")), "loc": str(params.get("loc", ""))})
 
@@ -221,13 +314,13 @@ func request_end_day() -> void:
 	var left: int = world.actions_left if world.slot <= 1 else 0
 	var text := ""
 	if left > 0:
-		text = "今天还有 %d 个行动点没用。现在收工，今晚也不出门了。" % left
+		text = t("common.end_day_left", {"n": left})
 	elif world.day == 6:
-		text = "周六收工。晚上可能有人上门，明天周日排版付印。"
+		text = t("common.end_day_saturday")
 	if text == "":
 		_end_day()
 	else:
-		open_overlay("confirm", {"text": text, "yes": "收工", "no": "再等等", "on_yes": _end_day})
+		open_overlay("confirm", {"text": text, "yes": t("common.end_day_yes"), "no": t("common.end_day_no"), "on_yes": _end_day})
 
 
 func _end_day() -> void:
@@ -257,9 +350,9 @@ func lead_from(rid: String) -> String:
 # ------------------------------------------------------------ 新局与存档
 func new_game(cfg: Dictionary) -> void:
 	Portrait.clear_cache()
-	world = World.new(int(cfg.seed), {"total_weeks": 104, "ironman": bool(cfg.get("ironman", true)), "lang": "zh", "suicide": bool(cfg.get("suicide", false))})
-	world.paper_name = str(cfg.get("paper_name", "灰河周报"))
-	world.player_name = str(cfg.get("player_name", "主编"))
+	world = World.new(int(cfg.seed), {"total_weeks": 104, "ironman": bool(cfg.get("ironman", true)), "lang": lang, "suicide": bool(cfg.get("suicide", false))})
+	world.paper_name = str(cfg.get("paper_name", t("common.default_paper")))
+	world.player_name = str(cfg.get("player_name", t("common.default_editor")))
 	ui = {"letters_week": 0, "saturday_week": 0, "visitors_done_week": 0, "visitors": [], "last_issue": {}, "cash_week_start": 30.0, "fronts": []}
 	_start_log()
 	track("new_game", {"seed": int(cfg.seed), "paper": world.paper_name})
@@ -287,6 +380,7 @@ func continue_game() -> bool:
 		return false
 	Portrait.clear_cache()
 	world = Save.from_dict(data.save)
+	world.lang = lang
 	ui = data.get("ui", {})
 	for k in ["letters_week", "saturday_week", "visitors_done_week"]:
 		ui[k] = int(ui.get(k, 0))
@@ -427,6 +521,9 @@ func _load_settings() -> void:
 	if cfg.load("user://settings.cfg") == OK:
 		for k in settings:
 			settings[k] = cfg.get_value("settings", k, settings[k])
+	if str(settings.lang) == "":
+		settings.lang = "zh" if OS.get_locale_language() == "zh" else "en"
+	lang = force_lang if force_lang != "" else str(settings.lang)
 
 
 func save_settings() -> void:

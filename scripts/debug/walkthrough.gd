@@ -1,5 +1,5 @@
 ## 自动走查：在真窗口里把试玩版从主菜单走到第五周周一，每一屏截图，审界面用。
-## 用法：Godot_v4.7.2-stable_win64.exe --path . -- --walkthrough --seed 7 --shots <目录>
+## 用法：Godot_v4.7.2-stable_win64.exe --path . -- --walkthrough --seed 7 --shots <目录> [--lang en]
 ## 导出包也能用：XiaoZhenZhouBao.exe -- --walkthrough --seed 7 --shots <目录>
 ## 它像一个规矩的玩家：白天找人聊、问选题簿里的事、查档案，每周熬一夜，周六见客，周日把最好的料排上版。
 ## 直接调各界面的内部函数，跳过鼠标；报错看控制台输出。
@@ -52,7 +52,7 @@ func _run() -> void:
 	await _shot("new_game")
 	if Game.has_save():
 		Game.delete_save()
-	Game.new_game({"seed": _seed, "paper_name": "灰河周报", "player_name": "走查"})
+	Game.new_game({"seed": _seed, "paper_name": Game.t("common.default_paper"), "player_name": Game.t("common.default_editor")})
 	Game.route(false)
 	var guard := 0
 	while guard < 400:
@@ -111,7 +111,7 @@ func _day_step() -> void:
 			var spots := ["tavern", "river", "bridge", "woods", "mill"]
 			var loc: String = spots[_rng.randi() % spots.size()]
 			var res: Dictionary = w.act_eavesdrop() if loc == "tavern" else w.act_stakeout(loc)
-			Game.show_result("夜里", res, "", func(): Game.route(false))
+			Game.show_result(Game.slot_name(2), res, "", func(): Game.route(false))
 			await _shot("w%d_night_result" % w.week)
 			Game.close_overlay()
 			Game.route(false)
@@ -132,13 +132,14 @@ func _day_step() -> void:
 		Game.close_overlay()
 	# 查档案：选题簿里有提示指向某处档案时去查
 	for g in w.notebook():
-		for h in g.hints:
-			for loc in ["post", "hall", "clinic", "store"]:
-				if h.find(w.loc_name(loc)) >= 0 and h.find("档案") >= 0 and _rng.randf() < 0.5:
+		for fid in g.event.facts:
+			var loc: String = w.facts[fid].archive
+			if loc in ["post", "hall", "clinic", "store"] and not w.known.get(fid, {"evidence": false}).evidence:
+				if _rng.randf() < 0.5:
 					Game.goto("location", {"loc": loc})
 					await _shot("w%d_d%d_%s" % [w.week, w.day, loc])
 					var res: Dictionary = w.act_archive(loc)
-					Game.show_result("档案", res, "", func(): pass)
+					Game.show_result(Game.place(loc), res, "", func(): pass)
 					await _shot("w%d_d%d_archive" % [w.week, w.day])
 					Game.close_overlay()
 					return
@@ -149,7 +150,7 @@ func _day_step() -> void:
 			Game.goto("location", {"loc": lloc})
 			await _shot("w%d_d%d_lead_%s" % [w.week, w.day, lloc])
 			var lres: Dictionary = w.act_interview(l.who, "")
-			Game.show_result("和%s谈" % w.residents[l.who].name, lres, l.who, func(): pass)
+			Game.show_result(Game.name_of(l.who), lres, l.who, func(): pass)
 			await _shot("w%d_d%d_lead_talk" % [w.week, w.day])
 			Game.close_overlay()
 			return
@@ -183,7 +184,7 @@ func _day_step() -> void:
 		await _shot("w%d_topics" % w.week)
 		Game.close_overlay()
 	var res: Dictionary = w.act_interview(rid, topic)
-	Game.show_result("和%s谈" % w.residents[rid].name, res, rid, func(): pass)
+	Game.show_result(Game.name_of(rid), res, rid, func(): pass)
 	if first_today:
 		await _shot("w%d_d%d_talk" % [w.week, w.day])
 	Game.close_overlay()

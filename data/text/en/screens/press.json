@@ -1,0 +1,8 @@
+{
+ "intro": "Issue No. {n}. Pull the lever and it prints. Printed words can't be taken back.",
+ "lever_tip": "Lever",
+ "lever": "Pull the lever",
+ "count": "Printed {n} / {total}",
+ "done": "All printed.",
+ "dawn": "The papers go out before dawn."
+}

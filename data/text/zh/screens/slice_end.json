@@ -1,0 +1,14 @@
+{
+ "title": "{paper} · 前四期",
+ "end_bankrupt": "连续四周亏空，报纸停了。",
+ "end_shut_down": "第三场官司输了，报纸被勒令停刊。",
+ "end_destroyed": "报社烧了，没钱重建。",
+ "end_train": "你登上了南去的火车。",
+ "end_term_end": "两年到了。你把钥匙留在桌上。",
+ "issue": "第 {n} 期　{headline}",
+ "no_fronts": "四期都没有头条。",
+ "thanks": "试玩版到这里为止。谢谢你替灰河镇办了一个月的报。\n\n请把下面这个文件夹里 session 开头的两个文件（.jsonl 和 -save.json）连同问卷一起发回来。它们记着你每一步看了什么、做了什么，不含任何个人信息：\n{path}",
+ "open_folder": "打开记录所在的文件夹",
+ "keep_playing": "接着玩（试玩版之外，没打磨过）",
+ "menu": "回主菜单"
+}

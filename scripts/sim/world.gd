@@ -47,7 +47,6 @@ var flags := {"burned_until": 0, "negative_weeks": 0, "lawsuits_lost": 0, "weeks
 var game_over := ""
 var player_name := "主编"
 var paper_name := "灰河周报"
-var paper_name_en := "The Greyriver Gazette"
 var lang := "zh"
 var text_counter := 0           # 文本引擎的计数器，只影响措辞，不影响模拟
 var text_memory := {}           # 语言 -> {模板原文: 上次用的周}，让报道半年内不重复同一句
@@ -105,6 +104,22 @@ func _note(fid: String) -> String:
 
 func _ui(key: String, args: Dictionary = {}) -> String:
 	return TE.ui(self, key, args, lang)
+
+
+## 报道的后果。给玩家看的按当前语言；进故事日志的一律用中文，日志和语言无关（测试比对它）。
+## args 里 name、who 传 rid，这里按语言换成名字。
+func _cons(issue: Dictionary, key: String, args: Dictionary = {}) -> void:
+	var shown := args.duplicate()
+	var zh := args.duplicate()
+	for k in ["name", "who"]:
+		if args.has(k):
+			shown[k] = TE.person_name(self, args[k], lang)
+			zh[k] = TE.person_name(self, args[k], "zh")
+	issue.consequences.append(_ui(key, shown))
+	var line := str(TE.data("zh").ui.get(key, key))
+	for k in zh:
+		line = line.replace("{" + k + "}", str(zh[k]))
+	issue.cons_log.append(line)
 
 
 func _letter(kind: String, roles: Dictionary = {}, vars: Dictionary = {}) -> void:
@@ -227,11 +242,11 @@ func notebook() -> Array:
 		var active: bool = e.week_end > week
 		for loc in e.witness:
 			if not known.has(e.witness[loc]) and active:
-				g.hints.append("晚上蹲守%s也许有发现" % loc_name(loc))
+				g.hints.append(_ui("hint_stakeout", {"place": TE.loc_label(self, loc, lang)}))
 		for fid in e.facts:
 			var f: Dictionary = facts[fid]
 			if f.archive != "" and not known.get(fid, {"evidence": false}).evidence:
-				g.hints.append("%s的档案里也许有记录" % loc_name(f.archive))
+				g.hints.append(_ui("hint_archive", {"place": TE.loc_label(self, f.archive, lang)}))
 		out.append(g)
 	return out
 
@@ -1116,10 +1131,10 @@ func preview_issue(articles: Array, headline_choice := {}) -> Array:
 func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 	assert(day >= 6, "还没到周日")
 	_record({"kind": "print", "articles": articles.duplicate(true), "choice": headline_choice.duplicate()})
-	var issue := {"week": week, "articles": [], "consequences": [], "cred_delta": 0.0, "circ_delta": 0.0, "cash_delta": 0.0}
+	var issue := {"week": week, "articles": [], "consequences": [], "cons_log": [], "cred_delta": 0.0, "circ_delta": 0.0, "cash_delta": 0.0}
 	var burned: bool = flags.burned_until > week
 	if burned:
-		issue.consequences.append("报社还是一片焦黑，这周没有报纸。")
+		_cons(issue, "cons_burned")
 		articles = []
 	var circ_change := 0.0
 	var cred_change := 0.0
@@ -1192,7 +1207,7 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 		_react_to_article(a, e, rec, exposure, issue)
 		for i in range(before, issue.consequences.size()):
 			if not e.soft:
-				log.append("    → " + issue.consequences[i])
+				log.append("    → " + issue.cons_log[i])
 	# 发行量：涨幅受公信力和镇子规模约束，跌幅不受
 	circ_change *= (0.25 + stats.credibility / 100.0)
 	circ_change *= clampf(1.0 - stats.circulation / 600.0, 0.1, 1.0)
@@ -1267,21 +1282,21 @@ func _react_to_article(a: Dictionary, e: Dictionary, rec: Dictionary, exposure: 
 				visitors.append({"who": subj, "kind": "tip", "event": e.id})
 			if r.advertiser and ads.has(subj) and ads[subj].paused_until > week:
 				ads[subj].paused_until = week
-			issue.consequences.append("%s对报道很满意。" % r.name)
+			_cons(issue, "cons_pleased", {"name": subj})
 			continue
 		var s: float = e.severity * naming_mult * (1.3 if a.tone == "hot" else 1.0) * (1.2 if a.get("evidence", false) else 1.0)
 		s *= {"head": 1.0, "second": 0.8, "third": 0.6, "small": 0.3}[a.slot]
 		# 读到了吗？点名的人几乎一定会被告知
 		var p_read := 0.95 if a.naming == "named" else (0.7 if a.naming == "alias" else 0.4)
 		if not rng.chance(p_read):
-			issue.consequences.append("%s好像还没读到那篇报道。" % r.name)
+			_cons(issue, "cons_unread", {"name": subj})
 			continue
 		var level := "light"
 		if s >= 2.2: level = "heavy"
 		elif s >= 1.1: level = "medium"
 		if e.bribed_by == subj:
 			level = "heavy"
-			issue.consequences.append("%s的钱你收了，报纸也印了。" % r.name)
+			_cons(issue, "cons_bribe_printed", {"name": subj})
 		r.player_rel.like = maxf(0.0, r.player_rel.like - 0.3 * s)
 		r.player_rel.trust = maxf(0.0, r.player_rel.trust - 0.2 * s)
 		r.player_rel.fear = minf(1.0, r.player_rel.fear + 0.1 * s)
@@ -1327,46 +1342,46 @@ func _schedule_reaction(kind: String, rid: String, e: Dictionary, issue: Diction
 	match kind:
 		"avoid":
 			r.avoid_until = week + 4
-			issue.consequences.append("%s不会再跟你说话了，至少这个月。" % r.name)
+			_cons(issue, "cons_avoid", {"name": rid})
 		"leave":
 			pending.append({"week": week + 2, "kind": "leave", "who": rid, "event": e.id})
-			issue.consequences.append("%s开始打听火车时刻。" % r.name)
+			_cons(issue, "cons_leave", {"name": rid})
 		"explain":
 			visitors.append({"who": rid, "kind": "explain", "event": e.id})
-			issue.consequences.append("%s说要来报社当面谈谈。" % r.name)
+			_cons(issue, "cons_explain", {"name": rid})
 		"deal":
 			visitors.append({"who": rid, "kind": "deal", "event": e.id})
-			issue.consequences.append("%s托人带话，想「私下解决」。" % r.name)
+			_cons(issue, "cons_deal", {"name": rid})
 		"expose":
 			visitors.append({"who": rid, "kind": "expose", "event": e.id})
-			issue.consequences.append("%s咬牙说：既然要写，那就都写出来。" % r.name)
+			_cons(issue, "cons_expose", {"name": rid})
 		"insult":
 			stats.circulation *= 0.98
 			for fr in r.friends:
 				residents[fr].player_rel.like = maxf(0.0, residents[fr].player_rel.like - 0.1)
-			issue.consequences.append("%s在酒馆骂了你一晚上。" % r.name)
+			_cons(issue, "cons_insult", {"name": rid})
 		"window":
 			pending.append({"week": week + 1, "kind": "window", "who": rid, "event": e.id})
-			issue.consequences.append("夜里有人在报社门口站了很久。")
+			_cons(issue, "cons_loiter")
 			_maybe_warning(rid, e)
 		"arson":
 			_maybe_warning(rid, e)
 			if rng.chance(0.5):
 				pending.append({"week": week + 1, "kind": "arson", "who": rid, "event": e.id})
-				issue.consequences.append("有人在报社后巷闻到了煤油味。")
+				_cons(issue, "cons_kerosene")
 			else:
 				pending.append({"week": week + 1, "kind": "window", "who": rid, "event": e.id})
-				issue.consequences.append("夜里有人在报社门口站了很久。")
+				_cons(issue, "cons_loiter")
 		"pull_ad":
 			if ads.has(rid):
 				ads[rid].paused_until = week + 8
-				issue.consequences.append("%s撤了广告。" % r.name)
+				_cons(issue, "cons_pull_ad", {"name": rid})
 				pending.append({"week": week + 1, "kind": "letter", "who": rid, "letter": {"kind": "ad_pulled", "roles": {"who": rid}, "vars": {}, "id": 900 + letters.size(), "week": week + 1}})
 			else:
 				for fr in r.friends:
 					if ads.has(fr):
 						ads[fr].paused_until = week + 4
-						issue.consequences.append("%s让%s撤了广告。" % [r.name, residents[fr].name])
+						_cons(issue, "cons_pull_ad_friend", {"name": rid, "who": fr})
 						break
 		"pressure":
 			stats.circulation *= 0.92
@@ -1378,13 +1393,13 @@ func _schedule_reaction(kind: String, rid: String, e: Dictionary, issue: Diction
 			for fr in r.friends:
 				if ads.has(fr):
 					ads[fr].paused_until = week + 6
-			issue.consequences.append("%s施压，退订单来了 %d 张。" % [r.name, n])
+			_cons(issue, "cons_pressure", {"name": rid, "n": n})
 		"sue":
 			lawsuits.append({"week": week + 3, "who": rid, "event": e.id, "truth": rec.avg_truth, "evidence": rec.evidence})
-			issue.consequences.append("%s请了律师，传票三周后到。" % r.name)
+			_cons(issue, "cons_sue", {"name": rid})
 		"suicide":
 			pending.append({"week": week + 2, "kind": "suicide", "who": rid, "event": e.id})
-			issue.consequences.append("%s这几天谁也不见。" % r.name)
+			_cons(issue, "cons_hide", {"name": rid})
 
 
 func _apply_pending() -> void:

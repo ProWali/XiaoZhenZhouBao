@@ -1,0 +1,8 @@
+{
+ "notebook": "选题簿",
+ "notebook_n": "选题簿 {n}",
+ "end_day": "收工",
+ "go_to_bed": "回去睡觉",
+ "night": "夜",
+ "status": "第 {week} 周 · {season} · {day}{slot}    行动 {act}   熬夜 {nights}    现金 {cash} 元    每期 {circ} 份"
+}

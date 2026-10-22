@@ -1,0 +1,14 @@
+{
+ "title": "{paper} · The first four issues",
+ "end_bankrupt": "Four weeks in the red. The paper has stopped.",
+ "end_shut_down": "The third lawsuit was lost. The paper has been ordered to close.",
+ "end_destroyed": "The office burned, and there is no money to rebuild.",
+ "end_train": "You boarded the southbound train.",
+ "end_term_end": "Two years are up. You leave the keys on the desk.",
+ "issue": "No. {n}   {headline}",
+ "no_fronts": "No front-page story in four issues.",
+ "thanks": "That is the end of the playtest. Thank you for running Greyriver's paper for a month.\n\nPlease send back the two files starting with \"session\" in the folder below (.jsonl and -save.json), along with the questionnaire. They record what you looked at and did, step by step, and contain no personal information:\n{path}",
+ "open_folder": "Open the folder",
+ "keep_playing": "Keep playing (past the playtest, unpolished)",
+ "menu": "Main menu"
+}

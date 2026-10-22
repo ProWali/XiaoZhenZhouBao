@@ -1,0 +1,23 @@
+{
+ "archive": "Records",
+ "back": "Back to the street",
+ "nobody": "Nobody here right now.",
+ "no_actions": "No actions left today.",
+ "click_person": "Click someone to talk (one action).",
+ "person_occ": "{name} ({occ})",
+ "tip_lead": "★ {tip} · {from} sent you",
+ "small_talk": "Just chat, and see what {name} offers",
+ "ask_about": "Ask about \"{event}\": {fact}",
+ "talk_note": "Pick a topic from the notebook. Ask people about their own doings and they will mostly deny it, and remember you were asking. When nothing comes of it, they may point you to someone else.",
+ "talk_note_lead": "★ {from} sent you to {name}. Say who sent you and you'll likely get an answer; just chatting will do.",
+ "avoiding": "{name} has been avoiding you lately.",
+ "talk_title": "What to ask {name} ({occ})?",
+ "talk_result": "Talking to {name}",
+ "archive_cost": "Going through the records at {place} costs one action. ",
+ "archive_unpointed": "Nothing in the notebook points to these records; you'll likely come up empty. ",
+ "keeper_trusts": "{name} trusts you and will let you look.",
+ "keeper_bribe": "{name} doesn't know you well. It'll take five dollars.",
+ "archive_yes": "Look",
+ "archive_no": "Never mind",
+ "archive_result": "The records at {place}"
+}

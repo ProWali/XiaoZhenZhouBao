@@ -1,0 +1,7 @@
+{
+ "into_notebook": "记进选题簿：",
+ "lead_noted": "记下线头：",
+ "lead_at": "，这会儿在{where}",
+ "lead_line": "★ {who}（{occ}）{at}。选题簿「线头」一页里也记着。",
+ "ok": "好"
+}

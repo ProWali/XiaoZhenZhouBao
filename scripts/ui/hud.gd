@@ -24,10 +24,10 @@ func _ready() -> void:
 	var box := HBoxContainer.new()
 	box.add_theme_constant_override("separation", 3)
 	add_child(box)
-	_nb_btn = _small("选题簿", func(): Game.open_overlay("notebook"))
+	_nb_btn = _small(Game.t("hud.notebook"), func(): Game.open_overlay("notebook"))
 	_nb_btn.tooltip_text = "Tab"
 	box.add_child(_nb_btn)
-	_end_btn = _small("收工", func(): end_day_requested.emit())
+	_end_btn = _small(Game.t("hud.end_day"), func(): end_day_requested.emit())
 	box.add_child(_end_btn)
 	box.add_child(_small("≡", func(): Game.open_overlay("settings")))
 	box.position = Vector2(640 - 3, 1)
@@ -57,20 +57,19 @@ func refresh() -> void:
 	var w = Game.world
 	if w == null:
 		return
-	var day_s: String = w.DAY_NAMES[mini(w.day, 7)]
-	var slot_s: String = w.SLOT_NAMES[mini(w.slot, 2)] if w.day <= 6 else "夜"
+	var day_s: String = Game.t("common.day_short_%d" % clampi(w.day, 1, 7))
+	var slot_s: String = Game.slot_name(w.slot) if w.day <= 6 else Game.t("hud.night")
 	var act := ""
 	for i in 2:
 		act += "■" if i < w.actions_left and w.slot <= 1 else "□"
 	var nights := ""
 	for i in w.MAX_NIGHTS:
 		nights += "●" if i < w.nights_used else "○"
-	var week_s := "第 %d 周 · %s" % [w.week, w.season_name()]
-	_text.text = "%s · %s%s    行动 %s   熬夜 %s    现金 %.1f 元    每期 %d 份" % [week_s, day_s, slot_s, act, nights, w.stats.cash, int(w.stats.circulation)]
+	_text.text = Game.t("hud.status", {"week": w.week, "season": Game.season_name(), "day": day_s, "slot": slot_s, "act": act, "nights": nights, "cash": "%.1f" % w.stats.cash, "circ": int(w.stats.circulation)})
 	_end_btn.visible = show_end_day and w.day <= 6
-	_end_btn.text = "回去睡觉" if w.slot >= 2 else "收工"
+	_end_btn.text = Game.t("hud.go_to_bed") if w.slot >= 2 else Game.t("hud.end_day")
 	var n: int = w.notebook().size()
-	_nb_btn.text = "选题簿 %d" % n if n > 0 else "选题簿"
+	_nb_btn.text = Game.t("hud.notebook_n", {"n": n}) if n > 0 else Game.t("hud.notebook")
 
 
 func _unhandled_input(event: InputEvent) -> void:

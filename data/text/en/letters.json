@@ -15,25 +15,25 @@
   "{who} took the south train and said goodbye to no one.",
   "{who} is gone. The station hands say it was a one-way ticket.",
   "The door of {who}'s house is locked, and nobody waters the flowers on the sill.",
-  "{who} has left Greyriver. Before going, {who.ta} stood a while outside the Gazette office, and did not come in.",
+  "{who} has left Greyriver. Before going, {who.ta} stood a while outside the newspaper office, and did not come in.",
   "Word is that {who} has moved down south."
  ]},
  "window": {"sign": false, "items": [
-  "Monday morning, the front window of the Gazette office lay in pieces on the floor. Ten dollars to fix it.",
+  "Monday morning, the front window of the newspaper office lay in pieces on the floor. Ten dollars to fix it.",
   "Someone smashed the front window. The stone was still lying on the type case. The repair cost ten dollars.",
   "Something struck the window in the small hours. In the morning the glass was all over the floor, and a brick with it. Ten dollars for the window.",
   "The window was broken. Two words had been chalked on the brick, but the dew had blurred them past reading. Ten dollars for the glass.",
   "Opening up in the morning, you found the glass of the door in pieces on the step. Nobody saw who did it. Ten dollars to replace it."
  ]},
  "arson": {"sign": false, "items": [
-  "The Gazette office burned. The fire started in the small hours. The press survived; the roof did not. Rebuilding will cost sixty dollars, and there will be no paper for two weeks.",
+  "This paper office burned. The fire started in the small hours. The press survived; the roof did not. Rebuilding will cost sixty dollars, and there will be no paper for two weeks.",
   "A fire broke out after midnight. The neighbors came running with buckets, but the roof could not be saved. Sixty dollars to rebuild, and two weeks without printing.",
   "The office caught fire. An empty kerosene can lay in the alley behind. Sixty dollars to rebuild, and no paper for two weeks.",
   "The fire began at the back window. Half the type melted, and the roof fell in. Rebuilding will take sixty dollars, and the paper cannot print for two weeks."
  ]},
  "mourning": {"sign": false, "items": [
   "Death notice: {who}. The service is Thursday at the church. No one mentioned the paper.",
-  "{who} is dead. On the day of the funeral, people passed the Gazette office with their heads down.",
+  "{who} is dead. On the day of the funeral, people passed the newspaper office with their heads down.",
   "You did not go to the funeral of {who}. Perhaps going would have been worse."
  ]},
  "lawsuit_won": {"sign": false, "items": [

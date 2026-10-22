@@ -21,6 +21,7 @@ func _init() -> void:
 	_test_language_independent()
 	_test_text_lint()
 	_test_preview_matches_print()
+	_test_screen_tables()
 	if failures.is_empty():
 		print("全部通过")
 		quit(0)
@@ -32,6 +33,54 @@ func _init() -> void:
 
 func _fail(msg: String) -> void:
 	failures.append(msg)
+
+
+## 界面文字表：中英两边条目一一对应、{参数} 一致，英文表里没有中文；画面层脚本里不写中文字面量（注释除外）。
+func _test_screen_tables() -> void:
+	var cjk := RegEx.create_from_string("[\\x{4e00}-\\x{9fff}]")
+	var param := RegEx.create_from_string("\\{(\\w+)\\}")
+	for f in DirAccess.get_files_at("res://data/text/zh/screens"):
+		if not f.ends_with(".json"):
+			continue
+		var zh = JSON.parse_string(FileAccess.get_file_as_string("res://data/text/zh/screens/" + f))
+		var en = JSON.parse_string(FileAccess.get_file_as_string("res://data/text/en/screens/" + f))
+		if not (zh is Dictionary) or not (en is Dictionary):
+			_fail("界面文字表读不出来：" + f)
+			continue
+		for k in zh:
+			if not en.has(k):
+				_fail("英文界面表缺条目：%s %s" % [f, k])
+				continue
+			var pz := {}
+			for m in param.search_all(str(zh[k])):
+				pz[m.get_string(1)] = true
+			var pe := {}
+			for m in param.search_all(str(en[k])):
+				pe[m.get_string(1)] = true
+			if pz.keys().size() != pe.keys().size() or not pz.has_all(pe.keys()):
+				_fail("中英参数对不上：%s %s" % [f, k])
+			if cjk.search(str(en[k])) != null:
+				_fail("英文界面表里有中文：%s %s" % [f, k])
+		for k in en:
+			if not zh.has(k):
+				_fail("中文界面表缺条目：%s %s" % [f, k])
+	# 这几处中文是有意写在代码里的：语言名用本语言写；结局代号是模拟层的状态值
+	var allowed := ["简体中文", "破产", "停刊", "报社被毁", "登上火车", "任期结束"]
+	var lit := RegEx.create_from_string("\"([^\"\\\\]|\\\\.)*\"")
+	for dir in ["res://scripts/ui", "res://scripts/ui/screens"]:
+		for f in DirAccess.get_files_at(dir):
+			if not f.ends_with(".gd"):
+				continue
+			var n := 0
+			for line in FileAccess.get_file_as_string(dir + "/" + f).split("\n"):
+				n += 1
+				var code := line.strip_edges()
+				if code.begins_with("#"):
+					continue
+				for m in lit.search_all(line):
+					var s := m.get_string()
+					if cjk.search(s) != null and not (s.trim_prefix("\"").trim_suffix("\"") in allowed):
+						_fail("画面层脚本里写了中文：%s:%d %s" % [f, n, s])
 
 
 func _play(seed_v: int, strategy: String, weeks: int, lang: String = "zh") -> Dictionary:

@@ -1,0 +1,22 @@
+{
+ "head": "周六夜",
+ "nobody": "今晚没有人来。只有钟在走。",
+ "sleep": "去睡觉，明天排版",
+ "title": "{name}（{occ}）{kind}",
+ "kind_plea": "来求情",
+ "kind_threat": "来警告",
+ "kind_deal": "来谈条件",
+ "kind_tip": "来送料",
+ "kind_explain": "来解释",
+ "kind_expose": "来揭别人的底",
+ "kind_ad": "来谈广告",
+ "kind_silent": "来了，没说话",
+ "kind_warning": "来报信",
+ "kind_other": "来了",
+ "take": "收下 {n} 块",
+ "take_tip": "收了钱，这件事就不该再登。登了，对方会记恨。",
+ "refuse": "不收，请回",
+ "see_out_last": "送客，去睡觉",
+ "see_out": "送客",
+ "noted": "记进选题簿："
+}

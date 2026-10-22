@@ -24,6 +24,27 @@ static func para(text: String, width: float, font := "hand", size := 10, color :
 	return l
 
 
+## 底栏提示：一条深色横条加一行字，贴着屏幕底边。字太长时折成两行，横条往上长（英文常比中文长一倍）。
+## top、h 是一行时横条的位置和高度；width 是字能用的宽度（右边有按钮时要让开）。
+static func note_bar(parent: Control, top: int, h: int, alpha: float, width := 628) -> Label:
+	var bar := rect(Color(P.INK, alpha), Vector2(0, top), Vector2(640, h))
+	parent.add_child(bar)
+	var l := label("", "pixel", 12, P.PAPER)
+	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	l.custom_minimum_size.x = width
+	var pad_top := (h - 14) / 2
+	l.position = Vector2(6, top + pad_top)
+	parent.add_child(l)
+	var fit := func():
+		l.size = Vector2(width, 0)
+		var extra := maxi(0, int(l.size.y) - 14)
+		bar.position.y = top - extra
+		bar.size.y = h + extra
+		l.position.y = top + pad_top - extra
+	l.minimum_size_changed.connect(fit)
+	return l
+
+
 static func button(text: String, cb: Callable, min_w := 0) -> Button:
 	var b := Button.new()
 	b.text = text

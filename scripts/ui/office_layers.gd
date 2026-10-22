@@ -7,7 +7,6 @@ const P = preload("res://scripts/ui/palette.gd")
 const WINDOW := Rect2(22, 14, 56, 208)
 const AD_SLOTS := [Rect2(237, 62, 35, 43), Rect2(282, 57, 35, 48), Rect2(326, 65, 35, 43)]
 const AD_ORDER := ["owner", "grocer", "barkeep"]
-const AD_SHORT := {"owner": "锯木厂", "grocer": "杂货店", "barkeep": "酒馆"}
 
 var letters := 0
 
@@ -94,7 +93,7 @@ func _draw_ads(w) -> void:
 			continue
 		draw_rect(r, P.PAPER)
 		draw_rect(Rect2(r.position.x, r.end.y - 1, r.size.x, 1), P.STONE)
-		draw_string(font, r.position + Vector2(3, 11), AD_SHORT[AD_ORDER[i]], HORIZONTAL_ALIGNMENT_LEFT, r.size.x - 4, 8, P.INK)
+		draw_string(font, r.position + Vector2(3, 11), Game.t("office_layers.ad_" + AD_ORDER[i]), HORIZONTAL_ALIGNMENT_LEFT, r.size.x - 4, 8, P.INK)
 		for k in 5:
 			draw_rect(Rect2(r.position.x + 4, r.position.y + 17 + k * 5, r.size.x - 8 - (k % 3) * 5, 1), P.WARM_GREY)
 

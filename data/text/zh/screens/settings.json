@@ -1,0 +1,10 @@
+{
+ "title": "设置",
+ "master": "总音量",
+ "music": "钢琴",
+ "sfx": "声音",
+ "fullscreen": "全屏（F11）",
+ "language": "语言",
+ "ok": "好",
+ "save_quit": "存档并回主菜单"
+}

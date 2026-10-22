@@ -20,14 +20,14 @@ func _ready() -> void:
 	_bg = K.image("res://assets/sprites/bg/press_night.png")
 	add_child(_bg)
 	add_child(K.rect(Color(P.INK, 0.2), Vector2.ZERO, Vector2(640, 360)))
-	_note = K.label("第 %d 期。拉下杠杆就印了，印出去的字收不回来。" % w.week, "serif", 12, P.PAPER)
+	_note = K.label(Game.t("press.intro", {"n": w.week}), "serif", 12, P.PAPER)
 	_note.position = Vector2(16, 14)
 	add_child(_note)
 	_count = K.label("", "serif_black", 14, P.LAMP)
 	_count.position = Vector2(16, 326)
 	add_child(_count)
-	add_child(K.hotspot(Rect2(470, 40, 140, 120), "拉杆", _pull))
-	_btn = K.button("拉下杠杆", _pull, 110)
+	add_child(K.hotspot(Rect2(470, 40, 140, 120), Game.t("press.lever_tip"), _pull))
+	_btn = K.button(Game.t("press.lever"), _pull, 110)
 	_btn.position = Vector2(510, 324)
 	add_child(_btn)
 	_btn.call_deferred("grab_focus")
@@ -70,14 +70,14 @@ func _pull() -> void:
 	Game.sfx("press_run")
 	var total := int(circ_before)
 	var tw := create_tween()
-	tw.tween_method(func(v): _count.text = "已印 %d / %d 份" % [int(v), total], 0.0, float(total), 5.0)
+	tw.tween_method(func(v): _count.text = Game.t("press.count", {"n": int(v), "total": total}), 0.0, float(total), 5.0)
 	var shake := create_tween().set_loops(20)
 	shake.tween_property(_bg, "position", Vector2(0, 1), 0.12)
 	shake.tween_property(_bg, "position", Vector2(0, 0), 0.13)
 	_note.text = ""
 	await get_tree().create_timer(6.2).timeout
-	_count.text = "印好了。"
+	_count.text = Game.t("press.done")
 	await get_tree().create_timer(1.8).timeout
-	_note.text = "报纸天亮前送出去。"
+	_note.text = Game.t("press.dawn")
 	await get_tree().create_timer(1.6).timeout
 	Game.route()

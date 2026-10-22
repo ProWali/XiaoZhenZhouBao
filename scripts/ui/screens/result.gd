@@ -22,10 +22,10 @@ func _ready() -> void:
 		var face := K.image(Portrait.face(w, who), Vector2(14, 14))
 		face.scale = Vector2(2, 2)
 		sheet.add_child(face)
-		var nm := K.label(w.residents[who].name, "pixel", 12, P.PENCIL)
+		var nm := K.label(Game.name_of(who), "pixel", 12, P.PENCIL)
 		nm.position = Vector2(14, 82)
 		sheet.add_child(nm)
-		var oc := K.label(TE.occ_label(w, who, "zh"), "pixel", 12, P.WARM_GREY)
+		var oc := K.label(Game.occ(who), "pixel", 12, P.WARM_GREY)
 		oc.position = Vector2(14, 96)
 		sheet.add_child(oc)
 		x = 92
@@ -39,22 +39,22 @@ func _ready() -> void:
 	var gained: Array = params.get("gained", [])
 	if not gained.is_empty():
 		sl[1].add_child(K.rect(P.NOTE_LINE, Vector2.ZERO, Vector2(10, 1)))
-		var head := K.label("记进选题簿：", "pixel", 12, P.STAMP_RED)
+		var head := K.label(Game.t("result.into_notebook"), "pixel", 12, P.STAMP_RED)
 		sl[1].add_child(head)
 		for fid in gained:
 			var hb := HBoxContainer.new()
 			hb.add_theme_constant_override("separation", 4)
 			hb.add_child(K.stamps(1, 1))
-			hb.add_child(K.para(TE.fact_note(w, fid, "zh"), 420 - x - 44, "hand", 10, P.PENCIL))
+			hb.add_child(K.para(TE.fact_note(w, fid, Game.lang), 420 - x - 44, "hand", 10, P.PENCIL))
 			sl[1].add_child(hb)
 		Game.sfx("stamp")
 	var lead: String = str(params.get("lead", ""))
 	if lead != "" and w.residents.has(lead):
-		sl[1].add_child(K.label("记下线头：", "pixel", 12, P.STAMP_RED))
+		sl[1].add_child(K.label(Game.t("result.lead_noted"), "pixel", 12, P.STAMP_RED))
 		var where: String = w.where_is(lead)
-		var at: String = "，这会儿在" + w.loc_name(where) if where != "" and not where.begins_with("home:") else ""
-		sl[1].add_child(K.para("★ %s（%s）%s。选题簿「线头」一页里也记着。" % [w.residents[lead].name, TE.occ_label(w, lead, "zh"), at], 420 - x - 30, "hand", 10, P.PENCIL, 0))
-	var ok := K.button("好", _close, 70)
+		var at: String = Game.t("result.lead_at", {"where": Game.place(where)}) if where != "" and not where.begins_with("home:") else ""
+		sl[1].add_child(K.para(Game.t("result.lead_line", {"who": Game.name_of(lead), "occ": Game.occ(lead), "at": at}), 420 - x - 30, "hand", 10, P.PENCIL, 0))
+	var ok := K.button(Game.t("result.ok"), _close, 70)
 	ok.position = Vector2(334, 222)
 	sheet.add_child(ok)
 	ok.call_deferred("grab_focus")

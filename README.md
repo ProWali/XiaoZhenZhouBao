@@ -31,11 +31,13 @@
 Godot_v4.7.2-stable_win64.exe --path .
 ```
 
-自动走查（真窗口，从主菜单走到第五周周一，每屏截图）：
+自动走查（真窗口，从主菜单走到第五周周一，每屏截图；`--lang en` 走英文界面，不改设置）：
 
 ```
-Godot_v4.7.2-stable_win64_console.exe --path . -- --walkthrough --seed 7 --shots <截图目录>
+Godot_v4.7.2-stable_win64_console.exe --path . -- --walkthrough --seed 7 --shots <截图目录> [--lang en]
 ```
+
+界面文字都在 `data/text/<语言>/screens/<表名>.json`，代码里写 `Game.t("表名.条目", {参数})`；人名、地名、职业、星期用 `Game.name_of / place / place_title / occ / day_name`。不要在画面层脚本里写中文字面量。英文术语见 [design/notes/英文术语表.md](design/notes/英文术语表.md)。
 
 改完界面先编译一遍全部画面层脚本（运行时才加载，别处查不出语法错误）：
 

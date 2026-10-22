@@ -8,8 +8,6 @@ const Layers = preload("res://scripts/ui/office_layers.gd")
 const Portrait = preload("res://scripts/ui/portrait.gd")
 const TE = preload("res://scripts/text/text_engine.gd")
 
-const KIND_NAME := {"plea": "来求情", "threat": "来警告", "deal": "来谈条件", "tip": "来送料", "explain": "来解释",
-	"expose": "来揭别人的底", "ad": "来谈广告", "silent": "来了，没说话", "warning": "来报信"}
 
 var params := {}
 var _i := 0
@@ -30,7 +28,7 @@ func _ready() -> void:
 	add_child(K.rect(Color(P.SLATE_DARK, 0.35), Vector2.ZERO, Vector2(640, 360)))
 	Game.ambience("night_ambience")
 	Game.stop_music()
-	var head := K.label("周六夜", "serif_black", 16, P.PAPER)
+	var head := K.label(Game.t("visitors.head"), "serif_black", 16, P.PAPER)
 	head.position = Vector2(12, 8)
 	add_child(head)
 	_holder = Control.new()
@@ -44,8 +42,8 @@ func _show() -> void:
 	var w = Game.world
 	var vs: Array = Game.ui.get("visitors", [])
 	if vs.is_empty():
-		_panel("今晚没有人来。只有钟在走。", [], "")
-		var b := K.button("去睡觉，明天排版", _done, 0)
+		_panel(Game.t("visitors.nobody"), [], "")
+		var b := K.button(Game.t("visitors.sleep"), _done, 0)
 		b.position = Vector2(440, 318)
 		_holder.add_child(b)
 		b.call_deferred("grab_focus")
@@ -58,8 +56,10 @@ func _show() -> void:
 		var fig := K.image(Portrait.figure(w, who), Vector2(546, 196))
 		fig.scale = Vector2(3, 3)
 		_holder.add_child(fig)
-	var r: Dictionary = w.residents.get(who, {})
-	var title := "%s（%s）%s" % [r.get("name", "？"), TE.occ_label(w, who, "zh"), KIND_NAME.get(v.kind, "来了")]
+	var kind_s := Game.t("visitors.kind_" + str(v.kind))
+	if kind_s.begins_with("〔"):
+		kind_s = Game.t("visitors.kind_other")
+	var title := Game.t("visitors.title", {"name": Game.name_of(who), "occ": Game.occ(who) if w.residents.has(who) else "?", "kind": kind_s})
 	var gained: Array = []
 	if str(v.get("fact", "")) != "":
 		gained.append(str(v.fact))
@@ -73,16 +73,16 @@ func _show() -> void:
 	_holder.add_child(bar)
 	var decided: bool = Game.ui.get("deals", {}).has(str(_i))
 	if v.kind == "deal" and not decided:
-		var take := K.button("收下 %d 块" % int(v.offer), func():
+		var take := K.button(Game.t("visitors.take", {"n": int(v.offer)}), func():
 			w.accept_deal(v)
 			Game.sfx("coins")
 			Game.ui.deals[str(_i)] = true
 			Game.track("deal", {"who": who, "offer": int(v.offer), "took": true})
 			Game.autosave()
 			_next(), 0)
-		take.tooltip_text = "收了钱，这件事就不该再登。登了，对方会记恨。"
+		take.tooltip_text = Game.t("visitors.take_tip")
 		bar.add_child(take)
-		var refuse := K.button("不收，请回", func():
+		var refuse := K.button(Game.t("visitors.refuse"), func():
 			Game.ui.deals[str(_i)] = false
 			Game.track("deal", {"who": who, "offer": int(v.offer), "took": false})
 			_next(), 0)
@@ -90,7 +90,7 @@ func _show() -> void:
 		refuse.call_deferred("grab_focus")
 	else:
 		var last: bool = _i >= vs.size() - 1
-		var b := K.button("送客，去睡觉" if last else "送客", _next, 0)
+		var b := K.button(Game.t("visitors.see_out_last") if last else Game.t("visitors.see_out"), _next, 0)
 		bar.add_child(b)
 		b.call_deferred("grab_focus")
 	var cnt := K.label("%d / %d" % [_i + 1, vs.size()], "pixel", 12, P.STONE)
@@ -116,10 +116,10 @@ func _panel(title: String, lines: Array, who: String, gained: Array = []) -> voi
 	for line in lines:
 		sl[1].add_child(K.para(str(line), 400 - x - 24, "hand", 11, P.PENCIL))
 	if not gained.is_empty():
-		sl[1].add_child(K.label("记进选题簿：", "pixel", 12, P.STAMP_RED))
+		sl[1].add_child(K.label(Game.t("visitors.noted"), "pixel", 12, P.STAMP_RED))
 		for fid in gained:
 			if w.facts.has(fid):
-				sl[1].add_child(K.para("· " + TE.fact_note(w, fid, "zh"), 400 - x - 30, "hand", 10, P.PENCIL, 0))
+				sl[1].add_child(K.para("· " + TE.fact_note(w, fid, Game.lang), 400 - x - 30, "hand", 10, P.PENCIL, 0))
 
 
 func _next() -> void:

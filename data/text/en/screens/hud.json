@@ -1,0 +1,8 @@
+{
+ "notebook": "Notebook",
+ "notebook_n": "Notebook {n}",
+ "end_day": "Call it a day",
+ "go_to_bed": "Go to bed",
+ "night": "night",
+ "status": "Wk {week} · {season} · {day} {slot}  Actions {act}  Nights {nights}  ${cash}  Run {circ}"
+}

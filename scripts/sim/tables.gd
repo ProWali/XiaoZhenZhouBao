@@ -1,23 +1,23 @@
 ## 静态数据表：地点、职业原型、性格特征。M1 先放在脚本里，M2 迁到 JSON。
 extends RefCounted
 
-## 地点类型。kind 用于事件模板的 requires；archive 表示这里有可查的档案；night 表示晚上有人。
+## 地点类型。en 是英文正文里的写法，plate_en 是地图名牌和地点标题上的短名。kind 用于事件模板的 requires；archive 表示这里有可查的档案；night 表示晚上有人。
 const LOCATIONS := [
-	{"id": "office", "en": "the Gazette office", "name": "报社", "kind": "office"},
-	{"id": "mill", "en": "the sawmill", "name": "锯木厂", "kind": "mill", "ads": true},
-	{"id": "church", "en": "the church", "name": "教堂", "kind": "church", "sunday": true},
-	{"id": "tavern", "en": "the tavern", "name": "酒馆", "kind": "tavern", "night": true, "ads": true},
-	{"id": "store", "en": "the general store", "name": "杂货店", "kind": "store", "ads": true, "archive": true},
-	{"id": "post", "en": "the post office", "name": "邮局", "kind": "post", "archive": true},
-	{"id": "hall", "en": "the town hall", "name": "镇公所", "kind": "hall", "archive": true},
-	{"id": "clinic", "en": "the clinic", "name": "诊所", "kind": "clinic", "archive": true},
-	{"id": "station", "en": "the railway station", "name": "火车站", "kind": "station"},
-	{"id": "school", "en": "the schoolhouse", "name": "学校", "kind": "school"},
-	{"id": "farm_a", "en": "the north farm", "name": "北边农场", "kind": "farm"},
-	{"id": "farm_b", "en": "the river-bend farm", "name": "河湾农场", "kind": "farm"},
-	{"id": "river", "en": "the riverbank", "name": "河边", "kind": "river", "outdoor": true},
-	{"id": "bridge", "en": "the bridge", "name": "桥头", "kind": "bridge", "outdoor": true},
-	{"id": "woods", "en": "the woods", "name": "树林", "kind": "woods", "outdoor": true},
+	{"id": "office", "plate_en": "Office", "en": "the newspaper office", "name": "报社", "kind": "office"},
+	{"id": "mill", "plate_en": "Sawmill", "en": "the sawmill", "name": "锯木厂", "kind": "mill", "ads": true},
+	{"id": "church", "plate_en": "Church", "en": "the church", "name": "教堂", "kind": "church", "sunday": true},
+	{"id": "tavern", "plate_en": "Tavern", "en": "the tavern", "name": "酒馆", "kind": "tavern", "night": true, "ads": true},
+	{"id": "store", "plate_en": "Store", "en": "the general store", "name": "杂货店", "kind": "store", "ads": true, "archive": true},
+	{"id": "post", "plate_en": "Post Office", "en": "the post office", "name": "邮局", "kind": "post", "archive": true},
+	{"id": "hall", "plate_en": "Town Hall", "en": "the town hall", "name": "镇公所", "kind": "hall", "archive": true},
+	{"id": "clinic", "plate_en": "Clinic", "en": "the clinic", "name": "诊所", "kind": "clinic", "archive": true},
+	{"id": "station", "plate_en": "Station", "en": "the railway station", "name": "火车站", "kind": "station"},
+	{"id": "school", "plate_en": "School", "en": "the schoolhouse", "name": "学校", "kind": "school"},
+	{"id": "farm_a", "plate_en": "North Farm", "en": "the north farm", "name": "北边农场", "kind": "farm"},
+	{"id": "farm_b", "plate_en": "Bend Farm", "en": "the river-bend farm", "name": "河湾农场", "kind": "farm"},
+	{"id": "river", "plate_en": "Riverbank", "en": "the riverbank", "name": "河边", "kind": "river", "outdoor": true},
+	{"id": "bridge", "plate_en": "Bridge", "en": "the bridge", "name": "桥头", "kind": "bridge", "outdoor": true},
+	{"id": "woods", "plate_en": "Woods", "en": "the woods", "name": "树林", "kind": "woods", "outdoor": true},
 ]
 
 ## 职业原型。

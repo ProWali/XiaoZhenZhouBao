@@ -40,7 +40,7 @@ func _ready() -> void:
 		sl[1].add_child(hb)
 		if first == null and not b.disabled:
 			first = b
-	var back := K.button("算了", func(): Game.close_overlay(), 70)
+	var back := K.button(Game.t("pick.back"), func(): Game.close_overlay(), 70)
 	back.position = Vector2(316, 278)
 	sheet.add_child(back)
 	if first != null:

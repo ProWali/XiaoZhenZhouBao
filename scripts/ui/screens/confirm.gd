@@ -15,14 +15,16 @@ func _ready() -> void:
 	var t := K.para(str(params.get("text", "")), 270, "hand", 11, P.PRINT_INK)
 	t.position = Vector2(15, 12)
 	sheet.add_child(t)
-	var yes := K.button(str(params.get("yes", "好")), func():
+	var yes := K.button(str(params.get("yes", Game.t("confirm.yes"))), func():
 		Game.close_overlay()
 		var cb: Callable = params.get("on_yes", Callable())
 		if cb.is_valid():
 			cb.call(), 70)
+	# 靠右对齐：英文按钮字长，宽度跟着字走
 	yes.position = Vector2(215, 78)
+	yes.resized.connect(func(): yes.position.x = 285 - yes.size.x)
 	sheet.add_child(yes)
-	var no := K.button(str(params.get("no", "算了")), func(): Game.close_overlay(), 70)
+	var no := K.button(str(params.get("no", Game.t("confirm.no"))), func(): Game.close_overlay(), 70)
 	no.position = Vector2(15, 78)
 	sheet.add_child(no)
 	no.call_deferred("grab_focus")

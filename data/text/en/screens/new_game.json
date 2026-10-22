@@ -1,0 +1,14 @@
+{
+ "title": "A new paper",
+ "paper": "Paper's name",
+ "editor": "Editor's name",
+ "editor_hint": "Printed at the foot of the page",
+ "seed": "Town seed",
+ "seed_tip": "The same seed always grows the same town",
+ "length": "Length: the playtest covers the first four weeks",
+ "ironman": "Ironman: autosave; what's printed stays printed",
+ "suicide": "Allow the gravest consequence (suicide)",
+ "suicide_note": "Off by default. When on, someone named in a damaging story may take their own life. It is never shown, only reported in obituaries and letters.",
+ "start": "Open shop",
+ "back": "Back"
+}

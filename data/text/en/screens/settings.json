@@ -1,0 +1,10 @@
+{
+ "title": "Settings",
+ "master": "Volume",
+ "music": "Piano",
+ "sfx": "Sound",
+ "fullscreen": "Fullscreen (F11)",
+ "language": "Language",
+ "ok": "OK",
+ "save_quit": "Save and return to menu"
+}

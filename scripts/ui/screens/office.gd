@@ -27,10 +27,7 @@ func _ready() -> void:
 	_hud.end_day_requested.connect(Game.request_end_day)
 	add_child(_hud)
 	# 底下一行：现在该干什么
-	add_child(K.rect(Color(P.INK, 0.85), Vector2(0, 342), Vector2(640, 18)))
-	_note = K.label("", "pixel", 12, P.PAPER)
-	_note.position = Vector2(6, 344)
-	add_child(_note)
+	_note = K.note_bar(self, 342, 18, 0.85)
 	if mode == "morning":
 		_morning()
 	else:
@@ -45,13 +42,13 @@ func _morning() -> void:
 	Game.sfx("mail_slot")
 	var n: int = w.letters.size()
 	if w.week == 1:
-		_note.text = "周一早上。门缝下有前任主编留下的一封信。"
+		_note.text = Game.t("office.morning_first")
 	elif n > 0:
-		_note.text = "周一早上。报纸发出去了，门缝下塞进来 %d 封信。" % n
+		_note.text = Game.t("office.morning_letters", {"n": n})
 	else:
-		_note.text = "周一早上。门缝下什么也没有。桌上是上周的账本。"
-	add_child(K.hotspot(Rect2(500, 300, 110, 40), "门缝下的信" if n > 0 else "账本", _read))
-	var b := K.button("读信" if n > 0 else "看账本", _read, 80)
+		_note.text = Game.t("office.morning_none")
+	add_child(K.hotspot(Rect2(500, 300, 110, 40), Game.t("office.tip_letters") if n > 0 else Game.t("office.tip_ledger"), _read))
+	var b := K.button(Game.t("office.read_letters") if n > 0 else Game.t("office.read_ledger"), _read, 80)
 	b.position = Vector2(552, 320)
 	add_child(b)
 	b.grab_focus()
@@ -71,26 +68,26 @@ func _day() -> void:
 	if evening:
 		Game.stop_music()
 	# 热区：门、选题簿、抽屉（线人）、日历（收工）、印刷机、广告板
-	add_child(K.hotspot(Rect2(560, 20, 60, 300), "出门 · 晚上去哪蹲着" if evening else "出门 · 去镇上", func(): Game.sfx("door_open"); Game.fade_to("town_map")))
-	add_child(K.hotspot(Rect2(322, 192, 74, 22), "选题簿", func(): Game.open_overlay("notebook")))
-	add_child(K.hotspot(Rect2(166, 222, 60, 82), "抽屉 · 线人的地址", _informer))
-	add_child(K.hotspot(Rect2(388, 40, 54, 72), "日历 · %s" % ("回去睡觉" if evening else "收工"), Game.request_end_day))
-	add_child(K.hotspot(Rect2(430, 92, 110, 176), "印刷机 · 周日才开", func(): _say("印刷机要等到周日。这一周的料先攒在选题簿里。")))
-	add_child(K.hotspot(Rect2(228, 38, 144, 88), "广告板", _ads_info))
+	add_child(K.hotspot(Rect2(560, 20, 60, 300), Game.t("office.tip_door_night") if evening else Game.t("office.tip_door_day"), func(): Game.sfx("door_open"); Game.fade_to("town_map")))
+	add_child(K.hotspot(Rect2(322, 192, 74, 22), Game.t("hud.notebook"), func(): Game.open_overlay("notebook")))
+	add_child(K.hotspot(Rect2(166, 222, 60, 82), Game.t("office.tip_drawer"), _informer))
+	add_child(K.hotspot(Rect2(388, 40, 54, 72), Game.t("office.tip_calendar", {"what": Game.t("hud.go_to_bed") if evening else Game.t("hud.end_day")}), Game.request_end_day))
+	add_child(K.hotspot(Rect2(430, 92, 110, 176), Game.t("office.tip_press"), func(): _say(Game.t("office.press_wait"))))
+	add_child(K.hotspot(Rect2(228, 38, 144, 88), Game.t("office.tip_ads"), _ads_info))
 	if w.slept_in == w.week * 10 + w.day:
-		_note.text = "昨晚熬得太晚，一觉睡到中午，上午没了。熬夜一周超过两次就会这样。"
+		_note.text = Game.t("office.slept_in")
 	elif w.day == 1 and w.slot == 0 and w.week == 1:
-		_note.text = "第一周。前任说邮差可靠：推开右边的门，先去邮局找他聊聊。问到的事会记进桌上的选题簿。"
+		_note.text = Game.t("office.first_week")
 	elif w.day == 2 and w.slot == 0 and w.week == 1:
-		_note.text = "桌子左边的抽屉里有线人的地址：花三块钱，可以托他打听某个人。"
+		_note.text = Game.t("office.first_tuesday")
 	elif evening:
-		_note.text = "天黑了。可以出门去酒馆听听、找个地方蹲守（熬夜），或者回去睡觉。"
+		_note.text = Game.t("office.evening")
 	elif w.day == 6:
-		_note.text = "周六。今晚可能有人上门，明天周日排版付印。"
+		_note.text = Game.t("office.saturday")
 	elif w.slot == 0:
-		_note.text = "%s上午。" % w.DAY_NAMES[w.day] + _hint()
+		_note.text = Game.t("office.day_slot", {"day": Game.day_name(w.day), "slot": Game.slot_name(0)}) + _hint()
 	else:
-		_note.text = "%s下午。" % w.DAY_NAMES[w.day] + _hint()
+		_note.text = Game.t("office.day_slot", {"day": Game.day_name(w.day), "slot": Game.slot_name(1)}) + _hint()
 
 
 func _hint() -> String:
@@ -98,18 +95,18 @@ func _hint() -> String:
 	for l in w.leads:
 		var where: String = w.where_is(l.who)
 		if where != "" and not where.begins_with("home:"):
-			return "★ 线头：%s说去找%s，这会儿在%s。" % [w.res_name(l.from), w.res_name(l.who), w.loc_name(where)]
+			return Game.t("office.hint_lead", {"from": Game.name_of(l.from), "who": Game.name_of(l.who), "where": Game.place(where)})
 	var groups: Array = w.notebook()
 	if groups.is_empty():
-		return "选题簿还是空的。"
+		return Game.t("office.hint_empty")
 	var unverified := 0
 	for g in groups:
 		for fid in g.facts:
 			if not w.is_verified(fid):
 				unverified += 1
 	if unverified > 0:
-		return "选题簿里有 %d 件事，%d 条还没坐实。" % [groups.size(), unverified]
-	return "选题簿里有 %d 件事。" % groups.size()
+		return Game.t("office.hint_unverified", {"n": groups.size(), "u": unverified})
+	return Game.t("office.hint_n", {"n": groups.size()})
 
 
 func _say(text: String) -> void:
@@ -119,20 +116,20 @@ func _say(text: String) -> void:
 func _informer() -> void:
 	var w = Game.world
 	if not w.can_act_day():
-		_say("线人只在白天见。")
+		_say(Game.t("office.informer_day_only"))
 		return
 	if w.stats.cash < 3:
-		_say("线人要三块钱，抽屉里不够。")
+		_say(Game.t("office.informer_broke"))
 		return
 	var items: Array = []
 	var known_people := _people_of_interest()
 	for rid in known_people:
 		var r: Dictionary = w.residents[rid]
-		items.append({"text": "%s（%s）" % [r.name, TE.occ_label(w, rid, "zh")], "who": rid, "cb": func():
+		items.append({"text": Game.t("office.person_occ", {"name": Game.name_of(rid), "occ": Game.occ(rid)}), "who": rid, "cb": func():
 			var res: Dictionary = w.act_informer(rid)
 			Game.sfx("coins")
-			Game.show_result("托线人打听%s" % r.name, res, "", func(): Game.route(false))})
-	Game.open_overlay("pick", {"title": "托线人打听谁？", "note": "花 3 块钱和一个行动点。线人消息准，但有时会被人收买。只列你见过或听说过的人。", "items": items})
+			Game.show_result(Game.t("office.informer_title", {"name": Game.name_of(rid)}), res, "", func(): Game.route(false))})
+	Game.open_overlay("pick", {"title": Game.t("office.informer_pick"), "note": Game.t("office.informer_note"), "items": items})
 
 
 ## 玩家见过或听说过的人：选题簿里出现过的、告诉过你事情的、采访过的
@@ -162,5 +159,5 @@ func _ads_info() -> void:
 	for rid in w.ads:
 		var r: Dictionary = w.residents[rid]
 		var on: bool = w.ads[rid].paused_until <= w.week and r.in_town and r.player_rel.like >= 0.3
-		lines.append("%s（%s）：%s" % [r.name, TE.loc_label(w, r.work, "zh"), "登着" if on else "撤了"])
-	_say("广告：" + "；".join(lines))
+		lines.append(Game.t("office.ad_line", {"name": Game.name_of(rid), "where": Game.place(r.work), "state": Game.t("office.ad_on") if on else Game.t("office.ad_off")}))
+	_say(Game.t("office.ads") + Game.t("common.list_sep").join(lines))

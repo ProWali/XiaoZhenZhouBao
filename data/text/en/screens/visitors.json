@@ -1,0 +1,22 @@
+{
+ "head": "Saturday night",
+ "nobody": "Nobody came tonight. Only the clock, ticking.",
+ "sleep": "Bed. Layout tomorrow",
+ "title": "{name} ({occ}) {kind}",
+ "kind_plea": "came to plead",
+ "kind_threat": "came with a warning",
+ "kind_deal": "came to make terms",
+ "kind_tip": "came with a tip",
+ "kind_explain": "came to explain",
+ "kind_expose": "came to tell on someone else",
+ "kind_ad": "came about advertising",
+ "kind_silent": "came, and said nothing",
+ "kind_warning": "came to warn you",
+ "kind_other": "came by",
+ "take": "Take the ${n}",
+ "take_tip": "Take the money and this story shouldn't run. Print it anyway and you'll have an enemy.",
+ "refuse": "Refuse, show them out",
+ "see_out_last": "Show them out, then bed",
+ "see_out": "Show them out",
+ "noted": "Into the notebook:"
+}
