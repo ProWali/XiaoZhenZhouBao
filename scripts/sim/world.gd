@@ -225,6 +225,9 @@ func verify_score(fid: String) -> float:
 			"eavesdrop": score += 0.5
 			"letter": score += 0.0
 			_: score += 1.0
+	# 谣言只靠人嘴传，凑不满三枚（第 2 轮：「三枚算坐实」的事，又有人写信说没发生过）
+	if facts[fid].get("is_rumor", false):
+		score = minf(score, 2.5)
 	return score
 
 
@@ -273,7 +276,10 @@ func notebook() -> Array:
 					if residents[rid].in_town and residents[rid].knows.has(fid) and _can_tell(rid, fid):
 						g.more += 1
 						break
-			g.hints.push_front(_ui("hint_more") if g.more > 0 else _ui("hint_done"))
+			if g.more > 0:
+				g.hints.push_front(_ui("hint_more"))
+			else:
+				g.hints.push_front(_ui("hint_done") if not g.hints.is_empty() else _ui("hint_all_known"))
 		for rid in reluctant:
 			var rl: Dictionary = reluctant[rid]
 			if rl.event == e.id and week - int(rl.week) <= 3 and residents[rid].alive and residents[rid].in_town:
@@ -316,7 +322,7 @@ func _start_week(first: bool) -> void:
 
 ## 周一邮差捎一句风声：镇上有件还没登、你一条都不知道的事，就指给你一个知道它的人（附一个线头）。
 ## 一周最多一条，不说是什么事。M4.2：试玩里没有 ★ 的时候，玩家整天不知道干什么。
-func _rumor_hook() -> void:
+func _rumor_hook(with_letter := true) -> void:
 	var postman := ""
 	for rid in living_ids():
 		if residents[rid].occ == "postman" and residents[rid].in_town:
@@ -347,7 +353,8 @@ func _rumor_hook() -> void:
 			continue
 		var who: String = rng.pick(cands)
 		leads.append({"who": who, "event": e.id, "from": postman, "week": week})
-		_letter("rumor_lead", {"who": postman, "tip": who})
+		if with_letter:
+			_letter("rumor_lead", {"who": postman, "tip": who})
 		return
 
 
@@ -362,7 +369,72 @@ func _start_day() -> void:
 		log.append("第 %d 周 %s：熬夜太多，上午起不来。" % [week, DAY_NAMES[day]])
 	_compute_whereabouts()
 	_spread_rumors()
+	if day >= 2 and day <= 5:
+		_midweek_hook()
 	_roll_witness_nights()
+
+
+## 周中：玩家手上既没有找得到人的线头，选题簿里的事也都问完了，就让镇上冒出一件玩家还没摸到的事，邮差路过时指个人。
+## M4.2 第 2 轮：一件事两三条料，一两天就挖完，到下周一之前没事可干。
+func _midweek_hook() -> void:
+	for l in leads:
+		var o: Dictionary = residents.get(l.who, {})
+		if not o.is_empty() and o.alive and o.in_town and o.work != "home":
+			return
+	for g in notebook():
+		if int(g.get("more", 0)) > 0:
+			return
+	var fresh := false
+	for e in events:
+		if e.soft or e.printed or e.week_end <= week + 1:
+			continue
+		var seen := false
+		for fid in e.facts:
+			if known.has(fid):
+				seen = true
+		if not seen:
+			fresh = true
+	# 只在这周手上没东西可登的时候补生一件，一周最多一件（补多了，挖得快、登得狠的人一周结几个仇，平衡里「敢说」派十局烧掉六局）
+	var printable := false
+	for e in events:
+		if e.soft or e.printed:
+			continue
+		for fid in e.facts:
+			if known.has(fid):
+				printable = true
+	if not fresh and not printable and int(flags.get("midweek_spawn", 0)) != week:
+		flags["midweek_spawn"] = week
+		_spawn_one_secret()
+	_rumor_hook(false)
+
+
+## 生一件秘密事件（不管周初掷过的骰）：季节对、没在跑、冷却过了、能凑齐角色的模板里挑一个
+func _spawn_one_secret() -> void:
+	var tpls: Array = []
+	for t in events_db.templates:
+		if t.get("manual", false) or t.get("soft", false):
+			continue
+		if t.has("season"):
+			var ok_season := false
+			for sv in t.season:
+				if int(sv) == is_season(week):
+					ok_season = true
+			if not ok_season:
+				continue
+		var active := false
+		for e in events:
+			if e.tid == t.id:
+				active = true
+		if active or (last_spawn.has(t.id) and week - int(last_spawn[t.id]) < int(t.get("cooldown", 8))):
+			continue
+		tpls.append(t)
+	rng.shuffle(tpls)
+	for t in tpls:
+		var roles: Dictionary = events_db.cast_roles(t, self)
+		if roles.is_empty():
+			continue
+		spawn_instance(t, roles, {}, "周中")
+		return
 
 
 func _compute_whereabouts() -> void:
@@ -768,7 +840,7 @@ func act_interview(rid: String, topic: String = "") -> Dictionary:
 				for s in known[fid].sources:
 					if s.who == rid:
 						heard = true
-				if not heard and event_of(fid).week_end > week:
+				if not heard and event_of(fid).week_end > week and not is_verified(fid):
 					echo.append(fid)
 			if not echo.is_empty():
 				offer = rng.pick(echo)
@@ -828,13 +900,20 @@ func act_interview(rid: String, topic: String = "") -> Dictionary:
 	reluctant.erase(rid)
 	_learn(offer, "interview", rid)
 	res.gained.append(offer)
-	res.lines.append(_ui(key, {"name": _nm(rid), "fact": TE.fact_note_by(self, offer, rid, lang)}))
+	res.lines.append(_ui(_own_key(key, offer, rid), {"name": _nm(rid), "fact": TE.fact_note_by(self, offer, rid, lang)}))
 	if not more.is_empty() and rng.chance(0.6):
 		var fid2: String = rng.pick(more)
 		_learn(fid2, "interview", rid)
 		res.gained.append(fid2)
-		res.lines.append(_ui("adds", {"name": _nm(rid), "fact": TE.fact_note_by(self, fid2, rid, lang)}))
+		res.lines.append(_ui(_own_key("adds", fid2, rid), {"name": _nm(rid), "fact": TE.fact_note_by(self, fid2, rid, lang)}))
 	return res
+
+
+## 碎片里说的就是说话人自己（他的车、他诊所的记录）：不用「我听说」的口气，换亲口说的说法（第 2 轮：「我只听说，面粉搬上了我的车」）
+func _own_key(key: String, fid: String, rid: String) -> String:
+	if TE.fact_note(self, fid, lang).contains(_nm(rid)) and TE.data(lang).ui.has(key + "_own"):
+		return key + "_own"
+	return key
 
 
 ## 这条碎片他会不会拿出来说：玩家还不知道；不是他自己的秘密；犯事的一方不会自己招认
@@ -980,14 +1059,27 @@ func act_eavesdrop() -> Dictionary:
 		var r: Dictionary = residents[rid]
 		if r.knows.is_empty() or not rng.chance(0.5):
 			continue
-		var fid: String = rng.pick(r.knows.keys())
+		# 酒客多半说你还没听过的；自己的丑事不会喝着酒说出来（第 2 轮：「火车晚点」一字不差听了四回、老板在自己店里说自己出千）
+		var fresh: Array = []
+		var old: Array = []
+		for k in r.knows:
+			if not _can_tell(rid, k) and not known.has(k):
+				continue
+			if known.has(k):
+				if facts[k].secrecy != "public":
+					old.append(k)
+			else:
+				fresh.append(k)
+		if fresh.is_empty() and (old.is_empty() or not rng.chance(0.3)):
+			continue
+		var fid: String = rng.pick(fresh) if not fresh.is_empty() else rng.pick(old)
 		var e := event_of(fid)
 		# 醉话走样：有概率变成谣言版本
-		if not e.is_empty() and not e.rumor_facts.is_empty() and rng.chance(0.25):
+		if not e.is_empty() and not e.rumor_facts.is_empty() and rng.chance(0.15):
 			fid = rng.pick(e.rumor_facts)
 		_learn(fid, "eavesdrop", rid)
 		res.gained.append(fid)
-		res.lines.append(_ui("overheard", {"name": _nm(rid), "fact": _note(fid)}))
+		res.lines.append(_ui("overheard", {"name": _nm(rid), "fact": TE.fact_note_by(self, fid, rid, lang)}))
 	if res.gained.is_empty():
 		res.lines.append(_ui("tavern_nothing"))
 	_spend_night()
@@ -1084,7 +1176,7 @@ func act_informer(target: String) -> Dictionary:
 	# 这人身上的事：碎片说的是他，或者他就是犯事的一方（试玩：偷猎的人被说成「干净得很」，因为碎片的主语是收鹿皮的店）
 	var involved := false
 	for e in events:
-		var his: bool = not e.soft and target in e.roles.get(e.target, [])
+		var his: bool = not e.soft and not _role_of(e, target).is_empty()
 		for fid in e.facts:
 			if facts[fid].subject == target or his:
 				involved = true
@@ -1137,7 +1229,7 @@ func act_stakeout(loc: String) -> Dictionary:
 	if res.gained.is_empty():
 		var hinted := ""
 		for e in events:
-			if e.witness.has(loc) and not e.tonight.has(loc) and not known.has(e.witness[loc]):
+			if e.witness.has(loc) and not e.get("tonight", {}).has(loc) and not known.has(e.witness[loc]):
 				for fid in e.facts:
 					if known.has(fid):
 						hinted = _nights_text(e, loc)
@@ -1192,6 +1284,9 @@ func saturday_visitors() -> Array:
 			if ev.id == v.event:
 				e = ev
 		var item := {"who": v.who, "kind": v.kind, "event": v.event, "lines": [], "offer": 0, "fact": "", "facts": []}
+		# 当事人上过门：报道里不能再写「本人还没有回应」（第 2 轮：前一晚刚上门认错，稿子写没回应）
+		if not e.is_empty() and v.who in e.roles.get(e.target, []):
+			e["visited"] = true
 		if v.has("subject"):
 			item["subject"] = v.subject
 		match v.kind:
@@ -1215,6 +1310,16 @@ func saturday_visitors() -> Array:
 					item.fact = fid
 			"explain":
 				r.player_rel.like = minf(1.0, r.player_rel.like + 0.1)
+				# 上门解释的人总得说点什么：挑一条他知道、你还不知道、又不往自己身上揽的（第 2 轮：「讲到天黑」，一个字都没给玩家看）
+				if not e.is_empty():
+					var side: Array = []
+					for fid in e.facts:
+						if r.knows.has(fid) and _can_tell(v.who, fid):
+							side.append(fid)
+					if not side.is_empty():
+						var fid: String = rng.pick(side)
+						_learn(fid, "visitor", v.who)
+						item.fact = fid
 			"expose":
 				for ev in events:
 					for fid in ev.facts:
@@ -1489,7 +1594,7 @@ func _react_to_article(a: Dictionary, e: Dictionary, rec: Dictionary, exposure: 
 			s *= FOLLOWUP_SEVERITY
 		# 读到了吗？点名的人几乎一定会被告知
 		var p_read := 0.95 if a.naming == "named" else (0.7 if a.naming == "alias" else 0.4)
-		if r.get("aware", false):
+		if r.get("aware", false) or e.get("visited", false):
 			p_read = 1.0
 		if not rng.chance(p_read):
 			_cons(issue, "cons_unread", {"name": subj})
@@ -1599,10 +1704,12 @@ func _schedule_reaction(kind: String, rid: String, e: Dictionary, issue: Diction
 				if residents[rid2].subscribed and (rid2 in r.friends or residents[rid2].work == r.work) and n < 6:
 					residents[rid2].subscribed = false
 					n += 1
-			for fr in r.friends:
-				if ads.has(fr):
-					ads[fr].paused_until = week + 6
 			_cons(issue, "cons_pressure", {"name": rid, "n": n})
+			# 连带撤掉的广告要写明是谁让谁撤的（第 2 轮：锯木厂撤了广告，玩家到最后都不知道为什么）
+			for fr in r.friends:
+				if ads.has(fr) and fr != rid:
+					ads[fr].paused_until = week + 6
+					_cons(issue, "cons_pull_ad_friend", {"name": rid, "who": fr})
 		"sue":
 			lawsuits.append({"week": week + 2, "who": rid, "event": e.id, "truth": rec.avg_truth, "evidence": rec.evidence})
 			_cons(issue, "cons_sue", {"name": rid})

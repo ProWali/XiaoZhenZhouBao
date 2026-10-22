@@ -874,8 +874,10 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 		comment_text = fill(world, g.pick_expand(comments), ctx, lang)
 	# 当事人回应：先用这类事件自己的说法，没有再用通用的
 	var resp_kind := "unreached"
-	if e.get("plea", "") != "" or e.get("bribed_by", "") != "":
+	if e.get("plea", "") != "" or e.get("bribed_by", "") != "" or e.get("visited", false):
 		resp_kind = "pleaded"
+	elif world.reluctant.has(target) and str(world.reluctant[target].event) == str(e.id):
+		resp_kind = "declined"
 	elif _interviewed(world, target):
 		resp_kind = "denied"
 	elif world.residents[target].get("aware", false):
@@ -1054,13 +1056,28 @@ static func visitor_lines(world, item: Dictionary, lang: String) -> Array:
 		vars["fact"] = fact_note(world, item.fact, lang)
 	if not roles.has("subject"):
 		roles["subject"] = item.who
-	var chosen = _pick_conditional_obj(world, items, item.who, rng, vars, e)
+	# 四周内用过的那段先不用（第 2 轮：三个人上门，都是「单据摊在桌上讲到天黑」）
+	var mem: Dictionary = world.text_memory.get(lang + ":visit", {})
+	world.text_memory[lang + ":visit"] = mem
+	var fresh: Array = []
+	for it in items:
+		if int(world.week) - int(mem.get(str(item.kind) + ":" + str(items.find(it)), -99)) > 4:
+			fresh.append(it)
+	var chosen = _pick_conditional_obj(world, fresh, item.who, rng, vars, e)
+	if chosen == null:
+		chosen = _pick_conditional_obj(world, items, item.who, rng, vars, e)
 	if chosen == null:
 		return ["(%s)" % item.kind]
+	mem[str(item.kind) + ":" + str(items.find(chosen))] = int(world.week)
 	var ctx := {"roles": roles, "naming": {}, "extras": e.get("extras", {}) if not e.is_empty() else {}, "vars": vars, "mentions": {}}
 	var out: Array = []
+	var said := false
 	for line in chosen.lines:
+		said = said or str(line).contains("{fact}")
 		out.append(render(world, str(line), ctx, lang, rng))
+	# 上门解释的人讲了什么，要让玩家看到（选中的那段没写到料，就补一句）
+	if item.kind == "explain" and vars.has("fact") and not said:
+		out.append(render(world, str(data(lang).ui.get("visit_explain_fact", "")), ctx, lang, rng))
 	return out
 
 
@@ -1137,6 +1154,23 @@ static func ui(world, key: String, args: Dictionary, lang: String) -> String:
 	world.text_counter += 1
 	var rng := text_rng(world, ["ui", world.week, world.day, world.text_counter, key])
 	var tpl: String = spec if spec is String else str(rng.pick(spec))
+	# 同一种说法别连着用：最近用过的几句先跳过（试玩：三个人说同一句「这阵子忙，没顾上听闲话」）
+	if spec is Array and spec.size() > 1:
+		var mem: Dictionary = world.text_memory.get(lang + ":ui", {})
+		world.text_memory[lang + ":ui"] = mem
+		var recent: Array = mem.get(key, [])
+		if tpl in recent:
+			var rest: Array = []
+			for x in spec:
+				if not (str(x) in recent):
+					rest.append(str(x))
+			if rest.is_empty():
+				rest = [str(spec[(spec.find(tpl) + 1) % spec.size()])]
+			tpl = str(rng.pick(rest))
+		recent.append(tpl)
+		while recent.size() > maxi(1, spec.size() / 2):
+			recent.pop_front()
+		mem[key] = recent
 	for k in args:
 		tpl = tpl.replace("{" + k + "}", str(args[k]))
 	var g := grammar_for(world, lang, rng)

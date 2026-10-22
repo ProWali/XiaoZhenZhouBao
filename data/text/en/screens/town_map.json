@@ -6,7 +6,7 @@
  "day_tip": "{place} · {n} here",
  "day_tip_empty": "{place} · nobody",
  "lead_here": " · your lead is here",
- "night_note": "Night. Drink loosens tongues at the tavern; the river, bridge, woods and mill can be watched. Two late nights a week at most.",
+ "night_note": "Night. Drink loosens tongues at the tavern; any place with a lit label can be watched. Two late nights a week at most.",
  "night_done": "No more going out tonight. Back to the office and bed.",
  "day_note": "The number on a sign is how many people are there now; ★ marks a lead. Walking in is free; talking or the records cost an action.",
  "warn_nights": "You've had two late nights this week already. Another, and you'll sleep through tomorrow morning.",

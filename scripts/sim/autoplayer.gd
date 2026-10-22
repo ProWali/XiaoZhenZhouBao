@@ -27,13 +27,24 @@ func play_week(world) -> Dictionary:
 	last_letters = world.render_letters()
 	for l in last_letters:
 		transcript.append("信：" + l)
+	var stuck := 0
 	while world.day <= 6 and world.game_over == "":
+		var before := [world.day, world.slot, world.actions_left, world.nights_used]
 		if world.can_act_day():
 			_day_action(world)
 		elif _want_night(world):
 			_night_action(world)
 		else:
 			world.end_day()
+		# 一步没花掉行动点（比如档案没人开门又没钱打点）：再试两回不成就收工，免得原地打转
+		if before == [world.day, world.slot, world.actions_left, world.nights_used]:
+			stuck += 1
+			if stuck >= 3:
+				print("autoplayer stuck: week %d day %d slot %d" % [world.week, world.day, world.slot])
+				world.end_day()
+				stuck = 0
+		else:
+			stuck = 0
 	if world.game_over != "":
 		return {}
 	var visitors: Array = world.saturday_visitors()
@@ -109,7 +120,8 @@ func _cautious_day(world) -> void:
 	# 2. 有没验证的碎片就找人核实
 	var unverified: Array = []
 	for fid in world.known:
-		if not world.is_verified(fid) and not world.event_of(fid).soft and world.event_of(fid).week_end > world.week:
+		# 问过四个人还坐不实的，像真人一样不再追（谣言凑不满三枚，见 world.verify_score）
+		if not world.is_verified(fid) and not world.event_of(fid).soft and world.event_of(fid).week_end > world.week and world.known[fid].sources.size() < 4:
 			unverified.append(fid)
 	if not unverified.is_empty():
 		var fid: String = rng.pick(unverified)

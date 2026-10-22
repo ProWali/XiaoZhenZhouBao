@@ -99,7 +99,7 @@ func _night_action(loc: String) -> void:
 	if w.nights_used >= w.MAX_NIGHTS:
 		warn = Game.t("town_map.warn_nights") + "\n"
 	if loc == "tavern":
-		Game.open_overlay("pick", {"title": Game.t("town_map.tavern_title"), "note": warn + Game.t("town_map.tavern_note"), "items": [
+		Game.open_overlay("pick", {"title": Game.t("town_map.tavern_title"), "note": warn if warn != "" else Game.t("town_map.tavern_note"), "items": [
 			{"text": Game.t("town_map.tavern_listen"), "cb": func(): _do_night("eavesdrop", loc)},
 			{"text": Game.t("town_map.tavern_watch"), "cb": func(): _do_night("stakeout", loc)},
 		]})
