@@ -213,12 +213,13 @@ func _compose(world) -> Array:
 	var candidates: Array = []
 	for g in world.notebook():
 		var e: Dictionary = g.event
-		if e.printed:
+		# 登过的事有了新料可以登续报（M4.1 起玩家能这么做），只登新料
+		if e.printed and (e.soft or g.fresh.is_empty()):
 			continue
 		var fids: Array = []
 		var all_verified := true
 		var any_evidence := false
-		for fid in g.facts:
+		for fid in (g.fresh if e.printed else g.facts):
 			fids.append(fid)
 			if not world.is_verified(fid):
 				all_verified = false

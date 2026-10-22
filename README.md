@@ -88,6 +88,7 @@ Godot_v4.7.2-stable_win64_console.exe --headless --path . -s res://scripts/tools
 Godot_v4.7.2-stable_win64_console.exe --headless --path . -s res://scripts/tools/blind_test.gd -- --brief --from 20    （--from：从哪个种子起找镇子，每轮换一个）
 Godot_v4.7.2-stable_win64_console.exe --headless --path . -s res://scripts/tools/blind_test.gd -- --packet
 Godot_v4.7.2-stable_win64_console.exe --headless --path . -s res://scripts/tools/blind_test.gd -- --score 3,7,12
+Godot_v4.7.2-stable_win64_console.exe --headless --path . -s res://scripts/tools/followup_sample.gd -- --lang zh --seeds 6 --weeks 30    （续报抽检）
 ```
 
 ## 跑测试

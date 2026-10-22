@@ -13,6 +13,9 @@ const Population = preload("res://scripts/sim/population.gd")
 const Election = preload("res://scripts/sim/election.gd")
 const TE = preload("res://scripts/text/text_engine.gd")
 
+## 续报：旧闻带来的发行量涨幅、对当事人的冲击，按首报的这个比例算
+const FOLLOWUP_CIRC := 0.6
+const FOLLOWUP_SEVERITY := 0.6
 const SLOT_NAMES := ["上午", "下午", "晚上"]
 const DAY_NAMES := ["", "周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 const MAX_NIGHTS := 2  # 一周最多熬夜次数，超过就吃次日上午
@@ -1145,6 +1148,8 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 		var e := event_of(a.facts[0])
 		if e.soft:
 			a.naming = "named"  # 公开的事没有化名可言
+		# 续报：早先登过的事又登新料。旧闻卖得少些，当事人已经挨过一回，这一回的冲击也轻些
+		var is_fu: bool = e.printed and int(e.get("printed_week", week)) < week
 		var ra: Dictionary = a.duplicate()
 		ra["choice"] = int(headline_choice.get(a.slot, 0))
 		ra["remember"] = true
@@ -1180,18 +1185,26 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 					cred_change -= 0.5
 		if not e.soft:
 			had_news = true
-		circ_change += T.SLOT_MULT[a.slot] / 3.0 * T.TONE_CIRC[a.tone] * (1.0 + 0.4 * e.severity) * {"named": 1.0, "alias": 0.7, "anon": 0.4}[a.naming]
+		circ_change += T.SLOT_MULT[a.slot] / 3.0 * T.TONE_CIRC[a.tone] * (1.0 + 0.4 * e.severity) * {"named": 1.0, "alias": 0.7, "anon": 0.4}[a.naming] * (FOLLOWUP_CIRC if is_fu else 1.0)
 		if not e.printed:
-			var tpl: Dictionary = events_db.template_by_id(e.tid)
-			for fu in tpl.get("followups", []):
-				if fu.get("needs_evidence", false) and not a.get("evidence", false):
-					continue
-				if not rng.chance(float(fu.get("chance", 0.6))):
-					continue
-				var preset := {}
-				for new_role in fu.map:
-					preset[new_role] = e.roles[fu.map[new_role]]
-				pending.append({"week": week + int(fu.get("delay", 2)), "kind": "followup", "who": "", "event": e.id, "tid": fu.tid, "preset": preset})
+			e["first_printed_week"] = week
+		# 后续事件（检查员上门之类）首报和续报都能引出：首报没附证据、续报附上了，也该有下文。
+		# 每种只掷一次骰子（够条件的那一期掷），和以前「首报掷一次」的概率一样
+		var rolled: Array = e.get("followups_rolled", [])
+		var tpl: Dictionary = events_db.template_by_id(e.tid)
+		for fu in tpl.get("followups", []):
+			if fu.tid in rolled:
+				continue
+			if fu.get("needs_evidence", false) and not a.get("evidence", false):
+				continue
+			rolled.append(fu.tid)
+			if not rng.chance(float(fu.get("chance", 0.6))):
+				continue
+			var preset := {}
+			for new_role in fu.map:
+				preset[new_role] = e.roles[fu.map[new_role]]
+			pending.append({"week": week + int(fu.get("delay", 2)), "kind": "followup", "who": "", "event": e.id, "tid": fu.tid, "preset": preset})
+		e["followups_rolled"] = rolled
 		e.printed = true
 		e.printed_week = week
 		var pf: Array = e.get("printed_facts", [])
@@ -1199,7 +1212,7 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 			if not (fid in pf):
 				pf.append(fid)
 		e["printed_facts"] = pf
-		var rec := {"slot": a.slot, "headline": hl, "body": body, "tone": a.tone, "naming": a.naming, "evidence": a.get("evidence", false), "event": e.id, "avg_truth": avg_truth, "facts": a.facts.duplicate(), "choice": ra.choice, "reroll": int(a.get("reroll", 0))}
+		var rec := {"slot": a.slot, "headline": hl, "body": body, "tone": a.tone, "naming": a.naming, "evidence": a.get("evidence", false), "event": e.id, "avg_truth": avg_truth, "facts": a.facts.duplicate(), "choice": ra.choice, "reroll": int(a.get("reroll", 0)), "followup": is_fu}
 		issue.articles.append(rec)
 		if not e.soft or a.slot == "head":
 			log.append("第 %d 周 %s：%s" % [week, T.SLOT_NAME[a.slot], hl_log])
@@ -1286,6 +1299,8 @@ func _react_to_article(a: Dictionary, e: Dictionary, rec: Dictionary, exposure: 
 			continue
 		var s: float = e.severity * naming_mult * (1.3 if a.tone == "hot" else 1.0) * (1.2 if a.get("evidence", false) else 1.0)
 		s *= {"head": 1.0, "second": 0.8, "third": 0.6, "small": 0.3}[a.slot]
+		if rec.get("followup", false):
+			s *= FOLLOWUP_SEVERITY
 		# 读到了吗？点名的人几乎一定会被告知
 		var p_read := 0.95 if a.naming == "named" else (0.7 if a.naming == "alias" else 0.4)
 		if not rng.chance(p_read):

@@ -503,6 +503,66 @@ static func _roles_ok(items: Array, allowed: Dictionary) -> Array:
 
 
 static func headline_candidates(world, e: Dictionary, a: Dictionary, lang: String) -> Array:
+	var own := _headline_candidates(world, e, a, lang)
+	if not is_followup(world, e) or not data(lang).grammar.has("fu_headline"):
+		return own
+	var tone: String = a.get("tone", "neutral")
+	var naming: String = a.get("naming", "named")
+	var rng := text_rng(world, [e.id, "fu_hl", world.week, tone, naming, int(a.get("reroll", 0))])
+	var g := grammar_for(world, lang, rng, tone)
+	var ctx := _ctx_for_event(e, naming)
+	ctx["vars"] = _fu_vars(world, e, lang)
+	var out: Array = []
+	var tries := 0
+	while out.size() < 2 and tries < 12:
+		tries += 1
+		# 带当事人名字的续报标题只在点名时用（化名、匿名写出来是「镇上某人的事」）
+		var sym := "#fu_headline_who#" if naming == "named" and g.has_rule("fu_headline_who") and rng.chance(0.3) else "#fu_headline#"
+		var h := _headline_polish(fill(world, g.expand(sym), ctx, lang), lang)
+		if not (h in out):
+			out.append(h)
+	for h in own:
+		if out.size() >= 3:
+			break
+		if not (h in out):
+			out.append(h)
+	# 续报的标题不进「半年内用过」的记忆：article() 按下标取模板，这里前两条没有模板
+	last_headline_templates.clear()
+	return out
+
+
+## 续报：这件事早先登过（不是这一周登的），这一篇只写新料。软新闻没有续报。
+static func is_followup(world, e: Dictionary) -> bool:
+	return bool(e.get("printed", false)) and int(e.get("printed_week", world.week)) < world.week and not bool(e.get("soft", false))
+
+
+## 续报体用的槽：{no} 首报那一期，{ago} 隔了多久，{ev} 事件名
+static func _fu_vars(world, e: Dictionary, lang: String) -> Dictionary:
+	var first := int(e.get("first_printed_week", e.get("printed_week", world.week)))
+	var n: int = maxi(1, int(world.week) - first)
+	var ago := ""
+	if lang == "en":
+		var words := ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
+		ago = "last week" if n == 1 else (str(words[n]) if n <= 10 else str(n)) + " weeks ago"
+	else:
+		ago = "上周" if n == 1 else ("两" if n == 2 else zh_num(n)) + "周前"
+	return {"no": str(first) if lang == "en" else zh_num(first), "ago": ago, "ev": event_name(world, e, lang)}
+
+
+## 一百以内（含一百零几）的中文数字：4 → 四，12 → 十二，104 → 一百零四
+static func zh_num(n: int) -> String:
+	const D := ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"]
+	if n < 10:
+		return D[n]
+	if n < 20:
+		return "十" + ("" if n == 10 else D[n % 10])
+	if n < 100:
+		return D[n / 10] + "十" + ("" if n % 10 == 0 else D[n % 10])
+	var rest := n % 100
+	return D[n / 100] + "百" + ("" if rest == 0 else ("零" + D[rest] if rest < 10 else zh_num(rest) if rest >= 20 else "一" + zh_num(rest)))
+
+
+static func _headline_candidates(world, e: Dictionary, a: Dictionary, lang: String) -> Array:
 	var et := event_text(lang, e.tid)
 	var tone: String = a.get("tone", "neutral")
 	var naming: String = "named" if e.soft else a.get("naming", "named")
@@ -594,10 +654,30 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 	# 人写的导语多从一个具体的场面起头（季节、地方、人在做什么），「本报查了什么」只是备用
 	var scenes := _fresh(g, eligible_strict(leads.get("scene", []), keys))
 	var lead := ""
-	if not scenes.is_empty() and rng.chance(0.4 if tone == "hot" else 0.7):
+	var fu: bool = is_followup(world, e) and g.has_rule("fu_lead")
+	if fu and not small:
+		# 续报先交代前报（第几期、隔了多久），点名的有一半再提一句当时登了什么；新料都在正文里
+		ctx["vars"] = _fu_vars(world, e, lang)
+		lead = fill(world, g.expand("#fu_lead#"), ctx, lang)
+		var old: Array = []
+		for fid in e.get("printed_facts", []):
+			if not (fid in a.facts) and world.facts.has(fid):
+				old.append(fid)
+		if naming == "named" and not old.is_empty() and g.has_rule("fu_recap") and rng.chance(0.5):
+			old.sort_custom(func(x, y): return world.verify_score(x) > world.verify_score(y))
+			ctx["vars"] = {"old": fact_note(world, old[0], lang)}
+			lead += sep_for(lang) + fill(world, g.expand("#fu_recap#"), ctx, lang)
+		ctx["vars"] = {}
+	elif not scenes.is_empty() and not fu and rng.chance(0.4 if tone == "hot" else 0.7):
+		# 续报的小栏不用场景导语：一句场面后面接「此事本报几周前登过」接不上
 		lead = g.pick_expand(scenes)
 	else:
 		lead = g.pick_expand(tone_pool(leads, [tone + "_" + naming, tone], keys))
+	if fu and small and g.has_rule("fu_brief"):
+		# 小栏放不下前报的交代，只在导语后面跟一句「本报第几期曾有报道」
+		ctx["vars"] = _fu_vars(world, e, lang)
+		lead = fill(world, lead, ctx, lang) + sep_for(lang) + fill(world, g.expand("#fu_brief#"), ctx, lang)
+		ctx["vars"] = {}
 	if e.soft:
 		var body := g.pick_expand(et.get("body", []))
 		var text := lead + body
@@ -807,7 +887,7 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 	ctx["vars"] = {}
 	var intro := ""
 	# 化名、匿名的人不介绍（「镇上的警长是某位警长」）
-	if naming == "named" and int(ctx.mentions.get(str(e.target), 0)) == 0 and not et.get("intro", []).is_empty():
+	if naming == "named" and not fu and int(ctx.mentions.get(str(e.target), 0)) == 0 and not et.get("intro", []).is_empty():
 		intro = fill(world, g.pick_expand(et.intro), ctx, lang)
 	# 介绍当事人的话跟着判断走；判断和回应有时分两段
 	var judge := _join([intro, comment_text], sep)
@@ -818,6 +898,10 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 	elif judge != "" or answer != "":
 		paras.append(polish(_join([judge, answer], sep), lang))
 	return {"headline": headline, "paragraphs": paras}
+
+
+static func sep_for(lang: String) -> String:
+	return " " if lang == "en" else ""
 
 
 static func _fresh(g: Grammar, items: Array) -> Array:

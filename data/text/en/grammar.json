@@ -492,5 +492,47 @@
  "link_public_archive": [
   "There is a written record, too, and it shows something more.",
   "Beyond what everyone knows, this paper went to the records."
+ ],
+ "fu_headline": [
+  "More on {ev}",
+  "{ev}, Continued",
+  "Further Word on {ev}",
+  "{ev}: What Came After",
+  "{ev}: New Accounts"
+ ],
+ "fu_headline@hot": [
+  "{ev}: It Isn't Over",
+  "There Is More to {ev}",
+  "{ev}: The Story Grows",
+  "{ev}, Continued"
+ ],
+ "fu_headline@calm": [
+  "{ev}: A Further Note",
+  "A Note on {ev}",
+  "More on {ev}",
+  "{ev}, Continued"
+ ],
+ "fu_lead": [
+  "In issue No. {no}, this paper reported on {ev}. More has reached this office since.",
+  "{ago}, this paper reported on {ev}. The matter did not end there.",
+  "This paper wrote of {ev} in issue No. {no}. Since then, more has been heard.",
+  "Issue No. {no} carried a report on {ev}. What follows came to light afterwards.",
+  "This paper first wrote of {ev} {ago}. Word has kept coming in."
+ ],
+ "fu_recap": [
+  "What this paper reported then: {old}.",
+  "The earlier report said that {old}.",
+  "As reported at the time, {old}."
+ ],
+ "fu_brief": [
+  "This paper first reported the matter in issue No. {no}.",
+  "This paper reported on it {ago}."
+ ],
+ "fu_headline_who": [
+  "More About {target}"
+ ],
+ "fu_headline_who@hot": [
+  "More About {target}",
+  "{target}: There Is More"
  ]
 }
