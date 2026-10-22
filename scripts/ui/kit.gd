@@ -156,6 +156,7 @@ static func clean_paras(paragraphs: Array) -> Array:
 static func stamps(n: int, total := 3) -> Control:
 	var c := Control.new()
 	c.custom_minimum_size = Vector2(total * 11, 10)
+	c.set_meta("stamps", [n, total])  # 文字版试玩读这个（agent_play.gd）
 	for i in total:
 		var s := ColorRect.new()
 		s.position = Vector2(i * 11, 0)

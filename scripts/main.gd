@@ -12,6 +12,10 @@ func _ready() -> void:
 	if "--walkthrough" in args:
 		Game.save_path = "user://saves/walkthrough.json"
 		Game.log_enabled = false
+	var ai := args.find("--session")
+	if "--agent" in args and ai >= 0:
+		Game.save_path = args[ai + 1].path_join("save.json")
+		Game.log_enabled = false
 	var li := args.find("--lang")
 	if li >= 0 and li + 1 < args.size():
 		Game.force_lang = args[li + 1]
@@ -19,6 +23,8 @@ func _ready() -> void:
 	if "--walkthrough" in args:
 		var w: Node = load("res://scripts/debug/walkthrough.gd").new()
 		add_child(w)
+	elif "--agent" in args:
+		add_child(load("res://scripts/debug/agent_play.gd").new())
 
 
 func _check_scripts() -> void:
