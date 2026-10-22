@@ -33,5 +33,6 @@
  "ad_on": "running",
  "ad_off": "pulled",
  "ads": "Ads: ",
- "hint_lead_self": "★ Lead: {who} wrote that they have more to tell, and is at {where} right now."
+ "hint_lead_self": "★ Lead: {who} wrote that they have more to tell, and is at {where} right now.",
+ "first_wednesday": "The red stamps by each item in your notebook: one per person or record, and three means confirmed. Unconfirmed items can still run, but the town remembers when you get it wrong."
 }

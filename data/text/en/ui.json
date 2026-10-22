@@ -47,7 +47,7 @@
  "cons_hide": "{name} has not let anyone in for days.",
  "same_event": ["{name} said: \"I haven't heard it put that way. What I know about it is this. {fact}.\"", "\"Not that part,\" said {name}, thinking. \"All I heard is this. {fact}.\""],
  "mem_soft_soon": ["{name} got talking about the family's news and could hardly stop.", "{name} was busy with family matters these days, and the talk kept drifting back to them."],
- "cons_sue": "{name} has hired a lawyer. The summons will arrive in two weeks.",
+ "cons_sue": "{name} has hired a lawyer. The summons will arrive next week.",
  "cons_deal": "{name} has let it be known they want to \"settle this privately.\"",
  "informer_nothing": ["{name} took the money and thought for a long while: \"That one's clean.\"", "{name} pocketed the money: \"I asked around. There's nothing on that one.\""],
  "hint_more": "Someone in town knows more of this than you've heard",
@@ -68,8 +68,6 @@
  "night_5": "Friday",
  "night_6": "Saturday",
  "nights_join": " and ",
- "tells_own": ["{name} hesitated, then said it anyway: \"{fact}.\"", "{name} sighed: \"There's no hiding it. {fact}.\"", "{name} lowered their voice: \"I know this one first-hand. {fact}.\""],
- "same_event_own": ["{name} said: \"That's not how it was. What I know myself is this. {fact}.\""],
  "adds_own": ["{name} went on: \"And another thing. {fact}.\""],
  "visit_explain_fact": "This is what {who.ta} said had happened: \"{fact}.\"",
  "small_talk": ["{name} talked about the weather and the river. Nothing new.", "{name} talked about the livestock for a quarter of an hour.", "{name} complained at length about the mud on the roads.", "{name} asked you for the news instead, and ended up doing the questioning.", "{name} said it had been a busy stretch, with no time for town gossip.", "{name} told an old story from years back that had nothing to do with anything now.", "{name} said the town was as quiet as ever, nothing worth printing.", "{name} kept working and answered in half-sentences.", "{name} talked about this year's harvest, and then next year's.", "{name} worked out for you how much more lamp oil costs now.", "{name} went on for a while about relatives down south.", "{name} said the print in the paper was too small to read comfortably.", "{name} asked whether running a paper alone was tiring, and said nothing else.", "{name} told a joke heard at the tavern. It had nothing to do with anything."],
@@ -90,7 +88,6 @@
  "cons_broke_hold": "You told {name} it would not run this week, and ran it. {name} said nothing, only stood outside the office a long time.",
  "cons_kept_hold": "{name} saw you kept your word, and has not come round again.",
  "confirms": ["{name} nodded: \"The {event} business? I heard the same, just as you say.\"", "{name} said: \"It's true enough.\" It matched what you had.", "{name} thought it over: \"I've heard that told, more or less the way you have it.\"", "{name} lowered their voice: \"The {event} business? That's how the town tells it.\""],
- "confirms_own": ["{name} didn't deny it: \"It's my own business. You have it right.\"", "{name} sighed: \"I'm in the middle of it myself. That's how it was.\""],
  "echo": ["{name} brought up the {event} business too, and told it the way you have it.", "{name} mentioned the {event} business. It matched what you'd heard.", "{name} said: \"The {event} business? The whole town's talking.\" One more voice saying so.", "Making conversation, {name} got onto the {event} business. Another mark in your notebook.", "{name} mentioned the {event} business in passing, the same as your notes.", "{name} asked whether you'd heard about the {event} business. You had, but another voice never hurts."],
  "tag_unknown": ["It seems they genuinely know nothing about this.", "They really haven't heard of it.", "They truly don't know about this."],
  "tag_refused_later": ["They know, but won't say yet. Come back later, or once the paper's name is better, and they may talk. Noted in your notebook", "It isn't that they don't know; they don't trust you yet. Try again in a few days. Noted in your notebook"],
@@ -99,5 +96,8 @@
  "informer_known": ["{name} took the money and smiled: \"Whatever that one's mixed up in, you know it already.\"", "{name} said: \"The town only knows so much about that one, and you've got as much as I do.\""],
  "cons_side_glad": "{name} said it was about time someone printed it.",
  "cons_ad_sulk": "{name} is still sore at the paper and paid nothing for advertising this issue.",
- "cons_ad_sulk_why": "{name} is still sore over \"{headline}\" and paid nothing for advertising this issue."
+ "cons_ad_sulk_why": "{name} is still sore over \"{headline}\" and paid nothing for advertising this issue.",
+ "tells_own": ["{name} hesitated, then said it anyway: \"{fact}.\"", "{name} said: \"I was right there for this. {fact}.\"", "{name} lowered their voice: \"I saw this with my own eyes. {fact}.\""],
+ "confirms_own": ["{name} nodded: \"I was right there. That's how it was.\"", "{name} said: \"It went through my own hands. You have it right.\""],
+ "same_event_own": ["{name} said: \"That's not how it was. I was there, and what I know is this. {fact}.\""]
 }

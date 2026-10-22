@@ -80,6 +80,9 @@ func _day() -> void:
 		_note.text = Game.t("office.first_week")
 	elif w.day == 2 and w.slot == 0 and w.week == 1:
 		_note.text = Game.t("office.first_tuesday")
+	elif w.day == 3 and w.slot == 0 and w.week == 1:
+		# 第 6 轮：新手不知道「章」是什么、怎样算坐实
+		_note.text = Game.t("office.first_wednesday")
 	elif evening:
 		_note.text = Game.t("office.evening")
 	elif w.day == 6:

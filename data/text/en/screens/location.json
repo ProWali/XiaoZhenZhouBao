@@ -20,5 +20,5 @@
  "archive_yes": "Look",
  "archive_no": "Never mind",
  "archive_result": "The records at {place}",
- "ask_done": "{text} (you've heard all the town knows; asking again only adds a witness)"
+ "ask_done": "{text} (nobody will say more on this for now; asking only adds a witness)"
 }

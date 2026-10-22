@@ -196,7 +196,7 @@ func _make_fact(inst: Dictionary, frag: Dictionary, roles: Dictionary, world, tr
 	# 事情出在哪儿，那儿的人就会知道（M4.2：推理型试玩者问「谁会知道」全靠运气，牧师不知道贴在自己教堂门口的预告）。
 	# 碎片里提到的地方、要去蹲守的地方、档案所在的地方：在那儿做事的人各知道一个，管档案的人知道档案上那条
 	for loc in _places_in(fact, frag, world):
-		for rid in _people_working_at(loc, world, 1 if loc == str(frag.get("witness", "")) else 2):
+		for rid in _people_working_at(loc, world, 1 if loc == str(frag.get("witness", "")) else 3):
 			world.residents[rid].knows[fid] = true
 	# 半公开的事，当事人身边总有几个人听说过：三个同事、一个朋友
 	if fact.secrecy == "semi":
@@ -216,6 +216,7 @@ const TOPIC_PLACES := {
 	"酒": "tavern", "牌": "tavern",
 	"面粉": "store", "黄油": "store", "货": "store",
 	"火车": "station", "车票": "station",
+	"偷": "hall", "丢": "hall", "少了": "hall", "打": "hall",
 	"木料": "mill", "工钱": "mill", "锯": "mill",
 }
 

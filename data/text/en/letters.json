@@ -89,7 +89,7 @@
   {"t": "I subscribed as a courtesy to the previous editor. The courtesy is used up.", "if": {"bucket": ["powerful"]}}
  ]},
  "complaint": {"sign": true, "items": [
-  "I watched {subject.short} grow up. When you wrote those things, did you stop to think how {subject.ta} is supposed to go on living in this town?",
+  "I have known {subject.short} for many years. When you wrote those things, did you stop to think how {subject.ta} is supposed to go on living in this town?",
   "I've known {subject.short} for twenty years. What you printed may be true, but you had no business printing it the way you did.",
   "{subject.short} hasn't left the house in days. Are you satisfied?",
   "A newspaper can write about a person, or it can ruin one. This week you chose the second.",

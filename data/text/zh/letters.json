@@ -89,7 +89,7 @@
   {"t": "我是看在前任主编的面子上订的。面子用完了。", "if": {"bucket": ["powerful"]}}
  ]},
  "complaint": {"sign": true, "items": [
-  "{subject.short}是我看着长大的。你们写{subject.ta}的那些话，有没有想过{subject.ta}以后怎么在镇上过日子？",
+  "我认识{subject.short}很多年了。你们写{subject.ta}的那些话，有没有想过{subject.ta}以后怎么在镇上过日子？",
   "我和{subject.short}认识二十年了。你们登的东西也许是真的，可你们不该那样登。",
   "{subject.short}这几天没出门。你们满意了？",
   "报纸可以写人，也可以毁人。你们这周选了后一种。",

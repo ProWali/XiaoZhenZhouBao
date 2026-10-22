@@ -17,7 +17,7 @@ const TE = preload("res://scripts/text/text_engine.gd")
 const FOLLOWUP_CIRC := 0.6
 const FOLLOWUP_SEVERITY := 0.6
 ## 事情里受害、旁观的角色：报道写到他们，不算曝光他们
-const SIDE_ROLES := ["victim", "creditor", "wife", "spouse", "bride", "father", "witness", "recognizer", "landowner", "maid", "teacher", "nurse", "borrower", "counter", "winner"]
+const SIDE_ROLES := ["victim", "creditor", "wife", "bride", "father", "witness", "recognizer", "landowner", "maid", "teacher", "nurse", "borrower", "counter"]
 ## 街头零售：头条中立、点名、严重度 0 的一篇卖这么多份；乘版位、语气、署名、严重度（见 tables.gd 的 TONE_RETAIL、NAMING_RETAIL）
 const RETAIL_BASE := 20.0
 ## 公信力：登错一条按 (1 - 真实度) × 这个数扣；没登错的一期往 CRED_RECOVER_TO 回差距的 CRED_RECOVER_RATE
@@ -81,6 +81,7 @@ var leads: Array = []           # 线头：交谈落空时对方指给你的人 
 var reluctant := {}             # 知道点什么、但不肯说的人：rid -> {event, why, who, week}，选题簿「按人」里显示
 var greeted := {}               # rid -> 哪一周说过见面头一句（_personal_line）
 var talked := {}                # rid -> 最近一次当面谈话的周（报道里的回应据此写，见 TE 的 resp_kind）
+var asked_blank := {}           # rid -> 哪一周拿话头问过他、他说不知道（这周线头不再指回去）
 var actions: Array = []         # 玩家操作日志，存档就是它
 var recording := true
 var replay_error := ""
@@ -885,6 +886,7 @@ func act_interview(rid: String, topic: String = "") -> Dictionary:
 	# 手上什么都没有：明说不知道
 	if offer == "":
 		if not tfact.is_empty():
+			asked_blank[rid] = week
 			res.lines.append(_ui("denies_knowing", {"name": _nm(rid)}))
 			res.lines.append(_ui("tag_unknown"))
 			# 对方把话头记住了，可能传开
@@ -1036,7 +1038,7 @@ func _maybe_lead(rid: String, topic: String, res: Dictionary) -> void:
 	var ev_list: Array = []
 	var weights: Array = []
 	for oid in living_ids():
-		if oid == rid or led.has(oid) or reluctant.has(oid) or float(residents[oid].player_rel.like) < 0.3:
+		if oid == rid or led.has(oid) or reluctant.has(oid) or float(residents[oid].player_rel.like) < 0.3 or int(asked_blank.get(oid, -9)) == week:
 			continue
 		var o: Dictionary = residents[oid]
 		var best_ev := ""
@@ -1847,7 +1849,7 @@ func _schedule_reaction(kind: String, rid: String, e: Dictionary, issue: Diction
 					ads[fr].paused_until = week + 6
 					_cons(issue, "cons_pull_ad_friend", {"name": rid, "who": fr})
 		"sue":
-			lawsuits.append({"week": week + 2, "who": rid, "event": e.id, "truth": rec.avg_truth, "evidence": rec.evidence})
+			lawsuits.append({"week": week + 1, "who": rid, "event": e.id, "truth": rec.avg_truth, "evidence": rec.evidence})
 			_cons(issue, "cons_sue", {"name": rid})
 		"suicide":
 			pending.append({"week": week + 2, "kind": "suicide", "who": rid, "event": e.id})

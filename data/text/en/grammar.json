@@ -91,8 +91,7 @@
   "When this paper called, {target.short} waved the question away."
  ],
  "resp_pleaded": [
-  "{target.short} sent word asking this paper not to print the story. This paper weighed the request, and printed it.",
-  "This paper is aware that some would rather this story had not appeared.",
+  "{target.short} called at the office and asked this paper not to print the story. This paper weighed the request, and printed it.",
   "{target.short} called at the newspaper office. What was said there has been noted, but is not repeated here."
  ],
  "resp_denied": [

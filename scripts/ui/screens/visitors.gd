@@ -79,6 +79,11 @@ func _show() -> void:
 		var note := K.para(Game.t("visitors.take_note"), 380, "pixel", 12, P.PAPER, 0)
 		note.position = Vector2(130, 300)
 		_holder.add_child(note)
+		var refuse := K.button(Game.t("visitors.refuse"), func():
+			Game.ui.deals[str(_i)] = false
+			Game.track("deal", {"who": who, "offer": int(v.offer), "took": false})
+			_next(), 0)
+		bar.add_child(refuse)
 		var take := K.button(Game.t("visitors.take", {"n": int(v.offer)}), func():
 			w.accept_deal(v)
 			Game.sfx("coins")
@@ -88,11 +93,6 @@ func _show() -> void:
 			_next(), 0)
 		take.tooltip_text = Game.t("visitors.take_tip")
 		bar.add_child(take)
-		var refuse := K.button(Game.t("visitors.refuse"), func():
-			Game.ui.deals[str(_i)] = false
-			Game.track("deal", {"who": who, "offer": int(v.offer), "took": false})
-			_next(), 0)
-		bar.add_child(refuse)
 		refuse.call_deferred("grab_focus")
 	elif (v.kind == "plea" or v.kind == "threat") and str(v.get("event", "")) != "" and not decided:
 		# 求情的可以答应不点名，威胁的可以答应这期不登；不答应就送客（M4.3：原来只能送客）
