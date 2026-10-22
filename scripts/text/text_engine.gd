@@ -486,8 +486,9 @@ static func _fact_keys(world, facts_list: Array, hide_archive := false) -> Dicti
 
 
 ## 登出来的事实里点到了哪些角色（当事人总算在内）。
+## 当事人只在登出的碎片里出现过才算（第 4 轮：碎片里一句没提警长，标题却写「某位警长经手的一笔钱」）
 static func _roles_in_facts(world, e: Dictionary, facts_list: Array) -> Dictionary:
-	var out := {"target": true, str(e.target): true}
+	var out := {}
 	for fid in facts_list:
 		if not world.facts.has(fid):
 			continue
@@ -499,6 +500,8 @@ static func _roles_in_facts(world, e: Dictionary, facts_list: Array) -> Dictiona
 		for role in e.roles:
 			if subj in e.roles[role]:
 				out[role] = true
+	if out.has(str(e.target)):
+		out["target"] = true
 	return out
 
 
@@ -786,7 +789,7 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 		elif not verified and src.kind in ["interview", "informer", "visitor", "eavesdrop", "letter"] and not hedged and g.has_rule("hedge") and rng.chance(0.5):
 			tail += sep + g.expand("#hedge#")
 			hedged = true
-		elif verified and not corroborated and not (own_voice and src.kind == "archive"):
+		elif verified and not corroborated and not (own_voice and src.kind == "archive") and _distinct_sources(world, fid) >= 2:
 			var csym := "corroborated"
 			if src.kind == "archive":
 				csym = "corroborated_archive"
@@ -900,7 +903,8 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 		var generic_resp = data(lang).grammar.get(gs, [])
 		if generic_resp is Array:
 			resp_pool = resp_pool + generic_resp
-	if not resp_pool.is_empty():
+	# 登出的碎片里没提当事人，就不写当事人回应（不然等于替玩家点出了是谁）
+	if not resp_pool.is_empty() and _roles_in_facts(world, e, a.get("facts", [])).has(str(e.target)):
 		resp = g.pick_expand(resp_pool)
 	var close := ""
 	var ev_close: Array = eligible_strict(et.get("close", {}).get(tone, []), keys)
@@ -1001,6 +1005,14 @@ static func _interviewed(world, rid: String) -> bool:
 
 
 ## skip：不拿来当信源的种类（不附档案时不写「据某处的记录」，见 article）
+## 这条碎片有几个不同的来源（同一个人说两回算一个）
+static func _distinct_sources(world, fid: String) -> int:
+	var seen := {}
+	for s in world.known.get(fid, {"sources": []}).sources:
+		seen[str(s.kind) + ":" + str(s.who)] = true
+	return seen.size()
+
+
 static func best_source(world, fid: String, skip: Array = []) -> Dictionary:
 	var best := {"kind": "letter", "who": ""}
 	var best_rank := 999

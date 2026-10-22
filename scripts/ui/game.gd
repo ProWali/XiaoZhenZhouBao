@@ -333,8 +333,17 @@ func _end_day() -> void:
 ## 一次行动做完：记录、存档、弹出结果。on_close 决定关掉之后去哪。
 func show_result(title: String, res: Dictionary, who: String, on_close: Callable) -> void:
 	track("action", {"title": title, "ok": res.ok, "gained": res.gained.size(), "who": who, "lead": str(res.get("lead", ""))})
+	# 连着三回空手，直接建议换个办法（第 4 轮：一天白过，游戏没有任何「该换个办法」的提示）
+	var lines: Array = res.lines.duplicate()
+	if res.ok and res.gained.is_empty() and str(res.get("lead", "")) == "":
+		ui["dry"] = int(ui.get("dry", 0)) + 1
+	elif res.ok:
+		ui["dry"] = 0
+	if int(ui.get("dry", 0)) >= 3:
+		lines.append(t("result.dry_hint"))
+		ui["dry"] = 0
 	autosave()
-	open_overlay("result", {"title": title, "lines": res.lines, "who": who, "gained": res.gained, "lead": str(res.get("lead", "")), "on_close": on_close})
+	open_overlay("result", {"title": title, "lines": lines, "who": who, "gained": res.gained, "lead": str(res.get("lead", "")), "on_close": on_close})
 
 
 ## 这个人是不是线头上的人；是的话返回是谁指的

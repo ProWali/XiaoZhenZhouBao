@@ -81,7 +81,7 @@ func _place(eid: String, slot: String) -> void:
 	facts = solid.slice(0, 4) if not solid.is_empty() else facts.slice(0, 1)
 	var ev := false
 	for fid in facts:
-		if w.known[fid].evidence:
+		if w.has_records(fid):
 			ev = true
 	_arts[slot] = {"slot": slot, "facts": facts, "tone": "neutral", "naming": "named" if g.event.soft else "alias", "evidence": ev, "reroll": 0}
 	_eids[slot] = eid
@@ -270,6 +270,9 @@ func _editor(slot: String) -> void:
 	if e.soft:
 		box.add_child(K.para(Game.t("layout.soft_note"), 280, "pixel", 12, P.WARM_GREY, 0))
 	box.add_child(K.para(Game.t("layout.retail_est", {"n": w.estimate_retail(a)}), 280, "pixel", 12, P.PRINT_INK, 0))
+	# 收过钱的事，登了就是两头得罪（第 4 轮：这条只写在按钮的提示里，玩家没看见）
+	if str(e.get("bribed_by", "")) != "":
+		box.add_child(K.para(Game.t("layout.bribed", {"name": Game.name_of(str(e.bribed_by))}), 280, "pixel", 12, P.STAMP_RED, 0))
 	# 周六夜答应过的事，排版时提醒一句
 	if e.has("promise"):
 		var pr: Dictionary = e.promise
@@ -277,7 +280,7 @@ func _editor(slot: String) -> void:
 	# 证据
 	var has_ev := false
 	for fid in a.facts:
-		if w.known[fid].evidence:
+		if w.has_records(fid):
 			has_ev = true
 	var evb := CheckBox.new()
 	evb.text = Game.t("layout.evidence")
@@ -313,7 +316,7 @@ func _editor(slot: String) -> void:
 func _fix_evidence(a: Dictionary) -> void:
 	var has := false
 	for fid in a.facts:
-		if Game.world.known[fid].evidence:
+		if Game.world.has_records(fid):
 			has = true
 	if not has:
 		a.evidence = false

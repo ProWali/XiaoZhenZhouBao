@@ -61,5 +61,6 @@
  "confirm_no": "再改改",
  "promise_alias": "你答应过{name}：不点名。",
  "promise_hold": "你答应过{name}：这一期不登。",
- "retail_est": "这样登，街头大约多卖 {n} 份（每份五分）。"
+ "retail_est": "这样登，街头大约多卖 {n} 份（每份五分）。",
+ "bribed": "你收过{name}的钱。登了，就是两头得罪。"
 }

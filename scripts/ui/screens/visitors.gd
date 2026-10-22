@@ -75,6 +75,10 @@ func _show() -> void:
 	_holder.add_child(bar)
 	var decided: bool = Game.ui.get("deals", {}).has(str(_i))
 	if v.kind == "deal" and not decided:
+		# 收了钱意味着什么，写在明处，不只放在悬停提示里
+		var note := K.para(Game.t("visitors.take_note"), 380, "pixel", 12, P.PAPER, 0)
+		note.position = Vector2(130, 300)
+		_holder.add_child(note)
 		var take := K.button(Game.t("visitors.take", {"n": int(v.offer)}), func():
 			w.accept_deal(v)
 			Game.sfx("coins")

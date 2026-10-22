@@ -1,4 +1,8 @@
 {
+ "bribe_leak": {"sign": false, "items": [
+  "Word is going round town that the paper took money from {subject}, and that is why the story never ran.",
+  "Someone at the tavern says {subject} paid off the paper. The talk is spreading fast."
+ ]},
  "rumor_lead": {"sign": false, "items": [
   "{who} the postman brought word: \"{tip}, the {tip.occ}, seems to know something lately. Go and ask.\"",
   "Dropping off the mail, {who} the postman mentioned: \"There's talk going round. Have a word with {tip}, the {tip.occ}.\"",

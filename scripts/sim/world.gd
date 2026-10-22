@@ -16,8 +16,10 @@ const TE = preload("res://scripts/text/text_engine.gd")
 ## 续报：旧闻带来的发行量涨幅、对当事人的冲击，按首报的这个比例算
 const FOLLOWUP_CIRC := 0.6
 const FOLLOWUP_SEVERITY := 0.6
+## 事情里受害、旁观的角色：报道写到他们，不算曝光他们
+const SIDE_ROLES := ["victim", "creditor", "wife", "spouse", "bride", "father", "witness", "recognizer", "landowner", "maid", "teacher", "nurse", "borrower", "counter", "winner"]
 ## 街头零售：头条中立、点名、严重度 0 的一篇卖这么多份；乘版位、语气、署名、严重度（见 tables.gd 的 TONE_RETAIL、NAMING_RETAIL）
-const RETAIL_BASE := 10.0
+const RETAIL_BASE := 20.0
 ## 公信力：登错一条按 (1 - 真实度) × 这个数扣；没登错的一期往 CRED_RECOVER_TO 回差距的 CRED_RECOVER_RATE
 const FALSE_PENALTY := 10.0
 ## 经济：每份纸墨钱；广告费随发行量涨，最多涨到起始的这么多倍（发行量大了钱不再白来）
@@ -234,6 +236,14 @@ func verify_score(fid: String) -> float:
 	return score
 
 
+## 这条有没有档案可附（影印只能是档案；亲眼看见的不算，第 4 轮：只有亲眼所见时也默认勾上「附档案影印」）
+func has_records(fid: String) -> bool:
+	for s in known.get(fid, {"sources": []}).sources:
+		if s.kind == "archive":
+			return true
+	return false
+
+
 func is_verified(fid: String) -> bool:
 	return verify_score(fid) >= 3.0
 
@@ -320,8 +330,21 @@ func _start_week(first: bool) -> void:
 		letters.push_front({"kind": "predecessor", "roles": {}, "vars": {}, "id": -1, "week": week})
 	_anonymous_letters()
 	if not first:
+		_bribe_leak()
 		_rumor_hook()
 	_start_day()
+
+
+## 收了钱不登的事，钱的事每周有两成可能漏出去：镇上传开，公信力掉一截（第 4 轮：收钱不登是稳赢的一招）
+func _bribe_leak() -> void:
+	for e in events + archive_events:
+		if str(e.get("bribed_by", "")) == "" or e.printed or e.get("leaked", false) or week - int(e.week_start) > 10:
+			continue
+		if rng.chance(0.2):
+			e["leaked"] = true
+			stats.credibility = maxf(0.0, stats.credibility - 6.0)
+			_letter("bribe_leak", {"subject": str(e.bribed_by)})
+			log.append("第 %d 周：报社收%s钱的事传开了。" % [week, res_name(str(e.bribed_by))])
 
 
 ## 周一邮差捎一句风声：镇上有件还没登、你一条都不知道的事，就指给你一个知道它的人（附一个线头）。
@@ -398,15 +421,8 @@ func _midweek_hook() -> void:
 				seen = true
 		if not seen:
 			fresh = true
-	# 只在这周手上没东西可登的时候补生一件，一周最多一件（补多了，挖得快、登得狠的人一周结几个仇，平衡里「敢说」派十局烧掉六局）
-	var printable := false
-	for e in events:
-		if e.soft or e.printed:
-			continue
-		for fid in e.facts:
-			if known.has(fid):
-				printable = true
-	if not fresh and not printable and int(flags.get("midweek_spawn", 0)) != week:
+	# 镇上没有你没摸到的事，就补生一件，一周最多一件（第 4 轮：每件都知道一点、剩下的人都不肯说，新手照样卡住）
+	if not fresh and int(flags.get("midweek_spawn", 0)) != week:
 		flags["midweek_spawn"] = week
 		_spawn_one_secret()
 	_rumor_hook(false)
@@ -921,7 +937,8 @@ func act_interview(rid: String, topic: String = "") -> Dictionary:
 	reluctant.erase(rid)
 	_learn(offer, "interview", rid)
 	res.gained.append(offer)
-	res.lines.append(_ui(_own_key(key, offer, rid), {"name": _nm(rid), "fact": TE.fact_note_by(self, offer, rid, lang)}))
+	# 附和、确认一件你已经记下的事，说的是「那件事」，不再把原句念一遍（第 4 轮：同一句话从五个人嘴里一字不差说出来）
+	res.lines.append(_ui(_own_key(key, offer, rid), {"name": _nm(rid), "fact": TE.fact_note_by(self, offer, rid, lang), "event": TE.event_name(self, event_of(offer), lang)}))
 	if not more.is_empty() and rng.chance(0.6):
 		var fid2: String = rng.pick(more)
 		_learn(fid2, "interview", rid)
@@ -1024,7 +1041,7 @@ func _maybe_lead(rid: String, topic: String, res: Dictionary) -> void:
 			if f.subject == oid and f.secrecy != "public":
 				continue
 			var e := event_of(fid)
-			if e.is_empty() or e.week_end <= week:
+			if e.is_empty() or e.week_end <= week or oid in e.roles.get(e.target, []):
 				continue
 			var wt := 3.0 if e.id == want_event else (1.0 if not e.soft else 0.4)
 			if wt > best_w:
@@ -1241,7 +1258,9 @@ func act_stakeout(loc: String) -> Dictionary:
 				if s.kind == "witness":
 					seen_before = true
 			if seen_before:
-				res.lines.append(_ui("witnessed_again", {"fact": _note(fid)}))
+				if not res.has("again"):
+					res["again"] = true
+					res.lines.append(_ui("witnessed_again", {"fact": _note(fid)}))
 				continue
 			_learn(fid, "witness", "")
 			known[fid].evidence = true
@@ -1381,8 +1400,15 @@ func estimate_retail(a: Dictionary) -> int:
 	var naming: String = "named" if e.soft else str(a.naming)
 	var is_fu: bool = e.printed and int(e.get("printed_week", week)) < week
 	var copies: float = T.SLOT_MULT[a.slot] * float(T.TONE_RETAIL[a.tone]) * (1.0 + 0.4 * e.severity) * float(T.NAMING_RETAIL[naming]) * (FOLLOWUP_CIRC if is_fu else 1.0) * RETAIL_BASE
+	# 碎片多一条，内容多一成
+	copies *= 1.0 + 0.1 * (a.facts.size() - 1)
+	# 不煽动的报道靠人信：公信力，加上这一篇有几成是坐实的（第 4 轮：只登坐实的得不到任何好处）
 	if a.tone != "hot":
-		copies *= 0.5 + stats.credibility / 100.0
+		var ok := 0
+		for fid in a.facts:
+			if is_verified(fid):
+				ok += 1
+		copies *= (0.5 + stats.credibility / 100.0) * (0.6 + 0.4 * float(ok) / a.facts.size())
 	return int(round(copies))
 
 
@@ -1613,6 +1639,8 @@ func print_issue(articles: Array, headline_choice := {}) -> Dictionary:
 	var ad_income := 0.0
 	for rid in ads:
 		var r: Dictionary = residents[rid]
+		if ads[rid].paused_until <= week and r.in_town and r.player_rel.like < 0.3:
+			_cons(issue, "cons_ad_sulk", {"name": rid})
 		if ads[rid].paused_until <= week and r.in_town and r.player_rel.like >= 0.3:
 			ad_income += (2.0 + r.wealth * 1.0 + r.player_rel.like * 2.0) * clampf(stats.circulation / 180.0, 0.3, AD_CIRC_CAP)
 	var cost: float = 10.0 + stats.circulation * PRINT_COST
@@ -1668,6 +1696,12 @@ func _react_to_article(a: Dictionary, e: Dictionary, rec: Dictionary, exposure: 
 			if r.advertiser and ads.has(subj) and ads[subj].paused_until > week:
 				ads[subj].paused_until = week
 			_cons(issue, "cons_pleased", {"name": subj})
+			continue
+		# 受害的、旁观的那一方被写进报道，不当成被曝光的人（第 4 轮：受害人上门「想私下解决」、账本说他「没读到」）
+		if _role_of(e, subj) in SIDE_ROLES:
+			r.player_rel.like = minf(1.0, r.player_rel.like + 0.1)
+			r.player_rel.trust = minf(1.0, r.player_rel.trust + 0.05)
+			_cons(issue, "cons_side_glad", {"name": subj})
 			continue
 		var s: float = e.severity * naming_mult * (1.3 if a.tone == "hot" else 1.0) * (1.2 if a.get("evidence", false) else 1.0)
 		s *= {"head": 1.0, "second": 0.8, "third": 0.6, "small": 0.3}[a.slot]

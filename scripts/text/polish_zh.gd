@@ -79,7 +79,9 @@ static func polish(text: String) -> String:
 	s = "".join(out)
 	# 结尾补标点
 	var last := s.substr(s.length() - 1)
-	if not (last in ["。", "！", "？", "」", "…", "—"]):
+	# 整句在括号里、括号里已有句号的不再补（试玩：「（对方是真不知道这件事。）。」）
+	var boxed := last == "）" and s.length() >= 2 and s.substr(s.length() - 2, 1) in ["。", "！", "？"]
+	if not (last in ["。", "！", "？", "」", "…", "—"]) and not boxed:
 		s += "。"
 	return s
 

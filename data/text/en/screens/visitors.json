@@ -25,5 +25,6 @@
  "promise_no_alias": "Refuse, and see them out",
  "promise_hold": "Back down: not in this issue",
  "promise_hold_tip": "Leave it out this Sunday and the promise is kept. Print it, and you are defying them to their face.",
- "promise_no_hold": "Ignore it, and see them out"
+ "promise_no_hold": "Ignore it, and see them out",
+ "take_note": "Take the money and the story should not run: run it and you lose both ways. Even unprinted, word of the money may get out."
 }

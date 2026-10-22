@@ -20,13 +20,11 @@
  "src_interview": [
   "According to a person familiar with the matter, ",
   "Someone who knows the particulars told this paper that ",
-  "This paper has learned that ",
-  "A source confirmed to this paper that "
+  "This paper has learned that "
  ],
  "src_interview_who": [
   "A {src_who} told this paper that ",
   "According to a {src_who}, ",
-  "A {src_who} interviewed by this paper confirmed that ",
   "A {src_who} who asked not to be named told this paper that "
  ],
  "src_informer": [

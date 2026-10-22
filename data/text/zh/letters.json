@@ -1,4 +1,8 @@
 {
+ "bribe_leak": {"sign": false, "items": [
+  "镇上有人在传：报社收了{subject}的钱，那件事才没上报。",
+  "酒馆里有人说，{subject}给报社塞过钱。这话传得很快。"
+ ]},
  "rumor_lead": {"sign": false, "items": [
   "邮差{who}捎来一句话：「{tip.occ}{tip}那儿最近像是知道点什么。你去问问。」",
   "邮差{who}送信的时候顺口说：「镇上有件事在传，你去找{tip.occ}{tip}聊聊。」",
