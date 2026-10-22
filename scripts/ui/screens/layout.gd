@@ -74,7 +74,12 @@ func _place(eid: String, slot: String) -> void:
 	var g := _group(eid)
 	var facts: Array = (g.fresh if g.event.printed else g.facts).duplicate()
 	facts.sort_custom(func(a, b): return w.verify_score(a) > w.verify_score(b))
-	facts = facts.slice(0, 4)
+	# 默认只勾坐实到两枚章以上的；一条都没有就只勾最好的那条。没坐实的登不登，让玩家自己选
+	var solid: Array = []
+	for fid in facts:
+		if w.verify_score(fid) >= 2.0:
+			solid.append(fid)
+	facts = solid.slice(0, 4) if not solid.is_empty() else facts.slice(0, 1)
 	var ev := false
 	for fid in facts:
 		if w.known[fid].evidence:
@@ -232,6 +237,7 @@ func _editor(slot: String) -> void:
 	var box: VBoxContainer = sl[1]
 	# 碎片
 	box.add_child(K.label("碎片（一到四条）", "pixel", 12, P.STAMP_RED))
+	box.add_child(K.para("没坐实的也能登，卖得一样多；登错了，镇上会记住。", 280, "pixel", 12, P.WARM_GREY, 0))
 	for fid in g.facts:
 		var hb := HBoxContainer.new()
 		hb.add_theme_constant_override("separation", 3)
@@ -247,7 +253,8 @@ func _editor(slot: String) -> void:
 			_refresh())
 		hb.add_child(cb)
 		hb.add_child(K.stamps(mini(3, int(w.verify_score(fid)))))
-		hb.add_child(K.para(TE.fact_note(w, fid, "zh"), 214, "hand", 10, P.PENCIL, 0))
+		var shaky: bool = w.verify_score(fid) < 2.0
+		hb.add_child(K.para(("【没坐实】" if shaky else "") + TE.fact_note(w, fid, "zh"), 214, "hand", 10, P.STAMP_RED if shaky else P.PENCIL, 0))
 		box.add_child(hb)
 	# 语气
 	box.add_child(_choice_row("语气", TONES, a.tone, func(v): a.tone = v; _choice[slot] = 0; _refresh(), false))

@@ -59,6 +59,7 @@ var next_fact_id := 1
 var namegen: NameGen
 var campaign := {}              # 选举期间的状态，见 election.gd
 var needy: Array = []           # 本周需求长期不满的人，见 needs.gd
+var slept_in := 0              # 哪天上午睡过去了（周 × 10 + 天），给画面层提示用
 var leads: Array = []           # 线头：交谈落空时对方指给你的人 {who, event, from, week}，见 _maybe_lead
 var actions: Array = []         # 玩家操作日志，存档就是它
 var recording := true
@@ -262,6 +263,7 @@ func _start_day() -> void:
 		actions_left = 1
 		slot = 1
 		morning_lost = false
+		slept_in = week * 10 + day
 		log.append("第 %d 周 %s：熬夜太多，上午起不来。" % [week, DAY_NAMES[day]])
 	_compute_whereabouts()
 	_spread_rumors()
@@ -598,7 +600,7 @@ func act_interview(rid: String, topic: String = "") -> Dictionary:
 	for i in range(leads.size() - 1, -1, -1):
 		if leads[i].who == rid:
 			lead_event = leads[i].event
-			w += 0.2
+			w += 0.4
 			leads.remove_at(i)
 	if "honest" in r.traits: w += 0.1
 	if "tight" in r.traits: w -= 0.2
@@ -620,11 +622,19 @@ func act_interview(rid: String, topic: String = "") -> Dictionary:
 	if stats.credibility < 30: w -= 0.15
 	if stats.credibility > 70: w += 0.1
 	if not rng.chance(clampf(w, 0.05, 0.95)):
-		if involved and ("sly" in r.traits or not ("honest" in r.traits)) and rng.chance(0.5):
+		var culprit := false
+		if not tfact.is_empty():
+			var te := event_of(topic)
+			var tgt: Array = te.roles.get(te.target, [])
+			culprit = rid in tgt
+			for t_rid in tgt:
+				if rid in residents[t_rid].family:
+					culprit = true
+		if culprit and ("sly" in r.traits or not ("honest" in r.traits)) and rng.chance(0.5):
 			var e := event_of(topic)
 			var lie: Array = []
 			for rf in e.rumor_facts:
-				if not known.has(rf):
+				if not known.has(rf) and facts[rf].subject != rid:
 					lie.append(rf)
 			if not lie.is_empty():
 				var fid: String = rng.pick(lie)
@@ -652,7 +662,7 @@ func act_interview(rid: String, topic: String = "") -> Dictionary:
 			for fid in r.knows:
 				if not known.has(fid) or facts[fid].secrecy == "public":
 					continue
-				if facts[fid].subject == rid:
+				if facts[fid].subject == rid or not _role_of(event_of(fid), rid).is_empty():
 					continue
 				var heard := false
 				for s in known[fid].sources:
@@ -698,6 +708,18 @@ func act_interview(rid: String, topic: String = "") -> Dictionary:
 			res.gained.append(fid2)
 			res.lines.append(_ui("adds", {"name": _nm(rid), "fact": _note(fid2)}))
 	else:
+		var lead_pool: Array = []
+		if lead_event != "":
+			for fid in r.knows:
+				var lf: Dictionary = facts[fid]
+				if not known.has(fid) and lf.event == lead_event and not (lf.subject == rid and lf.secrecy != "public"):
+					lead_pool.append(fid)
+		if not lead_pool.is_empty():
+			var lfid: String = rng.pick(lead_pool)
+			_learn(lfid, "interview", rid)
+			res.gained.append(lfid)
+			res.lines.append(_ui("lead_redirect", {"name": _nm(rid), "fact": _note(lfid)}))
+			return res
 		res.lines.append(_ui("denies_knowing", {"name": _nm(rid)}))
 		# 对方把话头记住了，可能传开
 		if rng.chance(0.4):
@@ -927,6 +949,13 @@ func act_stakeout(loc: String) -> Dictionary:
 	for e in events:
 		if e.get("tonight", {}).has(loc):
 			var fid: String = e.tonight[loc]
+			var seen_before := false
+			for s in known.get(fid, {"sources": []}).sources:
+				if s.kind == "witness":
+					seen_before = true
+			if seen_before:
+				res.lines.append(_ui("witnessed_again", {"fact": _note(fid)}))
+				continue
 			_learn(fid, "witness", "")
 			known[fid].evidence = true
 			res.gained.append(fid)

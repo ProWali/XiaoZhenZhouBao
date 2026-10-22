@@ -103,6 +103,8 @@ func _talk(rid: String) -> void:
 	var r: Dictionary = w.residents[rid]
 	var items: Array = [{"text": "随便聊聊，看%s愿意说什么" % r.name, "cb": _interview.bind(rid, "")}]
 	for g in w.notebook():
+		if g.event.soft:
+			continue  # 软新闻人人都知道，拿来当话头问不出东西
 		var ename: String = TE.event_name(w, g.event, "zh")
 		for fid in g.facts:
 			items.append({"text": "问「%s」：%s" % [ename, TE.fact_note(w, fid, "zh")], "cb": _interview.bind(rid, fid), "font": "hand", "size": 10})

@@ -29,7 +29,9 @@
  "witnessed": "You saw it with your own eyes: {fact}.",
  "stakeout_nothing": ["You waited at {place} until the small hours. Nothing but wind.", "You kept watch at {place} all night and saw nothing.", "Nothing happened at {place} all night, and it was light by the time you went home."],
  "letter_sign": " — {from}",
- "lead": ["{name} thought for a moment. \"Can't help you there. Try {who}, the {occ}. Hears a lot, that one.\"", "{name} waved a hand, then lowered their voice. \"Not me. {who} might have what you're after.\""],
- "lead_topic": ["{name} shook their head. \"You'd want {who}, the {occ}. Knows more about it than I do.\"", "{name} paused. \"That one... ask {who}.\""],
- "echo": ["{name} brought it up too: \"{fact}.\" You'd heard it before, but another voice never hurts.", "\"Have you heard?\" said {name}. \"{fact}.\" Not the first time you'd heard it."]
+ "echo": ["{name} brought it up too: \"{fact}.\" You'd heard it before, but another voice never hurts.", "\"Have you heard?\" said {name}. \"{fact}.\" Not the first time you'd heard it."],
+ "lead": ["\"Mind you,\" {name} added, \"try {who}, the {occ}. Hears a lot, that one.\"", "\"If it's news you want,\" said {name}, \"{who} might have it.\"", "{name} did mention that {who}, the {occ}, seemed to have heard something lately."],
+ "lead_topic": ["\"You'd want {who} for that,\" said {name}. \"The {occ}. Knows more than I do.\"", "After a while {name} added: \"Go and ask {who}.\""],
+ "lead_redirect": ["\"Can't help you with that,\" said {name}. \"What I heard was something else: {fact}.\"", "\"Don't know about that,\" {name} said quietly. \"What I do know is this: {fact}.\""],
+ "witnessed_again": ["You saw it again: {fact}. Same as last time. Nothing new.", "The same scene: {fact}. Nothing new tonight."]
 }

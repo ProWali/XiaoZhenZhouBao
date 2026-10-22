@@ -77,7 +77,9 @@ func _day() -> void:
 	add_child(K.hotspot(Rect2(388, 40, 54, 72), "日历 · %s" % ("回去睡觉" if evening else "收工"), Game.request_end_day))
 	add_child(K.hotspot(Rect2(430, 92, 110, 176), "印刷机 · 周日才开", func(): _say("印刷机要等到周日。这一周的料先攒在选题簿里。")))
 	add_child(K.hotspot(Rect2(228, 38, 144, 88), "广告板", _ads_info))
-	if w.day == 1 and w.slot == 0 and w.week == 1:
+	if w.slept_in == w.week * 10 + w.day:
+		_note.text = "昨晚熬得太晚，一觉睡到中午，上午没了。熬夜一周超过两次就会这样。"
+	elif w.day == 1 and w.slot == 0 and w.week == 1:
 		_note.text = "第一周。前任说邮差可靠：推开右边的门，先去邮局找他聊聊。问到的事会记进桌上的选题簿。"
 	elif w.day == 2 and w.slot == 0 and w.week == 1:
 		_note.text = "桌子左边的抽屉里有线人的地址：花三块钱，可以托他打听某个人。"
