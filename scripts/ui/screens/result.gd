@@ -48,6 +48,12 @@ func _ready() -> void:
 			hb.add_child(K.para(TE.fact_note(w, fid, "zh"), 420 - x - 44, "hand", 10, P.PENCIL))
 			sl[1].add_child(hb)
 		Game.sfx("stamp")
+	var lead: String = str(params.get("lead", ""))
+	if lead != "" and w.residents.has(lead):
+		sl[1].add_child(K.label("记下线头：", "pixel", 12, P.STAMP_RED))
+		var where: String = w.where_is(lead)
+		var at: String = "，这会儿在" + w.loc_name(where) if where != "" and not where.begins_with("home:") else ""
+		sl[1].add_child(K.para("★ %s（%s）%s。选题簿「线头」一页里也记着。" % [w.residents[lead].name, TE.occ_label(w, lead, "zh"), at], 420 - x - 30, "hand", 10, P.PENCIL, 0))
 	var ok := K.button("好", _close, 70)
 	ok.position = Vector2(334, 222)
 	sheet.add_child(ok)

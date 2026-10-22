@@ -142,6 +142,17 @@ func _day_step() -> void:
 					await _shot("w%d_d%d_archive" % [w.week, w.day])
 					Game.close_overlay()
 					return
+	# 有线头就顺着线头去
+	for l in w.leads:
+		var lloc: String = w.where_is(l.who)
+		if lloc != "" and not lloc.begins_with("home:") and lloc != "office":
+			Game.goto("location", {"loc": lloc})
+			await _shot("w%d_d%d_lead_%s" % [w.week, w.day, lloc])
+			var lres: Dictionary = w.act_interview(l.who, "")
+			Game.show_result("和%s谈" % w.residents[l.who].name, lres, l.who, func(): pass)
+			await _shot("w%d_d%d_lead_talk" % [w.week, w.day])
+			Game.close_overlay()
+			return
 	# 找人谈
 	var best := ""
 	var best_n := 0
@@ -183,6 +194,9 @@ func _day_step() -> void:
 		nb._sel = ""
 		nb._build()
 		await _shot("w%d_notebook_people" % w.week)
+		nb._tab = "leads"
+		nb._build()
+		await _shot("w%d_notebook_leads" % w.week)
 		Game.close_overlay()
 
 

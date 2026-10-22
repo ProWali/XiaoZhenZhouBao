@@ -233,3 +233,4 @@ func _test_preview_matches_print() -> void:
 					_fail("排版预览和付印不一致：种子 %d 第 %d 周 %s" % [seed_v, int(issue.week), a.slot])
 				checked += 1
 	print("预览一致：核对 %d 篇" % checked)
+

@@ -37,6 +37,19 @@ Godot_v4.7.2-stable_win64.exe --path .
 Godot_v4.7.2-stable_win64_console.exe --path . -- --walkthrough --seed 7 --shots <截图目录>
 ```
 
+改完界面先编译一遍全部画面层脚本（运行时才加载，别处查不出语法错误）：
+
+```
+Godot_v4.7.2-stable_win64_console.exe --headless --path . -- --check-scripts
+```
+
+读真人试玩：把存档逐步重放成文字；量新手玩家的取料产出：
+
+```
+Godot_v4.7.2-stable_win64_console.exe --headless --path . -s res://scripts/tools/replay_report.gd -- --save <slot1.json> --out report.md
+Godot_v4.7.2-stable_win64_console.exe --headless --path . -s res://scripts/tools/yield_probe.gd -- --seeds 30
+```
+
 导出 Windows 包：
 
 ```
@@ -85,4 +98,4 @@ Godot_v4.7.2-stable_win64_console.exe --headless --path . -s res://scripts/tools
 
 ## 里程碑
 
-M1 纸上原型（完成）→ M2 模拟核心（完成）→ M3 文本引擎（完成）→ M3.5 文本补课（完成，第十、十一轮盲测通过，保留意见见记录）→ M4 垂直切片（试玩包已出，等真人试玩反馈）→ M5 内容填充 → M6 Demo → M7 发售。排期见策划案十二版。
+M1 纸上原型（完成）→ M2 模拟核心（完成）→ M3 文本引擎（完成）→ M3.5 文本补课（完成，第十、十一轮盲测通过，保留意见见记录）→ M4 垂直切片（M4.1 试玩包已出，等外部试玩反馈）→ M5 内容填充 → M6 Demo → M7 发售。排期见策划案十二版。

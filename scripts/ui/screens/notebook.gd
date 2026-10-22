@@ -44,11 +44,17 @@ func _build() -> void:
 	var tp := K.button("按人", func(): _tab = "people"; _sel = ""; _build())
 	tp.disabled = _tab == "people"
 	tabs.add_child(tp)
+	var nl: int = Game.world.leads.size()
+	var tl := K.button("线头 %d" % nl if nl > 0 else "线头", func(): _tab = "leads"; _sel = ""; _build())
+	tl.disabled = _tab == "leads"
+	tabs.add_child(tl)
 	var close := K.button("合上", func(): Game.close_overlay(), 50)
 	close.position = Vector2(238, 300)
 	_right.add_child(close)
 	if _tab == "events":
 		_events()
+	elif _tab == "leads":
+		_leads()
 	else:
 		_people()
 
@@ -63,7 +69,7 @@ func _events() -> void:
 		sl[1].add_child(K.para("还是空的。出门找人聊聊，听到的事会记在这里。", 270, "hand", 11, P.PENCIL))
 		return
 	# 没登过的在前，登过的在后
-	groups.sort_custom(func(a, b): return int(a.event.printed) < int(b.event.printed))
+	groups.sort_custom(func(a, b): return int(a.event.printed and a.fresh.is_empty()) < int(b.event.printed and b.fresh.is_empty()))
 	if _sel == "":
 		_sel = groups[0].event.id
 	for g in groups:
@@ -72,7 +78,7 @@ func _events() -> void:
 		for fid in g.facts:
 			if w.is_verified(fid):
 				n_ok += 1
-		var tag := "（已登）" if e.printed else ("（软新闻）" if e.soft else "")
+		var tag: String = ("（已登，有新料）" if not g.fresh.is_empty() else "（已登）") if e.printed else ("（软新闻）" if e.soft else "")
 		var txt := "%s%s\n%d 条碎片，%d 条坐实" % [TE.event_name(w, e, "zh"), tag, g.facts.size(), n_ok]
 		var eid: String = e.id
 		var b := K.row(txt, func(): _sel = eid; _build(), 270, "hand", 11)
@@ -125,6 +131,31 @@ func _event_page(g: Dictionary) -> void:
 	var legend := K.label("一枚章＝一个来源。三枚算坐实。", "pixel", 12, P.WARM_GREY)
 	legend.position = Vector2(12, 304)
 	_right.add_child(legend)
+
+
+# ------------------------------------------------------------ 线头
+func _leads() -> void:
+	var w = Game.world
+	var sl: Array = K.scroll_list(Vector2(8, 34), Vector2(284, 286), 6)
+	_left.add_child(sl[0])
+	if w.leads.is_empty():
+		sl[1].add_child(K.para("还没有。找人聊天问不出东西时，对方有时会给你指个人，记在这里。", 270, "hand", 11, P.PENCIL))
+	for l in w.leads:
+		var who: String = l.who
+		var hb := HBoxContainer.new()
+		hb.add_theme_constant_override("separation", 4)
+		hb.add_child(K.image(Portrait.face(w, who)))
+		var where: String = w.where_is(who)
+		var at: String = "这会儿在" + w.loc_name(where) if where != "" and not where.begins_with("home:") and w.slot <= 1 else "这会儿不在外面"
+		var txt := "★ %s（%s）\n%s指的，第 %d 周。%s" % [w.res_name(who), TE.occ_label(w, who, "zh"), w.res_name(str(l.from)), int(l.week), at]
+		hb.add_child(K.para(txt, 236, "hand", 11, P.PENCIL, 1))
+		sl[1].add_child(hb)
+	var t := K.para("线头", 270, "hand", 14, P.PRINT_INK)
+	t.position = Vector2(12, 10)
+	_right.add_child(t)
+	var help := K.para("有人说「你去问问某某」，就记在左边。\n\n去找那个人，随便聊聊就行：说是谁让你来的，对方多半肯开口，说的也多半是同一件事。\n\n地图名牌和地点里有 ★ 的地方，就是线头上的人这会儿在的地方。\n\n线头放三周就凉了。", 266, "hand", 11, P.PENCIL, 3)
+	help.position = Vector2(14, 44)
+	_right.add_child(help)
 
 
 # ------------------------------------------------------------ 按人

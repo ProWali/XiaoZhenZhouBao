@@ -28,5 +28,8 @@
  "informer_nothing": "{name}收了钱，想了半天：「这人干净得很。」",
  "witnessed": "你亲眼看见：{fact}。",
  "stakeout_nothing": ["你在{place}蹲到后半夜，只有风。", "你在{place}守了一夜，什么也没等到。", "{place}一夜无事，你回去的时候天已经亮了。"],
- "letter_sign": "——{from}"
+ "letter_sign": "——{from}",
+ "lead": ["{name}想了想：「这些我不清楚。你去问问{who}吧，{occ}，那人消息多。」", "{name}摆摆手，又压低声音：「我不知道。{who}那儿也许有你要的。」", "{name}说：「最近{who}（{occ}）好像听说了点什么，你去问问。」"],
+ "lead_topic": ["{name}摇头：「这事你得问{who}，{occ}，那人比我清楚。」", "{name}想了一会儿：「这个……你去找{who}问问。」"],
+ "echo": ["{name}也说起了这件事：「{fact}。」你听过，但多一个人说总是好的。", "{name}说：「你听说了没有？{fact}。」这话你不是头一回听。"]
 }

@@ -71,6 +71,11 @@ func _ready() -> void:
 		else:
 			var cnt: int = w.people_at(loc).size()
 			h.plate = "%s %d" % [name, cnt] if cnt > 0 else name
+			for rid in w.people_at(loc):
+				if Game.lead_from(rid) != "":
+					h.plate += " ★"
+					h.tip += " · 线头上的人在这儿"
+					break
 		add_child(h)
 	var hud := Hud.new()
 	hud.end_day_requested.connect(Game.request_end_day)
@@ -87,7 +92,7 @@ func _ready() -> void:
 	elif not w.can_act_day():
 		_note.text = "今天的行动点用完了。"
 	else:
-		_note.text = "名牌上的数字是这会儿在那儿的人。进门不花行动点，找人谈、查档案才花。"
+		_note.text = "名牌上的数字是这会儿在那儿的人，★是有人指给你的线头。进门不花行动点，找人谈、查档案才花。"
 
 
 func _night_action(loc: String) -> void:

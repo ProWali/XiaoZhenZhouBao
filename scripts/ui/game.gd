@@ -9,9 +9,12 @@ const Portrait = preload("res://scripts/ui/portrait.gd")
 
 const SLICE_WEEKS := 4          # 垂直切片只开放前四周；第五周周一读完信就结束
 const SAVE_PATH := "user://saves/slot1.json"
-const VERSION := "M4 试玩版"
+const VERSION := "M4.1 试玩版"
 
 var world = null
+## 自动走查用自己的存档位、不写试玩记录，免得覆盖真人玩家的存档（M4.1 踩过一次）
+var save_path := SAVE_PATH
+var log_enabled := true
 ## 画面层自己的进度，和模拟存档一起存。模拟状态都在 world 里，这里只记「玩家看过了没有」。
 var ui := {}
 var settings := {"master": 0.8, "music": 0.6, "sfx": 0.8, "fullscreen": false}
@@ -236,9 +239,19 @@ func _end_day() -> void:
 
 ## 一次行动做完：记录、存档、弹出结果。on_close 决定关掉之后去哪。
 func show_result(title: String, res: Dictionary, who: String, on_close: Callable) -> void:
-	track("action", {"title": title, "ok": res.ok, "gained": res.gained.size(), "who": who})
+	track("action", {"title": title, "ok": res.ok, "gained": res.gained.size(), "who": who, "lead": str(res.get("lead", ""))})
 	autosave()
-	open_overlay("result", {"title": title, "lines": res.lines, "who": who, "gained": res.gained, "on_close": on_close})
+	open_overlay("result", {"title": title, "lines": res.lines, "who": who, "gained": res.gained, "lead": str(res.get("lead", "")), "on_close": on_close})
+
+
+## 这个人是不是线头上的人；是的话返回是谁指的
+func lead_from(rid: String) -> String:
+	if world == null:
+		return ""
+	for l in world.leads:
+		if l.who == rid:
+			return str(l.from)
+	return ""
 
 
 # ------------------------------------------------------------ 新局与存档
@@ -254,14 +267,14 @@ func new_game(cfg: Dictionary) -> void:
 
 
 func has_save() -> bool:
-	return FileAccess.file_exists(SAVE_PATH)
+	return FileAccess.file_exists(save_path)
 
 
 func autosave() -> void:
 	if world == null:
 		return
 	DirAccess.make_dir_recursive_absolute("user://saves")
-	var f := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	var f := FileAccess.open(save_path, FileAccess.WRITE)
 	if f == null:
 		return
 	f.store_string(JSON.stringify({"save": Save.to_dict(world), "ui": ui, "log": _log_path}))
@@ -269,7 +282,7 @@ func autosave() -> void:
 
 
 func continue_game() -> bool:
-	var data = JSON.parse_string(FileAccess.get_file_as_string(SAVE_PATH))
+	var data = JSON.parse_string(FileAccess.get_file_as_string(save_path))
 	if not (data is Dictionary) or not data.has("save"):
 		return false
 	Portrait.clear_cache()
@@ -287,12 +300,15 @@ func continue_game() -> bool:
 
 func delete_save() -> void:
 	if has_save():
-		DirAccess.remove_absolute(ProjectSettings.globalize_path(SAVE_PATH))
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(save_path))
 
 
 # ------------------------------------------------------------ 试玩记录
 ## 每次试玩写一份 JSON Lines：看了哪一屏、做了什么、花了多久。试玩结束时请玩家把这个文件发回来。
 func _start_log() -> void:
+	if not log_enabled:
+		_log_path = ""
+		return
 	DirAccess.make_dir_recursive_absolute("user://playtest")
 	var t := Time.get_datetime_dict_from_system()
 	_log_path = "user://playtest/session-%04d%02d%02d-%02d%02d%02d.jsonl" % [t.year, t.month, t.day, t.hour, t.minute, t.second]

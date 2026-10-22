@@ -49,7 +49,8 @@ func _ready() -> void:
 func _groups() -> Array:
 	var out: Array = []
 	for g in Game.world.notebook():
-		if not g.event.printed:
+		# 没登过的事；登过但又听到了新料的，可以登续报
+		if not g.event.printed or not g.fresh.is_empty():
 			out.append(g)
 	return out
 
@@ -71,7 +72,7 @@ func _placed(eid: String) -> String:
 func _place(eid: String, slot: String) -> void:
 	var w = Game.world
 	var g := _group(eid)
-	var facts: Array = g.facts.duplicate()
+	var facts: Array = (g.fresh if g.event.printed else g.facts).duplicate()
 	facts.sort_custom(func(a, b): return w.verify_score(a) > w.verify_score(b))
 	facts = facts.slice(0, 4)
 	var ev := false
@@ -157,7 +158,7 @@ func _story_list() -> void:
 	var t := K.label("周日 · 排版", "serif_black", 14, P.PRINT_INK)
 	t.position = Vector2(10, 8)
 	sheet.add_child(t)
-	var hint := K.para("从选题簿里挑一件事，放进右边的版面。一条报道只写一件事，用一到四条碎片。", 290, "pixel", 12, P.WARM_GREY, 0)
+	var hint := K.para("从选题簿里挑一件事，放进右边的版面。一条报道只写一件事，用一到四条碎片。登过的事有了新料，可以登续报。", 290, "pixel", 12, P.WARM_GREY, 0)
 	hint.position = Vector2(10, 30)
 	sheet.add_child(hint)
 	var groups := _groups()
@@ -173,7 +174,8 @@ func _story_list() -> void:
 			if w.is_verified(fid):
 				n_ok += 1
 		var at := _placed(eid)
-		var txt := "%s%s\n%d 条碎片，%d 条坐实%s" % [TE.event_name(w, e, "zh"), "（软新闻）" if e.soft else "", g.facts.size(), n_ok, ("  → " + T.SLOT_NAME[at]) if at != "" else ""]
+		var tag: String = ("（续报：%d 条新料）" % g.fresh.size()) if e.printed else ("（软新闻）" if e.soft else "")
+		var txt := "%s%s\n%d 条碎片，%d 条坐实%s" % [TE.event_name(w, e, "zh"), tag, g.facts.size(), n_ok, ("  → " + T.SLOT_NAME[at]) if at != "" else ""]
 		var b := K.row(txt, func():
 			if _placed(eid) != "":
 				_edit = _placed(eid)

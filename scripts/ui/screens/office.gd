@@ -78,7 +78,7 @@ func _day() -> void:
 	add_child(K.hotspot(Rect2(430, 92, 110, 176), "印刷机 · 周日才开", func(): _say("印刷机要等到周日。这一周的料先攒在选题簿里。")))
 	add_child(K.hotspot(Rect2(228, 38, 144, 88), "广告板", _ads_info))
 	if w.day == 1 and w.slot == 0 and w.week == 1:
-		_note.text = "第一周。推开右边的门去镇上找人聊聊；问到的事会记进桌上的选题簿。"
+		_note.text = "第一周。前任说邮差可靠：推开右边的门，先去邮局找他聊聊。问到的事会记进桌上的选题簿。"
 	elif w.day == 2 and w.slot == 0 and w.week == 1:
 		_note.text = "桌子左边的抽屉里有线人的地址：花三块钱，可以托他打听某个人。"
 	elif evening:
@@ -93,6 +93,10 @@ func _day() -> void:
 
 func _hint() -> String:
 	var w = Game.world
+	for l in w.leads:
+		var where: String = w.where_is(l.who)
+		if where != "" and not where.begins_with("home:"):
+			return "★ 线头：%s说去找%s，这会儿在%s。" % [w.res_name(l.from), w.res_name(l.who), w.loc_name(where)]
 	var groups: Array = w.notebook()
 	if groups.is_empty():
 		return "选题簿还是空的。"

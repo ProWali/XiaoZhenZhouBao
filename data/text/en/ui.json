@@ -28,5 +28,8 @@
  "informer_nothing": "{name} took the money and thought a long while: \"That one's clean as a whistle.\"",
  "witnessed": "You saw it with your own eyes: {fact}.",
  "stakeout_nothing": ["You waited at {place} until the small hours. Nothing but wind.", "You kept watch at {place} all night and saw nothing.", "Nothing happened at {place} all night, and it was light by the time you went home."],
- "letter_sign": " — {from}"
+ "letter_sign": " — {from}",
+ "lead": ["{name} thought for a moment. \"Can't help you there. Try {who}, the {occ}. Hears a lot, that one.\"", "{name} waved a hand, then lowered their voice. \"Not me. {who} might have what you're after.\""],
+ "lead_topic": ["{name} shook their head. \"You'd want {who}, the {occ}. Knows more about it than I do.\"", "{name} paused. \"That one... ask {who}.\""],
+ "echo": ["{name} brought it up too: \"{fact}.\" You'd heard it before, but another voice never hurts.", "\"Have you heard?\" said {name}. \"{fact}.\" Not the first time you'd heard it."]
 }

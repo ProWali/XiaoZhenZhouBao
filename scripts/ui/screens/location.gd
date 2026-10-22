@@ -81,8 +81,16 @@ func _place_people(people: Array) -> void:
 		fig.scale = Vector2(2, 2)
 		add_child(fig)
 	for f in figs:
+		if Game.lead_from(f.rid) != "":
+			var star := K.label("★", "pixel", 12, P.LAMP)
+			star.position = f.pos + Vector2(8, -16)
+			add_child(star)
+	for f in figs:
 		var r: Dictionary = w.residents[f.rid]
-		var h := K.hotspot(Rect2(f.pos.x - 2, f.pos.y - 2, 32, 64), "%s（%s）" % [r.name, TE.occ_label(w, f.rid, "zh")], _talk.bind(f.rid))
+		var tip := "%s（%s）" % [r.name, TE.occ_label(w, f.rid, "zh")]
+		if Game.lead_from(f.rid) != "":
+			tip = "★ " + tip + " · %s让你来找的" % w.res_name(Game.lead_from(f.rid))
+		var h := K.hotspot(Rect2(f.pos.x - 2, f.pos.y - 2, 32, 64), tip, _talk.bind(f.rid))
 		h.enabled = w.can_act_day()
 		add_child(h)
 
@@ -98,7 +106,9 @@ func _talk(rid: String) -> void:
 		var ename: String = TE.event_name(w, g.event, "zh")
 		for fid in g.facts:
 			items.append({"text": "问「%s」：%s" % [ename, TE.fact_note(w, fid, "zh")], "cb": _interview.bind(rid, fid), "font": "hand", "size": 10})
-	var note := "话头从选题簿里挑。问当事人自己的事，对方多半不认，还会记住你在查。"
+	var note := "话头从选题簿里挑。问当事人自己的事，对方多半不认，还会记住你在查。问不出来时，对方有时会给你指个人。"
+	if Game.lead_from(rid) != "":
+		note = "★ %s让你来找%s。说是谁让你来的，对方多半肯开口；随便聊聊就行。" % [w.res_name(Game.lead_from(rid)), r.name]
 	if r.avoid_until > w.week:
 		note = "%s最近躲着你。" % r.name
 	Game.open_overlay("pick", {"title": "和%s（%s）谈什么？" % [r.name, TE.occ_label(w, rid, "zh")], "note": note, "items": items})
@@ -119,6 +129,13 @@ func _archive() -> void:
 		if w.residents[rid].keeper == _loc:
 			keeper = rid
 	var text := "翻%s的档案要花一个行动点。" % w.loc_name(_loc)
+	var pointed := false
+	for g in w.notebook():
+		for h in g.hints:
+			if h.find(w.loc_name(_loc)) >= 0 and h.find("档案") >= 0:
+				pointed = true
+	if not pointed:
+		text += "选题簿里没有线索指向这里的档案，翻了很可能白翻。"
 	if keeper != "":
 		var k: Dictionary = w.residents[keeper]
 		if k.player_rel.trust >= 0.5:

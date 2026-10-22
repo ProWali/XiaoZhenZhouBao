@@ -184,6 +184,13 @@ func _make_fact(inst: Dictionary, frag: Dictionary, roles: Dictionary, world, tr
 	for spec in frag.get("known_by", []):
 		for rid in _resolve_known(spec, roles, world):
 			world.residents[rid].knows[fid] = true
+	# 半公开的事，当事人身边总有几个人听说过：三个同事、一个朋友
+	if fact.secrecy == "semi":
+		var extra: Array = _resolve_known("work:" + str(frag.subject) + ":3", roles, world)
+		extra.append_array(world.rng.sample(world.residents[subj].friends, 1))
+		for rid in extra:
+			if world.residents.has(rid):
+				world.residents[rid].knows[fid] = true
 	return fid
 
 
