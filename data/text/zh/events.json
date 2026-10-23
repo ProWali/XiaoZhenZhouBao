@@ -9997,5 +9997,149 @@
    "张罗抽奖的是{organizer.full}。",
    "抽奖是{organizer.full}办的。"
   ]
+ },
+ "repay": {
+  "name": "赔偿",
+  "headlines": {
+   "calm": [
+    "{payer}赔了钱",
+    "一笔账结清了",
+    "{payee}拿回了钱"
+   ],
+   "neutral": [
+    "{payer}向{payee}赔偿",
+    "{payer}赔钱了事",
+    "{payee}收到{payer}的赔偿"
+   ],
+   "hot": [
+    "{payer}掏钱了！",
+    "报道之后，{payer}乖乖赔钱",
+    "{payer}认赔"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "{payer.full}本周赔了一笔钱。"
+   ],
+   "neutral": [
+    "{payer.full}本周上门，把钱赔给了{payee.full}。"
+   ],
+   "hot": [
+    "本报上次报道的那件事，{payer.full}本周掏钱认了。"
+   ]
+  },
+  "body": [
+   "邻居们都看见了。",
+   "{payee.short}说，钱数对得上。",
+   "{payer.short}没多说什么，放下钱就走了。"
+  ]
+ },
+ "shut_down": {
+  "name": "收摊",
+  "headlines": {
+   "calm": [
+    "{owner}收摊",
+    "一门营生停了",
+    "镇上少了一处买卖"
+   ],
+   "neutral": [
+    "{owner}停了那门营生",
+    "{owner}收手",
+    "{owner}不再做那门买卖"
+   ],
+   "hot": [
+    "{owner}收摊了！",
+    "报道之后，{owner}关门",
+    "{owner}干不下去了"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "{owner.full}本周停了那门营生。"
+   ],
+   "neutral": [
+    "{owner.full}本周把东西都收了起来，说以后不干了。"
+   ],
+   "hot": [
+    "本报上次报道的那门营生，本周关张了。"
+   ]
+  },
+  "body": [
+   "来问的人吃了闭门羹。",
+   "{owner.short}说，往后安分过日子。",
+   "镇上有人说，早该这样。"
+  ]
+ },
+ "run_off": {
+  "name": "要离镇",
+  "headlines": {
+   "calm": [
+    "{leaver}要走了",
+    "镇上要少一个人",
+    "{leaver}打算离镇"
+   ],
+   "neutral": [
+    "{leaver}收拾行李，准备离镇",
+    "{leaver}将离开灰河镇",
+    "{leaver}说要走"
+   ],
+   "hot": [
+    "{leaver}待不下去了！",
+    "报道之后，{leaver}卷铺盖",
+    "{leaver}要走人"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "{leaver.full}准备离开灰河镇。"
+   ],
+   "neutral": [
+    "{leaver.full}这几天在收拾东西，说是要离开灰河镇。"
+   ],
+   "hot": [
+    "本报上次报道的那个人，要走了。"
+   ]
+  },
+  "body": [
+   "去哪儿，{leaver.short}没说。",
+   "镇上没几个人去送。",
+   "{leaver.short}住的地方，门已经锁上了。"
+  ]
+ },
+ "questioned": {
+  "name": "问话",
+  "headlines": {
+   "calm": [
+    "{suspect}被叫去问话",
+    "镇公所请人问话",
+    "{suspect}去了趟镇公所"
+   ],
+   "neutral": [
+    "{suspect}被叫到镇公所问话",
+    "镇公所传{suspect}问话",
+    "{suspect}在镇公所待了一下午"
+   ],
+   "hot": [
+    "{suspect}被传去问话！",
+    "报道之后，镇公所找上了{suspect}",
+    "{suspect}这回躲不过了"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "{suspect.full}本周被叫到镇公所问话。"
+   ],
+   "neutral": [
+    "{suspect.full}本周被叫到镇公所，问了一下午话。"
+   ],
+   "hot": [
+    "本报上次报道的事，镇公所本周找上了{suspect.full}。"
+   ]
+  },
+  "body": [
+   "问的什么，镇公所没说。",
+   "{suspect.short}出来的时候没跟人打招呼。",
+   "天黑以后{suspect.short}才回家。"
+  ]
  }
 }

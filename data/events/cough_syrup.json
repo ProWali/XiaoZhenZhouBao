@@ -81,5 +81,15 @@
    "孩子喝了睡一天一夜的糖浆"
   ]
  },
- "detail": "标签上的章"
+ "detail": "标签上的章",
+ "followups": [
+  {
+   "tid": "run_off",
+   "map": {
+    "leaver": "seller"
+   },
+   "delay": 1,
+   "chance": 0.7
+  }
+ ]
 }

@@ -77,5 +77,16 @@
    "谁偷了{victim}家的鸡"
   ]
  },
- "detail": "鸡毛"
+ "detail": "鸡毛",
+ "followups": [
+  {
+   "tid": "repay",
+   "map": {
+    "payer": "thief",
+    "payee": "victim"
+   },
+   "delay": 1,
+   "chance": 0.7
+  }
+ ]
 }

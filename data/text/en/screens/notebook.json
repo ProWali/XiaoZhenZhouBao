@@ -43,5 +43,7 @@
  "lead_row_self": "★ {who} ({occ}){about}\n{who} wrote saying they have more to tell, week {week}. {at}",
  "lead_about": ", knows about \"{event}\"",
  "lead_about_new": ", knows something you haven't heard yet",
- "leads_help": "When someone says \"go ask so-and-so,\" it goes on the left.\n\nFind that person and just chat. Say who sent you: they will usually open up. What they tell you is what they know and you don't, which may not be the story you are working on.\n\nA ★ on the map labels and in places marks where a lead is right now.\n\nLeads go cold after three weeks."
+ "leads_help": "When someone says \"go ask so-and-so,\" it goes on the left.\n\nFind that person and just chat. Say who sent you: they will usually open up. What they tell you is what they know and you don't, which may not be the story you are working on.\n\nA ★ on the map labels and in places marks where a lead is right now.\n\nLeads go cold after three weeks.",
+ "lead_row_vouch": "★ {who} ({occ}) saw \"{event}\" first-hand\nNamed in something you heard; you haven't asked them yet. Week {week}. {at}",
+ "lead_errand": "home in the morning; afternoons, often at {where}"
 }

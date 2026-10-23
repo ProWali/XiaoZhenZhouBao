@@ -54,6 +54,7 @@ func _pull() -> void:
 	Game.ui.last_issue = {
 		"week": week, "circ_before": circ_before, "sales": sales, "retail": retail, "ad_income": float(issue.get("ad_income", 0.0)),
 		"cost": cost, "other": w.stats.cash - cash_start - float(issue.cash_delta), "cred_delta": float(issue.cred_delta),
+		"debt": float(issue.get("debt", 0.0)), "debt_left": float(w.flags.get("debt_left", 0.0)),
 		"consequences": issue.consequences.slice(0, 6),
 		"headlines": issue.articles.map(func(a): return {"slot": a.slot, "headline": a.headline}),
 		# 账本上一篇一篇写：卖了多少份、镇上信不信、谁有什么反应（M4.3：玩家看不出自己的选择带来了什么）

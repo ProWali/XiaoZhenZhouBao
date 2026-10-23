@@ -78,5 +78,15 @@
    "{barkeep}抽走了工人的工钱"
   ]
  },
- "detail": "后屋桌上的烟灰"
+ "detail": "后屋桌上的烟灰",
+ "followups": [
+  {
+   "tid": "shut_down",
+   "map": {
+    "owner": "barkeep"
+   },
+   "delay": 1,
+   "chance": 0.6
+  }
+ ]
 }

@@ -31,5 +31,6 @@
  "art_trusted": "the town believed it",
  "art_doubted": "the town had its doubts",
  "art_flat": "the town said little",
- "art_false": "it was wrong, and the town noticed"
+ "art_false": "it was wrong, and the town noticed",
+ "row_debt": "Paying off debts (still owing {n})"
 }

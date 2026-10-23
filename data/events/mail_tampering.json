@@ -75,5 +75,15 @@
    "邮差在偷看你的信！"
   ]
  },
- "detail": "封口上的水渍"
+ "detail": "封口上的水渍",
+ "followups": [
+  {
+   "tid": "questioned",
+   "map": {
+    "suspect": "postman"
+   },
+   "delay": 1,
+   "chance": 0.6
+  }
+ ]
 }

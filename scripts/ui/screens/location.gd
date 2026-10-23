@@ -84,7 +84,9 @@ func _place_people(people: Array) -> void:
 			add_child(star)
 	for f in figs:
 		var tip := Game.t("location.person_occ", {"name": Game.name_of(f.rid), "occ": Game.occ(f.rid)})
-		if Game.lead_from(f.rid) != "":
+		if Game.lead_of(f.rid).has("fact"):
+			tip = Game.t("location.tip_vouch", {"tip": tip})
+		elif Game.lead_from(f.rid) != "":
 			tip = Game.t("location.tip_lead", {"tip": tip, "from": Game.name_of(Game.lead_from(f.rid))})
 		var h := K.hotspot(Rect2(f.pos.x - 2, f.pos.y - 2, 32, 64), tip, _talk.bind(f.rid))
 		h.enabled = w.can_act_day()
@@ -114,7 +116,9 @@ func _talk(rid: String) -> void:
 	items.append_array(open_items)
 	items.append_array(done_items)
 	var note := Game.t("location.talk_note")
-	if Game.lead_from(rid) != "":
+	if Game.lead_of(rid).has("fact"):
+		note = Game.t("location.talk_note_vouch", {"name": Game.name_of(rid)})
+	elif Game.lead_from(rid) != "":
 		note = Game.t("location.talk_note_lead", {"from": Game.name_of(Game.lead_from(rid)), "name": Game.name_of(rid)})
 	if r.avoid_until > w.week:
 		note = Game.t("location.avoiding", {"name": Game.name_of(rid)})

@@ -94,21 +94,29 @@ func _show() -> void:
 		take.tooltip_text = Game.t("visitors.take_tip")
 		bar.add_child(take)
 		refuse.call_deferred("grab_focus")
-	elif (v.kind == "plea" or v.kind == "threat") and str(v.get("event", "")) != "" and not decided:
-		# 求情的可以答应不点名，威胁的可以答应这期不登；不答应就送客（M4.3：原来只能送客）
-		var pk := "alias" if v.kind == "plea" else "hold"
-		var yes := K.button(Game.t("visitors.promise_" + pk), func():
-			w.make_promise(v, pk)
-			Game.ui.deals[str(_i)] = true
-			Game.track("promise", {"who": who, "kind": pk})
-			Game.autosave()
-			_next(), 0)
-		yes.tooltip_text = Game.t("visitors.promise_" + pk + "_tip")
-		bar.add_child(yes)
-		var no := K.button(Game.t("visitors.promise_no_" + pk), func():
+	elif (v.kind == "plea" or v.kind == "threat" or v.kind == "plea_kin") and str(v.get("event", "")) != "" and not decided:
+		# 求情的可以答应不点名，威胁的可以答应这期不登；家里人替他来求的，两样都能答应；不答应就送客（M4.3：原来只能送客）
+		var kinds: Array = ["alias", "hold"] if v.kind == "plea_kin" else (["alias"] if v.kind == "plea" else ["hold"])
+		var sfx := "_kin" if v.kind == "plea_kin" else ""
+		var subj := ""
+		var ev: Dictionary = w.event_by_id(str(v.event))
+		if not ev.is_empty():
+			subj = Game.name_of(str(ev.roles[ev.target][0]))
+		# 「不答应」排第一个：顺手点第一个的人不该默认就答应了（第 7 轮：两个新手都顺手点了「答应」）
+		var no := K.button(Game.t("visitors.promise_no_" + str(kinds[0])), func():
 			Game.ui.deals[str(_i)] = false
 			_next(), 0)
 		bar.add_child(no)
+		for k in kinds:
+			var pk: String = k
+			var yes := K.button(Game.t("visitors.promise_" + pk + sfx, {"subject": subj}), func():
+				w.make_promise(v, pk)
+				Game.ui.deals[str(_i)] = true
+				Game.track("promise", {"who": who, "kind": pk})
+				Game.autosave()
+				_next(), 0)
+			yes.tooltip_text = Game.t("visitors.promise_" + pk + "_tip")
+			bar.add_child(yes)
 		no.call_deferred("grab_focus")
 	else:
 		var last: bool = _i >= vs.size() - 1

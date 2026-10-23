@@ -75,5 +75,15 @@
    "穷人的面粉上了货架"
   ]
  },
- "detail": "面粉袋上的字"
+ "detail": "面粉袋上的字",
+ "followups": [
+  {
+   "tid": "questioned",
+   "map": {
+    "suspect": "clerk"
+   },
+   "delay": 1,
+   "chance": 0.6
+  }
+ ]
 }

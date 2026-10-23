@@ -54,6 +54,8 @@ func _ready() -> void:
 		sl[1].add_child(K.label(Game.t("result.lead_noted"), "pixel", 12, P.STAMP_RED))
 		var where: String = w.where_is(lead)
 		var at: String = Game.t("result.lead_at", {"where": Game.place(where)}) if where != "" and not where.begins_with("home:") else ""
+		if at == "" and str(w.residents[lead].work) == "home":
+			at = Game.t("result.lead_errand", {"where": Game.place(w.errand_place(lead))})
 		sl[1].add_child(K.para(Game.t("result.lead_line", {"who": Game.name_of(lead), "occ": Game.occ(lead), "at": at}), 420 - x - 30, "hand", 10, P.PENCIL, 0))
 	var ok := K.button(Game.t("result.ok"), _close, 70)
 	ok.position = Vector2(334, 222)

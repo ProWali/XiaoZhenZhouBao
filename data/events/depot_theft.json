@@ -75,5 +75,15 @@
    "货栈的罐头上了集"
   ]
  },
- "detail": "货单"
+ "detail": "货单",
+ "followups": [
+  {
+   "tid": "questioned",
+   "map": {
+    "suspect": "thief"
+   },
+   "delay": 1,
+   "chance": 0.7
+  }
+ ]
 }

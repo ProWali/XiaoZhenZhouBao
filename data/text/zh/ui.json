@@ -98,6 +98,13 @@
  "cons_ad_sulk": "{name}还在生报社的气，这期没给广告钱。",
  "cons_ad_sulk_why": "{name}还在为《{headline}》生报社的气，这期没给广告钱。",
  "tells_own": ["{name}犹豫了一下，还是说了：「{fact}。」", "{name}说：「这事我在跟前，清楚得很。{fact}。」", "{name}压低声音：「这是我亲眼见、亲手经过的。{fact}。」"],
- "confirms_own": ["{name}点头：「这事我在跟前，就是这样。」", "{name}说：「我自己经手的，没错。」"],
- "same_event_own": ["{name}说：「你说的那句不对。我在跟前，知道的是：{fact}。」"]
+ "confirms_own": ["{name}点头：「这事我在跟前，就是这样。」", "{name}说：「是我碰上的，错不了。」", "{name}叹了口气：「是有这回事，我亲眼看着的。」", "{name}说：「你听到的没错，那时候我就在。」"],
+ "same_event_own": ["{name}说：「你说的那句不对。我在跟前，知道的是：{fact}。」"],
+ "vouch_lead": "（这话里提到的{who}（{occ}）不是当事人，是亲身碰上这件事的人。当面去问{who}，比听人转述靠得住，问到了这条就差不多坐实了。线头记下了。）",
+ "cons_broke_alias_kin": "你答应过{name}不点{who}的名，报上却点了。{name}说你说话不算数。",
+ "cons_kept_alias_kin": "报上没点{who}的名。{name}托人带了句「谢谢」。",
+ "cons_broke_hold_kin": "你答应过{name}这期不登{who}的事，还是登了。{name}在报社门口站了很久，最后哭着走了。",
+ "cons_kept_hold_kin": "上一期没登{who}的事。{name}托人捎来一篮鸡蛋。",
+ "cons_grim": "{name}没说什么。登的是{name}的下场，镇上又议论了一阵。",
+ "cons_bribe_outed": "{name}到处说你收了钱还照登。镇上人对报社的话打了折扣。"
 }

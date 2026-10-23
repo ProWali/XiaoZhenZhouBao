@@ -74,5 +74,15 @@
    "锯木厂的炸药炸了灰河的鱼"
   ]
  },
- "detail": "破了肚子的鱼"
+ "detail": "破了肚子的鱼",
+ "followups": [
+  {
+   "tid": "questioned",
+   "map": {
+    "suspect": "fisher"
+   },
+   "delay": 1,
+   "chance": 0.6
+  }
+ ]
 }

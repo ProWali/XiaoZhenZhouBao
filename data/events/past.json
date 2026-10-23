@@ -62,5 +62,15 @@
   ]
  },
  "detail": "封口上的法院章",
- "once": true
+ "once": true,
+ "followups": [
+  {
+   "tid": "run_off",
+   "map": {
+    "leaver": "stranger"
+   },
+   "delay": 1,
+   "chance": 0.6
+  }
+ ]
 }

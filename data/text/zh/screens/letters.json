@@ -31,5 +31,6 @@
  "art_trusted": "镇上信了",
  "art_doubted": "镇上半信半疑",
  "art_flat": "镇上没什么说法",
- "art_false": "登错了，镇上记下了"
+ "art_false": "登错了，镇上记下了",
+ "row_debt": "还旧账（还欠 {n} 元）"
 }

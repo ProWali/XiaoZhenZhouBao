@@ -78,5 +78,15 @@
    "一毛钱一张的空奖"
   ]
  },
- "detail": "抽奖券"
+ "detail": "抽奖券",
+ "followups": [
+  {
+   "tid": "questioned",
+   "map": {
+    "suspect": "organizer"
+   },
+   "delay": 1,
+   "chance": 0.6
+  }
+ ]
 }

@@ -10290,5 +10290,169 @@
    "The raffle was run by {organizer.full}.",
    "The one behind the raffle is {organizer.full}."
   ]
+ },
+ "repay": {
+  "name": "the repayment",
+  "headlines": {
+   "calm": [
+    "{payer} Pays Up",
+    "An Account Settled",
+    "{payee} Gets the Money Back"
+   ],
+   "neutral": [
+    "{payer} Repays {payee}",
+    "{payer} Makes Good",
+    "{payee} Repaid by {payer}"
+   ],
+   "hot": [
+    "{payer} Pays!",
+    "After Our Report, {payer} Hands Over the Money",
+    "{payer} Owns Up"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "{payer.full} paid back a sum of money this week."
+   ],
+   "neutral": [
+    "{payer.full} called this week and paid {payee.full} back."
+   ],
+   "hot": [
+    "The business this paper reported last time: {payer.full} paid up this week."
+   ]
+  },
+  "facts": {
+   "repay": {
+    "note": "{payer} went round and paid {payee} back, in front of the neighbours"
+   }
+  },
+  "body": [
+   " The neighbours saw it done.",
+   " {payee.short} says the sum is right.",
+   " {payer.short} said little, put the money down and left."
+  ]
+ },
+ "shut_down": {
+  "name": "the closing",
+  "headlines": {
+   "calm": [
+    "{owner} Shuts Up Shop",
+    "A Trade Stops",
+    "One Less Business in Town"
+   ],
+   "neutral": [
+    "{owner} Gives Up the Trade",
+    "{owner} Calls It Off",
+    "{owner} Is Out of That Business"
+   ],
+   "hot": [
+    "{owner} Shuts Down!",
+    "After Our Report, {owner} Closes",
+    "{owner} Can't Carry On"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "{owner.full} stopped that line of business this week."
+   ],
+   "neutral": [
+    "{owner.full} packed everything away this week and says that's the end of it."
+   ],
+   "hot": [
+    "The trade this paper reported last time closed its doors this week."
+   ]
+  },
+  "facts": {
+   "shut": {
+    "note": "{owner} couldn't keep that trade going, and has packed it all away"
+   }
+  },
+  "body": [
+   " Callers found the door shut.",
+   " {owner.short} says {owner.ta} means to live quietly from now on.",
+   " Some in town say it should have happened long ago."
+  ]
+ },
+ "run_off": {
+  "name": "the leaving",
+  "headlines": {
+   "calm": [
+    "{leaver} Is Leaving",
+    "Town to Lose a Resident",
+    "{leaver} Plans to Go"
+   ],
+   "neutral": [
+    "{leaver} Packs to Leave Town",
+    "{leaver} to Leave Greyriver",
+    "{leaver} Bids Greyriver Goodbye"
+   ],
+   "hot": [
+    "{leaver} Can't Stay!",
+    "After Our Report, {leaver} Packs Up",
+    "{leaver} Clears Out"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "{leaver.full} is getting ready to leave Greyriver."
+   ],
+   "neutral": [
+    "{leaver.full} has spent the week packing, and says {leaver.ta} is leaving Greyriver."
+   ],
+   "hot": [
+    "The person this paper reported on last time is leaving."
+   ]
+  },
+  "facts": {
+   "leaving": {
+    "note": "{leaver} has been packing up these last days, and says {leaver.ta} is leaving Greyriver"
+   }
+  },
+  "body": [
+   " Where to, {leaver.short} did not say.",
+   " Few in town went to see {leaver.him} off.",
+   " The door of {leaver.short}'s lodging is already locked."
+  ]
+ },
+ "questioned": {
+  "name": "the questioning",
+  "headlines": {
+   "calm": [
+    "{suspect} Called In for Questions",
+    "Town Hall Asks Questions",
+    "{suspect} Visits the Town Hall"
+   ],
+   "neutral": [
+    "{suspect} Questioned at the Town Hall",
+    "Town Hall Sends for {suspect}",
+    "{suspect} Spends an Afternoon at the Town Hall"
+   ],
+   "hot": [
+    "{suspect} Hauled In!",
+    "After Our Report, the Town Hall Comes for {suspect}",
+    "No Dodging It This Time for {suspect}"
+   ]
+  },
+  "lead": {
+   "calm": [
+    "{suspect.full} was called to the town hall for questions this week."
+   ],
+   "neutral": [
+    "{suspect.full} was called to the town hall this week and questioned all afternoon."
+   ],
+   "hot": [
+    "After this paper's report, the town hall came for {suspect.full} this week."
+   ]
+  },
+  "facts": {
+   "questioned": {
+    "note": "{suspect} was called to the town hall and questioned all afternoon"
+   }
+  },
+  "body": [
+   " What was asked, the town hall did not say.",
+   " {suspect.short} greeted no one on the way out.",
+   " {suspect.short} did not get home until after dark."
+  ]
  }
 }

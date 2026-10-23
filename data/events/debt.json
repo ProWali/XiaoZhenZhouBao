@@ -63,5 +63,16 @@
  "once": true,
  "driven_by": [
   "money"
+ ],
+ "followups": [
+  {
+   "tid": "repay",
+   "map": {
+    "payer": "debtor",
+    "payee": "creditor"
+   },
+   "delay": 1,
+   "chance": 0.5
+  }
  ]
 }

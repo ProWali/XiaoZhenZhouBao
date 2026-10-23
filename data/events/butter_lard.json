@@ -74,5 +74,16 @@
    "你买的黄油一半是猪油"
   ]
  },
- "detail": "黄油模子"
+ "detail": "黄油模子",
+ "followups": [
+  {
+   "tid": "repay",
+   "map": {
+    "payer": "farmer",
+    "payee": "grocer"
+   },
+   "delay": 1,
+   "chance": 0.6
+  }
+ ]
 }

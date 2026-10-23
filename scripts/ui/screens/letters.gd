@@ -4,6 +4,7 @@ extends Control
 
 const K = preload("res://scripts/ui/kit.gd")
 const P = preload("res://scripts/ui/palette.gd")
+const Portrait = preload("res://scripts/ui/portrait.gd")
 
 var params := {}
 var _pages: Array = []   # [{kind: letter|ledger, text}]
@@ -15,8 +16,10 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	add_child(K.rect(Color(P.INK, 0.6), Vector2.ZERO, Vector2(640, 360)))
 	var w = Game.world
-	for t in w.render_letters():
-		_pages.append({"kind": "letter", "text": t})
+	var signers: Array = w.letter_signers()
+	var texts: Array = w.render_letters()
+	for i in texts.size():
+		_pages.append({"kind": "letter", "text": texts[i], "who": str(signers[i]) if i < signers.size() else ""})
 	if not Game.ui.get("last_issue", {}).is_empty() and int(Game.ui.last_issue.get("week", 0)) == w.week - 1:
 		_pages.append({"kind": "ledger"})
 	if _pages.is_empty():
@@ -32,7 +35,7 @@ func _show() -> void:
 	var page: Dictionary = _pages[_i]
 	Game.sfx("page_turn")
 	match page.kind:
-		"letter": _letter(page.text)
+		"letter": _letter(page.text, str(page.get("who", "")))
 		"ledger": _ledger()
 		_: _letter(Game.t("letters.empty"))
 	var nav := HBoxContainer.new()
@@ -63,9 +66,23 @@ func _next() -> void:
 		cb.call()
 
 
-func _letter(text: String) -> void:
+func _letter(text: String, who: String = "") -> void:
 	var sheet := K.paper(Vector2(150, 24), Vector2(340, 290), P.NOTE_PAPER)
 	_holder.add_child(sheet)
+	# 寄信人的头像和职业，放在信纸左边（老板试玩：外国名字难跟人对上）
+	var w = Game.world
+	if who != "" and w.residents.has(who):
+		var card := K.paper(Vector2(62, 40), Vector2(80, 100), P.NOTE_PAPER)
+		_holder.add_child(card)
+		var face := K.image(Portrait.face(w, who), Vector2(8, 6))
+		face.scale = Vector2(2, 2)
+		card.add_child(face)
+		var nm := K.para(Game.name_of(who), 72, "pixel", 12, P.PENCIL, 0)
+		nm.position = Vector2(4, 70)
+		card.add_child(nm)
+		var oc := K.label(Game.occ(who), "pixel", 12, P.WARM_GREY)
+		oc.position = Vector2(4, 84)
+		card.add_child(oc)
 	var sl: Array = K.scroll_list(Vector2(16, 14), Vector2(316, 266), 0)
 	sheet.add_child(sl[0])
 	sl[1].add_child(K.para(text, 300, "hand", 12, P.PENCIL, 3))
@@ -87,6 +104,8 @@ func _ledger() -> void:
 		[Game.t("letters.row_ads"), "%+.1f" % float(iss.ad_income)],
 		[Game.t("letters.row_cost"), "%+.1f" % -float(iss.cost)],
 	]
+	if float(iss.get("debt", 0.0)) > 0.0:
+		rows.append([Game.t("letters.row_debt", {"n": int(float(iss.get("debt_left", 0.0)))}), "%+.1f" % -float(iss.debt)])
 	if float(iss.get("other", 0.0)) != 0.0:
 		rows.append([Game.t("letters.row_other"), "%+.1f" % float(iss.other)])
 	rows.append([Game.t("letters.row_cash"), Game.t("letters.cash", {"n": "%.1f" % float(w.stats.cash)})])

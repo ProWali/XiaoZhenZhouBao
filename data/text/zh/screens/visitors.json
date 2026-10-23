@@ -26,5 +26,8 @@
  "promise_hold": "服软：这一期不登这件事",
  "promise_hold_tip": "这周日不登就算守约。登了，就是当面跟他对着干。",
  "promise_no_hold": "不理他，请回",
- "take_note": "收了钱，这件事就别登了：登了是两头得罪。不登，钱的事也可能传出去。"
+ "take_note": "收了钱，这件事就别登了：登了是两头得罪。不登，钱的事也可能传出去。",
+ "kind_plea_kin": "替家里人来求情",
+ "promise_alias_kin": "答应：不点名",
+ "promise_hold_kin": "答应：这期不登"
 }

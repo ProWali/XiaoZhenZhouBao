@@ -76,5 +76,16 @@
    "一块钱一车的柴"
   ]
  },
- "detail": "树桩"
+ "detail": "树桩",
+ "followups": [
+  {
+   "tid": "repay",
+   "map": {
+    "payer": "cutter",
+    "payee": "landowner"
+   },
+   "delay": 1,
+   "chance": 0.6
+  }
+ ]
 }

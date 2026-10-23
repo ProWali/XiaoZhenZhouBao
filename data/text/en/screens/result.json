@@ -4,5 +4,6 @@
  "lead_at": ", now at {where}",
  "lead_line": "★ {who} ({occ}){at}. Also on the Leads page of the notebook.",
  "ok": "OK",
- "dry_hint": "Several tries in a row and nothing. Try another way: check \"Where else to look\" in your notebook, visit whoever keeps the records, listen at the tavern tonight, or try somewhere else first."
+ "dry_hint": "Several tries in a row and nothing. Try another way: check \"Where else to look\" in your notebook, visit whoever keeps the records, listen at the tavern tonight, or try somewhere else first.",
+ "lead_errand": ", home in the morning, afternoons often at {where}"
 }

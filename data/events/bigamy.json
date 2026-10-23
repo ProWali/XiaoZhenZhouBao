@@ -80,5 +80,16 @@
    "{groom}要娶第二回"
   ]
  },
- "detail": "落款"
+ "detail": "落款",
+ "followups": [
+  {
+   "tid": "separation",
+   "map": {
+    "lover": "groom",
+    "spouse": "bride"
+   },
+   "delay": 2,
+   "chance": 0.6
+  }
+ ]
 }

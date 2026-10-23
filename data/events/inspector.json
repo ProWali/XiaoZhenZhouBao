@@ -4,6 +4,7 @@
  "severity": 0,
  "soft": true,
  "manual": true,
+ "grim": true,
  "cooldown": 0,
  "weeks": 1,
  "target": "official",

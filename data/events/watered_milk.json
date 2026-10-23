@@ -75,5 +75,16 @@
    "孩子们喝的是河水！"
   ]
  },
- "detail": "奶桶上的河泥"
+ "detail": "奶桶上的河泥",
+ "followups": [
+  {
+   "tid": "repay",
+   "map": {
+    "payer": "farmer",
+    "payee": "teacher"
+   },
+   "delay": 1,
+   "chance": 0.5
+  }
+ ]
 }

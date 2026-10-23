@@ -101,5 +101,6 @@
   {"lines": ["{who}没坐：「后巷那边你别去了，{subject.short}的人在那转悠。」"]},
   {"lines": ["{who}放下一句话就走：「这两天夜里把门闩好。」"]},
   {"lines": ["{who}说{subject.short}这几天脸色很难看。「我不知道{subject.ta}要干什么。我只是告诉你一声。」"]}
- ]
+ ],
+ "plea_kin": [{"lines": ["{who}在门口站了半天才开口：「我是替{subject.short}来的。{subject.ta}不知道我来。」", "「{event}的事，求你别登。{subject.ta}要是丢了活，我们一家怎么过？」"]}, {"lines": ["{who}拎来一篮鸡蛋，放下就不肯拿回去。", "「{subject.short}是做错了事。可{subject.ta}是我家里人。求你给{subject.ta}留条活路。」"]}, {"lines": ["{who}说话很轻，像怕被邻居听见。", "「{subject.short}这两天饭都吃不下。你能不能……至少别登{subject.ta}的名字？」"]}, {"lines": ["{who}进门先哭了一场，哭完了才说是为{subject.short}来的。", "「家里还有孩子。报上登了，孩子在学校怎么抬头？」"]}, {"if": {"trait": ["pious"]}, "lines": ["{who}说，礼拜天在教堂替{subject.short}祷告了很久。", "「{event}的事，你要是能不登，主会记着你的好。我也会。」"]}, {"if": {"bucket": ["practical"]}, "lines": ["{who}坐下来，先把话说在前头：「我不替{subject.short}辩。」", "「我只求你想一想，登出来以后，{subject.ta}家里这几口人往后怎么在镇上过。」"]}, {"if": {"bucket": ["hot"]}, "lines": ["{who}进门的时候脸涨得通红，像是一路上跟自己吵过架。", "「{subject.short}的事，你非登不可吗？……我求你，别登。」"]}]
 }

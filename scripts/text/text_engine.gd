@@ -98,7 +98,8 @@ static func surname(world, rid: String, lang: String) -> String:
 	if lang == "en":
 		var parts: PackedStringArray = str(r.get("name_en", r.name)).split(" ")
 		return parts[parts.size() - 1]
-	return str(r.name).split("·")[0]
+	var zh: PackedStringArray = str(r.name).split("·")
+	return zh[zh.size() - 1]
 
 
 ## 1935 年的报纸称呼：先生、太太、小姐。
@@ -294,6 +295,20 @@ static func _apposition(occ: String, oid: String, name: String, lang: String) ->
 
 
 const NO_APPOSITION := ["homemaker", "retired"]
+
+
+## 名字带上职业，给落款、账本这类单独出现名字的地方用：「邮差哈德·吉顿」「Hal Gidley (postman)」。
+## 老板试玩：外国名字难跟人对上，光看四个音译字不知道是谁。
+static func name_occ(world, rid: String, lang: String) -> String:
+	if not world.residents.has(rid):
+		return "?"
+	var oid: String = str(world.residents[rid].occ)
+	var nm := person_name(world, rid, lang)
+	if oid in NO_APPOSITION:
+		return nm
+	if lang == "en":
+		return "%s (%s)" % [nm, occ_label(world, rid, lang)]
+	return occ_label(world, rid, lang) + nm
 
 
 ## 化名第一次出现。in_apposition：模板写的是 {role.full}，前面常有「厂里的」「上游」这类修饰，匿名时只能写「某人」。
@@ -894,8 +909,11 @@ static func article(world, e: Dictionary, a: Dictionary, lang: String) -> Dictio
 		comment_text = fill(world, g.pick_expand(comments), ctx, lang)
 	# 当事人回应：先用这类事件自己的说法，没有再用通用的
 	var resp_kind := "unreached"
-	if e.get("plea", "") != "" or e.get("bribed_by", "") != "" or e.get("visited", false):
+	if e.get("plea", "") != "" or e.get("bribed_by", "") != "":
 		resp_kind = "pleaded"
+	elif e.get("visited", false):
+		# 上门警告、放下砖头就走的，不是来求情的（第 7 轮：稿子写成「来过报社，请本报不要刊登」）
+		resp_kind = "declined"
 	elif world.reluctant.has(target) and str(world.reluctant[target].event) == str(e.id):
 		resp_kind = "declined"
 	elif _interviewed(world, target, e):
@@ -1070,7 +1088,7 @@ static func letter(world, L: Dictionary, lang: String) -> Dictionary:
 	var text := render(world, picked, ctx, lang, rng)
 	var from := ""
 	if spec.get("sign", true) and who != "":
-		from = person_name(world, who, lang)
+		from = name_occ(world, who, lang)
 	return {"text": text, "from": from}
 
 
@@ -1114,16 +1132,21 @@ static func visitor_lines(world, item: Dictionary, lang: String) -> Array:
 	return out
 
 
-## 条件：{bucket: [...], female: bool, trait: [...], occ: [...], min_sev: n, has_fact: bool, has_subject: bool}
+## 条件：{bucket: [...], female: bool, literate: bool, married: bool, trait: [...], occ: [...], min_sev: n, has_fact: bool, has_subject: bool}
 static func _cond_ok(world, cond: Dictionary, who: String, vars: Dictionary = {}, e: Dictionary = {}) -> bool:
 	if cond.is_empty():
 		return true
 	if who == "" or not world.residents.has(who):
-		return not (cond.has("bucket") or cond.has("female") or cond.has("trait") or cond.has("occ"))
+		return not (cond.has("bucket") or cond.has("female") or cond.has("trait") or cond.has("occ") or cond.has("literate") or cond.has("married"))
 	var r: Dictionary = world.residents[who]
 	if cond.has("bucket") and not (r.bucket in cond.bucket):
 		return false
 	if cond.has("female") and bool(r.female) != bool(cond.female):
+		return false
+	# 不识字的人才「请人代写」，有配偶的才提「当家的」（第 7 轮：教师信里说不会写字，寡妇说当家的不让写）
+	if cond.has("literate") and bool(r.literate) != bool(cond.literate):
+		return false
+	if cond.has("married") and (str(r.spouse) != "") != bool(cond.married):
 		return false
 	if cond.has("occ") and not (r.occ in cond.occ):
 		return false

@@ -78,5 +78,16 @@
    "{poacher}偷了厂主的鹿"
   ]
  },
- "detail": "套子上的铁丝"
+ "detail": "套子上的铁丝",
+ "followups": [
+  {
+   "tid": "repay",
+   "map": {
+    "payer": "poacher",
+    "payee": "landowner"
+   },
+   "delay": 1,
+   "chance": 0.6
+  }
+ ]
 }

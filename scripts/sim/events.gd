@@ -184,6 +184,7 @@ func _make_fact(inst: Dictionary, frag: Dictionary, roles: Dictionary, world, tr
 		"week": world.week, "is_rumor": truth < 0.5,
 	}
 	fact["text"] = fill_text(frag.text, roles, world, "named", "", "named", inst.extras)
+	fact["vouch"] = _vouch_of(frag, roles, inst, truth)
 	world.facts[fid] = fact
 	# 分发知情者。碎片说的是谁，谁就知道（第 5 轮：问汇款被冒领的本人，她「真没听说过」）
 	world.residents[subj].knows[fid] = true
@@ -206,6 +207,24 @@ func _make_fact(inst: Dictionary, frag: Dictionary, roles: Dictionary, world, tr
 			if world.residents.has(rid):
 				world.residents[rid].knows[fid] = true
 	return fid
+
+
+## 碎片里点了名的亲历者：受害的、看见的、在查的那一方，自己知道这条，又不是犯事的人。
+## 玩家从别人嘴里听到这条时，记一个线头指向他；当面问到他算两枚章（老板第三次试玩：听到「凯斯·索恩说看见煤油桶」，
+## 以为「找本人不会承认」，没去找这个目击者）。
+const VOUCH_ROLES := ["victim", "creditor", "wife", "bride", "father", "witness", "recognizer", "landowner", "maid", "teacher", "nurse", "borrower", "counter", "boss", "keeper", "grocer"]
+
+
+func _vouch_of(frag: Dictionary, roles: Dictionary, inst: Dictionary, truth: float) -> String:
+	if truth < 0.5:
+		return ""
+	var first_hand: Array = frag.get("known_by", [])
+	for role in VOUCH_ROLES:
+		if role == inst.target or not roles.has(role) or not (role in first_hand):
+			continue
+		if str(frag.text).contains("{" + role):
+			return roles[role][0]
+	return ""
 
 
 ## 事情的性质对应的地方：碎片里有这些字，在那儿做事的人会听说。玩家照职业推得出来

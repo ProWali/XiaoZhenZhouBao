@@ -2,6 +2,7 @@
 extends RefCounted
 
 const Rng = preload("res://scripts/sim/rng.gd")
+const NameGen = preload("res://scripts/sim/namegen.gd")
 
 const T = preload("res://scripts/sim/tables.gd")
 const Relations = preload("res://scripts/sim/relations.gd")
@@ -29,7 +30,7 @@ static func generate(world) -> void:
 		if rng.chance(0.55):
 			var occ := HOMEMAKER.duplicate()
 			occ.wealth = r.wealth
-			var s := new_resident(world, not r.female, occ, r.name.split("·")[0])
+			var s := new_resident(world, not r.female, occ, NameGen.zh_surname(r.name))
 			s.age = clampi(r.age + rng.randi_range(-6, 6), 18, 80)
 			world.residents[s.id] = s
 			marry(world, rid, s.id)

@@ -78,5 +78,15 @@
    "{lender}吸着工人的血"
   ]
  },
- "detail": "借据上的手印"
+ "detail": "借据上的手印",
+ "followups": [
+  {
+   "tid": "shut_down",
+   "map": {
+    "owner": "lender"
+   },
+   "delay": 1,
+   "chance": 0.6
+  }
+ ]
 }

@@ -1,0 +1,39 @@
+{
+ "id": "run_off",
+ "name": "要离镇",
+ "severity": 0,
+ "soft": true,
+ "manual": true,
+ "grim": true,
+ "cooldown": 0,
+ "weeks": 1,
+ "target": "leaver",
+ "roles": {
+  "leaver": {}
+ },
+ "fragments": [
+  {
+   "key": "leaving",
+   "subject": "leaver",
+   "text": "{leaver}这几天在收拾东西，说要离开灰河镇",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "{leaver}要走了"
+  ],
+  "neutral": [
+   "{leaver}收拾行李，准备离镇"
+  ],
+  "hot": [
+   "{leaver}待不下去了"
+  ]
+ },
+ "effects": {
+  "move": "leaver"
+ }
+}

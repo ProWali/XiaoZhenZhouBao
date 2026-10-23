@@ -78,7 +78,7 @@ func _events() -> void:
 		for fid in g.facts:
 			if w.is_verified(fid):
 				n_ok += 1
-		var tag: String = (Game.t("notebook.tag_printed_fresh") if not g.fresh.is_empty() else Game.t("notebook.tag_printed")) if e.printed else (Game.t("notebook.tag_soft") if e.soft else "")
+		var tag: String = (Game.t("notebook.tag_printed_fresh") if int(g.get("new", 0)) > 0 else Game.t("notebook.tag_printed")) if e.printed else (Game.t("notebook.tag_soft") if e.soft else "")
 		var txt := Game.t("notebook.event_row", {"name": TE.event_name(w, e, Game.lang), "tag": tag, "n": g.facts.size(), "ok": n_ok})
 		var eid: String = e.id
 		var b := K.row(txt, func(): _sel = eid; _build(), 270, "hand", 11)
@@ -146,7 +146,11 @@ func _leads() -> void:
 		hb.add_theme_constant_override("separation", 4)
 		hb.add_child(K.image(Portrait.face(w, who)))
 		var where: String = w.where_is(who)
-		var at: String = Game.t("notebook.lead_at", {"where": Game.place(where)}) if where != "" and not where.begins_with("home:") and w.slot <= 1 else Game.t("notebook.lead_not_out")
+		var out: bool = where != "" and not where.begins_with("home:") and w.slot <= 1
+		var at: String = Game.t("notebook.lead_at", {"where": Game.place(where)}) if out else Game.t("notebook.lead_not_out")
+		# 在家做事的人：写明下午常去哪儿（第 8 轮：线头上的寡妇「不在外面」，不知道去哪碰她）
+		if not out and str(w.residents[who].work) == "home":
+			at = Game.t("notebook.lead_errand", {"where": Game.place(w.errand_place(who))})
 		# 关于哪件事：你已经知道这件事，就写出来；不知道就说是另一件事（试玩：以为线头上的人一定说你在查的那件）
 		var about := Game.t("notebook.lead_about_new")
 		var le: Dictionary = w.event_by_id(str(l.event))
@@ -154,7 +158,9 @@ func _leads() -> void:
 			if w.known.has(fid):
 				about = Game.t("notebook.lead_about", {"event": TE.event_name(w, le, Game.lang)})
 		var row_key := "notebook.lead_row_self" if str(l.from) == who else "notebook.lead_row"
-		var txt := Game.t(row_key, {"who": Game.name_of(who), "occ": Game.occ(who), "from": Game.name_of(str(l.from)), "week": int(l.week), "at": at, "about": about})
+		if l.has("fact"):
+			row_key = "notebook.lead_row_vouch"
+		var txt := Game.t(row_key, {"who": Game.name_of(who), "occ": Game.occ(who), "from": Game.name_of(str(l.from)), "week": int(l.week), "at": at, "about": about, "event": TE.event_name(w, le, Game.lang) if not le.is_empty() else ""})
 		hb.add_child(K.para(txt, 236, "hand", 11, P.PENCIL, 1))
 		sl[1].add_child(hb)
 	var t := K.para(Game.t("notebook.tab_leads"), 270, "hand", 14, P.PRINT_INK)

@@ -80,5 +80,15 @@
    "{owner}自己点的火？"
   ]
  },
- "detail": "烧剩下的那堵墙"
+ "detail": "烧剩下的那堵墙",
+ "followups": [
+  {
+   "tid": "questioned",
+   "map": {
+    "suspect": "owner"
+   },
+   "delay": 1,
+   "chance": 0.7
+  }
+ ]
 }

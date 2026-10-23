@@ -98,6 +98,13 @@
  "cons_ad_sulk": "{name} is still sore at the paper and paid nothing for advertising this issue.",
  "cons_ad_sulk_why": "{name} is still sore over \"{headline}\" and paid nothing for advertising this issue.",
  "tells_own": ["{name} hesitated, then said it anyway: \"{fact}.\"", "{name} said: \"I was right there for this. {fact}.\"", "{name} lowered their voice: \"I saw this with my own eyes. {fact}.\""],
- "confirms_own": ["{name} nodded: \"I was right there. That's how it was.\"", "{name} said: \"It went through my own hands. You have it right.\""],
- "same_event_own": ["{name} said: \"That's not how it was. I was there, and what I know is this. {fact}.\""]
+ "confirms_own": ["{name} nodded: \"I was right there. That's how it was.\"", "{name} said: \"It happened to me. No mistake.\"", "{name} sighed: \"It's true. I saw it with my own eyes.\"", "{name} said: \"What you heard is right. I was there.\""],
+ "same_event_own": ["{name} said: \"That's not how it was. I was there, and what I know is this. {fact}.\""],
+ "vouch_lead": "({who} ({occ}) isn't the one in trouble: they saw this first-hand. Ask {who} in person; that counts for more than hearsay, and would just about confirm it. Added to your leads.)",
+ "cons_broke_alias_kin": "You promised {name} that {who}'s name would stay out, and printed it. {name} says your word means nothing.",
+ "cons_kept_alias_kin": "The paper left {who}'s name out. {name} sent word: \"Thank you.\"",
+ "cons_broke_hold_kin": "You told {name} {who}'s business would not run this week, and ran it. {name} stood outside the office a long time, and went away in tears.",
+ "cons_kept_hold_kin": "The last issue left {who}'s business out. {name} sent round a basket of eggs.",
+ "cons_grim": "{name} said nothing. It was {name}'s comeuppance in print, and the town talked it over again.",
+ "cons_bribe_outed": "{name} is telling everyone you took the money and printed anyway. The town trusts the paper a little less."
 }

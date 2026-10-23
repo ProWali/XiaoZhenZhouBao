@@ -348,12 +348,21 @@ func show_result(title: String, res: Dictionary, who: String, on_close: Callable
 
 ## 这个人是不是线头上的人；是的话返回是谁指的
 func lead_from(rid: String) -> String:
-	if world == null:
+	var l := lead_of(rid)
+	if l.is_empty():
 		return ""
+	# 亲历者线头可能是从匿名信里来的，没有指路人，就记成他自己
+	return str(l.from) if str(l.from) != "" else rid
+
+
+## 指向这个人的线头（没有就是空字典）。有 fact 的是亲历者线头
+func lead_of(rid: String) -> Dictionary:
+	if world == null:
+		return {}
 	for l in world.leads:
 		if l.who == rid:
-			return str(l.from)
-	return ""
+			return l
+	return {}
 
 
 # ------------------------------------------------------------ 新局与存档

@@ -75,5 +75,16 @@
    "{grocer}的秤吃了你的面粉"
   ]
  },
- "detail": "秤盘底下的那块铅"
+ "detail": "秤盘底下的那块铅",
+ "followups": [
+  {
+   "tid": "repay",
+   "map": {
+    "payer": "grocer",
+    "payee": "victim"
+   },
+   "delay": 1,
+   "chance": 0.6
+  }
+ ]
 }

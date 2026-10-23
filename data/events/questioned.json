@@ -1,0 +1,36 @@
+{
+ "id": "questioned",
+ "name": "问话",
+ "severity": 0,
+ "soft": true,
+ "manual": true,
+ "grim": true,
+ "cooldown": 0,
+ "weeks": 1,
+ "target": "suspect",
+ "roles": {
+  "suspect": {}
+ },
+ "fragments": [
+  {
+   "key": "questioned",
+   "subject": "suspect",
+   "text": "{suspect}被叫到镇公所问了一下午话",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "{suspect}被叫去问话"
+  ],
+  "neutral": [
+   "{suspect}被叫到镇公所问话"
+  ],
+  "hot": [
+   "{suspect}被传去问话"
+  ]
+ }
+}

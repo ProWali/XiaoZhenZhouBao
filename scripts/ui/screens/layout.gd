@@ -178,7 +178,9 @@ func _story_list() -> void:
 			if w.is_verified(fid):
 				n_ok += 1
 		var at := _placed(eid)
-		var tag: String = Game.t("layout.tag_followup", {"n": g.fresh.size()}) if e.printed else (Game.t("layout.tag_soft") if e.soft else "")
+		var tag: String = Game.t("layout.tag_soft") if e.soft else ""
+		if e.printed:
+			tag = Game.t("layout.tag_printed_new", {"n": int(g.get("new", 0))}) if int(g.get("new", 0)) > 0 else Game.t("layout.tag_printed_stale")
 		var txt := Game.t("layout.story_line", {"name": TE.event_name(w, e, Game.lang), "tag": tag, "n": g.facts.size(), "ok": n_ok, "at": Game.t("layout.placed_at", {"slot": _slot_name(at)}) if at != "" else ""})
 		var b := K.row(txt, func():
 			if _placed(eid) != "":
@@ -242,6 +244,51 @@ func _editor(slot: String) -> void:
 	var sl: Array = K.scroll_list(Vector2(6, 36), Vector2(300, 306), 5)
 	sheet.add_child(sl[0])
 	var box: VBoxContainer = sl[1]
+	# 登过的事：写明哪期登过；勾的碎片里没有登完之后的新料，提醒是炒冷饭（老板第三次试玩：没注意登过，又登了两期）
+	if e.printed:
+		box.add_child(K.para(Game.t("layout.printed_note", {"n": int(e.printed_week)}), 280, "pixel", 12, P.STAMP_RED, 0))
+		var any_new := false
+		for fid in a.facts:
+			if w.new_since_print(fid, e) or (fid in e.get("printed_shaky", []) and w.is_verified(fid)):
+				any_new = true
+		if not any_new:
+			box.add_child(K.para(Game.t("layout.printed_stale_note"), 280, "pixel", 12, P.STAMP_RED, 0))
+	# 先做决定（语气、署名、附不附档案），紧跟着是「登出去会怎样」；碎片放后面（M4.4：预告原来在折叠线下面，看不到）
+	# 语气
+	box.add_child(_choice_row("tone", TONES, a.tone, func(v): a.tone = v; _choice[slot] = 0; _refresh(), false, false))
+	# 署名
+	box.add_child(_choice_row("naming", NAMINGS, a.naming, func(v): a.naming = v; _choice[slot] = 0; _refresh(), e.soft, false))
+	if e.soft:
+		box.add_child(K.para(Game.t("layout.soft_note"), 280, "pixel", 12, P.WARM_GREY, 0))
+	# 证据
+	var has_ev := false
+	for fid in a.facts:
+		if w.has_records(fid):
+			has_ev = true
+	var evb := CheckBox.new()
+	evb.text = Game.t("layout.evidence")
+	evb.disabled = not has_ev
+	evb.button_pressed = a.evidence and has_ev
+	evb.toggled.connect(func(on): a.evidence = on; _refresh())
+	box.add_child(evb)
+	box.add_child(K.para(Game.t("layout.evidence_tip") if has_ev else Game.t("layout.evidence_none"), 280, "pixel", 12, P.WARM_GREY, 0))
+	# 收过钱的事，登了就是两头得罪（第 4 轮：这条只写在按钮的提示里，玩家没看见）
+	if str(e.get("bribed_by", "")) != "":
+		box.add_child(K.para(Game.t("layout.bribed", {"name": Game.name_of(str(e.bribed_by))}), 280, "pixel", 12, P.STAMP_RED, 0))
+	# 周六夜答应过的事，排版时提醒一句
+	if e.has("promise"):
+		var pr: Dictionary = e.promise
+		box.add_child(K.para(Game.t("layout.promise_" + str(pr.kind), {"name": Game.name_of(str(pr.who))}), 280, "pixel", 12, P.STAMP_RED, 0))
+	var est := Game.t("layout.retail_est", {"n": w.estimate_retail(a)})
+	# 不煽动的报道靠人信：有没坐实的，正经读者少买（第 5 轮：多勾一条，「多卖」反而少了，看不懂）
+	var shaky_n := 0
+	for fid in a.facts:
+		if not w.is_verified(fid):
+			shaky_n += 1
+	if shaky_n > 0 and a.tone != "hot":
+		est += Game.t("layout.retail_shaky", {"n": shaky_n})
+	box.add_child(K.para(est, 280, "pixel", 12, P.PRINT_INK, 0))
+	_forecast_block(box, a, e, shaky_n)
 	# 碎片
 	box.add_child(K.label(Game.t("layout.facts"), "pixel", 12, P.STAMP_RED))
 	box.add_child(K.para(Game.t("layout.facts_warn"), 280, "pixel", 12, P.WARM_GREY, 0))
@@ -263,40 +310,6 @@ func _editor(slot: String) -> void:
 		var shaky: bool = w.verify_score(fid) < 2.0
 		hb.add_child(K.para((Game.t("layout.unconfirmed") if shaky else "") + TE.fact_note(w, fid, Game.lang), 214, "hand", 10, P.STAMP_RED if shaky else P.PENCIL, 0))
 		box.add_child(hb)
-	# 语气
-	box.add_child(_choice_row("tone", TONES, a.tone, func(v): a.tone = v; _choice[slot] = 0; _refresh(), false))
-	# 署名
-	box.add_child(_choice_row("naming", NAMINGS, a.naming, func(v): a.naming = v; _choice[slot] = 0; _refresh(), e.soft))
-	if e.soft:
-		box.add_child(K.para(Game.t("layout.soft_note"), 280, "pixel", 12, P.WARM_GREY, 0))
-	var est := Game.t("layout.retail_est", {"n": w.estimate_retail(a)})
-	# 不煽动的报道靠人信：有没坐实的，正经读者少买（第 5 轮：多勾一条，「多卖」反而少了，看不懂）
-	var shaky_n := 0
-	for fid in a.facts:
-		if not w.is_verified(fid):
-			shaky_n += 1
-	if shaky_n > 0 and a.tone != "hot":
-		est += Game.t("layout.retail_shaky", {"n": shaky_n})
-	box.add_child(K.para(est, 280, "pixel", 12, P.PRINT_INK, 0))
-	# 收过钱的事，登了就是两头得罪（第 4 轮：这条只写在按钮的提示里，玩家没看见）
-	if str(e.get("bribed_by", "")) != "":
-		box.add_child(K.para(Game.t("layout.bribed", {"name": Game.name_of(str(e.bribed_by))}), 280, "pixel", 12, P.STAMP_RED, 0))
-	# 周六夜答应过的事，排版时提醒一句
-	if e.has("promise"):
-		var pr: Dictionary = e.promise
-		box.add_child(K.para(Game.t("layout.promise_" + str(pr.kind), {"name": Game.name_of(str(pr.who))}), 280, "pixel", 12, P.STAMP_RED, 0))
-	# 证据
-	var has_ev := false
-	for fid in a.facts:
-		if w.has_records(fid):
-			has_ev = true
-	var evb := CheckBox.new()
-	evb.text = Game.t("layout.evidence")
-	evb.disabled = not has_ev
-	evb.button_pressed = a.evidence and has_ev
-	evb.toggled.connect(func(on): a.evidence = on; _refresh())
-	box.add_child(evb)
-	box.add_child(K.para(Game.t("layout.evidence_tip") if has_ev else Game.t("layout.evidence_none"), 280, "pixel", 12, P.WARM_GREY, 0))
 	# 标题
 	box.add_child(K.label(Game.t("layout.headline"), "pixel", 12, P.STAMP_RED))
 	var pv: Dictionary = _preview.get(slot, {})
@@ -321,6 +334,66 @@ func _editor(slot: String) -> void:
 	box.add_child(hb2)
 
 
+## 登出去会怎样：镇上信不信、当事人会不会读到、会怎么反应、会落到什么下场，再把三种署名并排比一比。
+## 和结算用同一套算法（world.forecast），只是不掷骰子（M4.4：老板排版全收默认，「不知道会有什么后果」）。
+func _forecast_block(box: VBoxContainer, a: Dictionary, e: Dictionary, shaky_n: int) -> void:
+	var w = Game.world
+	box.add_child(K.label(Game.t("layout.fc_title"), "pixel", 12, P.STAMP_RED))
+	var lines: Array = []
+	if not e.soft:
+		if a.tone == "hot":
+			lines.append(Game.t("layout.fc_town_hot"))
+		elif shaky_n > 0:
+			lines.append(Game.t("layout.fc_town_shaky", {"n": shaky_n}))
+		elif a.evidence:
+			lines.append(Game.t("layout.fc_town_ev"))
+		else:
+			lines.append(Game.t("layout.fc_town_solid"))
+	var fc: Dictionary = w.forecast(a)
+	var who: String = str(fc.who)
+	if who == "":
+		if not e.soft:
+			lines.append(Game.t("layout.fc_nobody"))
+	else:
+		var vars := _pron(who)
+		vars["name"] = Game.name_of(who)
+		if fc.pleased:
+			lines.append(Game.t("layout.fc_pleased", vars))
+		elif fc.kind == "grim":
+			lines.append(Game.t("layout.fc_grim", vars))
+		else:
+			var read_key := "fc_read_sure" if float(fc.read) >= 1.0 else "fc_read_" + str(a.naming)
+			vars["read"] = Game.t("layout." + read_key, vars)
+			vars["temper"] = Game.t("layout.temper_" + str(w.residents[who].bucket))
+			var rk := "react_" + str(fc.kind)
+			if fc.kind == "pull_ad" and float(fc.ad_loss) <= 0.0:
+				rk = "react_pull_ad_none"
+			vars["ad"] = "%.1f" % float(fc.ad_loss)
+			vars["react"] = Game.t("layout." + rk, vars)
+			lines.append(Game.t("layout.fc_who", vars))
+			if str(fc.fate) != "":
+				var p := float(fc.get("fate_p", 0.0))
+				var pk := "fate_p_high" if p >= 0.55 else ("fate_p_mid" if p >= 0.3 else "fate_p_low")
+				lines.append(Game.t("layout.fate_line", {"who": Game.name_of(who), "p": Game.t("layout." + pk), "what": Game.t("layout.fate_" + str(fc.fate))}))
+	for l in lines:
+		box.add_child(K.para(l, 280, "pixel", 12, P.PRINT_INK, 0))
+	# 三种署名并排：多卖几份、当事人怎么反应
+	if e.soft or who == "" or fc.pleased or fc.kind == "grim":
+		return
+	box.add_child(K.para(Game.t("layout.fc_compare"), 280, "pixel", 12, P.WARM_GREY, 0))
+	for nm in NAMINGS:
+		var b: Dictionary = a.duplicate()
+		b.naming = nm
+		var f2: Dictionary = w.forecast(b)
+		var short := "short_" + str(f2.kind) if str(f2.who) != "" else "short_none"
+		box.add_child(K.para(Game.t("layout.fc_cmp", {"mark": "● " if nm == a.naming else "○ ", "naming": Game.t("layout.naming_" + nm), "n": w.estimate_retail(b), "short": Game.t("layout." + short)}), 280, "pixel", 12, P.PRINT_INK if nm == a.naming else P.WARM_GREY, 0))
+
+
+## 代词：中文「他 / 她」，英文宾格和所有格
+func _pron(rid: String) -> Dictionary:
+	return {"ta": TE.pronoun(Game.world, rid, Game.lang, "him"), "pos": TE.pronoun(Game.world, rid, Game.lang, "his")}
+
+
 func _fix_evidence(a: Dictionary) -> void:
 	var has := false
 	for fid in a.facts:
@@ -331,7 +404,7 @@ func _fix_evidence(a: Dictionary) -> void:
 
 
 ## group：tone / naming，文字按 layout.<group>、layout.<group>_<值>、layout.<group>_<值>_tip 取
-func _choice_row(group: String, opts: Array, cur: String, cb: Callable, disabled: bool) -> Control:
+func _choice_row(group: String, opts: Array, cur: String, cb: Callable, disabled: bool, show_tip := true) -> Control:
 	var v := VBoxContainer.new()
 	v.add_theme_constant_override("separation", 1)
 	var hb := HBoxContainer.new()
@@ -350,7 +423,7 @@ func _choice_row(group: String, opts: Array, cur: String, cb: Callable, disabled
 		b.tooltip_text = Game.t(key + "_tip")
 		hb.add_child(b)
 	v.add_child(hb)
-	if not disabled:
+	if not disabled and show_tip:
 		v.add_child(K.para(tip, 280, "pixel", 12, P.WARM_GREY, 0))
 	return v
 

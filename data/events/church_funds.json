@@ -75,5 +75,16 @@
    "捐给教堂的钱去了南边"
   ]
  },
- "detail": "漏雨的那一排长椅"
+ "detail": "漏雨的那一排长椅",
+ "followups": [
+  {
+   "tid": "repay",
+   "map": {
+    "payer": "priest",
+    "payee": "counter"
+   },
+   "delay": 1,
+   "chance": 0.5
+  }
+ ]
 }

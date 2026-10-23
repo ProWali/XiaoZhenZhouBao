@@ -20,5 +20,7 @@
  "archive_yes": "Look",
  "archive_no": "Never mind",
  "archive_result": "The records at {place}",
- "ask_done": "{text} (nobody will say more on this for now; asking only adds a witness)"
+ "ask_done": "{text} (nobody will say more on this for now; asking only adds a witness)",
+ "tip_vouch": "★ {tip} · saw it first-hand",
+ "talk_note_vouch": "★ {name} saw what you're looking into first-hand. Just chat; you'll get to it."
 }

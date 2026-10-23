@@ -1,0 +1,39 @@
+{
+ "id": "shut_down",
+ "name": "收摊",
+ "severity": 0,
+ "soft": true,
+ "manual": true,
+ "grim": true,
+ "cooldown": 0,
+ "weeks": 1,
+ "target": "owner",
+ "roles": {
+  "owner": {}
+ },
+ "fragments": [
+  {
+   "key": "shut",
+   "subject": "owner",
+   "text": "{owner}的那门营生做不下去了，东西都收了起来",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "{owner}收摊"
+  ],
+  "neutral": [
+   "{owner}停了那门营生"
+  ],
+  "hot": [
+   "{owner}收摊了"
+  ]
+ },
+ "effects": {
+  "wealth": -1
+ }
+}

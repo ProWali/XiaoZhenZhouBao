@@ -13,12 +13,12 @@
   "What you printed is true, but it isn't all of it. I know more than the paper does. Come by and I'll tell you."
  ]},
  "predecessor": {"sign": false, "items": [
-  "A letter left by the previous editor: The postman is a friend; when in doubt, ask the postman first. Don't let the sawmill's advertisement lapse, because it pays for two weeks of newsprint. Go to the tavern at night and listen, but don't believe all of it. The front page is empty. Fill it yourself.",
-  "A letter left by the previous editor: The roof leaks. The lever on the left side of the press wants a hard pull. The postman can be trusted; take half of what you hear at the tavern. The sawmill's advertisement pays for two weeks of paper, so think twice before you lose it. I've left the front page blank for you."
+  "A letter left by the previous editor: The postman is a friend; when in doubt, ask the postman first. Don't let the sawmill's advertisement lapse, because it pays for two weeks of newsprint. Go to the tavern at night and listen, but don't believe all of it. One more thing: I never finished paying the print shop. We still owe forty, five after every issue. The front page is empty. Fill it yourself.",
+  "A letter left by the previous editor: The roof leaks. The lever on the left side of the press wants a hard pull. The postman can be trusted; take half of what you hear at the tavern. The sawmill's advertisement pays for two weeks of paper, so think twice before you lose it. We still owe the print shop forty, five an issue until it's paid. I've left the front page blank for you."
  ]},
  "anon_tip": {"sign": false, "items": [
   "A letter with no signature: \"{fact}.\"",
-  "A scrap of paper pushed under the door, in a hand that looks as if it were written with the left: \"{fact}.\"",
+  "A scrap of paper under the door, in a left-handed scrawl. It says: \"{fact}.\"",
   "An envelope with no stamp, holding a single line: \"{fact}.\"",
   "No return address on the envelope, and the letter inside folded very small: \"{fact}. Look into it.\"",
   "A page torn out of an account book: \"{fact}. Don't say where you heard it.\"",
@@ -39,10 +39,10 @@
   "Opening up in the morning, you found the glass of the door in pieces on the step. Nobody saw who did it. Ten dollars to replace it."
  ]},
  "arson": {"sign": false, "items": [
-  "This paper office burned. The fire started in the small hours. The press survived; the roof did not. Rebuilding will cost sixty dollars, and there will be no paper for two weeks.",
-  "A fire broke out after midnight. The neighbors came running with buckets, but the roof could not be saved. Sixty dollars to rebuild, and two weeks without printing.",
-  "The office caught fire. An empty kerosene can lay in the alley behind. Sixty dollars to rebuild, and no paper for two weeks.",
-  "The fire began at the back window. Half the type melted, and the roof fell in. Rebuilding will take sixty dollars, and the paper cannot print for two weeks."
+  "This paper office burned. The fire started in the small hours. The press survived; the roof did not. Rebuilding will cost sixty dollars, and there will be no paper for two weeks. The carpenter will put up the money and take it out of the sales, issue by issue.",
+  "A fire broke out after midnight. The neighbors came running with buckets, but the roof could not be saved. Sixty dollars to rebuild, and two weeks without printing. The carpenter will put up the money and take it out of the sales, issue by issue.",
+  "The office caught fire. An empty kerosene can lay in the alley behind. Sixty dollars to rebuild, and no paper for two weeks. The carpenter will put up the money and take it out of the sales, issue by issue.",
+  "The fire began at the back window. Half the type melted, and the roof fell in. Rebuilding will take sixty dollars, and the paper cannot print for two weeks. The carpenter will put up the money and take it out of the sales, issue by issue."
  ]},
  "mourning": {"sign": false, "items": [
   "Death notice: {who}. The service is Thursday at the church. No one mentioned the paper.",
@@ -95,7 +95,7 @@
   "A newspaper can write about a person, or it can ruin one. This week you chose the second.",
   "When you wrote about {subject.short}, did you ask {subject.him} even one question?",
   "When I saw what the paper printed about {subject.short}, my hands shook.",
-  "I can't write, so I've had someone write this for me. I only want to say that {subject.short} is not a bad person.",
+  {"t": "I can't write, so I've had someone write this for me. I only want to say that {subject.short} is not a bad person.", "if": {"literate": false}},
   {"t": "If {subject.short} did wrong, there are people whose job it is to deal with it. It is no business of a newspaper.", "if": {"bucket": ["powerful"]}},
   {"t": "I sat a whole afternoon at {subject.short}'s house. {subject.ta} said nothing at all, just sat.", "if": {"trait": ["kind"]}},
   {"t": "Remember, this is a small town. Everyone runs into everyone sooner or later.", "if": {"bucket": ["hot"]}},
@@ -123,7 +123,7 @@
   "Since that business with {subject.short} was printed, I passed {subject.him} on the road, and {subject.ta} couldn't look me in the eye.",
   "I sent a basket of eggs over to the office. It isn't much.",
   "There are things I've kept to myself for years. You said them for me.",
-  {"t": "My husband didn't want me to write this letter. I wrote it anyway.", "if": {"female": true}}
+  {"t": "My husband didn't want me to write this letter. I wrote it anyway.", "if": {"female": true, "married": true}}
  ]},
  "correction": {"sign": true, "items": [
   "You printed that \"{fact}.\" It isn't true. I know who said it first, and I know why.",
@@ -177,5 +177,9 @@
   "I'd like to advertise again, in the same spot as before.",
   "That business is behind us. Keep some space for me in the next issue.",
   "Business is business. The advertisement runs as usual."
- ]}
+ ]},
+ "stale_followup": {"sign": true, "items": ["\"{headline}\": didn't you run this last week? The same few lines all over again.", "You printed last week's story again. I thought I'd picked up the old paper.", "Stop reprinting old news. Is nobody out asking about what's new in town?", "The same story twice and not one new line in it. That isn't what my five cents is for."]},
+ "fate_kin": {"sign": true, "items": ["{fact}. Is that what you wanted when you printed it?", "{fact}. Will your paper see to how our family lives now?", "I don't blame you for printing the truth. But {fact}, and this house is in real trouble.", "{fact}. {subject.short} hasn't said a word in days. I only wanted you to know.", {"t": "{fact}. I pray for {subject.him} every day, and for you too.", "if": {"trait": ["pious"]}}, {"t": "{fact}. Mark this: our family won't forget it.", "if": {"bucket": ["hot"]}}]},
+ "fate_victim": {"sign": true, "items": ["{fact}. If the paper hadn't printed it, nobody would ever have done a thing. Thank you.", "{fact}. Our family won't forget what the paper did.", "{fact}. I thought I would just have to swallow it.", "{fact}. To be honest I take no joy in it. But at least it's settled."]},
+ "bribe_outed": {"sign": false, "items": ["At the tavern {subject} tells anyone who'll listen: the paper took the money and printed it anyway. It spreads fast, and now the town wonders how much of the paper is true.", "Word around town: the paper took {subject}'s money and ran the story all the same. Who trusts a paper that takes money?"]}
 }

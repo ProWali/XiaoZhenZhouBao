@@ -1,0 +1,40 @@
+{
+ "id": "repay",
+ "name": "赔偿",
+ "severity": 0,
+ "soft": true,
+ "manual": true,
+ "grim": true,
+ "cooldown": 0,
+ "weeks": 1,
+ "target": "payer",
+ "roles": {
+  "payer": {},
+  "payee": {}
+ },
+ "fragments": [
+  {
+   "key": "repay",
+   "subject": "payer",
+   "text": "{payer}上门把钱赔给了{payee}，当着邻居的面",
+   "secrecy": "public",
+   "known_by": [
+    "all"
+   ]
+  }
+ ],
+ "headlines": {
+  "calm": [
+   "{payer}赔了钱"
+  ],
+  "neutral": [
+   "{payer}向{payee}赔偿"
+  ],
+  "hot": [
+   "{payer}掏钱了"
+  ]
+ },
+ "effects": {
+  "wealth": -1
+ }
+}

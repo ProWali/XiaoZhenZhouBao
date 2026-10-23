@@ -75,5 +75,15 @@
  "detail": "油布下的酒糟味",
  "driven_by": [
   "money"
+ ],
+ "followups": [
+  {
+   "tid": "shut_down",
+   "map": {
+    "owner": "brewer"
+   },
+   "delay": 1,
+   "chance": 0.7
+  }
  ]
 }
